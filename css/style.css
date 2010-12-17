@@ -15,11 +15,13 @@ div::selection, p::selection, img::selection {
 .entry {
   padding: 5px 3px 5px 25px;
   border-radius: 5px;
+  text-shadow: #DDD 1px 1px 1px;
 }
 
 .entry:hover {
  background-color: #CC0F15;
  color: white;
+ text-shadow: #666 1px 1px 1px;
 }
 
 .double-entry-table {
@@ -65,6 +67,7 @@ div::selection, p::selection, img::selection {
 /*** Status-Style (Success) ***/
 .status_box {
   margin-top: 5px;
+  text-shadow: #DDD 1px 1px 1px;
 }
 
  /*** Status-Style (Error) ***/
@@ -75,6 +78,7 @@ div::selection, p::selection, img::selection {
   color: white;
   padding: 5px;
   margin-top: 10px;
+  text-shadow: #666 1px 1px 1px;
 }
 
 .error_box a {
@@ -97,9 +101,11 @@ div::selection, p::selection, img::selection {
   height: 30px;
   margin-bottom: 5px;
   overflow: hidden;
+  text-shadow: #CCC 1px 1px 1px;
 }
 
 .message:hover, .message:hover strong {
  color: #CC0F15;
  cursor: pointer;
+ text-shadow: #BBB 1px 1px 1px;
 }
