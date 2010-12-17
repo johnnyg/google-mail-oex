@@ -96,6 +96,7 @@ div::selection, p::selection, img::selection {
   background: url('img/msg-back.png') repeat-x 0 0;
   height: 30px;
   margin-bottom: 5px;
+  overflow: hidden;
 }
 
 .message:hover {
