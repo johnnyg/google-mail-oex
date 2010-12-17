@@ -69,7 +69,9 @@ JFeedItem.prototype = {
     link: '',
     description: '',
     updated: '',
+    authorname: '',
     id: ''
+    
 };
 
 function JAtom(xml) {
@@ -101,6 +103,7 @@ JAtom.prototype = {
             item.link = jQuery(this).find('link').eq(0).attr('href');
             item.description = jQuery(this).find('content').eq(0).text();
             item.updated = jQuery(this).find('updated').eq(0).text();
+            item.authorname = jQuery(this).find('author name').eq(0).text();
             item.id = jQuery(this).find('id').eq(0).text();
             
             feed.items.push(item);

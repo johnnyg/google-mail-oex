@@ -66,7 +66,7 @@ function HandleMessages(event)
         for(var i=0; i < event.data.msg.length; i++)
         {
             var msg = $('<div></div>').addClass('message')
-              .html(event.data.msg[i].title).click({link: event.data.msg[i].link}, LoadLink);
+              .html("<strong>" + event.data.msg[i].authorname + "</strong> : " + event.data.msg[i].title).click({link: event.data.msg[i].link}, LoadLink);
             $('#message_box').append(msg);
         }
       }

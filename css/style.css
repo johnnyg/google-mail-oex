@@ -25,7 +25,7 @@ div::selection, p::selection, img::selection {
 .double-entry-table {
   width: 100%; 
   padding: 0; 
-  margin: 0'
+  margin: 0;
 }
 
 .double-entry-table td {
@@ -99,7 +99,7 @@ div::selection, p::selection, img::selection {
   overflow: hidden;
 }
 
-.message:hover {
- font-weight: bold;
+.message:hover, .message:hover strong {
+ color: #CC0F15;
  cursor: pointer;
 }
