@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/options.css">
+  <title id="widget-title">Opera Extensions | Google Mail Notifier</title>
+  <script src="js/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+  <header>
+    <img src="img/gmail-big.png">
+    <h1 id="widget-name">Google Mail Notifier</h1>
+    <h2>by <span id="widget-author">Codebit /  Tom Schreiber</h2>
+  </header>
+
+  <section>
+    <p>Google Mail Notifier is a small, simple and fast extension to show the 
+    number of unread mails in your Gmail-Inbox inside a button and the titles of 
+    the messages in the menu.</p>
+    
+    <p><strong>Hint:</strong> <em>This Extension will only work with your 
+    "Google Apps for your Domain"-Account if you have switched to the new 
+    infrastructure.</em></p>
+
+    <h3>Login Credentials</h3>
+    <fieldset>
+      <p>
+        <input id="text1" name="login" type="text"></input>
+        <label for="text1">Gmail-Username</label>
+      </p>
+      <p>
+        <input id="text2" name="password" type="password"></input>
+        <label for="text2">Gmail-Password</label>
+      </p>
+      <p>
+        <input id="range_update_intervall" name="update_intervall" 
+          type="range" min="5" max="600" step="1"></input>
+        <label id="range_update_intervall_label" for="range_update_intervall"><b>Update-Time : s</b></label>
+      </p>
+    </fieldset>
+  </section>
+
+  <footer>
+    <p><strong>Another great <a href="http://www.codebit.de" title='Codebit-Homepage'>Codebit</a>-software 
+      programmed by <a href="mailto:tom.schreiber@codebit.de" title='Send a mail to the author'>Tom Schreiber</a></strong>
+    <br/>
+    <small>Thanks to the <a href="http://icons.mysitemyway.com/" 
+      title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> for the GMail-Icon.
+    <br />
+    This extension is licensed under the <a href="http://www.opensource.org/licenses/gpl-3.0.html" title='Show text of the license'>
+    GPLv3 license</a>, you can get the source 
+    <a href='http://code.google.com/p/google-mail-oxe/source/checkout' title='Source at Google Code'>here</a> </small>
+    </footer>
+  <script src="js/options.js" type="text/javascript"></script>
+</body>
+</html>

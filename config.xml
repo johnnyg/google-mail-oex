@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" 
+  id="http://www.codebit.de/oex/google-mail"
+  version="1.0">
+
+  <!-- Extension Infos -->
+	<name xml:lang="en">Google Mail Notifier</name>
+	
+	<description xml:lang="en">A simple and fast extensions to inform you about new
+  messages in your GMail-Inbox and show the titles of the new messages.</description>
+    
+  <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
+    Codebit</author>
+
+  <icon src="img/gmail-64px.png"/>  
+  
+  <!-- License -->
+  <license href="http://www.opensource.org/licenses/gpl-3.0.html" xml:lang="en">
+    Licensed under the GPLv3 license
+  </license>
+  
+  <!-- Default Values -->
+  <preference name="update_intervall" value="60" />
+  
+  <!-- Access Policy -->
+  <access origin="https://mail.google.com" subdomains="true"/>
+</widget>

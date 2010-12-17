@@ -1,0 +1,104 @@
+/*** Menu-Main ***/
+body {
+  font-family: Arial,Helvetica,SunSans-Regular,Sans-Serif;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+div::selection, p::selection, img::selection {
+    background-color: transparent;
+    cursor: default;
+}
+
+/*** Menu **/
+.entry {
+  padding: 5px 3px 5px 25px;
+  border-radius: 5px;
+}
+
+.entry:hover {
+ background-color: #CC0F15;
+ color: white;
+}
+
+.double-entry-table {
+  width: 100%; 
+  padding: 0; 
+  margin: 0'
+}
+
+.double-entry-table td {
+  width: 50%;
+}
+
+.separator {
+  border-bottom: 1px solid #ADADAD;
+  clear: both;
+}
+
+/*** Menu-Icons ***/
+.gmail-icon {
+  background: url('img/gmail-icon16.png') no-repeat 5px 5px;
+}
+
+.refresh-icon {
+  background: url('img/refresh16.png') no-repeat 5px 5px;
+}
+
+.pref-icon {
+  background: url('img/pref16.png') no-repeat 5px 5px;
+}
+
+/*** Status-Box ***/
+#status {
+ padding: 5px 3px 5px 5px;
+}
+
+/*** LastUpdate-Box ***/
+#last_update {
+  font-size: 8px;
+  padding: 0 3px 5px 5px;
+  color: #777;
+}
+
+/*** Status-Style (Success) ***/
+.status_box {
+  margin-top: 5px;
+}
+
+ /*** Status-Style (Error) ***/
+.error_box {
+  border: 1px solid #CC0F15;
+  border-radius: 5px;
+  background-color: #CC0F15;
+  color: white;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.error_box a {
+  color: white;
+}
+
+.error_box a:hover {
+  font-weight: bold;
+} 
+
+/*** Message-Style ***/
+
+.message {
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #EEE;
+  color: black;
+  padding: 5px;
+  background: url('img/msg-back.png') repeat-x 0 0;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.message:hover {
+ font-weight: bold;
+ cursor: pointer;
+}
