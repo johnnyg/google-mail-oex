@@ -21,7 +21,7 @@ div::selection, p::selection, img::selection {
 .entry:hover {
  background-color: #CC0F15;
  color: white;
- text-shadow: #666 1px 1px 1px;
+ text-shadow: #000 1px 1px 1px;
 }
 
 .double-entry-table {
@@ -101,11 +101,14 @@ div::selection, p::selection, img::selection {
   height: 30px;
   margin-bottom: 5px;
   overflow: hidden;
-  text-shadow: #CCC 1px 1px 1px;
+}
+
+.message:hover {
+ cursor: pointer;
+ background: url('img/msg-back-hover.png') repeat-x 0 0;
+ text-shadow: #000 1px 1px 1px;
 }
 
 .message:hover, .message:hover strong {
- color: #CC0F15;
- cursor: pointer;
- text-shadow: #BBB 1px 1px 1px;
+ color: white;
 }
