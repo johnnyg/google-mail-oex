@@ -24,7 +24,7 @@ window.addEventListener("load", function()
   var ToolbarUIItemProperties = 
   {
     title: "Google Mail Notifier",
-    icon: "img/gmail-18px.png",
+    icon: "img/gmail-icon-18px.png",
     badge:
     {
         display: "block",
