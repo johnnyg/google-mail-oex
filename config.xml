@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
   id="http://www.codebit.de/oex/google-mail"
-  version="1.0">
+  version="1.1b">
 
   <!-- Extension Infos -->
 	<name xml:lang="en">Google Mail Notifier</name>
@@ -21,6 +21,7 @@
   
   <!-- Default Values -->
   <preference name="update_intervall" value="60" />
+  <preference name="enable_sound" value="true" />
   
   <!-- Access Policy -->
   <access origin="https://mail.google.com" subdomains="true"/>

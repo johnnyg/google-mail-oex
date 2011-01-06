@@ -10,12 +10,14 @@
 
 
 // Global Vars
-var MyButton;     // Toolbar-Button
-var UpdateTimer;  // UpdateTimer
-var Debug=0;      // DebugMode (writes to Error-Console)
-var StdHeight= 120;
-var ErrorHeight= 130;
-var Infos;
+var MyButton;           // Toolbar-Button
+var UpdateTimer;        // UpdateTimer
+var Debug=0;            // DebugMode (writes to Error-Console)
+var StdHeight= 120;     // Standard-Height of Menu
+var ErrorHeight= 130 ;  // Error-Height of Menu
+var Infos;              // All Infos about last messages-feed
+var AudioObject;        // Audio-Object for Sound-Notification
+
 
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
@@ -111,24 +113,52 @@ function Update(source)
            // number in the icon or nothing if there are no unread elements in
            // the inbox
           var text
-          if(feed.items.length && (feed.items.length > 0))  
+          messages = feed.items;
+          if(messages.length && (messages.length > 0))  
           {         
-            MyButton.badge.textContent = feed.items.length;
+            MyButton.badge.textContent = messages.length;
             MyButton.badge.display="block";
-            if(feed.items.length > 1)
-              text = "There are <strong>" + feed.items.length + 
+            if(messages.length > 1)
+              text = "There are <strong>" + messages.length + 
                 " unread messages</strong> in your inbox";
             else
               text = "There are <strong> one unread message</strong> " +
                 "in your inbox";     
                 
-            messages = feed.items;
+            
           }
           else
           {
             MyButton.badge.display="none";
             text = "There are <strong>no unread messages</strong> in your inbox";
-            messages = null;
+          }
+          
+          // Check if there are new messages (if there is any new ID)
+          var newMessages = false;
+          if(Infos)
+            for(var i=0; i < messages.length; i++)
+            {
+              var foundMessage = false;
+              for(var j=0; j < Infos.msg.length; j++)
+              {
+                if(messages[i].id == Infos.msg[j].id)
+                  foundMessage = true;
+              }
+              
+              // if one message is not found, we can stop to search
+              if(!foundMessage)
+              {
+                newMessages = true;
+                break;
+              }
+            }
+          else if(messages.length > 0)
+            newMessages = true;
+          
+          // Notification if there new Messages
+          if(newMessages)
+          {
+            PlaySoundNotification();
           }
           
           // Current Time
@@ -213,6 +243,21 @@ function DisplayError(text)
   MyButton.badge.textContent = "e";
   Infos = {status: "error", info: text};
   MyButton.popup.height = ErrorHeight + "px";
+}
+
+// Play Sound-Notification (if enabled)
+function PlaySoundNotification()
+{
+  opera.postError("SET: " + widget.preferences['enable_sound']);
+  if(widget.preferences['enable_sound'] == 'on')
+  {
+    // Init Audio-Object if necessary
+    if(!AudioObject) AudioObject = new Audio;
+    
+    // Set Source and play
+    AudioObject.src = '/notification.ogg';
+    AudioObject.play();
+  }
 }
 
 

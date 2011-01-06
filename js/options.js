@@ -1,8 +1,9 @@
 // JQuery - Functions
 $(document).ready(function() 
 {
+  // Init
   $('#range_update_intervall').val(widget.preferences['update_intervall']);
-
+  
   // Show Range-Secounds on start
   $('#range_update_intervall_label').html(
       'Update Time : ' + $('#range_update_intervall').val() + 's');
