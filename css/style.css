@@ -101,6 +101,7 @@ div::selection, p::selection, img::selection {
   height: 30px;
   margin-bottom: 5px;
   overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
 }
 
 .message:hover {

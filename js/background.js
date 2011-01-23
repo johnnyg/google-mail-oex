@@ -13,8 +13,8 @@
 var MyButton;           // Toolbar-Button
 var UpdateTimer;        // UpdateTimer
 var Debug=0;            // DebugMode (writes to Error-Console)
-var StdHeight= 120;     // Standard-Height of Menu
-var ErrorHeight= 130 ;  // Error-Height of Menu
+var StdHeight=120;      // Standard-Height of Menu
+var ErrorHeight=130 ;   // Error-Height of Menu
 var Infos;              // All Infos about last messages-feed
 var AudioObject;        // Audio-Object for Sound-Notification
 
@@ -37,7 +37,7 @@ window.addEventListener("load", function()
     popup: 
     {
       href: "popup.html",
-      width: 290,
+      width: 325,
       height: StdHeight
     } 
   }
@@ -122,10 +122,8 @@ function Update(source)
               text = "There are <strong>" + messages.length + 
                 " unread messages</strong> in your inbox";
             else
-              text = "There are <strong> one unread message</strong> " +
-                "in your inbox";     
-                
-            
+              text = "There is <strong>one unread message</strong> " +
+                "in your inbox";
           }
           else
           {
@@ -135,7 +133,7 @@ function Update(source)
           
           // Check if there are new messages (if there is any new ID)
           var newMessages = false;
-          if(Infos)
+          if(Infos && Infos.status == "success")
             for(var i=0; i < messages.length; i++)
             {
               var foundMessage = false;
@@ -190,9 +188,9 @@ function Update(source)
        error : function(XMLHttpRequest, textStatus, errorThrown)
        {
           if(Debug) opera.postError("GMN : Error while receiving Feed");
-          DisplayError("<strong>An error occurred.</strong><br/>" +
+          DisplayError("<strong>An error occurred. </strong>" +
             "Please <a href='javascript:ShowPreferences();'>check</a> " +
-            "your username and password.")          
+            "your username, password and connection.")
           if(source) source.postMessage(Infos);
        }
    });
@@ -248,7 +246,6 @@ function DisplayError(text)
 // Play Sound-Notification (if enabled)
 function PlaySoundNotification()
 {
-  opera.postError("SET: " + widget.preferences['enable_sound']);
   if(widget.preferences['enable_sound'] == 'on')
   {
     // Init Audio-Object if necessary
