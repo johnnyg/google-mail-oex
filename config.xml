@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
   id="http://www.codebit.de/oex/google-mail"
-  version="1.1b">
+  version="1.1">
 
   <!-- Extension Infos -->
-	<name xml:lang="en">Google Mail Notifier</name>
+  <name xml:lang="en">Google Mail Notifier</name>
 	
 	<description xml:lang="en">A simple and fast extensions to inform you about new
   messages in your GMail-Inbox and show the titles of the new messages.</description>
