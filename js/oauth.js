@@ -1,8 +1,11 @@
 // Show Page for grant access/verfication code
 function GetVerificationCode() 
 {  
+    // Check MyToken
+    GetMyToken();
+    
     // Show Page
-    var url = "https://www.google.com/accounts/OAuthAuthorizeToken?hl=en&oauth_token=" + widget.preferences['oauth_mytoken'];
+    var url = "https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=" + widget.preferences['oauth_mytoken'];
     if( opera.extension.tabs.create )
         opera.extension.tabs.create({url: url, focused:true});
 }

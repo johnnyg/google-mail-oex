@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/options.css">
+  <link rel="icon" href="img/gmail-icon-16px.png" type="image/png" />
   <title id="widget-title">Opera Extensions | Google Mail Notifier</title>
   <script src="js/ext/jquery.js" type="text/javascript"></script>
-  <script src="js/lang.default.js" type="text/javascript"></script>
+  <script src="js/lang.js" type="text/javascript"></script>
   <script src="js/options.js" type="text/javascript"></script>
 </head>
 <body>
@@ -19,8 +20,8 @@
     titles of the messages in the button-menu.</p>
     
     <p><strong>Hint:</strong> <em>This Extension will only work with your 
-    "Google Apps for your Domain"-Account if you have switched to the new 
-    infrastructure.</em></p>
+    "Google Apps for your Domain"-Account if you have switched to the <a href="http://www.google.com/support/a/bin/topic.py?topic=28917" 
+    title='New infrastructure for Google Apps accounts'>new infrastructure</a> yet.</em></p>
 
     <h3>GMail verification code (OAuth)</h3>
     <fieldset>
@@ -35,7 +36,7 @@
         <input id="verify1" name="oauth_verify1" type="text"></input>
         <button id="VerifyCodeAction"></button>
       </p>
-      <small>If there are problems with OAuth-Autorisation, try to 
+      <small class='options_small'>If there are problems with OAuth-Autorisation, try to 
         <a href='javascript:ResetOAuth();' onclick='ResetOAuth();'>reset OAuth-Settings</a> (this revokes access).</small>
     </fieldset>
     <h3>Other Options</h3>
@@ -48,11 +49,11 @@
       <p>
         <input id="range_update_intervall" name="update_intervall" 
           type="range" min="5" max="600" step="1"></input>
-        <label id="range_update_intervall_label" for="range_update_intervall"><b>Update-Time : s</b></label>
+        <label id="range_update_intervall_label" for="range_update_intervall"></label>
       </p>
     </fieldset>
     <div class="button_line">
-        <button onclick="window.close();">Done / Close Window</button>
+        <button onclick="window.close();">Apply & Close Window</button>
     </div>
   </section>
 
@@ -66,7 +67,7 @@
     <br/>
     Thanks to the <a href="http://icons.mysitemyway.com/" 
       title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> for the GMail-Icon<br/>
-        Thanks to Patryk Obara for the improved Icon, error-reporting and fixes.
+        Thanks to Patryk Obara for the improved Icon and bug-fixes.
     </small>
     </footer>
 </body>

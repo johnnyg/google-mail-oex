@@ -32,7 +32,7 @@ section {
 footer {
   display: block;
   text-align: center;
-  padding: 0 50px;
+  padding: 0 35px;
   margin: 10px 50px 0 50px;
   border-top: 1px solid #fff;
   box-shadow: 0 -1px rgba(0,0,0,0.15);
@@ -68,6 +68,18 @@ text-shadow: #DDD 1px 1px 1px;
 .button_line {
     padding: 10px 0;
     text-align: right;
+}
+
+.button_line button {
+  text-shadow: #999 1px 1px 1px;
+}
+
+.options_small, .options_small a {
+  color: #4F7191;
+}
+
+.options_small a:hover {
+  color: blue;
 }
 
 fieldset {

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/options.css">
+  <link rel="icon" href="img/gmail-icon-16px.png" type="image/png" />
   <title id="widget-title">Opera Erweiterung | Google Mail Notifier</title>
   <script src="js/ext/jquery.js" type="text/javascript"></script>
   <script src="js/lang.js" type="text/javascript"></script>
@@ -15,59 +16,61 @@
   </header>
 
   <section>
-    <p>Google Mail Notifier is a small, simple and fast extension to show the 
-    number of unread mails in your Gmail-Inbox in front of a button and the 
-    titles of the messages in the button-menu.</p>
+    <p>Google Mail Notifier ist eine kleine und schnelle Erweiterung für Opera,
+    welche die Anzahl der ungelesenden Nachrichten in Ihrem Googlemail-Posteingang
+    anzeigt. Durch einen Klick auf den Button können Sie zudem die Titel der 
+    Nachrichten anzeigen lassen.</p>
     
-    <p><strong>Hinweis:</strong> <em>This Extension will only work with your 
-    "Google Apps for your Domain"-Account if you have switched to the new 
-    infrastructure.</em></p>
+    <p><strong>Hinweis: </strong><em>Diese Erweiterung funktioniert nur mit einem
+    "Google Apps"-Konto wenn dieses bereits auf die <a href="http://www.google.com/support/a/bin/answer.py?hl=de&answer=182075"
+    title="">neue Infrastruktur</a> umgestellt wurde.</em></p>
 
-    <h3>GMail verification code (OAuth)</h3>
+    <h3>Googlemail Bestätigungscode (OAuth)</h3>
     <fieldset>
-      <p><strong>Google Mail Notifier uses <a href='http://oauth.net/'>OAuth</a>
-      </strong> to get access to your GMail-Account, with this autorisation-method 
-      this extension will not have access to your password or any other personal 
-      information from your Google Account. <strong>Get your verficationc code for 
-      this extension by clicking the button, grant access and copy/paste the code in
-      the field below.</strong></p>
+      <p><strong>Google Mail Notifier verwendet das <a href='http://de.wikipedia.org/wiki/OAuth'>OAuth</a>
+      </strong>-Verfahren um Zugang zu Ihren Googlemail-Konto zu erhalten. Dadurch
+      hat diese Erweiterung <u>keinen Zugriff</u> auf Ihr Password oder andere persönliche
+      Daten aus Ihrem Google-Konto. <strong>Rufen Sie den Bestätigungscode
+      durch einen Klick auf den Button ab, bestätigen zu den Zugriff und kopieren
+      Sie den Code in das vorgesehene Feld.</strong></p>
       <p>
-        <label for="verify1">Verification-Code</label>
+        <label for="verify1">Bestätigungscode</label>
         <input id="verify1" name="oauth_verify1" type="text"></input>
         <button id="VerifyCodeAction"></button>
       </p>
-      <small>If there are problems with OAuth-Autorisation, try to 
-        <a href='javascript:ResetOAuth();' onclick='ResetOAuth();'>reset OAuth-Settings</a> (this revokes access).</small>
+      <small class='options_small'>Falls es Probleme mit der OAuth-Autorisierung gibt, versuchen Sie die
+        <a href='javascript:ResetOAuth();' onclick='ResetOAuth();'>OAuth-Einstellungen zurückzusetzen</a>. 
+        Bestehende Zugriffs-Berechtigungen werden dabei gelöscht.</small>
     </fieldset>
-    <h3>Other Options</h3>
+    <h3>Weitere Einstellungen</h3>
     <fieldset>
       <p>
         <input id="enable_sound" name="enable_sound" 
           type="checkbox"></input>
-        <label id="enable_sound_label" for="enable_sound"><b>Play notification sound on new messages</b></label>
+        <label id="enable_sound_label" for="enable_sound"><b>Spiele Klangbenachrichtigung bei neuen Nachrichten</b></label>
       </p>
       <p>
         <input id="range_update_intervall" name="update_intervall" 
           type="range" min="5" max="600" step="1"></input>
-        <label id="range_update_intervall_label" for="range_update_intervall"><b>Update-Time : s</b></label>
+        <label id="range_update_intervall_label" for="range_update_intervall"></label>
       </p>
     </fieldset>
     <div class="button_line">
-        <button onclick="window.close();">Done / Close Window</button>
+        <button onclick="window.close();">Einstellungen übernehmen und Fenster schließen</button>
     </div>
   </section>
 
   <footer>
-    <p><strong>Another great <a href="http://www.codebit.de" title='Codebit-Homepage'>Codebit</a>-software 
-      programmed by <a href="mailto:tom.schreiber@codebit.de" title='Send a mail to the author'>Tom Schreiber</a></strong>
+    <p><strong>Eine weitere grandiose <a href="http://www.codebit.de" title='Codebit-Homepage'>Codebit</a>-Software 
+      programmiert von <a href="mailto:tom.schreiber@codebit.de" title='Mail an Autor senden'>Tom Schreiber</a></strong>
     <br/>
-    <small>This extension is licensed under the <a href="http://www.opensource.org/licenses/apache2.0.php" title='Show text of the license'>
-    Apache License 2.0</a>, you can get the source
-    <a href='http://code.google.com/p/google-mail-oex/source/checkout' title='Source at Google Code'>here</a>
+    <small>Diese Erweiterung ist lizensiert unter der <a href="http://www.opensource.org/licenses/apache2.0.php" title='Lizenztext anzeigen (englisch)'>
+    Apache License 2.0</a>, den Quellcode gibt es
+    <a href='http://code.google.com/p/google-mail-oex/source/checkout' title='Quellcode bei Google Code'>hier</a>
     <br/>
-    Thanks to the <a href="http://icons.mysitemyway.com/" 
-      title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> for the GMail-Icon<br/>
-        Thanks to Patryk Obara for the improved Icon, error-reporting and fixes.
+    Dank an das <a href="http://icons.mysitemyway.com/" 
+      title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> für das Googlemail-Icon<br/>
+        Dank an Patryk Obara für das verbesserte Icon und die Fehlerbehebungen.
     </small>
     </footer>
 </body>

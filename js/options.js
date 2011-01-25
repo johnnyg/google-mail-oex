@@ -6,12 +6,12 @@ $(document).ready(function()
   
   // Show Range-Secounds on start
   $('#range_update_intervall_label').html(
-      'Update Time : ' + $('#range_update_intervall').val() + 's');
+      lang.options_update + " "  + $('#range_update_intervall').val() + 's');
 
   // Show Range-Secounds on change
   $('#range_update_intervall').change(function() {
     $('#range_update_intervall_label').html(
-      'Update Time : ' + $('#range_update_intervall').val() + 's');
+      lang.options_update + " " + $('#range_update_intervall').val() + 's');
   });
 
   // Make the VerfiyCode-Button work
@@ -35,7 +35,7 @@ function VerifyCodeAction()
   // Show "save verification code"
   else if(!widget.preferences['oauth_token1'] || widget.preferences['oauth_token1'] == "")
   {
-    $('#VerifyCodeAction').html("save verification code");
+    $('#VerifyCodeAction').html("<strong>" + lang.options_saveverifiy + "</strong>");
     $('#VerifyCodeAction').click(function(){
       opera.extension.postMessage({cmd: "SaveVerifyCode"});}); 
   }

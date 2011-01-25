@@ -2,4 +2,6 @@
 var lang = new Object();
 
 // set default strings (cut here for new language file)
-lang.options_getverifiy = "get verification code";
+lang.options_getverifiy  = "get code";
+lang.options_saveverifiy = "apply code";
+lang.options_update = "Update-Time";
