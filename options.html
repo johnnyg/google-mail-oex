@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/options.css">
   <title id="widget-title">Opera Extensions | Google Mail Notifier</title>
-  <script src="js/jquery.js" type="text/javascript"></script>
+  <script src="js/ext/jquery.js" type="text/javascript"></script>
+  <script src="js/options.js" type="text/javascript"></script>
 </head>
 <body>
   <header>
@@ -20,16 +21,21 @@
     "Google Apps for your Domain"-Account if you have switched to the new 
     infrastructure.</em></p>
 
-    <h3>Login Credentials</h3>
+    <h3>GMail verification code (OAuth)</h3>
     <fieldset>
+      <p><strong>Google Mail Notifier uses <a href='http://oauth.net/'>OAuth</a>
+      </strong> to get access to your GMail-Account, with this autorisation-method 
+      this extension will not have access to your password or any other personal 
+      information from your Google Account. <strong>Get your verficationc code for 
+      this extension by clicking the button, grant access and copy/paste the code in
+      the field below.</strong></p>
       <p>
-        <input id="text1" name="login" type="text"></input>
-        <label for="text1">Gmail-Username</label>
+        <label for="verify1">Verification-Code</label>
+        <input id="verify1" name="oauth_verify1" type="text"></input>
+        <button id="VerifyCodeAction"></button>
       </p>
-      <p>
-        <input id="text2" name="password" type="password"></input>
-        <label for="text2">Gmail-Password</label>
-      </p>
+      <small>If there are problems with OAuth-Autorisation, try to 
+        <a href='javascript:ResetOAuth();' onclick='ResetOAuth();'>reset OAuth-Settings</a> (this revokes access).</small>
     </fieldset>
     <h3>Other Options</h3>
     <fieldset>
@@ -62,6 +68,5 @@
         Thanks to Patryk Obara for the improved Icon, error-reporting and fixes.
     </small>
     </footer>
-  <script src="js/options.js" type="text/javascript"></script>
 </body>
 </html>

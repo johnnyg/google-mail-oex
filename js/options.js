@@ -13,8 +13,48 @@ $(document).ready(function()
     $('#range_update_intervall_label').html(
       'Update Time : ' + $('#range_update_intervall').val() + 's');
   });
-  
+
+  // Make the VerfiyCode-Button work
+  $('#verify1').keyup(VerifyCodeAction);  
 });
+
+// Update VerfiyCodeAction
+function VerifyCodeAction()
+{
+  // Unbind all existing handlers
+  $('#VerifyCodeAction').unbind();
+  
+  // Show "get verification code"
+  if($('#verify1').val() == "")
+  {
+    $('#VerifyCodeAction').unbind();
+    $('#VerifyCodeAction').html("get verification code");
+    $('#VerifyCodeAction').click(function(){
+      opera.extension.postMessage({cmd: "GetVerifyCode"});});  
+  }
+  // Show "save verification code"
+  else if(!widget.preferences['oauth_token1'] || widget.preferences['oauth_token1'] == "")
+  {
+    $('#VerifyCodeAction').html("save verification code");
+    $('#VerifyCodeAction').click(function(){
+      opera.extension.postMessage({cmd: "SaveVerifyCode"});}); 
+  }
+  //TODO: Show "revoke access"
+  else
+  {
+    $('#VerifyCodeAction').hide();
+    $('#verify1').attr("disabled", "disabled");
+  }
+}
+
+// Reset all OAuth-Parameter
+function ResetOAuth()
+{
+  $("input[name=oauth_verify1]").val("");
+  widget.preferences['oauth_mytoken'] = "";
+  widget.preferences['oauth_verify1'] = "";
+  widget.preferences['oauth_token1'] = "";
+}
 
 // general options behavior (from dev.opera.com)
 addEventListener
@@ -165,6 +205,9 @@ addEventListener
                 element.addEventListener( 'change', changedElement, true );
             }
         );
+        
+        // update verfify button
+        VerifyCodeAction();
 
     },
     false

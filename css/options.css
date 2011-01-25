@@ -33,7 +33,7 @@ footer {
   display: block;
   text-align: center;
   padding: 0 50px;
-  margin: 50px 50px 0 50px;
+  margin: 10px 50px 0 50px;
   border-top: 1px solid #fff;
   box-shadow: 0 -1px rgba(0,0,0,0.15);
 }
@@ -102,7 +102,7 @@ fieldset input[type=text], fieldset input[type=password] {
   width: 200px;
 }
 
-fieldset input[type=text]:focus, , fieldset input[type=password]:focus {
+fieldset input[type=text]:focus, fieldset input[type=password]:focus {
   border-color: rgba(80,80,130,0.8);
 }
 

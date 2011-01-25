@@ -8,20 +8,18 @@
  * @version SVN: $Id$
  */
 
-
 // Global Vars
 var MyButton;           // Toolbar-Button
 var UpdateTimer;        // UpdateTimer
-var Debug=0;            // DebugMode (writes to Error-Console)
+var Debug=1;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
 var Infos;              // All Infos about last messages-feed
 var AudioObject;        // Audio-Object for Sound-Notification
 
-
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
-{
+{                     
   // ToolbarButton-Properties
   var ToolbarUIItemProperties = 
   {
@@ -42,8 +40,11 @@ window.addEventListener("load", function()
     } 
   }
   
+  // Check for MyToken (OAuth)
+  GetMyToken();
+  
   // Listen for injected script messages
-  opera.extension.onmessage = HandleMenuMessages;
+  opera.extension.onmessage = HandleMessages;
 
   // Create and Add the Button
   MyButton = opera.contexts.toolbar.createItem(ToolbarUIItemProperties);
@@ -92,21 +93,28 @@ function storageHandler(e)
 function Update(source)
 {
   // At first we check if we have a login and password
-  if( (!widget.preferences['login']) ||
-      (!widget.preferences['password']) ||
-      (widget.preferences['login'] == "") || 
-      (widget.preferences['password'] == "") )
+  // TODO: Support more than one token (multi-account)
+  if((!widget.preferences['oauth_token1']) || (widget.preferences['oauth_token1'] == ""))
   {
-    DisplayError("<strong>No Username/Password</strong>,<br/>please edit <a href='javascript:ShowPreferences();'>preferences</a>.");
+    DisplayError("<strong>No valid verification code</strong>,<br/>please edit <a href='javascript:ShowPreferences();'>preferences</a>.");
     if(source) source.postMessage(Infos);
     return;
-  }
-
-  // Get Gmail-message-feed
+  } 
+  
+  // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
+  var feedURL = "https://mail.google.com/mail/feed/atom";
+  
+  // TODO: Support more than one token (multi-account)
+  var tokenNum = 1;
+  
+  // Get Feed now
+  // TODO: Put success- and error-inline-functions in separate funtions
   if(Debug) opera.postError("GMN : Get Message feed...");
   jQuery.getFeed(
   {
-       url: 'https://' + widget.preferences['login'] + ':' + widget.preferences['password'] + '@mail.google.com/mail/feed/atom',
+       url: feedURL,
+       beforeSend: function(XMLHttpRequest, settings){
+                      PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);},
        success: function(feed) 
        {
            // YEAH, we got the feed -> now just count the elements and show the
@@ -200,7 +208,7 @@ function Update(source)
 }
 
 // Handle messages from popup-menu
-function HandleMenuMessages(event)
+function HandleMessages(event)
 {
   switch(event.data.cmd)
   {
@@ -222,6 +230,16 @@ function HandleMenuMessages(event)
           opera.extension.tabs.create({url:event.data.lnk, focused:true});
       break;
       
+    // GetVerfiyCode
+    case 'GetVerifyCode':   
+      GetVerificationCode();
+    break;
+    
+    // SaveVerfiyCode
+    case 'SaveVerifyCode':   
+      GetAccessToken();
+    break;
+      
     // Refresh
     case 'Refresh':
       window.clearTimeout(UpdateTimer);
@@ -230,7 +248,7 @@ function HandleMenuMessages(event)
       
     // Do nothing
     default: 
-      if(Debug) opera.postError("GMN : Unkown Command from Menu -> " + event.data);
+      if(Debug) opera.postError("GMN : Unkown Command from Menu -> " + event.data.cmd);
   }
 }
 
@@ -256,6 +274,3 @@ function PlaySoundNotification()
     AudioObject.play();
   }
 }
-
-
-

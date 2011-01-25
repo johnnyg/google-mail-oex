@@ -61,7 +61,6 @@ function HandleMessages(event)
       // Check if there are Messages to display
       if(event.data.msg && event.data.msg.length > 0)
       {
-        
         // Add every message
         for(var i=0; i < event.data.msg.length; i++)
         {
