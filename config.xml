@@ -4,19 +4,24 @@
   version="1.2b">
 
   <!-- Extension Infos -->
-  <name xml:lang="en">Google Mail Notifier</name>
+  <name>Google Mail Notifier</name>
 	
-	<description xml:lang="en">A simple and fast extensions to inform you about new
+	<description>A simple and fast extensions to inform you about new unread
   messages in your GMail-Inbox and show the titles of the new messages.</description>
+  <description xml:lang="de">Diese Erweiterung informiert Sie über neue ungelesene
+  Nachrichten in Ihrem Googlemail-Posteingang und zeigt die Titel der Nachrichten an.</description>
     
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
-
+    
   <icon src="img/gmail-icon-64px.png"/>  
   
   <!-- License -->
-  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="en">
+  <license href="http://www.opensource.org/licenses/apache2.0.php">
     Licensed under the Apache License, Version 2.0
+  </license>
+  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="de">
+    Lizensiert unter der Apache License, Version 2.0
   </license>
   
   <!-- Default Values -->
@@ -26,7 +31,7 @@
   <preference name="oauth_consumersecret" value="mC7L0SPVt/0mQcQRkfmPsf3O" readonly="true"/>
 
   <!-- Access Policy -->
-  <access origin="https://mail.google.com" subdomains="true"/>
+  <access origin="https://mail.google.com/mail/feed/" subdomains="true"/>
   <access origin="https://www.google.com/accounts/" subdomains="true"/>
   
 </widget>

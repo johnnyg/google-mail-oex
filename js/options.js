@@ -28,7 +28,7 @@ function VerifyCodeAction()
   if($('#verify1').val() == "")
   {
     $('#VerifyCodeAction').unbind();
-    $('#VerifyCodeAction').html("get verification code");
+    $('#VerifyCodeAction').html(lang.options_getverifiy);
     $('#VerifyCodeAction').click(function(){
       opera.extension.postMessage({cmd: "GetVerifyCode"});});  
   }
