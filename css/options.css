@@ -82,6 +82,11 @@ text-shadow: #DDD 1px 1px 1px;
   color: blue;
 }
 
+.access_granted {
+  background: url('img/check16.png') no-repeat  0 5px;
+  padding-left: 20px;
+}
+
 fieldset {
   border: none;
   background: rgba(150,160,200,0.25);

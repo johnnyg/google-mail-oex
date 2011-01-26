@@ -6,6 +6,7 @@
  * 
  * @author  Tom Schreiber (tom.schreiber@codebit.de)
  * @version SVN: $Id$
+ *  
  */
 
 // Global Vars
@@ -108,103 +109,125 @@ function Update(source)
   var tokenNum = 1;
   
   // Get Feed now
-  // TODO: Put success- and error-inline-functions in separate funtions
-  if(Debug) opera.postError("GMN : Get Message feed...");
+  if(Debug) opera.postError("INFO: Get Message feed...");
   jQuery.getFeed(
   {
        url: feedURL,
        beforeSend: function(XMLHttpRequest, settings){
                       PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);},
-       success: function(feed) 
-       {
-           // YEAH, we got the feed -> now just count the elements and show the
-           // number in the icon or nothing if there are no unread elements in
-           // the inbox
-          var text
-          messages = feed.items;
-          if(messages.length && (messages.length > 0))  
-          {         
-            MyButton.badge.textContent = messages.length;
-            MyButton.badge.display="block";
-            if(messages.length > 1)
-              text = "There are <strong>" + messages.length + 
-                " unread messages</strong> in your inbox";
-            else
-              text = "There is <strong>one unread message</strong> " +
-                "in your inbox";
-          }
-          else
-          {
-            MyButton.badge.display="none";
-            text = "There are <strong>no unread messages</strong> in your inbox";
-          }
-          
-          // Check if there are new messages (if there is any new ID)
-          var newMessages = false;
-          if(Infos && Infos.status == "success")
-            for(var i=0; i < messages.length; i++)
-            {
-              var foundMessage = false;
-              for(var j=0; j < Infos.msg.length; j++)
-              {
-                if(messages[i].id == Infos.msg[j].id)
-                  foundMessage = true;
-              }
-              
-              // if one message is not found, we can stop to search
-              if(!foundMessage)
-              {
-                newMessages = true;
-                break;
-              }
-            }
-          else if(messages.length > 0)
-            newMessages = true;
-          
-          // Notification if there new Messages
-          if(newMessages)
-          {
-            PlaySoundNotification();
-          }
-          
-          // Current Time
-          var now = new Date();
-          var h0 = "", m0 = "", s0 = "";
-          if(now.getHours() < 10) h0 = "0"
-          if(now.getMinutes() < 10) m0 = "0"
-          if(now.getSeconds() < 10) s0 = "0"
-          var timestring = "Last Update : " + h0 + now.getHours() + ":" +
-            m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
-          
-          // Update Infos
-          if(Debug) opera.postError("GMN : Feed '" + feed.title +"' received");
-          Infos = {status: "success", info: text, updated: timestring, msg: messages};
-          
-          // Set new Menu-Height
-          if (feed.items.length > 0)
-          {
-            var elements= feed.items.length; 
-            if(feed.items.length > 10) elements = 10;
-            MyButton.popup.height = (StdHeight + 47 * elements) + "px";
-          }
-          else
-            MyButton.popup.height = StdHeight + "px";
-            
-          // Tell new Infos to Popup
-          if(source) source.postMessage(Infos);
-       },
+       success: function(feed){ParseFeed(feed, source)}, 
        error : function(XMLHttpRequest, textStatus, errorThrown)
        {
           if(Debug) opera.postError("GMN : Error while receiving Feed");
           DisplayError("<strong>An error occurred. </strong>" +
-            "Please <a href='javascript:ShowPreferences();'>check</a> " +
-            "your username, password and connection.")
+            "Please check your connection and your " +
+            "<a href='javascript:ShowPreferences();'>settings</a>")
           if(source) source.postMessage(Infos);
        }
    });
    
    // Set new timeout
    UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
+}
+
+// Handle new Feed
+function ParseFeed(feed, source)
+{
+  var text;
+  messages = feed.items;
+  if(messages.length && (messages.length > 0))  
+  {         
+    MyButton.badge.textContent = messages.length;
+    MyButton.badge.display="block";
+    if(messages.length > 1)
+      text = "There are <strong>" + messages.length + 
+        " unread messages</strong> in your inbox";
+    else
+      text = "There is <strong>one unread message</strong> " +
+        "in your inbox";
+  }
+  else
+  {
+    MyButton.badge.display="none";
+    text = "There are <strong>no unread messages</strong> in your inbox";
+  }
+  
+  // Check if there are new messages (if there is any new ID)
+  var newMessages = false;
+  if(Infos && Infos.status == "success")
+    for(var i=0; i < messages.length; i++)
+    {
+      var foundMessage = false;
+      for(var j=0; j < Infos.msg.length; j++)
+      {
+        if(messages[i].id == Infos.msg[j].id)
+          foundMessage = true;
+      }
+      
+      // if one message is not found, we can stop to search
+      if(!foundMessage)
+      {
+        newMessages = true;
+        break;
+      }
+    }
+  else if(messages.length > 0)
+    newMessages = true;
+  
+  // Notification if there new Messages
+  if(newMessages) PlaySoundNotification();
+  
+  // Current Time
+  var now = new Date();
+  var h0 = "", m0 = "", s0 = "";
+  if(now.getHours() < 10) h0 = "0"
+  if(now.getMinutes() < 10) m0 = "0"
+  if(now.getSeconds() < 10) s0 = "0"
+  var timestring = "Last Update : " + h0 + now.getHours() + ":" +
+    m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
+  
+  // Update Infos
+  if(Debug) opera.postError("SUCCESS: Feed '" + feed.title+"' with " + messages.length + " messages received");
+  Infos = {status: "success", info: text, updated: timestring, msg: messages};
+  
+  // Set new Menu-Height
+  if (feed.items.length > 0)
+  {
+    var elements= feed.items.length; 
+    if(feed.items.length > 10) elements = 10;
+    MyButton.popup.height = (StdHeight + 47 * elements) + "px";
+  }
+  else
+    MyButton.popup.height = StdHeight + "px";
+    
+  // Tell new Infos to Popup
+  if(source) source.postMessage(Infos);
+}
+
+// Checks feed and gets mail-adsress from feed
+function CheckFeed(tokenNum, source)
+{
+  // Get Feed now
+  if(Debug) opera.postError("INFO: Check Message feed...");
+  var feedURL = "https://mail.google.com/mail/feed/atom";
+  jQuery.getFeed(
+  {
+       url: feedURL,
+       beforeSend: function(XMLHttpRequest, settings){
+                      PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);},
+       success: function(feed)
+       {  
+           var pattern = /[^ ]*@.*$/g;
+           widget.preferences['oauth_mail' + tokenNum]  = pattern.exec(feed.title);
+           if(source) source.postMessage({cmd: 'successCheck', 
+            num: tokenNum, mail: widget.preferences['oauth_mail' + tokenNum]});
+       }, 
+       error : function(XMLHttpRequest, textStatus, errorThrown)
+       {
+          if(source) source.postMessage({cmd: 'errorCheck', 
+            num: tokenNum});
+       }
+   });
 }
 
 // Handle messages from popup-menu
@@ -237,18 +260,19 @@ function HandleMessages(event)
     
     // SaveVerfiyCode
     case 'SaveVerifyCode':   
-      GetAccessToken();
+      if(GetAccessToken(event.data.num));
+        CheckFeed(event.data.num, event.source);
     break;
       
     // Refresh
     case 'Refresh':
       window.clearTimeout(UpdateTimer);
-      Update(event.source);
+        Update(event.source);
       break;
       
     // Do nothing
     default: 
-      if(Debug) opera.postError("GMN : Unkown Command from Menu -> " + event.data.cmd);
+      if(Debug) opera.postError("ERROR: Unkown Command from Menu -> " + event.data.cmd);
   }
 }
 

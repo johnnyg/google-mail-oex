@@ -27,7 +27,6 @@ function VerifyCodeAction()
   // Show "get verification code"
   if($('#verify1').val() == "")
   {
-    $('#VerifyCodeAction').unbind();
     $('#VerifyCodeAction').html(lang.options_getverifiy);
     $('#VerifyCodeAction').click(function(){
       opera.extension.postMessage({cmd: "GetVerifyCode"});});  
@@ -37,13 +36,16 @@ function VerifyCodeAction()
   {
     $('#VerifyCodeAction').html("<strong>" + lang.options_saveverifiy + "</strong>");
     $('#VerifyCodeAction').click(function(){
-      opera.extension.postMessage({cmd: "SaveVerifyCode"});}); 
+      opera.extension.postMessage({cmd: "SaveVerifyCode", num: 1});}); 
   }
-  //TODO: Show "revoke access"
+  // Show mail-adress and "revoke"-button
   else
   {
-    $('#VerifyCodeAction').hide();
-    $('#verify1').attr("disabled", "disabled");
+    $('#mail1').html("<div class='access_granted'>" + lang.options_check + 
+        " '" + widget.preferences['oauth_mail1'] + "' " +
+        "<button id='VerifyCodeAction'>" + lang.options_revoke +"</button></div>");
+     $('#VerifyCodeAction').click(function(){
+        opera.extension.postMessage({cmd: "RevokeAccess", num: 1});}); 
   }
 }
 
@@ -54,6 +56,29 @@ function ResetOAuth()
   widget.preferences['oauth_mytoken'] = "";
   widget.preferences['oauth_verify1'] = "";
   widget.preferences['oauth_token1'] = "";
+}
+
+// Handle messages from background-process
+function HandleMessages(event)
+{
+  // whats the status
+  switch(event.data.cmd)
+  {
+    // Verfify-Code was successfully checked
+    case "successCheck" : 
+      $('#mail' + event.data.num).html("<div class='access_granted'>" + lang.options_check + 
+        " '" + widget.preferences['oauth_mail1'] + "' " +
+        "<button id='VerifyCodeAction'>" + lang.options_revoke +"</button></div>");
+      $('#VerifyCodeAction').click(function(){
+        opera.extension.postMessage({cmd: "RevokeAccess", num: 1});}); 
+    break;
+    
+    // Error while checking Verify-Code
+    // TODO: What we will do here?
+    case "errorCheck": 
+      $('#mail' + event.data.num).html("<div>ERROR</div>");
+    break;   
+  }
 }
 
 // general options behavior (from dev.opera.com)
@@ -208,7 +233,9 @@ addEventListener
         
         // update verfify button
         VerifyCodeAction();
-
+        
+        // Listen for script messages from background-process
+        opera.extension.onmessage = HandleMessages;
     },
     false
 );

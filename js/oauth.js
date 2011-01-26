@@ -60,15 +60,14 @@ function GetMyToken()
 }
 
 // GetAccessToken
-// TODO: Support more than one token (multi-account)
-function GetAccessToken()
+function GetAccessToken(tNum)
 {
   if(Debug) opera.postError("Get AccessToken for RequestToken " + 
-    widget.preferences['oauth_mytoken'] + " / VerfiyCode " + widget.preferences['oauth_verify1']);
+    widget.preferences['oauth_mytoken'] + " / VerfiyCode " + widget.preferences['oauth_verify' + tNum]);
 
   // Only request token if we have no one
   if(widget.preferences['oauth_mytoken'] && widget.preferences['oauth_mytoken'] !== "" 
-    || widget.preferences['oauth_verify1'] && widget.preferences['oauth_verify1'] !== "")
+    || widget.preferences['oauth_verify' + tNum] && widget.preferences['oauth_verify' + tNum] !== "")
   {
     var accessor = {consumerKey     : widget.preferences['oauth_consumerkey'],
                     consumerSecret  : widget.preferences['oauth_consumersecret'],
@@ -78,7 +77,7 @@ function GetAccessToken()
     var message = {method: "post",
                    action: "https://www.google.com/accounts/OAuthGetAccessToken",
                    parameters: [
-                       ["oauth_verifier",  widget.preferences['oauth_verify1']]                      
+                       ["oauth_verifier",  widget.preferences['oauth_verify' + tNum]]                      
                    ]};     
                                       
     OAuth.completeRequest(message, accessor);    
@@ -96,10 +95,10 @@ function GetAccessToken()
     if(requestTokenRequest.status == 200)
     {
       var results = OAuth.decodeForm(requestTokenRequest.responseText);
-      widget.preferences['oauth_token1'] = OAuth.getParameter(results, "oauth_token");
-      widget.preferences['oauth_secret1'] = OAuth.getParameter(results, "oauth_token_secret");
-      if(Debug) opera.postError("SUCCESS : AccessToken received : " + widget.preferences['oauth_token1'] 
-        + " (Secret: " + widget.preferences['oauth_secret1'] + ")");
+      widget.preferences['oauth_token' + tNum] = OAuth.getParameter(results, "oauth_token");
+      widget.preferences['oauth_secret' + tNum] = OAuth.getParameter(results, "oauth_token_secret");
+      if(Debug) opera.postError("SUCCESS : AccessToken received : " + widget.preferences['oauth_token' + tNum] 
+        + " (Secret: " + widget.preferences['oauth_secret' + tNum] + ")");
       return true;
     }
     // Show Error if there was an status != 200 (OK)
