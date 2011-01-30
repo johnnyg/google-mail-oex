@@ -2,6 +2,9 @@ window.addEventListener("load", function()
 {
   // Listen for script messages from background-process
   opera.extension.onmessage = HandleMessages;
+  
+  // Refresh fee now
+  opera.extension.postMessage({cmd:"Refresh"});
 }, false);
 
 // Open Google-Mail-Tab
