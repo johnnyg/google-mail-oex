@@ -21,50 +21,50 @@ var AudioObject;        // Audio-Object for Sound-Notification
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
 {                     
-  // ToolbarButton-Properties
-  var ToolbarUIItemProperties = 
-  {
-    title: "Google Mail Notifier",
-    icon: "img/gmail-icon-18px.png",
-    badge:
+    // ToolbarButton-Properties
+    var ToolbarUIItemProperties =
     {
-        display: "block",
-        textContent: "x",
-        color: "white",
-        backgroundColor: "rgba(211, 0, 4, 1)"
-    },
-    popup: 
-    {
-      href: "popup.html",
-      width: 325,
-      height: StdHeight
-    } 
-  }
+        title: "Google Mail Notifier",
+        icon: "img/gmail-icon-18px.png",
+        badge:
+        {
+            display: "block",
+            textContent: "x",
+            color: "white",
+            backgroundColor: "rgba(211, 0, 4, 1)"
+        },
+        popup:
+        {
+            href: "popup.html",
+            width: 325,
+            height: StdHeight
+        }
+    }
+    
+    // Check for MyToken (OAuth)
+    GetMyToken();
   
-  // Check for MyToken (OAuth)
-  GetMyToken();
-  
-  // Listen for injected script messages
-  opera.extension.onmessage = HandleMessages;
+    // Listen for injected script messages
+    opera.extension.onmessage = HandleMessages;
 
-  // Create and Add the Button
-  MyButton = opera.contexts.toolbar.createItem(ToolbarUIItemProperties);
-  opera.contexts.toolbar.addItem(MyButton);
+    // Create and Add the Button
+    MyButton = opera.contexts.toolbar.createItem(ToolbarUIItemProperties);
+    opera.contexts.toolbar.addItem(MyButton);
   
-  // listen to storage events
-  addEventListener( 'storage', storageHandler, false );
+    // listen to storage events
+    addEventListener( 'storage', storageHandler, false );
   
-  // Update now
-  Update(); 
+    // Update now
+    Update();
   
-  // Connect to Menu and give all the Infos
-  opera.extension.onconnect = function (event)
-  {
-  	if(event.origin.indexOf("popup.html") > -1)
-		{
-       event.source.postMessage(Infos);
-		}
-	}
+    // Connect to Menu and give all the Infos
+    opera.extension.onconnect = function (event)
+    {
+        if(event.origin.indexOf("popup.html") > -1)
+        {
+            event.source.postMessage(Infos);
+        }
+    }
 }, false);
 
 
@@ -85,222 +85,249 @@ function storageHandler(e)
     // If login or passsword was changed -> Update()
     if(e.key=='login' || e.key=='password')
     {
-      window.clearTimeout(UpdateTimer);
-      Update();
+        window.clearTimeout(UpdateTimer);
+        Update();
     }
 }
 
 // Update Message-Count
 function Update(source)
 {
-  // At first we check if we have a login and password
-  // TODO: Support more than one token (multi-account)
-  if((!widget.preferences['oauth_token1']) || (widget.preferences['oauth_token1'] == ""))
-  {
-    DisplayError("<strong>No valid verification code</strong>,<br/>please edit <a href='javascript:ShowPreferences();'>preferences</a>.");
-    if(source) source.postMessage(Infos);
-    return;
-  } 
+    // At first we check if we have a login and password
+    // TODO: Support more than one token (multi-account)
+    if((!widget.preferences['oauth_token1']) || (widget.preferences['oauth_token1'] == ""))
+    {
+        DisplayError("<strong>No valid verification code</strong>,<br/>please edit <a href='javascript:ShowPreferences();'>preferences</a>.");
+        if(source) source.postMessage(Infos);
+        return;
+    }
   
-  // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
-  var feedURL = "https://mail.google.com/mail/feed/atom";
+    // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
+    var feedURL = "https://mail.google.com/mail/feed/atom";
   
-  // TODO: Support more than one token (multi-account)
-  var tokenNum = 1;
+    // TODO: Support more than one token (multi-account)
+    var tokenNum = 1;
   
-  // Get Feed now
-  if(Debug) opera.postError("INFO: Get Message feed...");
-  jQuery.getFeed(
-  {
-       url: feedURL,
-       beforeSend: function(XMLHttpRequest, settings){
-                      PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);},
-       success: function(feed){ParseFeed(feed, source)}, 
-       error : function(XMLHttpRequest, textStatus, errorThrown)
-       {
-          if(Debug) opera.postError("GMN : Error while receiving Feed");
-          DisplayError("<strong>An error occurred. </strong>" +
-            "Please check your connection and your " +
-            "<a href='javascript:ShowPreferences();'>settings</a>")
-          if(source) source.postMessage(Infos);
-       }
-   });
+    // Get Feed now
+    if(Debug) opera.postError("INFO: Get Message feed...");
+    jQuery.getFeed(
+    {
+        url: feedURL,
+        beforeSend: function(XMLHttpRequest, settings){
+            PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);
+        },
+        success: function(feed){
+            ParseFeed(feed, source)
+            },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            if(Debug) opera.postError("GMN : Error while receiving Feed");
+            DisplayError("<strong>An error occurred. </strong>" +
+                "Please check your connection and your " +
+                "<a href='javascript:ShowPreferences();'>settings</a>")
+            if(source) source.postMessage(Infos);
+        }
+    });
    
-   // Set new timeout
-   UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
+    // Set new timeout
+    UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
 }
 
 // Handle new Feed
 function ParseFeed(feed, source)
 {
-  var text;
-  messages = feed.items;
-  if(messages.length && (messages.length > 0))  
-  {         
-    MyButton.badge.textContent = messages.length;
-    MyButton.badge.display="block";
-    if(messages.length > 1)
-      text = "There are <strong>" + messages.length + 
-        " unread messages</strong> in your inbox";
-    else
-      text = "There is <strong>one unread message</strong> " +
-        "in your inbox";
-  }
-  else
-  {
-    MyButton.badge.display="none";
-    text = "There are <strong>no unread messages</strong> in your inbox";
-  }
-  
-  // Check if there are new messages (if there is any new ID)
-  var newMessages = false;
-  if(Infos && Infos.status == "success")
-    for(var i=0; i < messages.length; i++)
+    var text;
+    messages = feed.items;
+    if(messages.length && (messages.length > 0))
     {
-      var foundMessage = false;
-      for(var j=0; j < Infos.msg.length; j++)
-      {
-        if(messages[i].id == Infos.msg[j].id)
-          foundMessage = true;
-      }
-      
-      // if one message is not found, we can stop to search
-      if(!foundMessage)
-      {
-        newMessages = true;
-        break;
-      }
+        MyButton.badge.textContent = messages.length;
+        MyButton.badge.display="block";
+        if(messages.length > 1)
+            text = lang.popup_msg_before + messages.length + lang.popup_msg_after;
+        else
+            text = lang.popup_onemsg;
     }
-  else if(messages.length > 0)
-    newMessages = true;
+    else
+    {
+        MyButton.badge.display="none";
+        text = lang.popup_nomsg;
+    }
   
-  // Notification if there new Messages
-  if(newMessages) PlaySoundNotification();
+    // Check if there are new messages (if there is any new ID)
+    var newMessages = false;
+    if(Infos && Infos.status == "success")
+        for(var i=0; i < messages.length; i++)
+        {
+            var foundMessage = false;
+            for(var j=0; j < Infos.msg.length; j++)
+            {
+                if(messages[i].id == Infos.msg[j].id)
+                    foundMessage = true;
+            }
+      
+            // if one message is not found, we can stop to search
+            if(!foundMessage)
+            {
+                newMessages = true;
+                break;
+            }
+        }
+    else if(messages.length > 0)
+        newMessages = true;
   
-  // Current Time
-  var now = new Date();
-  var h0 = "", m0 = "", s0 = "";
-  if(now.getHours() < 10) h0 = "0"
-  if(now.getMinutes() < 10) m0 = "0"
-  if(now.getSeconds() < 10) s0 = "0"
-  var timestring = "Last Update : " + h0 + now.getHours() + ":" +
-    m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
+    // Notification if there new Messages
+    if(newMessages) PlaySoundNotification();
   
-  // Update Infos
-  if(Debug) opera.postError("SUCCESS: Feed '" + feed.title+"' with " + messages.length + " messages received");
-  Infos = {status: "success", info: text, updated: timestring, msg: messages};
+    // Current Time
+    var now = new Date();
+    var h0 = "", m0 = "", s0 = "";
+    if(now.getHours() < 10) h0 = "0"
+    if(now.getMinutes() < 10) m0 = "0"
+    if(now.getSeconds() < 10) s0 = "0"
+    var timestring = lang.popup_lastupdate + h0 + now.getHours() + ":" +
+     m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
   
-  // Set new Menu-Height
-  if (feed.items.length > 0)
-  {
-    var elements= feed.items.length; 
-    if(feed.items.length > 10) elements = 10;
-    MyButton.popup.height = (StdHeight + 47 * elements) + "px";
-  }
-  else
-    MyButton.popup.height = StdHeight + "px";
+    // Update Infos
+    if(Debug) opera.postError("SUCCESS: Feed '" + feed.title+"' with " + messages.length + " messages received");
+    Infos = {
+        status: "success",
+        info: text,
+        updated: timestring,
+        msg: messages
+    };
+  
+    // Set new Menu-Height
+    if (feed.items.length > 0)
+    {
+        var elements= feed.items.length;
+        if(feed.items.length > 10) elements = 10;
+        MyButton.popup.height = (StdHeight + 47 * elements) + "px";
+    }
+    else
+        MyButton.popup.height = StdHeight + "px";
     
-  // Tell new Infos to Popup
-  if(source) source.postMessage(Infos);
+    // Tell new Infos to Popup
+    if(source) source.postMessage(Infos);
 }
 
 // Checks feed and gets mail-adsress from feed
 function CheckFeed(tokenNum, source)
 {
-  // Get Feed now
-  if(Debug) opera.postError("INFO: Check Message feed...");
-  var feedURL = "https://mail.google.com/mail/feed/atom";
-  jQuery.getFeed(
-  {
-       url: feedURL,
-       beforeSend: function(XMLHttpRequest, settings){
-                      PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);},
-       success: function(feed)
-       {  
-           var pattern = /[^ ]*@.*$/g;
-           widget.preferences['oauth_mail' + tokenNum]  = pattern.exec(feed.title);
-           if(source) source.postMessage({cmd: 'successCheck', 
-            num: tokenNum, mail: widget.preferences['oauth_mail' + tokenNum]});
-       }, 
-       error : function(XMLHttpRequest, textStatus, errorThrown)
-       {
-          if(source) source.postMessage({cmd: 'errorCheck', 
-            num: tokenNum});
-       }
-   });
+    // Get Feed now
+    if(Debug) opera.postError("INFO: Check Message feed...");
+    var feedURL = "https://mail.google.com/mail/feed/atom";
+    jQuery.getFeed(
+    {
+        url: feedURL,
+        beforeSend: function(XMLHttpRequest, settings){
+            PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);
+        },
+        success: function(feed)
+        {
+            var pattern = /[^ ]*@.*$/g;
+            widget.preferences['oauth_mail' + tokenNum]  = pattern.exec(feed.title);
+            if(source) source.postMessage({
+                cmd: 'successCheck',
+                num: tokenNum,
+                mail: widget.preferences['oauth_mail' + tokenNum]
+                });
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            if(source) source.postMessage({
+                cmd: 'errorCheck',
+                num: tokenNum
+            });
+        }
+    });
 }
 
 // Handle messages from popup-menu
 function HandleMessages(event)
 {
-  switch(event.data.cmd)
-  {
-    // Load Google Mail in new tab
-    case 'LoadGmailTab':
-      if( opera.extension.tabs.create )
-          opera.extension.tabs.create({url:"http://mail.google.com/mail/",focused:true});
-      break;
+    switch(event.data.cmd)
+    {
+        // Load Google Mail in new tab
+        case 'LoadGmailTab':
+            if( opera.extension.tabs.create )
+                opera.extension.tabs.create({
+                    url:"http://mail.google.com/mail/",
+                    focused:true
+                });
+            break;
       
-    // Load Preferences
-    case 'Preferences':
-      if( opera.extension.tabs.create )
-          opera.extension.tabs.create({url:"./options.html", focused:true});
-      break;
+        // Load Preferences
+        case 'Preferences':
+            if( opera.extension.tabs.create )
+                opera.extension.tabs.create({
+                    url:"./options.html",
+                    focused:true
+                });
+            break;
       
-    // Load Message-Link in new Tab
-    case 'LoadLink':
-      if( opera.extension.tabs.create )
-          opera.extension.tabs.create({url:event.data.lnk, focused:true});
-      break;
+        // Load Message-Link in new Tab
+        case 'LoadLink':
+            if( opera.extension.tabs.create )
+                opera.extension.tabs.create({
+                    url:event.data.lnk,
+                    focused:true
+                });
+            break;
       
-    // GetVerfiyCode
-    case 'GetVerifyCode':   
-      GetVerificationCode();
-    break;
+        // GetVerfiyCode
+        case 'GetVerifyCode':
+            GetVerificationCode();
+            break;
     
-    // SaveVerfiyCode
-    case 'SaveVerifyCode':   
-      if(GetAccessToken(event.data.num));
-        CheckFeed(event.data.num, event.source);
-    break;
+        // SaveVerfiyCode
+        case 'SaveVerifyCode':
+            if(GetAccessToken(event.data.num));
+            CheckFeed(event.data.num, event.source);
+            break;
       
-    // Refresh
-    case 'Refresh':
-      window.clearTimeout(UpdateTimer);
-        Update(event.source);
-      break;
+        // Refresh
+        case 'Refresh':
+            window.clearTimeout(UpdateTimer);
+            Update(event.source);
+            break;
       
-    // Compose Mail
-    case 'ComposeMail':
-      if( opera.extension.tabs.create )
-          opera.extension.tabs.create({url:"https://mail.google.com/mail/?#compose",focused:true});
-      break;
+        // Compose Mail
+        case 'ComposeMail':
+            if( opera.extension.tabs.create )
+                opera.extension.tabs.create({
+                    url:"https://mail.google.com/mail/?#compose",
+                    focused:true
+                });
+            break;
       
-    // Do nothing
-    default: 
-      if(Debug) opera.postError("ERROR: Unkown Command from Menu -> " + event.data.cmd);
-  }
+        // Do nothing
+        default:
+            if(Debug) opera.postError("ERROR: Unkown Command from Menu -> " + event.data.cmd);
+    }
 }
 
 // Display a error
 function DisplayError(text)
 {
-  MyButton.badge.display="block";
-  MyButton.badge.textContent = "e";
-  Infos = {status: "error", info: text};
-  MyButton.popup.height = ErrorHeight + "px";
+    MyButton.badge.display="block";
+    MyButton.badge.textContent = "e";
+    Infos = {
+        status: "error",
+        info: text
+    };
+    MyButton.popup.height = ErrorHeight + "px";
 }
 
 // Play Sound-Notification (if enabled)
 function PlaySoundNotification()
 {
-  if(widget.preferences['enable_sound'] == 'on')
-  {
-    // Init Audio-Object if necessary
-    if(!AudioObject) AudioObject = new Audio;
+    if(widget.preferences['enable_sound'] == 'on')
+    {
+        // Init Audio-Object if necessary
+        if(!AudioObject) AudioObject = new Audio;
     
-    // Set Source and play
-    AudioObject.src = '/notification.ogg';
-    AudioObject.play();
-  }
+        // Set Source and play
+        AudioObject.src = '/notification.ogg';
+        AudioObject.play();
+    }
 }

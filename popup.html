@@ -2,26 +2,21 @@
 <html lang="en">
   <head>
     <script src="js/ext/jquery.js" type="text/javascript"></script>
-  	<script src="js/menu.js" type="text/javascript"></script>
+    <script src="lang.js" type="text/javascript"></script>
+    <script src="js/menu.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen,print" title="screen" />
   </head>
   <body>
     <div>
     
       <!-- Menu-Points -->
-      <div class="entry gmail-icon" onclick='OpenGoogleMailTab()'>
-        Open <strong>Google Mail</strong> in new tab
-      </div>
+      <div id="open" class="entry gmail-icon" onclick='OpenGoogleMailTab()'></div>
       <table class='double-entry-table'><tr>  
         <td>
-          <div class="entry compose-icon" onclick='ComposeMail()'>
-            Compose Mail
-          </div>
-        </td>
+          <div id="compose" class="entry compose-icon" onclick='ComposeMail()'></div>
+        </td>      
         <td>
-          <div class="entry pref-icon" onclick='ShowPreferences()'>
-            Preferences...
-          </div>
+            <div id="pref" class="entry pref-icon" onclick='ShowPreferences()'></div>
         </td>
       </tr></table>
       

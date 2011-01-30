@@ -5,6 +5,11 @@ window.addEventListener("load", function()
   
   // Refresh fee now
   opera.extension.postMessage({cmd:"Refresh"});
+
+  // set strings
+  $("#open").html(lang.popup_open);
+  $("#compose").html(lang.popup_compose);
+  $("#pref").html(lang.popup_pref);
 }, false);
 
 // Open Google-Mail-Tab
