@@ -17,11 +17,11 @@ function OpenGoogleMailTab()
    window.close();
 }
 
-// Refresh now
-function Refresh()
+// Compose new mail
+function ComposeMail()
 {
   // Send command to background-process
-  opera.extension.postMessage({cmd:"Refresh"});
+  opera.extension.postMessage({cmd:"ComposeMail"});
 }
 
 // Show Preferences in new Tab

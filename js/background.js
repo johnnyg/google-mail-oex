@@ -270,6 +270,12 @@ function HandleMessages(event)
         Update(event.source);
       break;
       
+    // Compose Mail
+    case 'ComposeMail':
+      if( opera.extension.tabs.create )
+          opera.extension.tabs.create({url:"https://mail.google.com/mail/?#compose",focused:true});
+      break;
+      
     // Do nothing
     default: 
       if(Debug) opera.postError("ERROR: Unkown Command from Menu -> " + event.data.cmd);

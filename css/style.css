@@ -41,11 +41,11 @@ div::selection, p::selection, img::selection {
 
 /*** Menu-Icons ***/
 .gmail-icon {
-  background: url('img/gmail-icon16.png') no-repeat 5px 5px;
+  background: url('img/mail16.png') no-repeat 5px 5px;
 }
 
-.refresh-icon {
-  background: url('img/refresh16.png') no-repeat 5px 5px;
+.compose-icon {
+  background: url('img/compose16.png') no-repeat 5px 5px;
 }
 
 .pref-icon {
