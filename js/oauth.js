@@ -1,3 +1,7 @@
+// MyToken
+var MyConsumerKey       = "www.codebit.de";
+var MyConsumerSecret    = "mC7L0SPVt/0mQcQRkfmPsf3O";
+
 // Show Page for grant access/verfication code
 function GetVerificationCode() 
 {  
@@ -16,8 +20,8 @@ function GetMyToken()
   // Only request token if we have no one
   if(!widget.preferences['oauth_mytoken'] || widget.preferences['oauth_mytoken'] == "")
   {
-    var accessor = {consumerKey     : widget.preferences['oauth_consumerkey'],
-                    consumerSecret  : widget.preferences['oauth_consumersecret']};
+    var accessor = {consumerKey     : MyConsumerKey,
+                    consumerSecret  : MyConsumerSecret};
                     
     var message = {method: "post",
                    action: "https://www.google.com/accounts/OAuthGetRequestToken",
@@ -69,8 +73,8 @@ function GetAccessToken(tNum)
   if(widget.preferences['oauth_mytoken'] && widget.preferences['oauth_mytoken'] !== "" 
     || widget.preferences['oauth_verify' + tNum] && widget.preferences['oauth_verify' + tNum] !== "")
   {
-    var accessor = {consumerKey     : widget.preferences['oauth_consumerkey'],
-                    consumerSecret  : widget.preferences['oauth_consumersecret'],
+    var accessor = {consumerKey     : MyConsumerKey,
+                    consumerSecret  : MyConsumerSecret,
                     token           : widget.preferences['oauth_mytoken'],
                     tokenSecret     : widget.preferences['oauth_mytoken_secret']} ;
                     
@@ -117,8 +121,8 @@ function PrepareRequest(XMLHttpRequest, settings, tNum, url)
   // Only request token if we have no one
   if(widget.preferences['oauth_token' + tNum] && widget.preferences['oauth_token' + tNum] !== "")
   {
-    var accessor = {consumerKey     : widget.preferences['oauth_consumerkey'],
-                    consumerSecret  : widget.preferences['oauth_consumersecret'],
+    var accessor = {consumerKey     : MyConsumerKey,
+                    consumerSecret  : MyConsumerSecret,
                     token           : widget.preferences['oauth_token' + tNum],
                     tokenSecret     : widget.preferences['oauth_secret' + tNum]} ;                    
     var message = {method: "get", action: url};

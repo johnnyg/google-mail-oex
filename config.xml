@@ -25,8 +25,6 @@
   <!-- Default Values -->
   <preference name="update_intervall" value="60" />
   <preference name="enable_sound" value="true" />
-  <preference name="oauth_consumerkey" value="www.codebit.de" readonly="true"/>
-  <preference name="oauth_consumersecret" value="mC7L0SPVt/0mQcQRkfmPsf3O" readonly="true"/>
 
   <!-- Access Policy -->
   <access origin="https://mail.google.com/mail/feed/" subdomains="true"/>
