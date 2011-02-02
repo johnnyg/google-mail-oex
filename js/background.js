@@ -61,9 +61,7 @@ window.addEventListener("load", function()
     opera.extension.onconnect = function (event)
     {
         if(event.origin.indexOf("popup.html") > -1)
-        {
-            event.source.postMessage(Infos);
-        }
+            if(Infos) event.source.postMessage(Infos);
     }
 }, false);
 
@@ -93,9 +91,12 @@ function storageHandler(e)
 // Update Message-Count
 function Update(source)
 {
-    // At first we check if we have a login and password
     // TODO: Support more than one token (multi-account)
-    if((!widget.preferences['oauth_token1']) || (widget.preferences['oauth_token1'] == ""))
+    var tokenNum = 1;
+
+    // At first we check if we have a login and password
+    if((!widget.preferences['oauth_token' + tokenNum]) ||
+       (widget.preferences['oauth_token' + tokenNum] == ""))
     {
         DisplayError("<strong>No valid verification code</strong>,<br/>please edit <a href='javascript:ShowPreferences();'>preferences</a>.");
         if(source) source.postMessage(Infos);
@@ -104,9 +105,6 @@ function Update(source)
   
     // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
     var feedURL = "https://mail.google.com/mail/feed/atom";
-  
-    // TODO: Support more than one token (multi-account)
-    var tokenNum = 1;
   
     // Get Feed now
     if(Debug) opera.postError("INFO: Get Message feed...");
@@ -119,8 +117,7 @@ function Update(source)
         success: function(feed){
             ParseFeed(feed, source)
             },
-        error : function(XMLHttpRequest, textStatus, errorThrown)
-        {
+        error : function(){
             if(Debug) opera.postError("GMN : Error while receiving Feed");
             DisplayError("<strong>An error occurred. </strong>" +
                 "Please check your connection and your " +
@@ -245,6 +242,7 @@ function CheckFeed(tokenNum, source)
 // Handle messages from popup-menu
 function HandleMessages(event)
 {
+    if(Debug) opera.postError("INFO: Background-Process get command '" + event.data.cmd + "'");
     switch(event.data.cmd)
     {
         // Load Google Mail in new tab
@@ -281,8 +279,24 @@ function HandleMessages(event)
     
         // SaveVerfiyCode
         case 'SaveVerifyCode':
-            if(GetAccessToken(event.data.num));
-            CheckFeed(event.data.num, event.source);
+            if(GetAccessToken(event.data.num))
+                CheckFeed(event.data.num, event.source);
+            else
+                event.source.postMessage({cmd: 'errorVerify',num: event.data.num});
+            break;
+
+        // RevokeAccess
+        case 'RevokeAccess':
+            // 2FIX: RevokeAccessToken(event.data.num, event.source);
+            // WORKAROUND: Revoke Access manually
+            if( opera.extension.tabs.create )
+                opera.extension.tabs.create({
+                    url:"https://www.google.com/accounts/IssuedAuthSubTokens",
+                    focused:true
+                });
+            widget.preferences['oauth_token' + event.data.num] = "";
+            widget.preferences['oauth_secret' + event.data.num] = "";
+            widget.preferences['oauth_verify' + event.data.num] = "";
             break;
       
         // Refresh

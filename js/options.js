@@ -1,3 +1,6 @@
+//Debug
+var Debug = 1;
+
 // JQuery - Functions
 $(document).ready(function() 
 {
@@ -28,6 +31,8 @@ function VerifyCodeAction()
 {
   // Unbind all existing handlers
   $('#VerifyCodeAction').unbind();
+  $('#VerifyCodeAction').removeAttr("disabled");
+  $('#verify1').removeAttr("disabled");
   
   // Show "get verification code"
   if($('#verify1').val() == "")
@@ -41,7 +46,10 @@ function VerifyCodeAction()
   {
     $('#VerifyCodeAction').html("<strong>" + lang.options_saveverifiy + "</strong>");
     $('#VerifyCodeAction').click(function(){
-      opera.extension.postMessage({cmd: "SaveVerifyCode", num: 1});}); 
+      opera.extension.postMessage({cmd: "SaveVerifyCode", num: 1});
+    $('#VerifyCodeAction').attr("disabled", "disabled");
+    $('#verify1').attr("disabled", "disabled");
+    $('#VerifyCodeAction').html(lang.options_wait)});
   }
   // Show mail-adress and "revoke"-button
   else
@@ -50,7 +58,8 @@ function VerifyCodeAction()
         " '" + widget.preferences['oauth_mail1'] + "' " +
         "<button id='VerifyCodeAction'>" + lang.options_revoke +"</button></div>");
      $('#VerifyCodeAction').click(function(){
-        opera.extension.postMessage({cmd: "RevokeAccess", num: 1});}); 
+        opera.extension.postMessage({cmd: "RevokeAccess", num: 1});
+        window.close();});
   }
 }
 
@@ -61,11 +70,13 @@ function ResetOAuth()
   widget.preferences['oauth_mytoken'] = "";
   widget.preferences['oauth_verify1'] = "";
   widget.preferences['oauth_token1'] = "";
+  VerifyCodeAction();
 }
 
 // Handle messages from background-process
 function HandleMessages(event)
 {
+  if(Debug) opera.postError("INFO: Option-Page get command '" + event.data.cmd + "'");
   // whats the status
   switch(event.data.cmd)
   {
@@ -80,9 +91,10 @@ function HandleMessages(event)
     break;
     
     // Error while checking Verify-Code
-    // TODO: What we will do here?
-    case "errorCheck": 
-      $('#mail' + event.data.num).html("<div>ERROR</div>");
+    case "errorVerify":
+    case "errorCheck":
+      VerifyCodeAction();
+      //TODO: $('#error' + event.data.num).html("<div>ERROR</div>");
     break;   
   }
 }

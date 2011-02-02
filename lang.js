@@ -7,6 +7,7 @@ lang.options_saveverifiy = "apply code";
 lang.options_revoke = "revoke access";
 lang.options_update = "Update-Time";
 lang.options_check = "Check new mail for ";
+lang.options_wait = "Please wait...";
 
 lang.popup_open = "Open <strong>GMail</strong> in new tab";
 lang.popup_compose = "Compose Mail";

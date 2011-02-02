@@ -119,6 +119,11 @@ fieldset input[type=text], fieldset input[type=password] {
   width: 200px;
 }
 
+fieldset input:readonly, fieldset input[type=text]:readonly, fieldset input[type=password]:readonly {
+  background-color: #ddd !important;
+  color: #666 !important;
+}
+
 fieldset input[type=text]:focus, fieldset input[type=password]:focus {
   border-color: rgba(80,80,130,0.8);
 }

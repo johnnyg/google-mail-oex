@@ -2,6 +2,9 @@
 var MyConsumerKey       = "www.codebit.de";
 var MyConsumerSecret    = "mC7L0SPVt/0mQcQRkfmPsf3O";
 
+//Debug
+var Debug = 1;
+
 // Show Page for grant access/verfication code
 function GetVerificationCode() 
 {  
@@ -107,13 +110,59 @@ function GetAccessToken(tNum)
     }
     // Show Error if there was an status != 200 (OK)
     else
-      if(Debug) opera.postError("ERROR : AccessToken-Status " + requestTokenRequest.status + " (" +
+    {
+        if(Debug) opera.postError("ERROR : AccessToken-Status " + requestTokenRequest.status + " (" +
         requestTokenRequest.statusText + ")\nResponse: " + requestTokenRequest.responseText);
-      return false;
+        return false;
+    }
   }
   else
     return false;
 }
+
+/* RevokeAccessToken - DONT WORK
+// http://code.google.com/intl/de-DE/apis/accounts/docs/OAuth_ref.html#RevokeToken
+// Fails because the API only Revokes AuthSub-Tokens
+function RevokeAccessToken(tNum)
+{
+    if(Debug) opera.postError("Revoke AccessToken  " +
+        widget.preferences['oauth_token' + tNum]);
+
+    var accessor = {consumerKey     : MyConsumerKey,
+                consumerSecret  : MyConsumerSecret,
+                token           : widget.preferences['oauth_token' + tNum],
+                tokenSecret     : widget.preferences['oauth_secret' + tNum]} ;
+
+    var message = {method: "get",
+                   action: "https://www.google.com/accounts/AuthSubRevokeToken"};
+
+    OAuth.completeRequest(message, accessor);
+    var requestBody = OAuth.formEncode(message.parameters);
+    var requestTokenRevoke = new XMLHttpRequest();
+    requestTokenRevoke.open(message.method, message.action, false);
+    requestTokenRevoke.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    requestTokenRevoke.setRequestHeader("Authorization", "OAuth toke=\"" +
+        widget.preferences['oauth_token' + tNum] + "\"");
+    requestTokenRevoke.send(requestBody);
+
+    // wait for response
+    while(requestTokenRevoke.readyState != 4);
+
+    // evaluate response
+    if(requestTokenRevoke.status == 200)
+    {
+      widget.preferences['oauth_token' + tNum] = null;
+      widget.preferences['oauth_secret' + tNum] = null;
+      if(Debug) opera.postError("SUCCESS : Revoke Token"  + tNum + " successfull");
+      if(source) source.postMessage({cmd: 'successRevoke', num: tokenNum});
+    }
+    // Show Error if there was an status != 200 (OK)
+    else
+    {
+      if(Debug) opera.postError("ERROR : RevokeToken-Status " + requestTokenRevoke.status + " (" +
+        requestTokenRevoke.statusText + ")\nResponse: " + requestTokenRevoke.responseText);
+    }
+ }*/
 
 // Set the oauth-infos to the request
 function PrepareRequest(XMLHttpRequest, settings, tNum, url)
