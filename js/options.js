@@ -16,6 +16,11 @@ $(document).ready(function()
 
   // Make the VerfiyCode-Button work
   $('#verify1').keyup(VerifyCodeAction);  
+  
+  // set close function (refresh feed & close window)
+  $("#close").click(function(){
+    opera.extension.postMessage({cmd:"Refresh"});
+    window.close();});
 });
 
 // Update VerfiyCodeAction
@@ -71,6 +76,7 @@ function HandleMessages(event)
         "<button id='VerifyCodeAction'>" + lang.options_revoke +"</button></div>");
       $('#VerifyCodeAction').click(function(){
         opera.extension.postMessage({cmd: "RevokeAccess", num: 1});}); 
+      opera.extension.postMessage({cmd:"Refresh"});
     break;
     
     // Error while checking Verify-Code

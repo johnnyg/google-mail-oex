@@ -12,8 +12,8 @@ lang.popup_open = "<strong>GoogleMail</strong> im neuen Tab öffnen";
 lang.popup_compose = "E-Mail schreiben";
 lang.popup_pref = "Einstellungen...";
 
-lang.popup_nomsg = "Es gibt <strong>keine ungelesene Nachricht</strong>.";
-lang.popup_onemsg = "Es gibt <strong>eine ungelesene Nachricht</strong.>";
+lang.popup_nomsg = "Es gibt <strong>keine ungelesene Nachrichten</strong>";
+lang.popup_onemsg = "Es gibt <strong>eine ungelesene Nachricht</strong>";
 lang.popup_msg_before = "Es gibt <strong>";
-lang.popup_msg_after = " ungelesene Nachricht</strong>.";
+lang.popup_msg_after = " ungelesene Nachrichten</strong>";
 lang.popup_lastupdate = "Letztes Update : ";
