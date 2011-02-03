@@ -12,7 +12,7 @@
 // Global Vars
 var MyButton;           // Toolbar-Button
 var UpdateTimer;        // UpdateTimer
-var Debug=1;            // DebugMode (writes to Error-Console)
+var Debug=0;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
 var Infos;              // All Infos about last messages-feed
@@ -40,9 +40,6 @@ window.addEventListener("load", function()
             height: StdHeight
         }
     }
-    
-    // Check for MyToken (OAuth)
-    GetMyToken();
   
     // Listen for injected script messages
     opera.extension.onmessage = HandleMessages;

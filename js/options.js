@@ -1,5 +1,5 @@
 //Debug
-var Debug = 1;
+var Debug = 0;
 
 // Intialize the option page
 $(document).ready(function() 
@@ -18,7 +18,8 @@ $(document).ready(function()
   });
 
   // Make the VerfiyCode-Button work
-  $('#verify1').keyup(VerifyCodeAction);  
+  $('#verify1').keyup(VerifyCodeAction); 
+  $('#verify1').bind('paste', VerifyCodeAction); 
   
   // set close function (refresh feed & close window)
   $("#close").click(function(){

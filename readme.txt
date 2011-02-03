@@ -10,6 +10,7 @@ v1.2
 Support of OAuth for Authentification (login/pass removed)
 German Translation
 New Icons
+Auto-Refresh when open button-menu
 
 v1.1
 Add optional sound notification
@@ -20,6 +21,6 @@ v1.0
 Initial Release
 
 THANKS TO
-Patryk Obara for improved Icon, error-reporting and fixes
-The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the GMail-Icon
-PC.de (http://pc.de/icons/) for the other Icons
+Patryk Obara for improved icon, error-reporting and fixes
+The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the gmail-icon
+PC.de (http://pc.de/icons/) for the other icons
