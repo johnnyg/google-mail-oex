@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/options.css">
+  <link rel="icon" href="img/gmail-icon-16px.png" type="image/png" />
+  <title id="widget-title">Opera Extensions | Google Mail Notifier</title>
+  <script src="js/ext/jquery.js" type="text/javascript"></script>
+  <script src="lang.js" type="text/javascript"></script>
+  <script src="js/options.js" type="text/javascript"></script>
+</head>
+<body>
+  <header>
+    <img src="img/logo-banner.png">
+  </header>
+
+  <section>
+    <p>Google Mail Notifier is a small, simple and fast extension to show the 
+    number of unread mails in your Gmail-Inbox in front of a button and the 
+    titles of the messages in the button-menu.</p>
+    
+    <p><strong>Hint:</strong> <em>This Extension will only work with your 
+    "Google Apps for your Domain"-Account if you have switched to the <a href="http://www.google.com/support/a/bin/topic.py?topic=28917" 
+    title='New infrastructure for Google Apps accounts'>new infrastructure</a> yet.</em></p>
+
+    <h3>GMail verification code (OAuth)</h3>
+    <fieldset>
+      <p><strong>Google Mail Notifier uses <a href='http://oauth.net/'>OAuth</a>
+      </strong> to get access to your GMail-Account, with this autorisation-method 
+      this extension will not have access to your password or any other personal 
+      information from your Google Account. <strong>Get your verficationc code for 
+      this extension by clicking the button, grant access and copy/paste the code in
+      the field below.</strong></p>
+      <div id='mail1'>
+        <label for="verify1">Verification-Code</label>
+        <input id="verify1" type="text"></input>
+        <button id="VerifyCodeAction"></button>
+        <div id="error1" class="error"></div>
+      </div>
+      <small class='options_small'>
+        <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Here</a> 
+        you can manually revoke access for this extension, after that mail-check 
+        will not longer work.</small></small>
+    </fieldset>
+    <h3>Other Options</h3>
+    <fieldset>
+      <p>
+        <input id="enable_sound" name="enable_sound" 
+          type="checkbox"></input>
+        <label id="enable_sound_label" for="enable_sound"><b>Play notification sound on new messages</b></label>
+      </p>
+      <p>
+        <input id="range_update_intervall" name="update_intervall" 
+          type="range" min="5" max="600" step="1"></input>
+        <label id="range_update_intervall_label" for="range_update_intervall"></label>
+      </p>
+    </fieldset>
+    <div class="button_line">
+        <button id="close">Apply & Close Window</button>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Another great <a href="http://www.codebit.de" title='Codebit-Homepage'>Codebit</a>-software 
+      programmed by <a href="mailto:tom.schreiber@codebit.de" title='Send a mail to the author'>Tom Schreiber</a></strong>
+    <br/>
+    <small>This extension is licensed under the <a href="http://www.opensource.org/licenses/apache2.0.php" title='Show text of the license'>
+    Apache License 2.0</a>, you can get the source
+    <a href='http://code.google.com/p/google-mail-oex/source/checkout' title='Source at Google Code'>here</a>
+    <br/>
+    Thanks to the <a href="http://icons.mysitemyway.com/" 
+      title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> for the GMail-Icon 
+      and <a href='http://pc.de/icons/' title='Homepage of PC'>PC</a> for the other icons.<br/>
+        Thanks to Patryk Obara for the improved Icon and bug-fixes.
+    </small>
+    </footer>
+</body>
+</html>

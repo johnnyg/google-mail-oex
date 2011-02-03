@@ -108,14 +108,15 @@ function Update(source)
     jQuery.getFeed(
     {
         url: feedURL,
-        beforeSend: function(XMLHttpRequest, settings){
+        beforeSend: function(XMLHttpRequest, settings) {
             PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);
         },
-        success: function(feed){
+        success: function(feed) {
             ParseFeed(feed, source)
             },
-        error : function(){
-            if(Debug) opera.postError("GMN : Error while receiving Feed");
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            if(Debug) opera.postError("GMN : Error while receiving Feed, " + errorThrown +
+              "(" + XMLHttpRequest.status + ")") ;
             DisplayError(lang.error_confails)
             if(source) source.postMessage(Infos);
         }
@@ -199,7 +200,7 @@ function ParseFeed(feed, source)
         MyButton.popup.height = StdHeight + "px";
     
     // Tell new Infos to Popup
-    if(source) source.postMessage(Infos);
+    if(typeof source != 'undefined') source.postMessage(Infos);
 }
 
 // Checks feed and gets mail-adsress from feed
@@ -296,7 +297,10 @@ function HandleMessages(event)
         // Refresh
         case 'Refresh':
             window.clearTimeout(UpdateTimer);
-            Update(event.source);
+            if(event.data.nocallback)
+              Update();
+            else
+              Update(event.source);
             break;
       
         // Compose Mail

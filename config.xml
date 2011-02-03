@@ -5,10 +5,11 @@
 
   <!-- Extension Infos -->
   <name>Google Mail Notifier</name>
-	
+  
 	<description>A simple and fast extensions to inform you about new unread messages in your GMail-Inbox and show the titles of the new messages.</description>
+  <description xml:lang="en">A simple and fast extensions to inform you about new unread messages in your GMail-Inbox and show the titles of the new messages.</description>
   <description xml:lang="de">Diese Erweiterung informiert Sie über neue ungelesene Nachrichten in Ihrem Googlemail-Posteingang und zeigt die Titel dieser Nachrichten an.</description>
-    
+
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
     
@@ -16,6 +17,9 @@
   
   <!-- License -->
   <license href="http://www.opensource.org/licenses/apache2.0.php">
+    Licensed under the Apache License, Version 2.0
+  </license>
+  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="en">
     Licensed under the Apache License, Version 2.0
   </license>
   <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="de">

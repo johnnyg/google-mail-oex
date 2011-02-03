@@ -2,9 +2,6 @@
 var MyConsumerKey       = "www.codebit.de";
 var MyConsumerSecret    = "mC7L0SPVt/0mQcQRkfmPsf3O";
 
-//Debug
-var Debug = 0;
-
 // Show Page for grant access/verfication code
 function GetVerificationCode() 
 {  

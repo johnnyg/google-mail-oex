@@ -23,7 +23,7 @@ $(document).ready(function()
   
   // set close function (refresh feed & close window)
   $("#close").click(function(){
-    opera.extension.postMessage({cmd:"Refresh"});
+    opera.extension.postMessage({cmd:"Refresh", nocallback: true});
     window.close();});
 });
 
