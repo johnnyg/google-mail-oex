@@ -8,161 +8,107 @@ var Debug = 1;
 // Show Page for grant access/verfication code
 function GetVerificationCode() 
 {  
-    // Check MyToken
-    GetMyToken();
-    
-    // Show Page
-    var url = "https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=" + widget.preferences['oauth_mytoken'];
-    if( opera.extension.tabs.create )
-        opera.extension.tabs.create({url: url, focused:true});
+    // Get MyToken
+    if(GetMyToken())
+    {    
+      // Show Page
+      var url = "https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=" + widget.preferences['oauth_mytoken'];
+      if( opera.extension.tabs.create )
+          opera.extension.tabs.create({url: url, focused:true});
+    }
 }
 
 // Receive MyToken and optional callback given function
 function GetMyToken()
 {
-  // Only request token if we have no one
-  if(!widget.preferences['oauth_mytoken'] || widget.preferences['oauth_mytoken'] == "")
-  {
-    var accessor = {consumerKey     : MyConsumerKey,
+  var accessor = {consumerKey     : MyConsumerKey,
                     consumerSecret  : MyConsumerSecret};
                     
-    var message = {method: "post",
-                   action: "https://www.google.com/accounts/OAuthGetRequestToken",
-                   parameters: [
-                       ["oauth_callback",  "oob"],
-                       ["scope",  "https://mail.google.com/mail/feed/atom"],
-                       ["xoauth_displayname", "Google Mail Notifier"]
-                   ]};     
-                                      
-    OAuth.completeRequest(message, accessor);    
-    var requestBody = OAuth.formEncode(message.parameters);
-    var requestTokenRequest = new XMLHttpRequest();
-    requestTokenRequest.open(message.method, message.action, false);
-    requestTokenRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    requestTokenRequest.setRequestHeader("Authorization", "OAuth");
-    requestTokenRequest.send(requestBody);
-    
-    // wait for response
-    while(requestTokenRequest.readyState != 4);
-    
-    // evaluate response
-    if(requestTokenRequest.status == 200)
-    {
-      var results = OAuth.decodeForm(requestTokenRequest.responseText);
-      widget.preferences['oauth_mytoken'] = OAuth.getParameter(results, "oauth_token");
-      widget.preferences['oauth_mytoken_secret'] = OAuth.getParameter(results, "oauth_token_secret");
-      if(Debug) opera.postError("SUCCESS : RequestToken received : " + widget.preferences['oauth_mytoken']);
-      return true;
-    }
-    // Show Error if there was an status != 200 (OK)
-    else
-    {
-      if(Debug) opera.postError("ERROR : RequestToken-Status " + requestTokenRequest.status + 
-        " / " + requestTokenRequest.responseText);
-      return false;
-    }        
-  }
-  else
+  var message = {method: "post",
+                 action: "https://www.google.com/accounts/OAuthGetRequestToken",
+                 parameters: [
+                     ["oauth_callback",  "oob"],
+                     ["scope",  "https://mail.google.com/mail/feed/atom"],
+                     ["xoauth_displayname", "Google Mail Notifier"]
+                 ]};     
+                                    
+  OAuth.completeRequest(message, accessor);    
+  var requestBody = OAuth.formEncode(message.parameters);
+  var requestTokenRequest = new XMLHttpRequest();
+  requestTokenRequest.open(message.method, message.action, false);
+  requestTokenRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  requestTokenRequest.setRequestHeader("Authorization", "OAuth");
+  requestTokenRequest.send(requestBody);
+  
+  // wait for response
+  while(requestTokenRequest.readyState != 4);
+  
+  // evaluate response
+  if(requestTokenRequest.status == 200)
+  {
+    var results = OAuth.decodeForm(requestTokenRequest.responseText);
+    widget.preferences['oauth_mytoken'] = OAuth.getParameter(results, "oauth_token");
+    widget.preferences['oauth_mytoken_secret'] = OAuth.getParameter(results, "oauth_token_secret");
+    if(Debug) opera.postError("SUCCESS : RequestToken received : " + widget.preferences['oauth_mytoken']);
     return true;
+  }
+  // Show Error if there was an status != 200 (OK)
+  else
+  {
+    if(Debug) opera.postError("ERROR : RequestToken-Status " + requestTokenRequest.status + 
+      " / " + requestTokenRequest.responseText);
+    return false;
+  }        
 }
 
 // GetAccessToken
-function GetAccessToken(tNum)
-{
-  if(Debug) opera.postError("Get AccessToken for RequestToken " + 
-    widget.preferences['oauth_mytoken'] + " / VerfiyCode " + widget.preferences['oauth_verify' + tNum]);
+function GetAccessToken(tNum, Code)
+{    
+  // Cleanup existing-code
+  widget.preferences['oauth_token' + tNum] = "";
+  widget.preferences['oauth_secret' + tNum] = "";
 
-  // Only request token if we have no one
-  if(widget.preferences['oauth_mytoken'] && widget.preferences['oauth_mytoken'] !== "" 
-    || widget.preferences['oauth_verify' + tNum] && widget.preferences['oauth_verify' + tNum] !== "")
+  // Prepare request
+  var accessor = {consumerKey     : MyConsumerKey,
+                  consumerSecret  : MyConsumerSecret,
+                  token           : widget.preferences['oauth_mytoken'],
+                  tokenSecret     : widget.preferences['oauth_mytoken_secret']} ;
+                  
+  var message = {method: "post",
+                 action: "https://www.google.com/accounts/OAuthGetAccessToken",
+                 parameters: [
+                     ["oauth_verifier", Code]                      
+                 ]};     
+                                    
+  OAuth.completeRequest(message, accessor);    
+  var requestBody = OAuth.formEncode(message.parameters);
+  var requestTokenRequest = new XMLHttpRequest();
+  requestTokenRequest.open(message.method, message.action, false);
+  requestTokenRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  requestTokenRequest.setRequestHeader("Authorization", "OAuth");
+  requestTokenRequest.send(requestBody);
+  
+  // wait for response
+  while(requestTokenRequest.readyState != 4);
+  
+  // evaluate response
+  if(requestTokenRequest.status == 200)
   {
-    var accessor = {consumerKey     : MyConsumerKey,
-                    consumerSecret  : MyConsumerSecret,
-                    token           : widget.preferences['oauth_mytoken'],
-                    tokenSecret     : widget.preferences['oauth_mytoken_secret']} ;
-                    
-    var message = {method: "post",
-                   action: "https://www.google.com/accounts/OAuthGetAccessToken",
-                   parameters: [
-                       ["oauth_verifier",  widget.preferences['oauth_verify' + tNum]]                      
-                   ]};     
-                                      
-    OAuth.completeRequest(message, accessor);    
-    var requestBody = OAuth.formEncode(message.parameters);
-    var requestTokenRequest = new XMLHttpRequest();
-    requestTokenRequest.open(message.method, message.action, false);
-    requestTokenRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    requestTokenRequest.setRequestHeader("Authorization", "OAuth");
-    requestTokenRequest.send(requestBody);
-    
-    // wait for response
-    while(requestTokenRequest.readyState != 4);
-    
-    // evaluate response
-    if(requestTokenRequest.status == 200)
-    {
-      var results = OAuth.decodeForm(requestTokenRequest.responseText);
-      widget.preferences['oauth_token' + tNum] = OAuth.getParameter(results, "oauth_token");
-      widget.preferences['oauth_secret' + tNum] = OAuth.getParameter(results, "oauth_token_secret");
-      if(Debug) opera.postError("SUCCESS : AccessToken received : " + widget.preferences['oauth_token' + tNum] 
-        + " (Secret: " + widget.preferences['oauth_secret' + tNum] + ")");
-      return true;
-    }
-    // Show Error if there was an status != 200 (OK)
-    else
-    {
-        if(Debug) opera.postError("ERROR : AccessToken-Status " + requestTokenRequest.status + " (" +
-        requestTokenRequest.statusText + ")\nResponse: " + requestTokenRequest.responseText);
-        return false;
-    }
+    var results = OAuth.decodeForm(requestTokenRequest.responseText);
+    widget.preferences['oauth_token' + tNum] = OAuth.getParameter(results, "oauth_token");
+    widget.preferences['oauth_secret' + tNum] = OAuth.getParameter(results, "oauth_token_secret");
+    if(Debug) opera.postError("SUCCESS : AccessToken received : " + widget.preferences['oauth_token' + tNum] 
+      + " (Secret: " + widget.preferences['oauth_secret' + tNum] + ")");
+    return true;
   }
+  // Show Error if there was an status != 200 (OK)
   else
-    return false;
+  {
+      if(Debug) opera.postError("ERROR : AccessToken-Status " + requestTokenRequest.status + " (" +
+      requestTokenRequest.statusText + ")\nResponse: " + requestTokenRequest.responseText);
+      return false;
+  }
 }
-
-/* RevokeAccessToken - DONT WORK
-// http://code.google.com/intl/de-DE/apis/accounts/docs/OAuth_ref.html#RevokeToken
-// Fails because the API only Revokes AuthSub-Tokens
-function RevokeAccessToken(tNum)
-{
-    if(Debug) opera.postError("Revoke AccessToken  " +
-        widget.preferences['oauth_token' + tNum]);
-
-    var accessor = {consumerKey     : MyConsumerKey,
-                consumerSecret  : MyConsumerSecret,
-                token           : widget.preferences['oauth_token' + tNum],
-                tokenSecret     : widget.preferences['oauth_secret' + tNum]} ;
-
-    var message = {method: "get",
-                   action: "https://www.google.com/accounts/AuthSubRevokeToken"};
-
-    OAuth.completeRequest(message, accessor);
-    var requestBody = OAuth.formEncode(message.parameters);
-    var requestTokenRevoke = new XMLHttpRequest();
-    requestTokenRevoke.open(message.method, message.action, false);
-    requestTokenRevoke.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    requestTokenRevoke.setRequestHeader("Authorization", "OAuth toke=\"" +
-        widget.preferences['oauth_token' + tNum] + "\"");
-    requestTokenRevoke.send(requestBody);
-
-    // wait for response
-    while(requestTokenRevoke.readyState != 4);
-
-    // evaluate response
-    if(requestTokenRevoke.status == 200)
-    {
-      widget.preferences['oauth_token' + tNum] = null;
-      widget.preferences['oauth_secret' + tNum] = null;
-      if(Debug) opera.postError("SUCCESS : Revoke Token"  + tNum + " successfull");
-      if(source) source.postMessage({cmd: 'successRevoke', num: tokenNum});
-    }
-    // Show Error if there was an status != 200 (OK)
-    else
-    {
-      if(Debug) opera.postError("ERROR : RevokeToken-Status " + requestTokenRevoke.status + " (" +
-        requestTokenRevoke.statusText + ")\nResponse: " + requestTokenRevoke.responseText);
-    }
- }*/
 
 // Set the oauth-infos to the request
 function PrepareRequest(XMLHttpRequest, settings, tNum, url)

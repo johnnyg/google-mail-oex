@@ -1,7 +1,7 @@
 //Debug
 var Debug = 1;
 
-// JQuery - Functions
+// Intialize the option page
 $(document).ready(function() 
 {
   // Init
@@ -29,72 +29,76 @@ $(document).ready(function()
 // Update VerfiyCodeAction
 function VerifyCodeAction()
 {
-  // Unbind all existing handlers
+  // Unbind all existing handlers and set fields to default
   $('#VerifyCodeAction').unbind();
   $('#VerifyCodeAction').removeAttr("disabled");
   $('#verify1').removeAttr("disabled");
   
-  // Show "get verification code"
-  if($('#verify1').val() == "")
+  // Show "get verification code" or "save verification code"
+  if(!widget.preferences['oauth_token1'] || widget.preferences['oauth_token1'] == "")
   {
-    $('#VerifyCodeAction').html(lang.options_getverifiy);
-    $('#VerifyCodeAction').click(function(){
-      opera.extension.postMessage({cmd: "GetVerifyCode"});});  
+    if($('#verify1').val() == "")
+    {
+      $('#VerifyCodeAction').html(lang.options_getverifiy);
+      $('#VerifyCodeAction').click(function(){
+        opera.extension.postMessage({cmd: "GetVerifyCode"});});  
+    }
+    else
+    {
+      $('#VerifyCodeAction').html("<strong>" + lang.options_saveverifiy + "</strong>");
+      $('#VerifyCodeAction').click(function()
+      {
+        // save verification-code
+        opera.extension.postMessage({cmd: "SaveVerifyCode", num: 1, code: $('#verify1').val()});
+        $('#VerifyCodeAction').attr("disabled", "disabled");
+        $('#verify1').attr("disabled", "disabled");
+        $('#VerifyCodeAction').html(lang.options_wait)
+      });
+    }
   }
-  // Show "save verification code"
-  else if(!widget.preferences['oauth_token1'] || widget.preferences['oauth_token1'] == "")
-  {
-    $('#VerifyCodeAction').html("<strong>" + lang.options_saveverifiy + "</strong>");
-    $('#VerifyCodeAction').click(function(){
-      opera.extension.postMessage({cmd: "SaveVerifyCode", num: 1});
-    $('#VerifyCodeAction').attr("disabled", "disabled");
-    $('#verify1').attr("disabled", "disabled");
-    $('#VerifyCodeAction').html(lang.options_wait)});
-  }
-  // Show mail-adress and "revoke"-button
+  // Show mail-address and "revoke"-button
   else
   {
-    $('#mail1').html("<div class='access_granted'>" + lang.options_check + 
-        " '" + widget.preferences['oauth_mail1'] + "' " +
-        "<button id='VerifyCodeAction'>" + lang.options_revoke +"</button></div>");
-     $('#VerifyCodeAction').click(function(){
-        opera.extension.postMessage({cmd: "RevokeAccess", num: 1});
-        window.close();});
+    $('#mail1').html("<div class='access_granted'><strong>" +  widget.preferences['oauth_mail1'] + 
+        "</strong> " + lang.options_check + " <button id='VerifyCodeAction'>" + 
+        lang.options_delete +"</button></div>");
+     $('#VerifyCodeAction').click(function()
+     {
+        // delete token
+        widget.preferences['oauth_token1'] = "";
+        widget.preferences['oauth_secret1'] = "";
+        widget.preferences['oauth_mail1'] = "";
+        
+        // update feed(s)
+        opera.extension.postMessage({cmd:"Refresh"});
+        
+        // reset form to default   
+        $('#mail1').html('<label for="verify1">' + lang.options_vcode + '</label>' +
+          '<input id="verify1" type="text"></input><button id="VerifyCodeAction"></button>' +
+          '<div id="error1" class="error"></div>');
+        $('#verify1').keyup(VerifyCodeAction);  
+        VerifyCodeAction();         
+     });
   }
-}
-
-// Reset all OAuth-Parameter
-function ResetOAuth()
-{
-  $("input[name=oauth_verify1]").val("");
-  widget.preferences['oauth_mytoken'] = "";
-  widget.preferences['oauth_verify1'] = "";
-  widget.preferences['oauth_token1'] = "";
-  VerifyCodeAction();
 }
 
 // Handle messages from background-process
 function HandleMessages(event)
 {
   if(Debug) opera.postError("INFO: Option-Page get command '" + event.data.cmd + "'");
-  // whats the status
   switch(event.data.cmd)
   {
     // Verfify-Code was successfully checked
     case "successCheck" : 
-      $('#mail' + event.data.num).html("<div class='access_granted'>" + lang.options_check + 
-        " '" + widget.preferences['oauth_mail1'] + "' " +
-        "<button id='VerifyCodeAction'>" + lang.options_revoke +"</button></div>");
-      $('#VerifyCodeAction').click(function(){
-        opera.extension.postMessage({cmd: "RevokeAccess", num: 1});}); 
-      opera.extension.postMessage({cmd:"Refresh"});
+      VerifyCodeAction();
     break;
     
     // Error while checking Verify-Code
     case "errorVerify":
     case "errorCheck":
       VerifyCodeAction();
-      //TODO: $('#error' + event.data.num).html("<div>ERROR</div>");
+      $('#error' + event.data.num).html(lang.options_failverify);
+      $('#verify' + event.data.num).select();
     break;   
   }
 }
@@ -120,8 +124,6 @@ addEventListener
         var multipleValues  = hash( 'checkbox,select-multiple' );
         var checkable       = hash( 'checkbox,radio' );
 
-
-
         // string to hash
         function hash( str, glue )
         {
@@ -133,7 +135,6 @@ addEventListener
 
             return obj;
         }
-
 
         // walk the elements and apply a callback method to them
         function walkElements( callback )

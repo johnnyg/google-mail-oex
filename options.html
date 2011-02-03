@@ -31,13 +31,16 @@
       information from your Google Account. <strong>Get your verficationc code for 
       this extension by clicking the button, grant access and copy/paste the code in
       the field below.</strong></p>
-      <p>
+      <div id='mail1'>
         <label for="verify1">Verification-Code</label>
-        <input id="verify1" name="oauth_verify1" type="text"></input>
+        <input id="verify1" type="text"></input>
         <button id="VerifyCodeAction"></button>
-      </p>
-      <small class='options_small'>If there are problems with OAuth-Autorisation, try to 
-        <a href='javascript:ResetOAuth();' onclick='ResetOAuth();'>reset OAuth-Settings</a> (this revokes access).</small>
+        <div id="error1" class="error"></div>
+      </div>
+      <small class='options_small'>
+        <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Here</a> 
+        you can manually revoke access for this extension, after that mail-check 
+        will not longer work.</small></small>
     </fieldset>
     <h3>Other Options</h3>
     <fieldset>

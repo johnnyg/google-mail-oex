@@ -98,7 +98,7 @@ function Update(source)
     if((!widget.preferences['oauth_token' + tokenNum]) ||
        (widget.preferences['oauth_token' + tokenNum] == ""))
     {
-        DisplayError("<strong>No valid verification code</strong>,<br/>please edit <a href='javascript:ShowPreferences();'>preferences</a>.");
+        DisplayError(lang.error_nocode);
         if(source) source.postMessage(Infos);
         return;
     }
@@ -119,9 +119,7 @@ function Update(source)
             },
         error : function(){
             if(Debug) opera.postError("GMN : Error while receiving Feed");
-            DisplayError("<strong>An error occurred. </strong>" +
-                "Please check your connection and your " +
-                "<a href='javascript:ShowPreferences();'>settings</a>")
+            DisplayError(lang.error_confails)
             if(source) source.postMessage(Infos);
         }
     });
@@ -279,24 +277,23 @@ function HandleMessages(event)
     
         // SaveVerfiyCode
         case 'SaveVerifyCode':
-            if(GetAccessToken(event.data.num))
+            if(GetAccessToken(event.data.num, event.data.code))
+            {
                 CheckFeed(event.data.num, event.source);
+                Update();
+            }
             else
                 event.source.postMessage({cmd: 'errorVerify',num: event.data.num});
             break;
 
         // RevokeAccess
         case 'RevokeAccess':
-            // 2FIX: RevokeAccessToken(event.data.num, event.source);
-            // WORKAROUND: Revoke Access manually
+            // Revoke Access manually
             if( opera.extension.tabs.create )
                 opera.extension.tabs.create({
                     url:"https://www.google.com/accounts/IssuedAuthSubTokens",
                     focused:true
                 });
-            widget.preferences['oauth_token' + event.data.num] = "";
-            widget.preferences['oauth_secret' + event.data.num] = "";
-            widget.preferences['oauth_verify' + event.data.num] = "";
             break;
       
         // Refresh

@@ -32,14 +32,16 @@
       Daten aus Ihrem Google-Konto. <strong>Rufen Sie den Bestätigungscode
       durch einen Klick auf den Button ab, bestätigen zu den Zugriff und kopieren
       Sie den Code in das vorgesehene Feld.</strong></p>
-      <p id='mail1'>
+      <div id='mail1'>
         <label for="verify1">Bestätigungscode</label>
-        <input id="verify1" name="oauth_verify1" type="text"></input>
+        <input id="verify1" type="text"></input>
         <button id="VerifyCodeAction"></button>
-      </p>
-      <small class='options_small'>Falls es Probleme mit der OAuth-Autorisierung gibt, versuchen Sie die
-        <a href='javascript:ResetOAuth();' onclick='ResetOAuth();'>OAuth-Einstellungen zurückzusetzen</a>. 
-        Bestehende Zugriffs-Berechtigungen werden dabei gelöscht.</small>
+        <div id="error1" class="error"></div>
+      </div>
+      <small class='options_small'>
+        <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Hier</a> 
+        können Sie die Berechtigung für diese Erweiterung löschen,
+        der Abruf wird dann nicht mehr funktionieren.</small>
     </fieldset>
     <h3>Weitere Einstellungen</h3>
     <fieldset>

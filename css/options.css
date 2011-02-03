@@ -87,6 +87,11 @@ text-shadow: #DDD 1px 1px 1px;
   padding-left: 20px;
 }
 
+.error {
+  margin-left: 20px;
+  color: #B11921;
+}
+
 fieldset {
   border: none;
   background: rgba(150,160,200,0.25);
