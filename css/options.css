@@ -157,3 +157,8 @@ fieldset input[type=radio]:disabled, fieldset input[type=checkbox]:disabled {
   background: #fff;
   border-color: rgba(80,80,130,0.5);
 }
+
+#box_update_intervall {
+    width: 28px;
+    text-align: right;
+}

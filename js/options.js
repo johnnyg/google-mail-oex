@@ -7,14 +7,12 @@ $(document).ready(function()
   // Init
   $('#range_update_intervall').val(widget.preferences['update_intervall']);
   
-  // Show Range-Secounds on start
-  $('#range_update_intervall_label').html(
-      lang.options_update + " "  + $('#range_update_intervall').val() + 's');
-
   // Show Range-Secounds on change
   $('#range_update_intervall').change(function() {
-    $('#range_update_intervall_label').html(
-      lang.options_update + " " + $('#range_update_intervall').val() + 's');
+    $('#box_update_intervall').val($('#range_update_intervall').val());
+  });
+  $('#box_update_intervall').keyup(function() {
+    $('#range_update_intervall').val($('#box_update_intervall').val());
   });
 
   // Make the VerfiyCode-Button work

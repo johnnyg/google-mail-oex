@@ -5,7 +5,6 @@ var lang = new Object();
 lang.options_getverifiy  = "request code";
 lang.options_saveverifiy = "apply code";
 lang.options_delete = "delete";
-lang.options_update = "Update-Time";
 lang.options_check = "is checked";
 lang.options_wait = "Please wait...";
 lang.options_vcode = "Verification-Code";

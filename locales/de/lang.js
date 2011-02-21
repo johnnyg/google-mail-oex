@@ -4,7 +4,6 @@ var lang = new Object();
 // set strings
 lang.options_getverifiy     = "Code anfordern";
 lang.options_saveverifiy    = "Code übernehmen";
-lang.options_update         = "Aktualisierungszeit";
 lang.options_delete         = "Löschen";
 lang.options_check          = "wird überprüft";
 lang.options_wait           = "Bitte warten...";
