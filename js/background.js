@@ -12,7 +12,7 @@
 // Global Vars
 var MyButton;           // Toolbar-Button
 var UpdateTimer;        // UpdateTimer
-var Debug=0;            // DebugMode (writes to Error-Console)
+var Debug=1;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
 var Infos;              // All Infos about last messages-feed
@@ -61,7 +61,6 @@ window.addEventListener("load", function()
             if(Infos) event.source.postMessage(Infos);
     }
 }, false);
-
 
 // Some Options maybe have changed
 function storageHandler(e)
@@ -310,6 +309,11 @@ function HandleMessages(event)
                     url:"https://mail.google.com/mail/?#compose",
                     focused:true
                 });
+            break;
+
+        // Return Mailto-Option
+        case 'MailtoEnabled':
+            event.source.postMessage({cmd: 'MailtoEnabled', value: widget.preferences['mailto_links']});
             break;
       
         // Do nothing

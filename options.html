@@ -45,15 +45,19 @@
     <h3>Other Options</h3>
     <fieldset>
       <p>
-        <input id="enable_sound" name="enable_sound" 
+        <input id="range_update_intervall" type="range" min="5" max="600" step="1"></input>
+        <label id="range_update_intervall_label" for="range_update_intervall">Update-Time </label>
+       <input id="box_update_intervall" name="update_intervall" type="text"></input> s
+      </p>
+      <p>
+        <input id="enable_sound" name="enable_sound"
           type="checkbox"></input>
         <label id="enable_sound_label" for="enable_sound"><b>Play notification sound on new messages</b></label>
       </p>
       <p>
-        <input id="range_update_intervall" name="update_intervall" 
-          type="range" min="5" max="600" step="1"></input>
-        <label id="range_update_intervall_label" for="range_update_intervall">Update-Time </label>
-        <input id="box_update_intervall"  type="text"></input>
+        <input id="mailto_links" name="mailto_links"
+          type="checkbox"></input>
+        <label id="enable_sound_label" for="mailto_links"><b>Open Mail-Links (mailto) with GMail</b></label>
       </p>
     </fieldset>
     <div class="button_line">

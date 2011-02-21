@@ -6,6 +6,10 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
+v1.3
+Option to give a Update-Intervall manually
+Option to open "mailto"-links with GMail
+
 v1.2
 Support of OAuth for Authentification (login/pass removed)
 German Translation
