@@ -27,6 +27,7 @@
   </license>
   
   <!-- Default Values -->
+  <preference name="num_max_accounts" value="5" />
   <preference name="update_intervall" value="60" />
   <preference name="enable_sound" value="true" />
 

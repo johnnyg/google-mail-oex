@@ -1,11 +1,12 @@
-//Debug
-var Debug = 1;
+var Debug = 1;      //Debug
+var MaxAccounts;     // Number of max supported accounts
 
 // Intialize the option page
 $(document).ready(function() 
 {
     // Init
     $('#range_update_intervall').val(widget.preferences['update_intervall']);
+    MaxAccounts = parseInt(widget.preferences['num_max_accounts']);
   
     // Show Range-Secounds on change
     $('#range_update_intervall').change(function() {
@@ -35,7 +36,7 @@ function BuildMailContainer()
     $('#mail-container').html = "";  
   
     // build new
-    for(var i=1; i <= 5; i++)
+    for(var i=0; i < MaxAccounts; i++)
     {
         var mail = "";
     
@@ -62,7 +63,7 @@ function CreateForm(type, num)
     // new blank-form
     if(type == 'new')
     {
-        return '<label for="verify' + num + '">' + lang.options_vcode + ' ' + num + ' </label>' +
+        return '<label for="verify' + num + '">' + lang.options_vcode + ' ' + (num + 1) + ' </label>' +
         '<input id="verify' + num + '" type="text" onkeyup="CheckForSave(' + num + ');" oninput="CheckForSave(' + num + ');"></input> ' +
         '<button id="vbutton' + num + '" onclick="GetVerifyCode(' + num + ');">' + lang.options_getverifiy + ' </button>' +
         '<div id="error' + num + '" class="error"></div>';

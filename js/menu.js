@@ -61,7 +61,7 @@ function HandleMessages(event)
       // Show Status
       $('#status').html(event.data.info)
         .addClass('status_box').removeClass('error_box');
-      $('#last_update').html(event.data.updated);
+      $('#last_update').html(event.data.timestring);
       
       // Clear Box 
       $('#message_box .message').remove();

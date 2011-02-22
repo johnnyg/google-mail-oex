@@ -15,8 +15,10 @@ var UpdateTimer;        // UpdateTimer
 var Debug=1;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
-var Infos;              // All Infos about last messages-feed
+var MaxAccounts;        // Number of max supported accounts
+var Feeds;              // Feeds-Array
 var AudioObject;        // Audio-Object for Sound-Notification
+var LockUpdate;         // Lock SendInfo()-Function
 
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
@@ -40,6 +42,11 @@ window.addEventListener("load", function()
             height: StdHeight
         }
     }
+    
+    // Set vars
+    MaxAccounts = parseInt(widget.preferences['num_max_accounts']);
+    Feeds = new Array(MaxAccounts);
+    LockUpdate = false;
   
     // Listen for injected script messages
     opera.extension.onmessage = HandleMessages;
@@ -54,11 +61,11 @@ window.addEventListener("load", function()
     // Update now
     Update();
   
-    // Connect to Menu and give all the Infos
+    // Connect to Menu and give all the Feeds
     opera.extension.onconnect = function (event)
     {
         if(event.origin.indexOf("popup.html") > -1)
-            if(Infos) event.source.postMessage(Infos);
+            if(Feeds) event.source.postMessage(Feeds);
     }
 }, false);
 
@@ -87,23 +94,39 @@ function storageHandler(e)
 // Update Message-Count
 function Update(source)
 {
-    // TODO: Support more than one token (multi-account)
-    var tokenNum = 1;
-
-    // At first we check if we have a login and password
-    if((!widget.preferences['oauth_token' + tokenNum]) ||
-       (widget.preferences['oauth_token' + tokenNum] == ""))
+    for(var i=0; i < MaxAccounts; i++)
     {
-        DisplayError(lang.error_nocode);
-        if(source) source.postMessage(Infos);
-        return;
+        // check if we have an token here
+        if((!widget.preferences['oauth_token' + i]) || (widget.preferences['oauth_token' + i] == ""))
+        {
+            Feeds[i] = {
+                status: "empty"
+            };
+            continue;
+        }
+        
+        // set status to "request"
+        if(Feeds[i] && Feeds[i].status)
+            Feeds[i].status = "request"
+        else
+            Feeds[i]= {
+                status: "request"
+            };
+  
+        // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
+        var feedURL = "https://mail.google.com/mail/feed/atom";
+  
+        // Get Feed now
+        GetFeed(feedURL, i, source)
     }
-  
-    // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
-    var feedURL = "https://mail.google.com/mail/feed/atom";
-  
-    // Get Feed now
-    if(Debug) opera.postError("INFO: Get Message feed...");
+
+    // Set new timeout
+    UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
+}
+
+function GetFeed(feedURL, tokenNum, source)
+{
+    if(Debug) opera.postError("INFO: Get Message feed " + tokenNum + "...");
     jQuery.getFeed(
     {
         url: feedURL,
@@ -111,49 +134,35 @@ function Update(source)
             PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);
         },
         success: function(feed) {
-            ParseFeed(feed, source)
-            },
+            ParseFeed(feed, source, tokenNum)
+        },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
-            if(Debug) opera.postError("GMN : Error while receiving Feed, " + errorThrown +
-              "(" + XMLHttpRequest.status + ")") ;
-            DisplayError(lang.error_confails)
-            if(source) source.postMessage(Infos);
+            if(Debug) opera.postError("ERROR : Error while receiving Feed " + 
+                tokenNum + ", " + errorThrown + "(" + XMLHttpRequest.status + ")") ;
+            Feeds[i] = {
+                status: "error", 
+                info: lang.error_confails
+            };
+            SendFeeds(source);
         }
     });
-   
-    // Set new timeout
-    UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
 }
 
 // Handle new Feed
-function ParseFeed(feed, source)
+function ParseFeed(feed, source, tokenNum)
 {
-    var text;
+    // get feed
     messages = feed.items;
-    if(messages.length && (messages.length > 0))
-    {
-        MyButton.badge.textContent = messages.length;
-        MyButton.badge.display="block";
-        if(messages.length > 1)
-            text = lang.popup_msg_before + messages.length + lang.popup_msg_after;
-        else
-            text = lang.popup_onemsg;
-    }
-    else
-    {
-        MyButton.badge.display="none";
-        text = lang.popup_nomsg;
-    }
   
     // Check if there are new messages (if there is any new ID)
     var newMessages = false;
-    if(Infos && Infos.status == "success")
+    if(Feeds[tokenNum] && Feeds[tokenNum].msg && Feeds[tokenNum].msg.length > 0)
         for(var i=0; i < messages.length; i++)
         {
             var foundMessage = false;
-            for(var j=0; j < Infos.msg.length; j++)
+            for(var j=0; j < Feeds[tokenNum].msg.length; j++)
             {
-                if(messages[i].id == Infos.msg[j].id)
+                if(messages[i].id == Feeds[tokenNum].msg[j].id)
                     foundMessage = true;
             }
       
@@ -165,44 +174,21 @@ function ParseFeed(feed, source)
             }
         }
     else if(messages.length > 0)
-        newMessages = true;
-  
-    // Notification if there new Messages
-    if(newMessages) PlaySoundNotification();
-  
-    // Current Time
-    var now = new Date();
-    var h0 = "", m0 = "", s0 = "";
-    if(now.getHours() < 10) h0 = "0"
-    if(now.getMinutes() < 10) m0 = "0"
-    if(now.getSeconds() < 10) s0 = "0"
-    var timestring = lang.popup_lastupdate + h0 + now.getHours() + ":" +
-     m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
-  
-    // Update Infos
-    if(Debug) opera.postError("SUCCESS: Feed '" + feed.title+"' with " + messages.length + " messages received");
-    Infos = {
+        newMessages = true;  
+
+    // Update Feeds
+    if(Debug) opera.postError("SUCCESS: Feed " + tokenNum + " '" + feed.title + "' with " + messages.length + " messages received");
+    Feeds[tokenNum] = {
         status: "success",
-        info: text,
-        updated: timestring,
-        msg: messages
+        msg: messages,
+        newMsg: newMessages
     };
-  
-    // Set new Menu-Height
-    if (feed.items.length > 0)
-    {
-        var elements= feed.items.length;
-        if(feed.items.length > 10) elements = 10;
-        MyButton.popup.height = (StdHeight + 47 * elements) + "px";
-    }
-    else
-        MyButton.popup.height = StdHeight + "px";
-    
-    // Tell new Infos to Popup
-    if(typeof source != 'undefined') source.postMessage(Infos);
+
+    // Tell new Feeds to Popup / Update Icon
+    SendFeeds(source);
 }
 
-// Checks feed and gets mail-adsress from feed
+// Checks feed and gets mail-adress from feed
 function CheckFeed(tokenNum, source)
 {
     // Get Feed now
@@ -218,15 +204,15 @@ function CheckFeed(tokenNum, source)
         {
             var pattern = /[^ ]*@.*$/g;
             widget.preferences['oauth_mail' + tokenNum]  = pattern.exec(feed.title);
-            if(source) source.postMessage({
+            if(typeof source != 'undefined') source.postMessage({
                 cmd: 'successCheck',
                 num: tokenNum,
                 mail: widget.preferences['oauth_mail' + tokenNum]
-                });
+            });
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
-            if(source) source.postMessage({
+            if(typeof source != 'undefined') source.postMessage({
                 cmd: 'errorCheck',
                 num: tokenNum
             });
@@ -280,7 +266,10 @@ function HandleMessages(event)
                 Update();
             }
             else
-                event.source.postMessage({cmd: 'errorVerify',num: event.data.num});
+                event.source.postMessage({
+                    cmd: 'errorVerify',
+                    num: event.data.num
+                });
             break;
 
         // RevokeAccess
@@ -297,9 +286,9 @@ function HandleMessages(event)
         case 'Refresh':
             window.clearTimeout(UpdateTimer);
             if(event.data.nocallback)
-              Update();
+                Update();
             else
-              Update(event.source);
+                Update(event.source);
             break;
       
         // Compose Mail
@@ -313,7 +302,10 @@ function HandleMessages(event)
 
         // Return Mailto-Option
         case 'MailtoEnabled':
-            event.source.postMessage({cmd: 'MailtoEnabled', value: widget.preferences['mailto_links']});
+            event.source.postMessage({
+                cmd: 'MailtoEnabled', 
+                value: widget.preferences['mailto_links']
+            });
             break;
       
         // Do nothing
@@ -323,15 +315,83 @@ function HandleMessages(event)
 }
 
 // Display a error
-function DisplayError(text)
+function SendFeeds(source)
 {
-    MyButton.badge.display="block";
-    MyButton.badge.textContent = "e";
-    Infos = {
-        status: "error",
-        info: text
-    };
-    MyButton.popup.height = ErrorHeight + "px";
+    // Should we wait?
+    // TODO: Timeout
+    for(var i=0; i < MaxAccounts; i++)
+    {
+        if(Feeds[i] && Feeds[i].status=="request") return;   
+    }
+    if(Debug) opera.postError("INFO: All Feeds received.");
+    
+    // Check if there are new messages and get messages
+    // TODO: Sort
+    // TODO: Add Feed Number and mail-address
+    var newMessages = false;
+    var msg = new Array();
+    for(var i=0; i < MaxAccounts; i++)
+    {
+        if(Feeds[i] && Feeds[i].status=="success")
+        {
+            // msg
+            for (var x=0; x < Feeds[i].msg.length; x++) 
+            {
+                msg.push(Feeds[i].msg[x]);
+            }
+
+            // new?
+            if(Feeds[i].newMsg) newMessages = true; 
+        }       
+    }    
+    
+    // Notification if there new Messages
+    if(newMessages) PlaySoundNotification();  
+    
+    // Current Time
+    var now = new Date();
+    var h0 = "", m0 = "", s0 = "";
+    if(now.getHours() < 10) h0 = "0"
+    if(now.getMinutes() < 10) m0 = "0"
+    if(now.getSeconds() < 10) s0 = "0"
+    var timestring = lang.popup_lastupdate + h0 + now.getHours() + ":" +
+    m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();  
+ 
+    // Show message-count and set text
+    var text;
+    if(msg.length && (msg.length > 0))
+    {
+        MyButton.badge.textContent = msg.length;
+        MyButton.badge.display="block";
+        if(msg.length > 1)
+            text = lang.popup_msg_before + msg.length + lang.popup_msg_after;
+        else
+            text = lang.popup_onemsg;
+    }
+    else
+    {
+        MyButton.badge.display="none";
+        text = lang.popup_nomsg;
+    }
+    
+    // Set new Menu-Height
+    if (msg.length > 0)
+    {
+        var elements= msg.length;
+        if(msg.length > 10) elements = 10;
+        MyButton.popup.height = (StdHeight + 47 * elements) + "px";
+    }
+    else
+        MyButton.popup.height = StdHeight + "px";
+    
+    // Send to source if defined
+    if(typeof source != 'undefined')
+        source.postMessage({
+            status: "success", 
+            info: text, 
+            timestring: timestring, 
+            msg: msg
+        });
 }
 
 // Play Sound-Notification (if enabled)
