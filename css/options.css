@@ -82,9 +82,23 @@ text-shadow: #DDD 1px 1px 1px;
   color: blue;
 }
 
+.mail {
+    clear: both;
+}
+
 .access_granted {
   background: url('img/check16.png') no-repeat  0 5px;
   padding-left: 20px;
+  clear: both;
+}
+
+.access_granted .right {
+  float: right;
+}
+
+.access_granted label {
+  margin-left: 3px;
+  margin-right: 10px;
 }
 
 .error {
@@ -92,6 +106,16 @@ text-shadow: #DDD 1px 1px 1px;
   margin-bottom: 15px;
   color: #B11921;
   display: none;
+}
+
+.showMore {
+  background: url('img/plus16.png') no-repeat  0 5px;
+  padding-left: 20px;
+  clear: both;
+}
+
+.showMore:hover {
+  color: blue;
 }
 
 fieldset {

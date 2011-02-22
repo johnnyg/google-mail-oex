@@ -7,7 +7,13 @@ $(document).ready(function()
     // Init
     $('#range_update_intervall').val(widget.preferences['update_intervall']);
     MaxAccounts = parseInt(widget.preferences['num_max_accounts']);
-  
+    
+    // Set language-strings
+    $('#range_update_intervall_label').html(lang.options_update);
+    $('#enable_sound_label').html(lang.options_sound);
+    $('#mailto_links_label').html(lang.options_mailto);
+    $('#close').html(lang.options_close);
+    
     // Show Range-Secounds on change
     $('#range_update_intervall').change(function() {
         $('#box_update_intervall').val($('#range_update_intervall').val());
@@ -33,7 +39,16 @@ $(document).ready(function()
 function BuildMailContainer()
 {
     // first clear
-    $('#mail-container').html = "";  
+    $('#mail-container').html = "";
+    
+    // check for last token
+    var lastToken = 0;
+    for(var i=0; i < MaxAccounts; i++)
+    {
+        // check if token exists
+        if(widget.preferences['oauth_token' + i] && widget.preferences['oauth_token' + i] != "")
+            lastToken = i;
+    }
   
     // build new
     for(var i=0; i < MaxAccounts; i++)
@@ -43,17 +58,32 @@ function BuildMailContainer()
         // check if token exists
         if(!widget.preferences['oauth_token' + i] || widget.preferences['oauth_token' + i] == "")
         {
+            // show this on default?
+            var style="";
+            if(i > 0 && i > lastToken) style=' style="display: none;"'        
             // Create new form
-            mail = '<div id="mail' + i + '">' + CreateForm('new', i) + '</div>';
+            mail = '<div id="mail' + i + '" class="mail"' + style + '>' + CreateForm('new', i) + '</div>';
         }
         else
         {
             // Create Info-Form with Delete-Button
-            mail = '<div id="mail' + i + '">' + CreateForm('info', i) + '</div>';
+            mail = '<div id="mail' + i + '" class="mail">' + CreateForm('info', i) + '</div>';
         }
-     
+        
         // append to container now
         $('#mail-container').append(mail);
+    }
+            
+    // link to show more codes
+    if(lastToken < (MaxAccounts-1))
+    {
+        $('#mail-container').append($('<div></div>')
+            .addClass("showMore")
+            .html(lang.options_more_vcode)
+            .click(function(){
+                $(this).remove();
+                $('.mail').show();
+            }));
     }
 }
 
@@ -64,17 +94,25 @@ function CreateForm(type, num)
     if(type == 'new')
     {
         return '<label for="verify' + num + '">' + lang.options_vcode + ' ' + (num + 1) + ' </label>' +
-        '<input id="verify' + num + '" type="text" onkeyup="CheckForSave(' + num + ');" oninput="CheckForSave(' + num + ');"></input> ' +
+        '<input id="verify' + num + '" type="text" onkeyup="CheckForSave(' + num + ');" oninput="CheckForSave(' + num + ');" title="' + lang.options_vcode_tooltip + '"></input> ' +
         '<button id="vbutton' + num + '" onclick="GetVerifyCode(' + num + ');">' + lang.options_getverifiy + ' </button>' +
         '<div id="error' + num + '" class="error"></div>';
     }
     // info-form
     else
     {
+        // check 'all unread'
+        var check="";
+        if(widget.preferences['unread_feed' + num] == "on") check='checked="checked"';
+        
         return '<div class="access_granted"><strong>' +  
         widget.preferences['oauth_mail' + num] + '</strong> ' + lang.options_check + 
-        '<button id="vbutton' + num + '" onclick="RemoveToken(' + num + ');">' + 
-        lang.options_delete + '</button>';
+        '<div class="right">' + 
+        '<input name="unread_feed' + num + '" type="checkbox" title="' + lang.options_unread_tooltip + '"' + check + '></input>' +
+        '<label for="unread_feed' + num + '" title="' + lang.options_unread_tooltip + '">' + lang.options_unread + '</label>' +
+        '<button id="vbutton' + num + '" onclick="RemoveToken(' + num + ');" title="' + lang.options_delete_tooltip + '">' + 
+        lang.options_delete + '</button>' +
+        '</div>';
     } 
 }
 
@@ -134,6 +172,7 @@ function RemoveToken(num)
     widget.preferences['oauth_token' + num] = "";
     widget.preferences['oauth_secret' + num] = "";
     widget.preferences['oauth_mail' + num] = "";
+    widget.preferences['unread_feed' + num] = "";
         
     // update feed(s)
     opera.extension.postMessage({

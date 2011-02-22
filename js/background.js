@@ -113,8 +113,10 @@ function Update(source)
                 status: "request"
             };
   
-        // TODO: Support alternative feed-url https://mail.google.com/mail/feed/atom/unread
+        // use default or "all unread"-feed
         var feedURL = "https://mail.google.com/mail/feed/atom";
+        if(widget.preferences['unread_feed' + i] == "on")
+            feedURL = "https://mail.google.com/mail/feed/atom/unread";       
   
         // Get Feed now
         GetFeed(feedURL, i, source)
@@ -204,6 +206,7 @@ function CheckFeed(tokenNum, source)
         {
             var pattern = /[^ ]*@.*$/g;
             widget.preferences['oauth_mail' + tokenNum]  = pattern.exec(feed.title);
+            widget.preferences['unread_feed' + tokenNum] = "";
             if(typeof source != 'undefined') source.postMessage({
                 cmd: 'successCheck',
                 num: tokenNum,

@@ -5,10 +5,20 @@ var lang = new Object();
 lang.options_getverifiy  = "request code";
 lang.options_saveverifiy = "apply code";
 lang.options_delete = "delete";
+lang.options_update = "Update-Time";
 lang.options_check = "is checked";
 lang.options_wait = "Please wait...";
 lang.options_vcode = "Verification-Code";
 lang.options_failverify = "The verification-code ist incorrect.";
+lang.options_unread = "all unread";
+lang.options_more_vcode = "Add more verification-codes (multi-account)";
+lang.options_sound = "Play notification sound on new messages";
+lang.options_mailto = "Open Mail-Links (mailto) with GMail";
+lang.options_close = "Apply & Close Window";
+
+lang.options_unread_tooltip = "enable this option if you want to show all unread mails, not just from inbox";
+lang.options_vcode_tooltip = "paste or type the verification code and click on 'apply code'";
+lang.options_delete_tooltip = "click here to remove this mail-check";
 
 lang.popup_open = "Open <strong>GMail</strong> in new tab";
 lang.popup_compose = "Compose Mail";

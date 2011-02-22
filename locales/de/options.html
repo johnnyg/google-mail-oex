@@ -24,7 +24,7 @@
     "Google Apps"-Konto wenn dieses bereits auf die <a href="http://www.google.com/support/a/bin/answer.py?hl=de&answer=182075"
     title="">neue Infrastruktur</a> umgestellt wurde.</em></p>
 
-    <h3>Googlemail Bestätigungscode (OAuth)</h3>
+    <h3>Googlemail Konten</h3>
     <fieldset>
       <p><strong>Google Mail Notifier verwendet das <a href='http://de.wikipedia.org/wiki/OAuth'>OAuth</a>
       </strong>-Verfahren um Zugang zu Ihren Googlemail-Konto zu erhalten. Dadurch
@@ -32,12 +32,7 @@
       Daten aus Ihrem Google-Konto. <strong>Rufen Sie den Bestätigungscode
       durch einen Klick auf den Button ab, bestätigen zu den Zugriff und kopieren
       Sie den Code in das vorgesehene Feld.</strong></p>
-      <div id='mail1'>
-        <label for="verify1">Bestätigungscode</label>
-        <input id="verify1" type="text"></input>
-        <button id="VerifyCodeAction"></button>
-        <div id="error1" class="error"></div>
-      </div>
+      <div id='mail-container'></div>
       <small class='options_small'>
         <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Hier</a> 
         können Sie die Berechtigung für diese Erweiterung löschen,
@@ -47,20 +42,20 @@
     <fieldset>
       <p>
         <input id="range_update_intervall" type="range" min="5" max="600" step="1"></input>
-        <label id="range_update_intervall_label" for="range_update_intervall">Aktualisierungszeit </label>
+        <label id="range_update_intervall_label" for="range_update_intervall"></label>
         <input id="box_update_intervall" name="update_intervall" type="text"></input> s
       </p>
       <p>
         <input id="enable_sound" name="enable_sound" type="checkbox"></input>
-        <label id="enable_sound_label" for="enable_sound"><b>Spiele Klangbenachrichtigung bei neuen Nachrichten</b></label>
+        <label id="enable_sound_label" for="enable_sound"><b></b></label>
       </p>
       <p>
         <input id="mailto_links" name="mailto_links" type="checkbox"></input>
-        <label id="enable_sound_label" for="mailto_links"><b>Öffne EMail-Links ('mailto:') mit Googlemail</b></label>
+        <label id="mailto_links_label" for="mailto_links"><b></b></label>
       </p>
     </fieldset>
     <div class="button_line">
-        <button id="close">Einstellungen übernehmen und Fenster schließen</button>
+        <button id="close"></button>
     </div>
   </section>
 
@@ -75,7 +70,7 @@
     Dank an das <a href="http://icons.mysitemyway.com/" 
       title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> für das Googlemail-Icon
       und <a href='http://pc.de/icons/' title='Homepage of PC'>PC</a> für die anderen Icons.<br/>
-        Dank an Patryk Obara für das verbesserte Icon und die Fehlerbehebungen.
+       Weiterer Dank an: Patryk Obara für das verbesserte Icon und die Fehlerbehebungen und Роман Каштанов für die russische Übersetzung.
     </small>
     </footer>
 </body>

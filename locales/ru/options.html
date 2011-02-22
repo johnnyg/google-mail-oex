@@ -31,12 +31,7 @@
       информации из вашего аккаунта Google. 
       <p><strong>Запросите код проверки для этого расширения нажав на кнопку
       и втавьте его в поле расположенное ниже.</strong></p>
-      <div id='mail1'>
-        <label for="verify1">Код проверки</label>
-        <input id="verify1" type="text"></input>
-        <button id="VerifyCodeAction"></button>
-        <div id="error1" class="error"></div>
-      </div>
+      <div id='mail-container'></div>
       <small class='options_small'>
         <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Здесь</a> 
         вы можете вручную запретить доступ для этого расширения. Знайте, что проверка 
@@ -45,15 +40,14 @@
     <h3>Остальные настройки</h3>
     <fieldset>
       <p>
-        <input id="enable_sound" name="enable_sound" 
-          type="checkbox"></input>
-        <label id="enable_sound_label" for="enable_sound"><b>Воспроизводить звуковой сигнал при получении нового сообщения.</b></label>
-      </p>
-      <p>
-        <input id="range_update_intervall" name="update_intervall" 
-          type="range" min="5" max="600" step="1"></input>
+        <input id="range_update_intervall" name="update_intervall" type="range" min="5" max="600" step="1"></input>
         <label id="range_update_intervall_label" for="range_update_intervall"></label>
       </p>
+      <p>
+        <input id="enable_sound" name="enable_sound" type="checkbox"></input>
+        <label id="enable_sound_label" for="enable_sound"><b>Воспроизводить звуковой сигнал при получении нового сообщения.</b></label>
+      </p>
+
     </fieldset>
     <div class="button_line">
         <button id="close">Применить и закрыть</button>
@@ -71,7 +65,8 @@
     Thanks to the <a href="http://icons.mysitemyway.com/" 
       title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> for the GMail-Icon 
       and <a href='http://pc.de/icons/' title='Homepage of PC'>PC</a> for the other icons.<br/>
-        Thanks to Patryk Obara for the improved Icon and bug-fixes.
+        Thanks to Patryk Obara for the improved Icon and bug-fixes.<br />
+        Additional Thanks to Patryk Obara for the improved Icon and bug-fixes and Роман Каштанов for russian translation.<br />
     </small>
     </footer>
 </body>
