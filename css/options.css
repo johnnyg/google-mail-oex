@@ -88,8 +88,10 @@ text-shadow: #DDD 1px 1px 1px;
 }
 
 .error {
-  margin-left: 20px;
+  margin-left: 135px;
+  margin-bottom: 15px;
   color: #B11921;
+  display: none;
 }
 
 fieldset {

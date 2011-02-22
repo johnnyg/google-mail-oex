@@ -1,12 +1,15 @@
-~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Google Mail Notifier (a Opera-Extension)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Google Mail Notifier (an Opera-Extension)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 v1.3
+Support up to 5 Accounts
+Add Rusian-Tranlation (thanks to Роман Каштанов)
+Recognize when paste verfification-code from clipboard to input-field
 Option to give a Update-Intervall manually
 Option to open "mailto"-links with GMail
 

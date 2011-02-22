@@ -8,6 +8,7 @@
   
   <description xml:lang="en">A simple and fast extensions to inform you about new unread messages in your GMail-Inbox and show the titles of the new messages.</description>
   <description xml:lang="de">Diese Erweiterung informiert Sie über neue ungelesene Nachrichten in Ihrem Googlemail-Posteingang und zeigt die Titel dieser Nachrichten an.</description>
+  <description xml:lang="ru">Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки.</description>
 
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
@@ -20,6 +21,9 @@
   </license>
   <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="de">
     Lizensiert unter der Apache License, Version 2.0
+  </license>
+  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="ru">
+    Лицензируется в соответствии с Apache License, версия 2.0
   </license>
   
   <!-- Default Values -->

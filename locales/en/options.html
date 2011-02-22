@@ -23,7 +23,7 @@
     "Google Apps for your Domain"-Account if you have switched to the <a href="http://www.google.com/support/a/bin/topic.py?topic=28917" 
     title='New infrastructure for Google Apps accounts'>new infrastructure</a> yet.</em></p>
 
-    <h3>GMail verification code (OAuth)</h3>
+    <h3>Your GMail Account(s)</h3>
     <fieldset>
       <p><strong>Google Mail Notifier uses <a href='http://oauth.net/'>OAuth</a>
       </strong> to get access to your GMail-Account, with this authorization-method 
@@ -31,12 +31,7 @@
       information from your Google Account. <strong>Get your verification code for 
       this extension by clicking the button, grant access and copy/paste the code in
       the field below.</strong></p>
-      <div id='mail1'>
-        <label for="verify1">Verification-Code</label>
-        <input id="verify1" type="text"></input>
-        <button id="VerifyCodeAction"></button>
-        <div id="error1" class="error"></div>
-      </div>
+      <div id='mail-container'></div>
       <small class='options_small'>
         <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Here</a> 
         you can manually revoke access for this extension, note that the mail-check 
@@ -47,11 +42,10 @@
       <p>
         <input id="range_update_intervall" type="range" min="5" max="600" step="1"></input>
         <label id="range_update_intervall_label" for="range_update_intervall">Update-Time </label>
-        <input id="box_update_intervall" name="update_intervall" type="text"></input> s
+       <input id="box_update_intervall" name="update_intervall" type="text"></input> s
       </p>
       <p>
-        <input id="enable_sound" name="enable_sound"
-          type="checkbox"></input>
+        <input id="enable_sound" name="enable_sound" type="checkbox"></input>
         <label id="enable_sound_label" for="enable_sound"><b>Play notification sound on new messages</b></label>
       </p>
       <p>
