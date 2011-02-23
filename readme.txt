@@ -11,8 +11,9 @@ KNOWN ISSUES
 
 HISTORY
 v2.0
-TODO: Show feed-number and mail in popup
+TODO: Sort Mails?
 Support up to 5 Accounts
+Show Tooltip with Sender-Mail and Subject-Extract in Popup-Menu
 Option per Account to show all unread mails or only inbox
 Add Rusian-Tranlation (thanks to Роман Каштанов)
 Option to give a Update-Intervall manually
