@@ -77,6 +77,7 @@ JFeedItem.prototype = {
     authormail: '',
     sendermail: '',
     feednum: '',
+    modified: '',
     summary: '',
     id: ''
     
@@ -112,6 +113,7 @@ JAtom.prototype = {
             item.description = jQuery(this).find('content').eq(0).text();
             item.summary = jQuery(this).find('summary').eq(0).text();
             item.updated = jQuery(this).find('updated').eq(0).text();
+            item.modified = jQuery(this).find('modified').eq(0).text();
             item.authorname = jQuery(this).find('author name').eq(0).text();
             item.authormail = jQuery(this).find('author email').eq(0).text();
             item.id = jQuery(this).find('id').eq(0).text();
@@ -153,6 +155,7 @@ JRss.prototype  = {
             item.description = jQuery(this).find('description').eq(0).text();
             item.summary = jQuery(this).find('summary').eq(0).text();
             item.updated = jQuery(this).find('pubDate').eq(0).text();
+            item.modified = jQuery(this).find('modified').eq(0).text();
             item.authorname = jQuery(this).find('author name').eq(0).text();
             item.authormail = jQuery(this).find('author email').eq(0).text();
             item.id = jQuery(this).find('guid').eq(0).text();

@@ -11,8 +11,8 @@ KNOWN ISSUES
 
 HISTORY
 v2.0
-TODO: Sort Mails?
 Support up to 5 Accounts
+New messages are at top of list
 Show Tooltip with Sender-Mail and Subject-Extract in Popup-Menu
 Option per Account to show all unread mails or only inbox
 Add Rusian-Tranlation (thanks to Роман Каштанов)

@@ -347,7 +347,13 @@ function SendFeeds(source)
             // new?
             if(Feeds[i].newMsg) newMessages = true; 
         }       
-    }    
+    }
+
+    // Sort (Date)
+    msg.sort(function(a, b){
+        var t1 = new Date(a.modified);
+        var t2 = new Date(b.modified);
+        return t2.getTime()-t1.getTime();});
     
     // Notification if there new Messages
     if(newMessages) PlaySoundNotification();  
