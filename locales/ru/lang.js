@@ -32,6 +32,8 @@ lang.popup_onemsg = "У вас <strong>одно непрочитанное со�
 lang.popup_msg_before = "У вас <strong>";
 lang.popup_msg_after = " непрочитанных сообщений</strong>";
 lang.popup_lastupdate = "Последнее обновление : ";
+lang.popup_from = "From: ";
+lang.popup_to = "To: ";
 
 lang.error_confails = "<strong>Произошла ошибка. </strong> " +
   "Пожалуйста проверьте ваше подключение и <a href='javascript:ShowPreferences();'>настройки</a>";

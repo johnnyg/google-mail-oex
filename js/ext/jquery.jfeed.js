@@ -74,6 +74,10 @@ JFeedItem.prototype = {
     description: '',
     updated: '',
     authorname: '',
+    authormail: '',
+    sendermail: '',
+    feednum: '',
+    summary: '',
     id: ''
     
 };
@@ -106,8 +110,10 @@ JAtom.prototype = {
             item.title = jQuery(this).find('title').eq(0).text();
             item.link = jQuery(this).find('link').eq(0).attr('href');
             item.description = jQuery(this).find('content').eq(0).text();
+            item.summary = jQuery(this).find('summary').eq(0).text();
             item.updated = jQuery(this).find('updated').eq(0).text();
             item.authorname = jQuery(this).find('author name').eq(0).text();
+            item.authormail = jQuery(this).find('author email').eq(0).text();
             item.id = jQuery(this).find('id').eq(0).text();
             
             feed.items.push(item);
@@ -145,7 +151,10 @@ JRss.prototype  = {
             item.title = jQuery(this).find('title').eq(0).text();
             item.link = jQuery(this).find('link').eq(0).text();
             item.description = jQuery(this).find('description').eq(0).text();
+            item.summary = jQuery(this).find('summary').eq(0).text();
             item.updated = jQuery(this).find('pubDate').eq(0).text();
+            item.authorname = jQuery(this).find('author name').eq(0).text();
+            item.authormail = jQuery(this).find('author email').eq(0).text();
             item.id = jQuery(this).find('guid').eq(0).text();
             
             feed.items.push(item);

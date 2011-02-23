@@ -330,7 +330,6 @@ function SendFeeds(source)
     
     // Check if there are new messages and get messages
     // TODO: Sort
-    // TODO: Add Feed Number and mail-address
     var newMessages = false;
     var msg = new Array();
     for(var i=0; i < MaxAccounts; i++)
@@ -340,6 +339,8 @@ function SendFeeds(source)
             // msg
             for (var x=0; x < Feeds[i].msg.length; x++) 
             {
+                Feeds[i].msg[x].feednum = i;
+                Feeds[i].msg[x].sendermail = widget.preferences['oauth_mail' + i];
                 msg.push(Feeds[i].msg[x]);
             }
 

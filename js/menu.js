@@ -72,7 +72,12 @@ function HandleMessages(event)
         // Add every message
         for(var i=0; i < event.data.msg.length; i++)
         {
-            var msg = $('<div></div>').addClass('message')
+            var tooltip = "<div class='tooltip'><p><u>" + lang.popup_from + "</u> " + 
+                event.data.msg[i].authormail + "<br/><u>" + lang.popup_to + "</u> " + 
+                event.data.msg[i].sendermail + "<br/><br/></p><p>" + 
+                event.data.msg[i].summary + "</p>"
+            
+            var msg = $('<div></div>').addClass('message').attr("title", tooltip).tooltip({left: -15})
               .html("<strong>" + event.data.msg[i].authorname + "</strong> : " + event.data.msg[i].title).click({link: event.data.msg[i].link}, LoadLink);
             $('#message_box').append(msg);
         }

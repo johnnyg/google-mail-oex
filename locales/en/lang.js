@@ -29,6 +29,8 @@ lang.popup_onemsg = "There is <strong>one unread message</strong>";
 lang.popup_msg_before = "There are <strong>";
 lang.popup_msg_after = " unread messages</strong>";
 lang.popup_lastupdate = "Last Update : ";
+lang.popup_from = "From: ";
+lang.popup_to = "To: ";
 
 lang.error_confails = "<strong>An error occurred. </strong> " +
   "Please check your connection and your <a href='javascript:ShowPreferences();'>settings</a>";
