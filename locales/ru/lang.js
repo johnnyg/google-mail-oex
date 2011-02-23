@@ -1,28 +1,39 @@
+/* Translation by Р РѕРјР°РЅ РљР°С€С‚Р°РЅРѕРІ (staroberdansk@gmail.com) */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 // init language object (do)
 var lang = new Object();
 
 // set default strings
-lang.options_getverifiy  = "Запросить код";
-lang.options_saveverifiy = "Применить код";
-lang.options_delete = "Удалить";
-lang.options_update = "Интервал проверки";
-lang.options_check = "Проверено";
-lang.options_wait = "Подождите пожалуйста...";
-lang.options_vcode = "Код проверки";
-lang.options_failverify = "Код проверки не правильный.";
+lang.options_getverifiy  = "Р—Р°РїСЂРѕСЃРёС‚СЊ РєРѕРґ";
+lang.options_saveverifiy = "РџСЂРёРјРµРЅРёС‚СЊ РєРѕРґ";
+lang.options_delete = "РЈРґР°Р»РёС‚СЊ";
+lang.options_update = "РРЅС‚РµСЂРІР°Р» РїСЂРѕРІРµСЂРєРё";
+lang.options_check = "РџСЂРѕРІРµСЂРµРЅРѕ";
+lang.options_wait = "РџРѕРґРѕР¶РґРёС‚Рµ РїРѕР¶Р°Р»СѓР№СЃС‚Р°...";
+lang.options_vcode = "РљРѕРґ РїСЂРѕРІРµСЂРєРё";
+lang.options_failverify = "РљРѕРґ РїСЂРѕРІРµСЂРєРё РЅРµ РїСЂР°РІРёР»СЊРЅС‹Р№.";
+lang.options_unread = "Р’СЃРµ РЅРµРїСЂРѕС‡С‚РµРЅРЅС‹Рµ";
+lang.options_more_vcode = "Р”РѕР±Р°РІРёС‚СЊ РёС‰Рµ РєРѕРґ РїСЂРѕРІРµСЂРєРё (РЅРµСЃРєРѕР»СЊРєРѕ Р°РєРєР°СѓРЅС‚РѕРІ)"
+lang.options_sound = "Р’РѕСЃРїСЂРѕРёР·РІРѕРґРёС‚СЊ Р·РІСѓРєРѕРІРѕР№ СЃРёРіРЅР°Р» РїСЂРё РїРѕР»СѓС‡РµРЅРёРё РЅРѕРІРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ.";
+lang.options_mailto = "РћС‚РєСЂС‹РІР°С‚СЊ СЃСЃС‹Р»РєРё (mailto:) РїСЂРё РїРѕРјРѕС‰Рё GMail";
+lang.options_close = "РџСЂРёРјРµРЅРёС‚СЊ Рё Р·Р°РєСЂС‹С‚СЊ";
 
-lang.popup_open = "Открыть <strong>GMail</strong> в новой вкладке";
-lang.popup_compose = "Написать письмо";
-lang.popup_pref = "Настройки";
+lang.options_unread_tooltip = "Р’РєР»СЋС‡РёС‚Рµ, РµСЃР»Рё С…РѕС‚РёС‚Рµ РІРёРґРµС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РЅРµРїСЂРѕС‡РёС‚Р°РЅРЅС‹С… РЅРµ С‚РѕР»СЊРєРѕ РІ РїР°РїРєРµ 'Р’С…РѕРґСЏС‰РёРµ'";
+lang.options_vcode_tooltip = "Р’СЃС‚Р°РІСЊС‚Рµ РёР»Рё РЅР°Р±РµСЂРёС‚Рµ РєРѕРґ РїСЂРѕРІРµСЂРєРё Рё РЅР°Р¶РјРёС‚Рµ 'РџСЂРѕРІРµСЂРёС‚СЊ'";
+lang.options_delete_tooltip = "РќР°Р¶РјРёС‚Рµ, С‡С‚РѕР±С‹ СѓРґР°Р»РёС‚СЊ СЌС‚РѕС‚ Р°РєРєР°СѓРЅС‚";
 
-lang.popup_nomsg = "У вас <strong>нет непрочитанных сообщений</strong>";
-lang.popup_onemsg = "У вас <strong>одно непрочитанное сообщение</strong>";
-lang.popup_msg_before = "У вас <strong>";
-lang.popup_msg_after = " непрочитанных сообщений</strong>";
-lang.popup_lastupdate = "Последнее обновление : ";
+lang.popup_open = "РћС‚РєСЂС‹С‚СЊ <strong>GMail</strong> РІ РЅРѕРІРѕР№ РІРєР»Р°РґРєРµ";
+lang.popup_compose = "РќР°РїРёСЃР°С‚СЊ РїРёСЃСЊРјРѕ";
+lang.popup_pref = "РќР°СЃС‚СЂРѕР№РєРё";
 
-lang.error_confails = "<strong>Произошла ошибка. </strong> " +
-  "Пожалуйста проверьте ваше подключение и <a href='javascript:ShowPreferences();'>настройки</a>";
-lang.error_nocode = "<strong>Почтовый аккаунт не настроен</strong>, " +
-  "<br>пожалуйста воспользуйтесь <a href='javascript:ShowPreferences();'>настройками</a>";
+lang.popup_nomsg = "РЈ РІР°СЃ <strong>РЅРµС‚ РЅРµРїСЂРѕС‡РёС‚Р°РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№</strong>";
+lang.popup_onemsg = "РЈ РІР°СЃ <strong>РѕРґРЅРѕ РЅРµРїСЂРѕС‡РёС‚Р°РЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ</strong>";
+lang.popup_msg_before = "РЈ РІР°СЃ <strong>";
+lang.popup_msg_after = " РЅРµРїСЂРѕС‡РёС‚Р°РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№</strong>";
+lang.popup_lastupdate = "РџРѕСЃР»РµРґРЅРµРµ РѕР±РЅРѕРІР»РµРЅРёРµ : ";
 
+lang.error_confails = "<strong>РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°. </strong> " +
+  "РџРѕР¶Р°Р»СѓР№СЃС‚Р° РїСЂРѕРІРµСЂСЊС‚Рµ РІР°С€Рµ РїРѕРґРєР»СЋС‡РµРЅРёРµ Рё <a href='javascript:ShowPreferences();'>РЅР°СЃС‚СЂРѕР№РєРё</a>";
+lang.error_nocode = "<strong>РџРѕС‡С‚РѕРІС‹Р№ Р°РєРєР°СѓРЅС‚ РЅРµ РЅР°СЃС‚СЂРѕРµРЅ</strong>, " +
+  "<br>РїРѕР¶Р°Р»СѓР№СЃС‚Р° РІРѕСЃРїРѕР»СЊР·СѓР№С‚РµСЃСЊ <a href='javascript:ShowPreferences();'>РЅР°СЃС‚СЂРѕР№РєР°РјРё</a>";

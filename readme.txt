@@ -12,12 +12,12 @@ KNOWN ISSUES
 HISTORY
 v2.0
 TODO: Show feed-number and mail in popup
-TODO: All unread mails or only inbox
 Support up to 5 Accounts
+Option per Account to show all unread mails or only inbox
 Add Rusian-Tranlation (thanks to Роман Каштанов)
-Recognize when paste verfification-code from clipboard to input-field
 Option to give a Update-Intervall manually
 Option to open "mailto"-links with GMail
+Recognize when paste verfification-code from clipboard to input-field
 
 v1.2
 Support of OAuth for Authentification (login/pass removed)
