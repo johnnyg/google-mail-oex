@@ -102,8 +102,9 @@ function CreateForm(type, num)
     else
     {
         // check 'all unread'
-        var check="";
-        if(widget.preferences['unread_feed' + num] == "on") check='checked="checked"';
+        var check = "";
+        if(widget.preferences['unread_feed' + num] && widget.preferences["unread_feed" + num] === "on")
+            check = ' checked="checked"';
         
         return '<div class="access_granted"><strong>' +  
         widget.preferences['oauth_mail' + num] + '</strong> ' + lang.options_check + 

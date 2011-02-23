@@ -60,7 +60,14 @@ window.addEventListener("load", function()
   
     // Update now
     Update();
-  
+    
+    // resolve bug with unread_feed
+    for(var i=0; i < MaxAccounts; i++)
+    {
+        if(!widget.preferences["unread_feed" + i])
+            widget.preferences["unread_feed" + i] = "";
+    }
+
     // Connect to Menu and give all the Feeds
     opera.extension.onconnect = function (event)
     {
@@ -353,7 +360,8 @@ function SendFeeds(source)
     msg.sort(function(a, b){
         var t1 = new Date(a.modified);
         var t2 = new Date(b.modified);
-        return t2.getTime()-t1.getTime();});
+        return t2.getTime()-t1.getTime();
+    });
     
     // Notification if there new Messages
     if(newMessages) PlaySoundNotification();  
