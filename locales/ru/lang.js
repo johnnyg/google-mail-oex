@@ -32,6 +32,8 @@ lang.popup_onemsg = "У вас <strong>одно непрочитанное со�
 lang.popup_msg_before = "У вас <strong>";
 lang.popup_msg_after = " непрочитанных сообщений</strong>";
 lang.popup_lastupdate = "Последнее обновление : ";
+lang.popup_error_occurred="error occurred";
+lang.popup_errors_occurred="errors occurred";
 lang.popup_from = "От: ";
 lang.popup_to = "Кому: ";
 
@@ -39,3 +41,4 @@ lang.error_confails = "<strong>Произошла ошибка. </strong> " +
   "Пожалуйста проверьте ваше подключение и <a href='javascript:ShowPreferences();'>настройки</a>";
 lang.error_nocode = "<strong>Почтовый аккаунт не настроен</strong>, " +
   "<br>пожалуйста воспользуйтесь <a href='javascript:ShowPreferences();'>настройками</a>";
+lang.error_getfeed = "Error while get messages from";

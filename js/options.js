@@ -1,5 +1,5 @@
-var Debug = 1;      //Debug
-var MaxAccounts;     // Number of max supported accounts
+var Debug = 0;      //Debug
+var MaxAccounts;    // Number of max supported accounts
 
 // Intialize the option page
 $(document).ready(function() 

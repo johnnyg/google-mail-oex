@@ -29,6 +29,8 @@ lang.popup_onemsg       = "Es gibt <strong>eine ungelesene Nachricht</strong>";
 lang.popup_msg_before   = "Es gibt <strong>";
 lang.popup_msg_after    = " ungelesene Nachrichten</strong>";
 lang.popup_lastupdate   = "Letztes Update : ";
+lang.popup_error_occurred="Fehler ist aufgetreten";
+lang.popup_errors_occurred="Fehler sind aufgetreten";
 lang.popup_from         = "Von: ";
 lang.popup_to           = "An: ";
 
@@ -36,3 +38,4 @@ lang.error_confails = "<strong>Ein Fehler ist aufgetreten. </strong> " +
   "Bitte überprüfen Sie Ihre Verbindung und die <a href='javascript:ShowPreferences();'>Einstellungen</a>";
 lang.error_nocode = "<strong>Es ist keine Mailadresse eingerichtet</strong>, " +
   "<br/>bitte prüfen Sie die <a href='javascript:ShowPreferences();'>Einstellungen</a>";
+lang.error_getfeed = "Fehler beim Abrufen der Nachrichten von";

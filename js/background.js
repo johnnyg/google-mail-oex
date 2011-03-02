@@ -12,7 +12,7 @@
 // Global Vars
 var MyButton;           // Toolbar-Button
 var UpdateTimer;        // UpdateTimer
-var Debug=1;            // DebugMode (writes to Error-Console)
+var Debug=0;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
 var MaxAccounts;        // Number of max supported accounts
@@ -156,7 +156,7 @@ function GetFeed(param)
                 param.num + ", " + errorThrown + "(" + textStatus + ")") ;
             Feeds[param.num] = {
                 status: "error", 
-                info: lang.error_confails
+                info: errorThrown + "(" + textStatus + ")"
             };
             SendFeeds(param.src);
         }
@@ -341,8 +341,7 @@ function HandleMessages(event)
 // Sends FeedInfo to Button/PopUp-Menu
 function SendFeeds(source)
 {
-    // Should we wait?
-    // TODO: Timeout
+    // TODO: Should we wait? Could a deadlock ever happen here?
     for(var i=0; i < MaxAccounts; i++)
     {
         if(Feeds[i] && Feeds[i].status=="request") return;   
@@ -377,7 +376,8 @@ function SendFeeds(source)
             err_msg.push({
                 num: i,
                 mail: widget.preferences['oauth_mail' + i],
-                text: Feeds[i].info
+                detail: Feeds[i].info,
+                text: lang.error_getfeed + " " + widget.preferences['oauth_mail' + i]
                 });
         }
     }

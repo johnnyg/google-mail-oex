@@ -72,6 +72,14 @@ div::selection, p::selection, img::selection {
   color: #777;
 }
 
+/* Error-Details */
+#error_details {
+    display: none;
+    font-size: 8px;
+    padding: 0 3px 5px 5px;
+    color: #CC0F15;
+}
+
 /*** Status-Style (Success) ***/
 .status_box {
   margin-top: 5px;
