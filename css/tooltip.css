@@ -2,9 +2,10 @@
 	position: absolute;
 	z-index: 3000;
 	border: 1px solid #111;
-	background-color: #eee;
+	background-color: #2a2b2a;
+        color: white;
 	padding: 3px;
-	opacity: 0.90;
+	opacity: 0.95;
         border-radius: 5px;
         max-width: 250px;
 }

@@ -3,7 +3,7 @@ window.addEventListener("load", function()
   // Listen for script messages from background-process
   opera.extension.onmessage = HandleMessages;
   
-  // Refresh fee now
+  // Refresh feed now
   opera.extension.postMessage({cmd:"Refresh"});
 
   // set strings
@@ -35,7 +35,7 @@ function ShowPreferences()
   opera.extension.postMessage({cmd:"Preferences"});
 }
 
-// Show Preferences in new Tab
+// Loads links to message to new tab
 function LoadLink(event)
 {
   opera.extension.postMessage({cmd: "LoadLink", lnk: event.data.link});
@@ -49,6 +49,7 @@ function HandleMessages(event)
   {
     // Show Error
     case "error" : 
+      $('#wait').hide();
       $('#status').html(event.data.info)
         .addClass('error_box').removeClass('status_box');
       $('#last_update').html("");
@@ -57,7 +58,7 @@ function HandleMessages(event)
     
     // Show Status and Messages
     case "success": 
-    
+      $('#wait').hide();
       // Show Status
       $('#status').html(event.data.info)
         .addClass('status_box').removeClass('error_box');

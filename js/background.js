@@ -19,6 +19,7 @@ var MaxAccounts;        // Number of max supported accounts
 var Feeds;              // Feeds-Array
 var AudioObject;        // Audio-Object for Sound-Notification
 var LockUpdate;         // Lock SendInfo()-Function
+var LastRequest;        // LastRequest
 
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
@@ -72,7 +73,7 @@ window.addEventListener("load", function()
     opera.extension.onconnect = function (event)
     {
         if(event.origin.indexOf("popup.html") > -1)
-            if(Feeds) event.source.postMessage(Feeds);
+            if(Feeds) SendMsg(event.source, Feeds);
     }
 }, false);
 
@@ -103,6 +104,7 @@ function Update(source)
 {
     for(var i=0; i < MaxAccounts; i++)
     {
+        opera.postError("INFO: OK");
         // check if we have an token here
         if((!widget.preferences['oauth_token' + i]) || (widget.preferences['oauth_token' + i] == ""))
         {
@@ -124,35 +126,39 @@ function Update(source)
         var feedURL = "https://mail.google.com/mail/feed/atom";
         if(widget.preferences['unread_feed' + i] == "on")
             feedURL = "https://mail.google.com/mail/feed/atom/unread";       
-  
-        // Get Feed now
-        GetFeed(feedURL, i, source)
+
+        // Get Feed now (async in 10ms)
+        var param = {url: feedURL, num: i, src: source};
+        window.setTimeout(GetFeed, 10, param);
     }
 
     // Set new timeout
     UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
 }
 
-function GetFeed(feedURL, tokenNum, source)
+// Get a single feed 
+// NOTE: This function is called asynchronous, otherwise a "no-connection" will
+//       hang here for a while
+function GetFeed(param)
 {
-    if(Debug) opera.postError("INFO: Get Message feed " + tokenNum + "...");
+    if(Debug) opera.postError("INFO: Get Message feed " + param.num + "...");
     jQuery.getFeed(
     {
-        url: feedURL,
+        url: param.url,
         beforeSend: function(XMLHttpRequest, settings) {
-            PrepareRequest(XMLHttpRequest, settings, tokenNum, feedURL);
+            PrepareRequest(XMLHttpRequest, settings,  param.num,  param.url);
         },
         success: function(feed) {
-            ParseFeed(feed, source, tokenNum)
+            ParseFeed(feed,  param.src,  param.num)
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
             if(Debug) opera.postError("ERROR : Error while receiving Feed " + 
-                tokenNum + ", " + errorThrown + "(" + XMLHttpRequest.status + ")") ;
-            Feeds[i] = {
+                param.num + ", " + errorThrown + "(" + textStatus + ")") ;
+            Feeds[param.num] = {
                 status: "error", 
                 info: lang.error_confails
             };
-            SendFeeds(source);
+            SendFeeds(param.src);
         }
     });
 }
@@ -214,7 +220,7 @@ function CheckFeed(tokenNum, source)
             var pattern = /[^ ]*@.*$/g;
             widget.preferences['oauth_mail' + tokenNum]  = pattern.exec(feed.title);
             widget.preferences['unread_feed' + tokenNum] = "";
-            if(typeof source != 'undefined') source.postMessage({
+            SendMsg(source, {
                 cmd: 'successCheck',
                 num: tokenNum,
                 mail: widget.preferences['oauth_mail' + tokenNum]
@@ -222,7 +228,7 @@ function CheckFeed(tokenNum, source)
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
-            if(typeof source != 'undefined') source.postMessage({
+            SendMsg(source, {
                 cmd: 'errorCheck',
                 num: tokenNum
             });
@@ -276,7 +282,7 @@ function HandleMessages(event)
                 Update();
             }
             else
-                event.source.postMessage({
+                SendMsg(event.source, {
                     cmd: 'errorVerify',
                     num: event.data.num
                 });
@@ -296,9 +302,17 @@ function HandleMessages(event)
         case 'Refresh':
             window.clearTimeout(UpdateTimer);
             if(event.data.nocallback)
+            {
                 Update();
+            }
             else
+            {
+                // quick response of last request
+                if(LastRequest && LastRequest.status == "success") 
+                    SendMsg(event.source, LastRequest);
+                // update feed(s) now
                 Update(event.source);
+            }
             break;
       
         // Compose Mail
@@ -312,7 +326,7 @@ function HandleMessages(event)
 
         // Return Mailto-Option
         case 'MailtoEnabled':
-            event.source.postMessage({
+            SendMsg(event.source, {
                 cmd: 'MailtoEnabled', 
                 value: widget.preferences['mailto_links']
             });
@@ -324,7 +338,7 @@ function HandleMessages(event)
     }
 }
 
-// Display a error
+// Sends FeedInfo to Button/PopUp-Menu
 function SendFeeds(source)
 {
     // Should we wait?
@@ -336,13 +350,16 @@ function SendFeeds(source)
     if(Debug) opera.postError("INFO: All Feeds received.");
     
     // Check if there are new messages and get messages
-    // TODO: Sort
     var newMessages = false;
     var msg = new Array();
-    for(var i=0; i < MaxAccounts; i++)
+    var err_msg = new Array();
+    var onlyErrors = true;
+    for(i=0; i < MaxAccounts; i++)
     {
+        // add feed-entrys
         if(Feeds[i] && Feeds[i].status=="success")
         {
+            onlyErrors = false;
             // msg
             for (var x=0; x < Feeds[i].msg.length; x++) 
             {
@@ -353,18 +370,26 @@ function SendFeeds(source)
 
             // new?
             if(Feeds[i].newMsg) newMessages = true; 
-        }       
+        } 
+        // add error-entrys
+        else if (Feeds[i] && Feeds[i].status=="error")
+        {
+            err_msg.push({
+                num: i,
+                mail: widget.preferences['oauth_mail' + i],
+                text: Feeds[i].info
+                });
+        }
     }
-
     // Sort (Date)
-    msg.sort(function(a, b){
-        var t1 = new Date(a.modified);
-        var t2 = new Date(b.modified);
-        return t2.getTime()-t1.getTime();
-    });
-    
-    // Notification if there new Messages
-    if(newMessages) PlaySoundNotification();  
+    if(msg.length && (msg.length > 0))
+    {
+        msg.sort(function(a, b){
+            var t1 = new Date(a.modified);
+            var t2 = new Date(b.modified);
+            return t2.getTime()-t1.getTime();
+        });
+    }
     
     // Current Time
     var now = new Date();
@@ -373,8 +398,35 @@ function SendFeeds(source)
     if(now.getMinutes() < 10) m0 = "0"
     if(now.getSeconds() < 10) s0 = "0"
     var timestring = lang.popup_lastupdate + h0 + now.getHours() + ":" +
-    m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();  
+    m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
+
+    // If there are only Errors, reponse now
+    if(onlyErrors)
+    {
+        // Save to LastRequest
+        LastRequest = {
+            status: "error", 
+            info: lang.error_confails, 
+            timestring: timestring, 
+            emsg: err_msg
+        };
+        
+        // set button / menu
+        MyButton.badge.display="block";
+        MyButton.badge.textContent = "e";
+        MyButton.popup.height = ErrorHeight + "px";
+
+        // Send to source if defined
+        SendMsg(source, LastRequest);
+
+        return;
+    }
  
+    
+    // Notification if there new Messages
+    if(newMessages) PlaySoundNotification();  
+    
+
     // Show message-count and set text
     var text;
     if(msg.length && (msg.length > 0))
@@ -402,14 +454,34 @@ function SendFeeds(source)
     else
         MyButton.popup.height = StdHeight + "px";
     
+    // Save to LastRequest for quick update
+    LastRequest = {
+        status: "success", 
+        info: text, 
+        timestring: timestring, 
+        msg: msg,
+        emsg: err_msg
+    };
+    
     // Send to source if defined
-    if(typeof source != 'undefined')
-        source.postMessage({
-            status: "success", 
-            info: text, 
-            timestring: timestring, 
-            msg: msg
-        });
+    SendMsg(source, LastRequest);
+}
+
+// Sent to source (error-handler)
+function SendMsg(source, message)
+{
+    if(source && (typeof source != 'undefined'))
+    {
+        try
+        {
+            source.postMessage(message);
+        }
+        catch(e)
+        {
+            if(Debug) 
+                opera.postError("ERROR: sending message to source fails");
+        }
+    }    
 }
 
 // Play Sound-Notification (if enabled)

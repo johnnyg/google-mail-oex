@@ -121,3 +121,9 @@ div::selection, p::selection, img::selection {
 .message:hover, .message:hover strong {
  color: white;
 }
+
+/*** Wait-Animation in Popup-Menu ***/
+#wait {
+    background: url('img/ajax-loader.gif') no-repeat center center;
+    height: 30px;
+}
