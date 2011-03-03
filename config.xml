@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
   id="http://www.codebit.de/oex/google-mail"
-  version="2.0b">
+  version="2.0">
 
   <!-- Extension Infos -->
   <name>Google Mail Notifier</name>
   
   <description xml:lang="en">A simple and fast extensions to inform you about new unread messages in your GMail-Account and show the titles of the new messages. You can watch multiple accounts and have the option to open maillinks directly with gmail.</description>
   <description xml:lang="de">Diese Erweiterung informiert Sie über neue ungelesene Nachrichten in Ihrem Googlemail-Konto und zeigt die Titel dieser Nachrichten an. Es werden mehrere Konten unterstützt und Maillinks können direkt mit Googlemail geöffnet werden.</description>
-  <description xml:lang="ru">Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки.</description>
+  <description xml:lang="ru">Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки. Расширение может работать с несколькими аккаунтами и позволяет открывать ссылки mailto: с помощью Gmail.</description>
 
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
@@ -27,12 +27,12 @@
   </license>
   
   <!-- Default Values -->
-  <preference name="num_max_accounts" value="5" />
+  <preference name="num_max_accounts" value="5" readonly="true" />
   <preference name="update_intervall" value="60" />
   <preference name="enable_sound" value="true" />
 
   <!-- Access Policy -->
-  <access origin="https://mail.google.com/mail/feed/" subdomains="true"/>
-  <access origin="https://www.google.com/accounts/" subdomains="true"/>
+  <access origin="https://mail.google.com" />
+  <access origin="https://www.google.com" />
   
 </widget>

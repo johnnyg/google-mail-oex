@@ -104,7 +104,6 @@ function Update(source)
 {
     for(var i=0; i < MaxAccounts; i++)
     {
-        opera.postError("INFO: OK");
         // check if we have an token here
         if((!widget.preferences['oauth_token' + i]) || (widget.preferences['oauth_token' + i] == ""))
         {
