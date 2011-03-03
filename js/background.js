@@ -102,6 +102,7 @@ function storageHandler(e)
 // Update Message-Count
 function Update(source)
 {
+    var noAccount = true;
     for(var i=0; i < MaxAccounts; i++)
     {
         // check if we have an token here
@@ -112,6 +113,9 @@ function Update(source)
             };
             continue;
         }
+        
+        // we have at least one account
+        noAccount = false;
         
         // set status to "request"
         if(Feeds[i] && Feeds[i].status)
@@ -129,6 +133,24 @@ function Update(source)
         // Get Feed now (async in 10ms)
         var param = {url: feedURL, num: i, src: source};
         window.setTimeout(GetFeed, 10, param);
+    }
+    
+    // If we have no account -> show "e" and give error
+    if(noAccount)        
+    {    
+        // save to LastRequest
+        LastRequest = {
+            status: "error", 
+            info: lang.error_nocode, 
+        };
+        
+        // set button / menu
+        MyButton.badge.display="block";
+        MyButton.badge.textContent = "e";
+        MyButton.popup.height = ErrorHeight + "px";
+
+        // Send to source if defined
+        SendMsg(source, LastRequest);
     }
 
     // Set new timeout
