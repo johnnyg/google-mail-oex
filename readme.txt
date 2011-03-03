@@ -8,6 +8,7 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 KNOWN ISSUES
 -this extension will only show/count up to 20 unread mails per account
  (thats a limitation from the google api)
+-currently dont work with barracuda-release of opera (tested with build 2014)
 
 HISTORY
 v2.0
