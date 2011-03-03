@@ -3,23 +3,25 @@ Description for addons.opera.com (Russian)
 
 Short description (max 220):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки. Расширение может работать с несколькими аккаунтами и позволяет открывать ссылки mailto: с помощью Gmail.
+Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 Detailed description:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Google Mail Notifier is a small, simple and fast extension to show the number of unread mails in your Gmail-Account(s) in front of a button and the titles of the messages in the button-menu. Furthermore this extension gives you the option to open mail-links (mailto:) directly with GMail.
+Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки. Расширение может работать с несколькими аккаунтами и позволяет открывать ссылки mailto: с помощью Gmail.
 
-FEATURES
-* Support up to 5 Accounts
-* Supports all GMail-Accounts
-* Show all unread Messages or just from Inbox
-* Option to open Mail-Links directly with GMail
-* Optional Sound-Notification
-* Use safe OAuth-Authorization
-* Supports English, German, Russian
+ВОЗМОЖНОСТИ
+* Поддержка до 5 аккаунтов
+* Поддержка всех аккаунтов GMail
+* Показывает все входящие или сообщения только из папки Inbox
+* Позволяет открывать ссылки mailto: с помощью Gmail
+* Воспроизведение звукового сигнала при входящих сообщениях
+* Использование безопасной авторизации OAuth
+* Поддержка английского, немецкого и русского языков
 
-THANKS TO
-Роман Каштанов for russian translation
+БЛАГОДАРНОСТИ
+Roman Kashtanov for russian translation
 Patryk Obara for improved Icon, error-reporting and fixes
 The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the gmail-icon
 PC.de (http://pc.de/icons/) for the other icons
@@ -34,6 +36,6 @@ Option to give a Update-Intervall manually
 Option to open "mailto"-links with GMail
 Show Tooltip with Sender-Mail and Subject-Extract in Popup-Menu
 Option per Account to show all unread mails or only inbox
-Add Rusian-Tranlation (thanks to Роман Каштанов)
+Add Rusian-Tranlation (thanks to Roman Kashtanov)
 Recognize when pasting verfification-code from clipboard to input-field
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

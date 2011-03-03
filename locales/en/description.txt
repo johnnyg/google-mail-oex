@@ -3,8 +3,8 @@ Description for addons.opera.com (English)
 
 Short description (max 220):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-A simple and fast extensions to inform you about unread messages in your GMail-Account and show the titles of the new messages. You can check multiple accounts and have the option to open mail-links directly with GMail.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+A simple and fast extensions to inform you about unread messages in your GMail-Account and show the titles of the new messages. You can check multiple accounts and have the option to open mail-links directly with GMail.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Detailed description:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
