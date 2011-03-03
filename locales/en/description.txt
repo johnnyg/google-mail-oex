@@ -1,0 +1,40 @@
+Description for addons.opera.com (German)
+*****************************************
+
+Short description (max 220):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+A simple and fast extensions to inform you about unread messages in your GMail-Account and show the titles of the new messages. You can check multiple accounts and have the option to open mail-links directly with GMail.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Detailed description:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Google Mail Notifier is a small, simple and fast extension to show the number of unread mails in your Gmail-Account(s) in front of a button and the titles of the messages in the button-menu. Furthermore this extension gives you the option to open mail-links (mailto:) directly with GMail.
+
+FEATURES
+* Support up to 5 Accounts
+* Supports all GMail-Accounts
+* Show all unread Messages or just from Inbox
+* Option to open Mail-Links directly with GMail
+* Optional Sound-Notification
+* Use safe OAuth-Authorization
+* Supports English, German, Russian
+
+THANKS TO
+Роман Каштанов for russian translation
+Patryk Obara for improved Icon, error-reporting and fixes
+The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the gmail-icon
+PC.de (http://pc.de/icons/) for the other icons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Changes from previous version:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Support up to 5 Accounts
+New messages are at top of list
+Option to give a Update-Intervall manually
+Option to open "mailto"-links with GMail
+Show Tooltip with Sender-Mail and Subject-Extract in Popup-Menu
+Option per Account to show all unread mails or only inbox
+Add Rusian-Tranlation (thanks to Роман Каштанов)
+Recognize when pasting verfification-code from clipboard to input-field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
