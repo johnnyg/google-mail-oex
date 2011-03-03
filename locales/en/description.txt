@@ -1,5 +1,5 @@
-Description for addons.opera.com (German)
-*****************************************
+Description for addons.opera.com (English)
+******************************************
 
 Short description (max 220):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
