@@ -15,7 +15,7 @@ var UpdateTimer;        // UpdateTimer
 var Debug=0;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
-var MaxAccounts;        // Number of max supported accounts
+var MaxAccounts = 5;    // Number of max supported accounts
 var Feeds;              // Feeds-Array
 var AudioObject;        // Audio-Object for Sound-Notification
 var LockUpdate;         // Lock SendInfo()-Function
@@ -45,7 +45,6 @@ window.addEventListener("load", function()
     }
     
     // Set vars
-    MaxAccounts = parseInt(widget.preferences['num_max_accounts']);
     Feeds = new Array(MaxAccounts);
     LockUpdate = false;
   
