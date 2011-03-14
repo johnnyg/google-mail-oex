@@ -11,6 +11,10 @@ KNOWN ISSUES
 -currently dont work with barracuda-release of opera (tested with build 2014)
 
 HISTORY
+v2.1
+remove xss-vulnerability
+remove bug when see no request-code-field
+
 v2.0
 Support up to 5 Accounts
 New messages are at top of list
