@@ -1,12 +1,11 @@
-var Debug = 0;      //Debug
-var MaxAccounts;    // Number of max supported accounts
+var Debug       = 0;    //Debug
+var MaxAccounts = 5;    // Number of max supported accounts
 
 // Intialize the option page
 $(document).ready(function() 
 {
     // Init
     $('#range_update_intervall').val(widget.preferences['update_intervall']);
-    MaxAccounts = parseInt(widget.preferences['num_max_accounts']);
     
     // Set language-strings
     $('#range_update_intervall_label').html(lang.options_update);
@@ -51,9 +50,10 @@ function BuildMailContainer()
     }
   
     // build new
+    if(Debug) opera.postError("INFO: Build " + MaxAccounts + " Code-Fields... (LastToken: " + lastToken + ")");
     for(var i=0; i < MaxAccounts; i++)
     {
-        var mail = "";
+        var mail = "";   
     
         // check if token exists
         if(!widget.preferences['oauth_token' + i] || widget.preferences['oauth_token' + i] == "")

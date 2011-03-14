@@ -18,14 +18,6 @@ div::selection, p::selection, img::selection {
   text-shadow: #DDD 1px 1px 1px;
 }
 
-.tooltip {
-    font-size: 11px;
-}
-
-.tooltip p {
-    margin: 0px;
-}
-
 .entry:hover {
  background-color: #CC0F15;
  color: white;

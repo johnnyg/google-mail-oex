@@ -113,17 +113,32 @@ function HandleMessages(event)
                 // Add every message
                 for(var i=0; i < event.data.msg.length; i++)
                 {
-                    var tooltip = "<div class='tooltip'><p><u>"+ lang.popup_to + " " + 
-                    event.data.msg[i].sendermail + "</u><br/>" +
-                    lang.popup_from + " " + event.data.msg[i].authormail + 
-                    "<br/><br/></p><p>" + event.data.msg[i].summary + "</p>"
-            
-                    var msg = $('<div></div>').addClass('message').attr("title", tooltip).tooltip({
+                    // Autorname
+                    var author = "";
+                    if(event.data.msg[i].authorname != "")
+                      author = $('<strong></strong>').text(event.data.msg[i].authorname + " : ");
+                      
+                   // Message-Title
+                   var title = $('<span></span>').text(event.data.msg[i].title);
+                   
+                   // Message-Body
+                   var body = $('<p></p>').text(event.data.msg[i].summary);
+                   
+                    // Tooltip
+                    var tooltip = $("<div></div>")
+                      .html("<p><u>"+ lang.popup_to + " " + 
+                        event.data.msg[i].sendermail + "</u><br/>" +
+                        lang.popup_from + " " + event.data.msg[i].authormail + 
+                        "<br/><br/></p>").append(body);                    
+           
+                    // MessageBox
+                    var msg = $('<div></div>').addClass('message')
+                    .attr("title", tooltip.html()).tooltip({
                         left: -15
-                    })
-                    .html("<strong>" + event.data.msg[i].authorname + "</strong> : " + event.data.msg[i].title).click({
+                    }).append(author).append(title).click({
                         link: event.data.msg[i].link
                     }, LoadLink);
+                    
                     $('#message_box').append(msg);
                 }
             }

@@ -5,8 +5,13 @@
 	background-color: #2a2b2a;
         color: white;
 	padding: 3px;
-	opacity: 0.95;
-        border-radius: 5px;
-        max-width: 250px;
+	opacity: 0.90;
+  border-radius: 5px;
+  max-width: 250px;
+  font-size: 9px;
 }
 #tooltip h3, #tooltip div { margin: 0; }
+
+#tooltip p {
+    margin: 0px;
+}
