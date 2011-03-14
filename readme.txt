@@ -8,12 +8,11 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 KNOWN ISSUES
 -this extension will only show/count up to 20 unread mails per account
  (thats a limitation from the google api)
--currently dont work with barracuda-release of opera (tested with build 2014)
 
 HISTORY
 v2.1
-remove xss-vulnerability
-remove bug when see no request-code-field
+removed xss-vulnerability
+removed bug when user see no  field for request-code
 
 v2.0
 Support up to 5 Accounts
@@ -40,7 +39,7 @@ v1.0
 Initial Release
 
 THANKS TO
-Роман Каштанов for russian translation
+Roman Kashtanov for russian translation
 Patryk Obara for improved icon, error-reporting and fixes
 The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the gmail-icon
 PC.de (http://pc.de/icons/) for the other icons

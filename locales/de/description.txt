@@ -20,22 +20,9 @@ MERKMALE
 * Verwendet das sichere OAuth-Verfahren zur Autorisierung
 * Unterstützt Deutsch, Englisch, Russisch
 
-VIELEN DANK AN
-Роман Каштанов für die russische Übersetzung
-Patryk Obara für das verbesserte Icon und die Fehlerbehebungen
-Das Mysitemyway Design Team (http://icons.mysitemyway.com/)  für das Googlemail-Icon
-PC.de (http://pc.de/icons/) für die anderen Icons
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Changes from previous version:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Unterstützung von bis zu 5 Konten
-Neue Nachrichten immer ganz oben
-Zeigt beim Überfahren der Nachrichten weitere Infos an
-Option das Update-Intervall manuell einzugeben
-Option "mailto"-Links direkt mit Googlemail zu öffnen
-Option alle ungelesenen Nachrichten oder nur Posteingang zu beachten
-Russische Übersetzung (Dank an Роман Каштанов)
-Das Einfügen des Bestätiguingscodes aus der Zwischenablage wird bemerkt
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

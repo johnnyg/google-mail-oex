@@ -19,23 +19,10 @@ Detailed description:
 * Воспроизведение звукового сигнала при входящих сообщениях
 * Использование безопасной авторизации OAuth
 * Поддержка английского, немецкого и русского языков
-
-БЛАГОДАРНОСТИ
-Roman Kashtanov for russian translation
-Patryk Obara for improved Icon, error-reporting and fixes
-The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the gmail-icon
-PC.de (http://pc.de/icons/) for the other icons
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Changes from previous version:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Support up to 5 Accounts
-New messages are at top of list
-Option to give a Update-Intervall manually
-Option to open "mailto"-links with GMail
-Show Tooltip with Sender-Mail and Subject-Extract in Popup-Menu
-Option per Account to show all unread mails or only inbox
-Add Rusian-Tranlation (thanks to Roman Kashtanov)
-Recognize when pasting verfification-code from clipboard to input-field
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
