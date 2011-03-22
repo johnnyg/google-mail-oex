@@ -10,6 +10,9 @@ KNOWN ISSUES
  (thats a limitation from the google api)
 
 HISTORY
+v2.2
+add missing input-field for update-interval in russian localisation
+
 v2.1
 removed xss-vulnerability
 removed bug when user see no  field for request-code
