@@ -1,6 +1,7 @@
 // MyToken
 var MyConsumerKey       = "www.codebit.de";
 var MyConsumerSecret    = "mC7L0SPVt/0mQcQRkfmPsf3O";
+var Debug=1;
 
 // Show Page for grant access/verfication code
 function GetVerificationCode() 
@@ -108,7 +109,7 @@ function GetAccessToken(tNum, Code)
 }
 
 // Set the oauth-infos to the request
-function PrepareRequest(XMLHttpRequest, settings, tNum, url)
+function PrepareRequest(jqXHR, settings, tNum, url)
 {
   // Only request token if we have no one
   if(widget.preferences['oauth_token' + tNum] && widget.preferences['oauth_token' + tNum] !== "")
@@ -119,7 +120,8 @@ function PrepareRequest(XMLHttpRequest, settings, tNum, url)
                     tokenSecret     : widget.preferences['oauth_secret' + tNum]} ;                    
     var message = {method: "get", action: url};
     OAuth.completeRequest(message, accessor);
-    XMLHttpRequest.setRequestHeader("Authorization", OAuth.getAuthorizationHeader("", message.parameters));
+    jqXHR.setRequestHeader("Authorization", OAuth.getAuthorizationHeader("", message.parameters));
+    if(Debug) opera.postError("INFO : Prepare Request F" + tNum + " - Authorization:" + OAuth.getAuthorizationHeader("", message.parameters));
     return true;
   }
   else

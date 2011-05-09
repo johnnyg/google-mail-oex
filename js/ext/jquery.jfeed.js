@@ -23,15 +23,15 @@ jQuery.getFeed = function(options) {
             url: options.url,
             data: options.data,
             dataType: 'xml',
-            success: function(xml) {
-                var feed = new JFeed(xml);
+            success: function(data) {
+                var feed = new JFeed(data);
                 if(jQuery.isFunction(options.success)) options.success(feed);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                if(jQuery.isFunction(options.error)) options.error(XMLHttpRequest, textStatus, errorThrown);
+            error: function(jqXHR, textStatus, errorThrown) {
+                if(jQuery.isFunction(options.error)) options.error(jqXHR, textStatus, errorThrown);
             },
-            beforeSend: function(XMLHttpRequest, settings) {
-                if(jQuery.isFunction(options.beforeSend)) options.beforeSend(XMLHttpRequest, settings);
+            beforeSend: function(jqXHR, settings) {
+                if(jQuery.isFunction(options.beforeSend)) options.beforeSend(jqXHR, settings);
             }
         });
     }

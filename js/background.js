@@ -12,7 +12,7 @@
 // Global Vars
 var MyButton;           // Toolbar-Button
 var UpdateTimer;        // UpdateTimer
-var Debug=0;            // DebugMode (writes to Error-Console)
+var Debug=1;            // DebugMode (writes to Error-Console)
 var StdHeight=120;      // Standard-Height of Menu
 var ErrorHeight=130 ;   // Error-Height of Menu
 var MaxAccounts = 5;    // Number of max supported accounts
@@ -20,6 +20,9 @@ var Feeds;              // Feeds-Array
 var AudioObject;        // Audio-Object for Sound-Notification
 var LockUpdate;         // Lock SendInfo()-Function
 var LastRequest;        // LastRequest
+
+// Global jQuery-Settings
+jQuery.support.cors = true;
 
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
@@ -165,13 +168,13 @@ function GetFeed(param)
     jQuery.getFeed(
     {
         url: param.url,
-        beforeSend: function(XMLHttpRequest, settings) {
-            PrepareRequest(XMLHttpRequest, settings,  param.num,  param.url);
+        beforeSend: function(jqXHR, settings) {
+            PrepareRequest(jqXHR, settings,  param.num,  param.url);
         },
         success: function(feed) {
             ParseFeed(feed,  param.src,  param.num)
         },
-        error : function(XMLHttpRequest, textStatus, errorThrown) {
+        error : function(jqXHR, textStatus, errorThrown) {
             if(Debug) opera.postError("ERROR : Error while receiving Feed " + 
                 param.num + ", " + errorThrown + "(" + textStatus + ")") ;
             Feeds[param.num] = {
