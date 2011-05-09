@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/options.css">
+        <link rel="icon" href="img/gmail-icon-16px.png" type="image/png" />
+        <title id="widget-title">Opera Extensions | Google Mail Notifier</title>
+        <script src="js/ext/jquery.js" type="text/javascript"></script>
+        <script src="lang.js" type="text/javascript"></script>
+        <script src="js/options.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <header>
+            <img src="img/logo-banner.png">
+        </header>
+
+        <section>
+            <p>Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過
+            按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，
+            這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。</p>
+
+            <h3>你的 Gmail 帳號</h3>
+            <fieldset>
+                <p><strong>Google Mail Notifier 使用 <a href='http://oauth.net/'>OAuth</a>
+                    </strong> 來存取你的 Gmail 帳號，透過這個認證方式套件完全不需要你提供你的
+                    Google 帳號密碼或其他個人資訊。<strong>透過點選套件提供的按鈕，同意存取許可
+                    後複製並貼上驗證碼到空白欄位即可。</strong></p>
+                <div id='mail-container'></div>
+                <small class='options_small'>
+                    <a href="https://www.google.com/accounts/IssuedAuthSubTokens">點選這裡</a>
+                    後你可以手動取消這個延伸套件的存取權限，但請記得執行這個撤銷授權後將會停用
+                    郵件檢查的動作。</small>
+            </fieldset>
+            <h3>其他選項</h3>
+            <fieldset>
+                <p>
+                    <input id="range_update_intervall" type="range" min="5" max="600" step="1"></input>
+                    <label id="range_update_intervall_label" for="range_update_intervall"></label>
+                    <input id="box_update_intervall" name="update_intervall" type="text"></input> 秒
+                </p>
+                <p>
+                    <input id="enable_sound" name="enable_sound" type="checkbox"></input>
+                    <label id="enable_sound_label" for="enable_sound"></label>
+                </p>
+                <p>
+                    <input id="mailto_links" name="mailto_links" type="checkbox"></input>
+                    <label id="mailto_links_label" for="mailto_links"><b></b></label>
+                </p>
+            </fieldset>
+            <div class="button_line">
+                <button id="close"></button>
+            </div>
+        </section>
+
+        <footer>
+            <p class="big"><strong>Another great <a href="http://www.codebit.de" title='codebit-homepage'>codebit</a>-software 
+                    programmed by <a href="mailto:tom.schreiber@codebit.de" title='Send a mail to the author'>Tom Schreiber</a></strong>
+            </p>
+            <p class="small">
+                This extension is licensed under the <a href="http://www.opensource.org/licenses/apache2.0.php" title='Show text of the license'>
+                    Apache License 2.0</a>, you can get the source
+                <a href='http://code.google.com/p/google-mail-oex/source/checkout' title='Source at Google Code'>here</a>
+            </p>
+            <p class="small">
+                Thanks to the <a href="http://icons.mysitemyway.com/" 
+                                 title='Homepage of the Mysitemyway Design Team'>Mysitemyway Design Team</a> for the GMail-Icon 
+                and <a href='http://pc.de/icons/' title='Homepage of PC'>PC</a> for the other icons.
+            </p>
+            <p class="small">
+                Thanks to Patryk Obara for the improved Icon and bug-fixes.
+            </p>
+            <p class="small">
+                Thanks to Роман Каштанов for russian translation
+            </p>
+        </footer>
+    </body>
+</html>
