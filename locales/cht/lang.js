@@ -15,6 +15,7 @@ lang.options_more_vcode = "加入更多授權碼（多個帳號）";
 lang.options_sound = "當有新的郵件時播放提示音效";
 lang.options_mailto = "使用 Gmail 開啟郵件連結（mailto）";
 lang.options_close = "套用並關閉視窗";
+lang.options_choose_theme = "Choose Theme";
 
 lang.options_unread_tooltip = "啟用這個選項後會顯示所有尚未讀取的郵件而非只有收件匣的未讀郵件";
 lang.options_vcode_tooltip = "貼上或輸入授權碼然後點選「套用授權碼」";

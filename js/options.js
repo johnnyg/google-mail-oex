@@ -1,6 +1,10 @@
 var Debug       = 0;    //Debug
 var MaxAccounts = 5;    // Number of max supported accounts
 
+var Themes = {
+  "standard":"Standard",
+  "spring":"Spring"};
+
 // Intialize the option page
 $(document).ready(function() 
 {
@@ -11,7 +15,17 @@ $(document).ready(function()
     $('#range_update_intervall_label').html(lang.options_update);
     $('#enable_sound_label').html(lang.options_sound);
     $('#mailto_links_label').html(lang.options_mailto);
-    $('#close').html(lang.options_close);
+    $('#theme_label').html(lang.options_choose_theme);
+    $('#close').html(lang.options_close);    
+    
+    // Set Themes
+    $.each(Themes, function(key, value)
+    {   
+         $('#theme').
+              append($("<option></option>").
+              attr("value",key).
+              text(value)); 
+    });
     
     // Show Range-Secounds on change
     $('#range_update_intervall').change(function() {

@@ -15,6 +15,7 @@ lang.options_more_vcode = "Add more verification-codes (multi-account)";
 lang.options_sound = "Play notification sound on new messages";
 lang.options_mailto = "Open Mail-Links (mailto) with GMail";
 lang.options_close = "Apply & Close Window";
+lang.options_choose_theme = "Choose Theme";
 
 lang.options_unread_tooltip = "enable this option if you want to show all unread mails, not just from inbox";
 lang.options_vcode_tooltip = "paste or type the verification code and click on 'apply code'";

@@ -15,6 +15,7 @@ lang.options_more_vcode     = "Mehr Bestätigungscodes hinzufügen (Multi-Accoun
 lang.options_sound          = "Spiele Klangbenachrichtigung bei neuen Nachrichten";
 lang.options_mailto         = "Öffne EMail-Links ('mailto:') mit Googlemail";
 lang.options_close          = "Einstellungen übernehmen und Fenster schließen";
+lang.options_choose_theme   = "Choose Theme";
 
 lang.options_unread_tooltip = "Aktivieren Sie diese Funktion um alle ungelesenen Nachrichten anzuzeigen, nicht nur aus dem Posteingang";
 lang.options_vcode_tooltip  = "Fügen Sie den Bestätigungscode hier ein und klicken Sie auf 'Code übernehmen'";

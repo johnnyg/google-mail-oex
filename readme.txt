@@ -12,6 +12,7 @@ KNOWN ISSUES
 HISTORY
 v2.2
 add missing input-field for update-interval in russian localisation
+Add Chinese Translation
 
 v2.1
 removed xss-vulnerability

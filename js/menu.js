@@ -7,6 +7,12 @@ window.addEventListener("load", function()
         opera.extension.postMessage({
             cmd:"Refresh"
         });
+        
+        // Set Theme
+        if(widget.preferences['theme'] != 'standard')
+        {
+           $('head').append('<link rel="stylesheet" href="css/' + widget.preferences['theme'] + '/theme.css" type="text/css" />');
+        }
 
         // set strings
         $("#open").html(lang.popup_open);
@@ -125,10 +131,11 @@ function HandleMessages(event)
                    var body = $('<p></p>').text(event.data.msg[i].summary);
                    
                     // Tooltip
+                    var tt_to = "";
+                    if(event.data.msg[i].sendermail)
+                      tt_to = "<u>"+ lang.popup_to + " " + event.data.msg[i].sendermail + "</u><br/>";
                     var tooltip = $("<div></div>")
-                      .html("<p><u>"+ lang.popup_to + " " + 
-                        event.data.msg[i].sendermail + "</u><br/>" +
-                        lang.popup_from + " " + event.data.msg[i].authormail + 
+                      .html("<p>" + tt_to + lang.popup_from + " " + event.data.msg[i].authormail + 
                         "<br/><br/></p>").append(body);                    
            
                     // MessageBox
