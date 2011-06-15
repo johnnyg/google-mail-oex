@@ -1,0 +1,28 @@
+Description for addons.opera.com (polski)
+******************************************
+
+Short description  (max 220):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Proste i szybkie rozszerzenie informujące o nowych nieprzeczytanych wiadomościach na koncie GMail oraz pokazujące ich tytuły. Możliwe jest sprawdzanie wielu kont i otwieranie odnośników mailowych bezpośrednio w GMailu.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Detailed description:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Google Mail Notifier jest niewielkim, prostym i szybkim rozszerzeniem, które wyświetla na przycisku ilość nieprzeczytanych wiadomości na koncie (kontach) GMail oraz pokazuje ich tytuły w menu. Rozszerzenie daje również możliwość otwierania odnośników mailowych (mailto:) bezpośrednio w GMailu.
+
+FUNKCJE
+* Wsparcie do 5. kont
+* Wspiera wszystkie konta GMail
+* Wyświetlanie wszystkich nieprzeczytanych wiadomości lub tylko ze skrzynki odbiorczej
+* Możliwość otwierania odnośników mailowych bezpośrednio w GMailu
+* Opcjonalne powiadamianie dźwiękowe
+* Bezpieczna autoryzacja OAuth
+* W języku angielskim, niemieckim, rosyjskim i polskim
+* Supports English, German, Russian
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Changes from previous version:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

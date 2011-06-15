@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/options.css">
+        <link rel="icon" href="img/gmail-icon-16px.png" type="image/png" />
+        <title id="widget-title">Opera Extensions | Google Mail Notifier</title>
+        <script src="js/ext/jquery.js" type="text/javascript"></script>
+        <script src="lang.js" type="text/javascript"></script>
+        <script src="js/options.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <header>
+            <img src="img/logo-banner.png">
+        </header>
+
+        <section>
+            <p>Google Mail Notifier jest niewielkim, prostym i szybkim rozszerzeniem,
+            które wyświetla na przycisku ilość nieprzeczytanych wiadomości na koncie
+            (kontach) GMail oraz pokazuje ich tytuły w menu. Rozszerzenie daje 
+            również możliwość otwierania linków mailowych (mailto:) 
+            bezpośrednio w GMailu.</p>
+
+            <h3>Twoje konto (konta) GMail</h3>
+            <fieldset>
+                <p><strong>Google Mail Notifier używa <a href='http://oauth.net/'>OAuth</a>
+                    </strong> aby mieć dostęp do Twojego konta GMail. Dzięki tej metodzie autoryzacji
+                    to rozszerzenie nie będzie miało dostępu do Twojego hasła lub innych prywatnych
+                    informacji z konta Google. <strong>Pobierz kod weryfikacyjny dla
+                        tego rozszerzenia klikając w przycisk. Następnie udziel dostępu i skopiuj/wklej kod
+                        do pola poniżej.</strong></p>
+                <div id='mail-container'></div>
+                <small class='options_small'>
+                    <a href="https://www.google.com/accounts/IssuedAuthSubTokens">Tutaj</a> 
+                    możesz odebrać temu rozszerzeniu dostęp do konta, jednak wówczas sprawdzanie poczty
+                    nie będzie dłużej działało.</small>
+            </fieldset>
+            <h3>Appearance</h3>
+            <fieldset>
+                <p>
+                    <label id="theme_label" for="theme"></label>
+                    <select id="theme" name="theme" type="text"></select>
+                </p>
+            </fieldset>
+            <h3>Other Options</h3>
+            <fieldset>
+                <p>
+                    <input id="range_update_intervall" type="range" min="5" max="600" step="1"></input>
+                    <label id="range_update_intervall_label" for="range_update_intervall"></label>
+                    <input id="box_update_intervall" name="update_intervall" type="text"></input> s
+                </p>
+                <p>
+                    <input id="enable_sound" name="enable_sound" type="checkbox"></input>
+                    <label id="enable_sound_label" for="enable_sound"></label>
+                </p>
+                <p>
+                    <input id="mailto_links" name="mailto_links" type="checkbox"></input>
+                    <label id="mailto_links_label" for="mailto_links"><b></b></label>
+                </p>
+            </fieldset>
+            <div class="button_line">
+                <button id="close"></button>
+            </div>
+        </section>
+
+        <footer>
+            <p class="big"><strong><a href="http://www.codebit.de" title='codebit-homepage'>codebit</a>-software 
+                    programmed by <a href="mailto:tom.schreiber@codebit.de" title='Send a mail to the author'>Tom Schreiber</a></strong>
+            </p>
+            <p class="small">
+                This extension is licensed under the <a href="http://www.opensource.org/licenses/apache2.0.php" title='Show text of the license'>
+                    Apache License 2.0</a>, you can get the source
+                <a href='http://code.google.com/p/google-mail-oex/source/checkout' title='Source at Google Code'>here</a>
+            </p>
+            <p class="small">
+                Russian translation by Roman Kashtanov | Chinese translation by 嚮陽 | Polish translation by Michał Góral
+            </p>
+        </footer>
+    </body>
+</html>
