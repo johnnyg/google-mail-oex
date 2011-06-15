@@ -1,3 +1,23 @@
+/*** Menu-Main ***/
+body {
+  font-family: "Comic Sans MS", "TSCu_Comic", sans-serif;
+  font-size: 13px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/*** Menu **/
+.entry {
+  border-radius: 5px;
+  text-shadow: #DDD 1px 1px 1px;
+}
+
+.entry:hover {
+ background-color: #00CC00;
+ color: white;
+ text-shadow: #000 1px 1px 1px;
+}
+
 /*** Seperator ***/
 .separator {
   border-bottom: 1px solid #ADADAD;

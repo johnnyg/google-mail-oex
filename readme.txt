@@ -11,12 +11,14 @@ KNOWN ISSUES
 
 HISTORY
 v2.2
-add missing input-field for update-interval in russian localisation
-Add Chinese Translation
+Add Support for Themes
+Add missing input-field for update-interval in russian localisation
+Add Chinese Translation (thanks to 嚮陽)
+Add Polish Translation (thanks to Michał Góral)
 
 v2.1
-removed xss-vulnerability
-removed bug when user see no  field for request-code
+Removed xss-vulnerability
+Removed bug when user see no  field for request-code
 
 v2.0
 Support up to 5 Accounts
@@ -44,6 +46,8 @@ Initial Release
 
 THANKS TO
 Roman Kashtanov for russian translation
+嚮陽 for Chinese translation
+Michał Góral for Polish translation
 Patryk Obara for improved icon, error-reporting and fixes
 The Mysitemyway Design Team (http://icons.mysitemyway.com/) for the gmail-icon
 PC.de (http://pc.de/icons/) for the other icons

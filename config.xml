@@ -10,6 +10,7 @@
   <description xml:lang="de">Diese Erweiterung informiert Sie über neue ungelesene Nachrichten in Ihrem Googlemail-Konto und zeigt die Titel dieser Nachrichten an. Es werden mehrere Konten unterstützt und Mail-Links können direkt mit Googlemail geöffnet werden.</description>
   <description xml:lang="ru">Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки. Расширение может работать с несколькими аккаунтами и позволяет открывать ссылки mailto: с помощью Gmail.</description>
   <description xml:lang="cht">一個簡單又快速的延伸套件提醒你 Gmail 帳號中有多少尚未讀取的郵件和顯示郵件的標題。你可以設定多個要檢查的帳號還有設定直接用 Gmail 來開啟郵件連結。</description>
+  <description xml:lang="pl">Proste i szybkie rozszerzenie informujące o nowych nieprzeczytanych wiadomościach na koncie GMail oraz pokazujące ich tytuły. Możliwe jest sprawdzanie wielu kont i otwieranie odnośników mailowych bezpośrednio w GMailu.</description>
 
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
@@ -25,6 +26,12 @@
   </license>
   <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="ru">
     Лицензируется в соответствии с Apache License, версия 2.0
+  </license>
+  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="cht">
+    Licensed under the Apache License, Version 2.0
+  </license>
+  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="pl">
+    Licensed under the Apache License, Version 2.0
   </license>
   
   <!-- Default Values -->
