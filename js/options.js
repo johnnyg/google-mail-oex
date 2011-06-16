@@ -30,6 +30,8 @@ $(document).ready(function()
     // Show Range-Secounds on change
     $('#range_update_intervall').change(function() {
         $('#box_update_intervall').val($('#range_update_intervall').val());
+        // WORKAROUND: Update Intervall-Value manually (auto-save don't work in 11.50b1040)
+        widget.preferences['update_intervall'] = $('#range_update_intervall').val();
     });
     $('#box_update_intervall').keyup(function() {
         $('#range_update_intervall').val($('#box_update_intervall').val());
