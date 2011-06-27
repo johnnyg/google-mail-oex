@@ -10,8 +10,10 @@ KNOWN ISSUES
  (thats a limitation from the google api)
 
 HISTORY
-v2.2
+v2.3
 Add Support for Themes
+
+v2.2
 Add missing input-field for update-interval in russian localisation
 Add Chinese Translation (thanks to 嚮陽)
 Add Polish Translation (thanks to Michał Góral)

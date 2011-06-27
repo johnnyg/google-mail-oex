@@ -18,7 +18,7 @@ FUNKCJE
 * Opcjonalne powiadamianie dźwiękowe
 * Bezpieczna autoryzacja OAuth
 * W języku angielskim, niemieckim, rosyjskim i polskim
-* Supports English, German, Russian
+* Supports English, German, Russian, Chinese, Polish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
