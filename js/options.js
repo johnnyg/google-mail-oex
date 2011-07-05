@@ -1,4 +1,4 @@
-var Debug       = 0;    //Debug
+var Debug       = 1;    //Debug
 var MaxAccounts = 5;    // Number of max supported accounts
 
 var Themes = {
