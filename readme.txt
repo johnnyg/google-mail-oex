@@ -11,7 +11,9 @@ KNOWN ISSUES
 
 HISTORY
 v2.3
-Add Support for Themes
+Fix wrong message count (thnaks to Victor Grischenko)
+Serveral text fixes
+Some fixes for Opera 12.0
 
 v2.2
 Add missing input-field for update-interval in russian localisation

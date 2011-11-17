@@ -191,7 +191,7 @@ function ParseFeed(feed, source, tokenNum)
 {
     // get feed
     messages = feed.items;
-  
+
     // Check if there are new messages (if there is any new ID)
     var newMessages = false;
     if(Feeds[tokenNum] && Feeds[tokenNum].msg && Feeds[tokenNum].msg.length > 0)
@@ -219,6 +219,7 @@ function ParseFeed(feed, source, tokenNum)
     Feeds[tokenNum] = {
         status: "success",
         msg: messages,
+        fullCount: feed.origXml.querySelector("fullcount").textContent,
         newMsg: newMessages
     };
 
@@ -374,6 +375,7 @@ function SendFeeds(source)
     // Check if there are new messages and get messages
     var newMessages = false;
     var msg = new Array();
+    var fullCount = 0;
     var err_msg = new Array();
     var onlyErrors = true;
     for(i=0; i < MaxAccounts; i++)
@@ -382,6 +384,7 @@ function SendFeeds(source)
         if(Feeds[i] && Feeds[i].status=="success")
         {
             onlyErrors = false;
+            fullCount += parseInt(Feeds[i].fullCount);
             // msg
             for (var x=0; x < Feeds[i].msg.length; x++) 
             {
@@ -454,10 +457,10 @@ function SendFeeds(source)
     var text;
     if(msg.length && (msg.length > 0))
     {
-        MyButton.badge.textContent = msg.length;
+        MyButton.badge.textContent = fullCount;
         MyButton.badge.display="block";
         if(msg.length > 1)
-            text = lang.popup_msg_before + msg.length + lang.popup_msg_after;
+            text = lang.popup_msg_before + fullCount + lang.popup_msg_after;
         else
             text = lang.popup_onemsg;
     }

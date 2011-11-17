@@ -48,10 +48,10 @@ JFeed.prototype = {
     title: '',
     link: '',
     description: '',
+    origXml: undefined,
     parse: function(xml) {
-        
+        this.origXml = xml;
         if(jQuery('channel', xml).length == 1) {
-        
             this.type = 'rss';
             var feedClass = new JRss(xml);
 
