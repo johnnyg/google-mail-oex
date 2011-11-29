@@ -1,19 +1,23 @@
- // Send a POST action to Gmail
-function GmailInterface(id, action)
+function GMailHandler 
 {
-  // Get the AT-Value from HTMl-Version of Gmail
-  var url = mailURL + "h/" + Math.ceil(1000000 * Math.random()) + "/?ui=html&zy=c";
-  var request = new XMLHttpRequest();
+   var mailURL = "https://mail.google.com/mail/";
   
-  // GET-Request
-  // $.get("test.php", function(data){alert("Data Loaded: " + data); });
-  
-  // look for ?at= when status=200
-  
-  // debug-output
-  
-  // NEW GET REQUEST
-  // MAILURL + RANDOM + t=ID + at=AT + act=ACTION
-  
-  // when success update count
+   /* Public methods */
+
+   // Starts the scheduler
+   this.CheckMailStart = function () 
+   {
+      getInboxCount();
+      scheduleRequest();
+   }
+
+   // Stops the scheduler
+   this.CheckMailStop = function () 
+   {
+      isStopped = true;
+      if (requestTimer != null) 
+      {
+         window.clearTimeout(requestTimer);
+      }
+   }
 }
