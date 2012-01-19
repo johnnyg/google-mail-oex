@@ -1,32 +1,74 @@
-window.addEventListener("load", function()
-    {
-        // Listen for script messages from background-process
-        opera.extension.onmessage = HandleMessages;
-  
-        // Refresh feed now
-        opera.extension.postMessage({
-            cmd:"Refresh"
-        });
-        
-        // Set Theme
-        if(widget.preferences['theme'] != 'standard')
-        {
-           $('head').append('<link rel="stylesheet" href="css/' + widget.preferences['theme'] + '/theme.css" type="text/css" />');
-        }
+///
+// Codebit "Opera Google Mail Extension"
+// Menu-Handler
+// 
+// @author  Tom Schreiber (tom.schreiber@codebit.de)
+// @version SVN: $Id$
+//
+///
 
-        // set strings
-        $("#open").html(lang.popup_open);
-        $("#compose").html(lang.popup_compose);
-        $("#pref").html(lang.popup_pref);
-    }, false);
+var StandardHeight=120; // Standard-Height of Menu
+var InfoHeight=130; // Info-Height of Menu
+var SingleMessageHeight = 47; // Height of single Message-Entry
+var Debug = false;
+var Accounts;
+
+// Init Menu-Handler
+// (this is called when the menu is displayed)
+window.addEventListener("load", function()
+{
+    // Listen for script messages from background-process
+    opera.extension.onmessage = HandleMessages;
+  
+    // Refresh feed now
+    opera.extension.postMessage({
+        cmd:"Refresh"
+    });
+    
+    // Get Debug-Option
+    opera.extension.postMessage({
+        cmd:"DebugEnabled"
+    });
+        
+    // Set Theme
+    if(widget.preferences['theme'] != 'standard')
+    {
+        $('head').append('<link rel="stylesheet" href="css/' + widget.preferences['theme'] + '/theme.css" type="text/css" />');
+    }
+
+    // Set Language-Strings
+    $("#open").html(lang.popup_open);
+    $("#compose").html(lang.popup_compose);
+    $("#pref").html(lang.popup_pref);
+        
+}, false);
 
 // Open Google-Mail-Tab
 function OpenGoogleMailTab()
 {
-    // Send command to background-process
-    opera.extension.postMessage({
-        cmd:"LoadGmailTab"
-    });
+    // Check if we have Accounts here
+    if(Accounts && Accounts.length > 0)
+    {
+        // At first clear AccountList
+        $('#AccountList').html("");
+        
+        // Fill AccountList
+        for(a in Accounts)
+        {
+            var entry = $("<div></div>").addClass("accountEntry").html(a.Name);
+            $('#AccountList').append(entry);            
+        }    
+
+        // Show Layer
+        $('#DarkLayer').show();
+    }
+    else
+    {
+        // Show GMail-Tab (no special account)
+        opera.extension.postMessage({
+            cmd:"LoadGmailTab"
+        });
+    }
   
     // Close Popup-Menu
     window.close();
@@ -58,97 +100,132 @@ function LoadLink(event)
     });
 }
 
+// Set new height (only background-process can do this)
+function SetHeight(height)
+{
+    opera.extension.postMessage({
+        cmd: "SetPopupSize", 
+        height: height
+    });
+}
+
 // Handle messages from background-process
 function HandleMessages(event)
-{
-    // whats the status
-    switch(event.data.status)
+{   
+    DebugMessage("Popup-menu received message: " + event.data.cmd);
+    
+    // Whats the status
+    switch(event.data.cmd)
     {
-        // Show Error
-        case "error" :
+        // Debug-Option
+        case "DebugEnabled":
+            Debug = event.data.value;
+            break;
+        
+        // Show Error-Message
+        case "info" :
             $('#wait').hide();
-            $('#status').html(event.data.info)
-            .addClass('error_box').removeClass('status_box');
+            SetHeight(InfoHeight)
+            $('#status').html(event.data.msg);
+            $('#status').addClass('info_box').removeClass('status_box');
             $('#last_update').html("");
             $('#message_box .message').remove();
             break;
     
-        // Show Status and Messages
-        case "success":
+        // Show Success-Message
+        case "messages":
             $('#wait').hide();
-      
+            
             // Show Status
-            $('#status').html(event.data.info)
-            .addClass('status_box').removeClass('error_box');
+            $('#status').html(event.data.info);
+            $('#status').addClass('status_box').removeClass('info_box');
             $('#last_update').html(event.data.timestring);
-      
-            // Are the are single error-messages?
-            if(event.data.emsg && event.data.emsg.length > 0)
-            {
-                // set text
-                var txt;
-                if(event.data.emsg.length == 1)
-                    txt = " (" + event.data.emsg.length + " " + lang.popup_error_occurred + ")";
-                else
-                    txt = " (" + event.data.emsg.length + " " + lang.popup_errors_occurred + ")";   
-      
-                // append text
-                $('#last_update').append(
-                    $('<span></span>').html(txt).css('color', '#CC0F15').css('cursor', 'pointer')
-                    .click(function(){
-                        $('#error_details').toggle()
-                        })
-                    );
-               // add details
-               $('#error_details').html("");
-               for(var j=0; j < event.data.emsg.length; j++)
-               {
-                    $('#error_details')
-                        .append("<div title='ERROR: " + event.data.emsg[j].detail + "'>" + event.data.emsg[j].text + "</div>");
-               }
-            }
-            else
-                $('#error_details').hide();
-      
-            // Clear Box 
-            $('#message_box .message').remove();
-      
-            // Check if there are Messages to display
-            if(event.data.msg && event.data.msg.length > 0)
-            {
-                // Add every message
-                for(var i=0; i < event.data.msg.length; i++)
-                {
-                    // Autorname
-                    var author = "";
-                    if(event.data.msg[i].authorname != "")
-                      author = $('<strong></strong>').text(event.data.msg[i].authorname + " : ");
-                      
-                   // Message-Title
-                   var title = $('<span></span>').text(event.data.msg[i].title);
-                   
-                   // Message-Body
-                   var body = $('<p></p>').text(event.data.msg[i].summary);
-                   
-                    // Tooltip
-                    var tt_to = "";
-                    if(event.data.msg[i].sendermail)
-                      tt_to = "<u>"+ lang.popup_to + " " + event.data.msg[i].sendermail + "</u><br/>";
-                    var tooltip = $("<div></div>")
-                      .html("<p>" + tt_to + lang.popup_from + " " + event.data.msg[i].authormail + 
-                        "<br/><br/></p>").append(body);                    
-           
-                    // MessageBox
-                    var msg = $('<div></div>').addClass('message')
-                    .attr("title", tooltip.html()).tooltip({
-                        left: -15
-                    }).append(author).append(title).click({
-                        link: event.data.msg[i].link
-                    }, LoadLink);
-                    
-                    $('#message_box').append(msg);
-                }
-            }
-            break;   
+            $('#error_details').hide();
+            
+            // Show Messages
+            Accounts = event.data.accounts;
+            ShowMessages(event.data.accounts, event.data.showAccountSorted)
     }
+}
+
+// Shows the messages
+function ShowMessages(accounts, showAccountSorted)
+{
+    DebugMessage("Show messages now");
+
+    // Show per Account
+    if(showAccountSorted)
+    {
+    //TODO: Cooming soon...
+    }
+    else
+    {
+        var msg = JoinMessages(accounts);
+        SetHeight(StandardHeight + msg.length * SingleMessageHeight);
+        var newMsgBox = $('<div></div>');
+        for(var i=0; i < msg.length; i++)
+            newMsgBox.append(CreateMessageBox(msg[i]));
+        
+        // Show now
+        $('#message_box .message').remove();
+        $('#message_box').append(newMsgBox);
+    }
+}
+
+// Join all messages for no-account-sorting
+function JoinMessages(accounts)
+{
+    // Put all messages from every account in one message
+    var msg = new Array();    
+    for(var mail in accounts)
+    {
+        msg = msg.concat(accounts[mail].UnreadMessages);
+    }
+    
+    // Sort all messages
+    msg.sort(function(a, b){
+        var t1 = new Date(a.modified);
+        var t2 = new Date(b.modified);
+        return t2.getTime()-t1.getTime();
+    });
+    return msg;
+}
+
+// Create Single-Message-Box
+function CreateMessageBox(message)
+{
+    // Autorname
+    var author = "";
+    if(message.Sendername != "")
+        author = $('<strong></strong>').text(message.Sendername + " : ");
+                      
+    // Message-Title
+    var title = $('<span></span>').text(message.Subject);
+
+    // Message-Body
+    var body = $('<p></p>').text(message.Content);
+    
+    // Tooltip
+    var tt_to = "";
+    var tooltip = $("<div></div>")
+    .html("<p>" + tt_to + lang.popup_from + " " + message.Sendermail + 
+        "<br/><br/></p>").append(body);                    
+           
+    // MessageBox
+    var msg = $('<div></div>').addClass('message')
+    .attr("title", tooltip.html()).tooltip({
+        left: -15
+    }).append(author).append(title).click({
+        link: message.MessageLink
+    }, LoadLink);
+         
+    // return JQuey-Object
+    return msg;
+}
+
+// Write Debug-Message
+function DebugMessage(message, type)
+{
+    if(!type) type = "info";
+    if(Debug) opera.postError("GMNEx," + type + " : " + message);
 }

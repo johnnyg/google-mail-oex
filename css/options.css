@@ -24,13 +24,36 @@ header {
   box-shadow: 0 1px #fff;
 }
 
+h3 {
+    font-weight: lighter;
+    font-variant: normal;
+    letter-spacing: 0.3em;
+}
+
+#link_section {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-top: 1px solid rgba(0,0,0,0.15); 
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#link_section a {
+    color: #525c66;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+#link_section a:hover {
+    color: #525c66;
+    text-decoration: underline;
+}
+
 footer {
   display: block;
   text-align: center;
-  margin: 20px 50px 0 50px;
-  padding-top: 30px;
-  border-top: 1px solid #fff;
-  box-shadow: 0 -1px rgba(0,0,0,0.15);
+  margin: 20px 30px 0 30px;
+  padding-top: 10px;
   color: #525c66;
 }
 

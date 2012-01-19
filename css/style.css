@@ -16,6 +16,7 @@ div::selection, p::selection, img::selection {
   padding: 5px 3px 5px 25px;
   border-radius: 5px;
   text-shadow: #DDD 1px 1px 1px;
+  cursor: pointer;
 }
 
 .entry:hover {
@@ -64,14 +65,6 @@ div::selection, p::selection, img::selection {
   color: #777;
 }
 
-/* Error-Details */
-#error_details {
-    display: none;
-    font-size: 8px;
-    padding: 0 3px 5px 5px;
-    color: #CC0F15;
-}
-
 /*** Status-Style (Success) ***/
 .status_box {
   margin-top: 5px;
@@ -79,7 +72,7 @@ div::selection, p::selection, img::selection {
 }
 
  /*** Status-Style (Error) ***/
-.error_box {
+.info_box {
   border: 1px solid #CC0F15;
   border-radius: 5px;
   background-color: #CC0F15;
@@ -126,4 +119,41 @@ div::selection, p::selection, img::selection {
 #wait {
     background: url('img/ajax-loader.gif') no-repeat center center;
     height: 30px;
+}
+
+/*** Tooltip-Layout ***/
+#tooltip {
+    position: absolute;
+    z-index: 3000;
+    border: 1px solid #111;
+    background-color: #2a2b2a;
+    color: white;
+    padding: 3px;
+    opacity: 0.90;
+    border-radius: 5px;
+    max-width: 250px;
+    font-size: 9px;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+
+#tooltip p {
+    margin: 0px;
+}
+
+/*** Account-List (Overlay) ***/
+#DarkLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0.8;    
+}
+
+#AccountList {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.accountEntry {
+    
 }

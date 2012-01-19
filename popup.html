@@ -1,44 +1,49 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <script src="js/ext/jquery.js" type="text/javascript"></script>
-    <script src="js/ext/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="lang.js" type="text/javascript"></script>
-    <script src="js/menu.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="css/tooltip.css" media="screen,print" title="screen" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen,print" title="screen" />
-  </head>
-  <body>
-    <div>
-    
-      <!-- Menu-Points -->
-      <div id="open" class="entry gmail-icon" onclick='OpenGoogleMailTab()'></div>
-      <table class='double-entry-table'><tr>  
-        <td>
-          <div id="compose" class="entry compose-icon" onclick='ComposeMail()'></div>
-        </td>      
-        <td>
-            <div id="pref" class="entry pref-icon" onclick='ShowPreferences()'></div>
-        </td>
-      </tr></table>
-      
-      <div class="separator"></div>
-      
-      <!-- Status -->
-      <div id="status"></div>
-      
-      <!-- Last Update Time -->
-      <div id="last_update"></div>
-      
-      <!-- Error-Details -->
-      <div id="error_details"></div>
-      
-      <!-- Messages -->
-      <div id="message_box"></div>  
-      
-      <!-- Wait-Animation -->
-      <div id="wait"></div>
-      
-    </div>
-  </body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/ext/jquery.js" type="text/javascript"></script>
+        <script src="js/ext/jquery.tooltip.js" type="text/javascript"></script>
+        <script src="locales/lang.default.js" type="text/javascript"></script>
+        <script src="lang.js" type="text/javascript"></script>
+        <script src="js/menu.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css" media="screen,print" title="screen" />
+    </head>
+    <body>
+        <!-- Hidden Layer for Account-List -->
+        <div id='DarkLayer' style='display:none'>
+            <div id='AccountList'></div>
+        </div>
+
+        <!-- Main-Layer -->
+        <div>
+            <!-- Menu-Points -->
+            <div id="open" class="entry gmail-icon" onclick='OpenGoogleMailTab()'></div>
+            <table class='double-entry-table'><tr>  
+                    <td>
+                        <div id="compose" class="entry compose-icon" onclick='ComposeMail()'></div>
+                    </td>      
+                    <td>
+                        <div id="pref" class="entry pref-icon" onclick='ShowPreferences()'></div>
+                    </td>
+                </tr></table>
+
+            <div class="separator"></div>
+
+            <!-- Status -->
+            <div id="status"></div>
+
+            <!-- Last Update Time -->
+            <div id="last_update"></div>
+
+            <!-- Error-Details -->
+            <div id="error_details"></div>
+
+            <!-- Messages -->
+            <div id="message_box"></div>  
+
+            <!-- Wait-Animation -->
+            <div id="wait"></div>
+
+        </div>
+    </body>
 </html>

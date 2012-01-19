@@ -2,8 +2,9 @@ var Debug       = 1;    //Debug
 var MaxAccounts = 5;    // Number of max supported accounts
 
 var Themes = {
-  "standard":"Standard",
-  "spring":"Spring"};
+    "standard":"Standard",
+    "spring":"Spring"
+};
 
 // Intialize the option page
 $(document).ready(function() 
@@ -13,18 +14,25 @@ $(document).ready(function()
     
     // Set language-strings
     $('#range_update_intervall_label').html(lang.options_update);
+    $('#update_intervall_unit').html(lang.options_update_unit);
     $('#enable_sound_label').html(lang.options_sound);
     $('#mailto_links_label').html(lang.options_mailto);
     $('#theme_label').html(lang.options_choose_theme);
-    $('#close').html(lang.options_close);    
+    $('#close').html(lang.options_close);  
+    $('#description').html(lang.options_description);  
+    $('#accounts_header').html(lang.options_accounts_header);
+    $('#appearance_header').html(lang.options_appearance_header);
+    $('#other_header').html(lang.options_other_header);
+    $('#link_feedback').html(lang.options_link_feedback);
+    $('#link_projectpage').html(lang.options_link_projectpage);
     
     // Set Themes
     $.each(Themes, function(key, value)
     {   
-         $('#theme').
-              append($("<option></option>").
-              attr("value",key).
-              text(value)); 
+        $('#theme').
+        append($("<option></option>").
+            attr("value",key).
+            text(value)); 
     });
     
     // Show Range-Secounds on change
@@ -36,169 +44,15 @@ $(document).ready(function()
     $('#box_update_intervall').keyup(function() {
         $('#range_update_intervall').val($('#box_update_intervall').val());
     });
-
-    // Create Mail-Form
-    BuildMailContainer();
    
     // set close function (refresh feed & close window)
     $("#close").click(function(){
         opera.extension.postMessage({
-            cmd:"Refresh", 
-            nocallback: true
+            cmd:"Refresh"
         });
         window.close();
     });
 });
-
-// builds new mail-container
-function BuildMailContainer()
-{
-    // first clear
-    $('#mail-container').html = "";
-    
-    // check for last token
-    var lastToken = 0;
-    for(var i=0; i < MaxAccounts; i++)
-    {
-        // check if token exists
-        if(widget.preferences['oauth_token' + i] && widget.preferences['oauth_token' + i] != "")
-            lastToken = i;
-    }
-  
-    // build new
-    if(Debug) opera.postError("INFO: Build " + MaxAccounts + " Code-Fields... (LastToken: " + lastToken + ")");
-    for(var i=0; i < MaxAccounts; i++)
-    {
-        var mail = "";   
-    
-        // check if token exists
-        if(!widget.preferences['oauth_token' + i] || widget.preferences['oauth_token' + i] == "")
-        {
-            // show this on default?
-            var style="";
-            if(i > 0 && i > lastToken) style=' style="display: none;"'        
-            // Create new form
-            mail = '<div id="mail' + i + '" class="mail"' + style + '>' + CreateForm('new', i) + '</div>';
-        }
-        else
-        {
-            // Create Info-Form with Delete-Button
-            mail = '<div id="mail' + i + '" class="mail">' + CreateForm('info', i) + '</div>';
-        }
-        
-        // append to container now
-        $('#mail-container').append(mail);
-    }
-            
-    // link to show more codes
-    if(lastToken < (MaxAccounts-1))
-    {
-        $('#mail-container').append($('<div></div>')
-            .addClass("showMore")
-            .html(lang.options_more_vcode)
-            .click(function(){
-                $(this).remove();
-                $('.mail').show();
-            }));
-    }
-}
-
-// Creates a mail-form
-function CreateForm(type, num)
-{
-    // new blank-form
-    if(type == 'new')
-    {
-        return '<label for="verify' + num + '">' + lang.options_vcode + ' ' + (num + 1) + ' </label>' +
-        '<input id="verify' + num + '" type="text" onkeyup="CheckForSave(' + num + ');" oninput="CheckForSave(' + num + ');" title="' + lang.options_vcode_tooltip + '"></input> ' +
-        '<button id="vbutton' + num + '" onclick="GetVerifyCode(' + num + ');">' + lang.options_getverifiy + ' </button>' +
-        '<div id="error' + num + '" class="error"></div>';
-    }
-    // info-form
-    else
-    {
-        // check 'all unread'
-        var check = "";
-        if(widget.preferences['unread_feed' + num] && widget.preferences["unread_feed" + num] === "on")
-            check = ' checked="checked"';
-        
-        return '<div class="access_granted"><strong>' +  
-        widget.preferences['oauth_mail' + num] + '</strong> ' + lang.options_check + 
-        '<div class="right">' + 
-        '<input name="unread_feed' + num + '" type="checkbox" title="' + lang.options_unread_tooltip + '"' + check + '></input>' +
-        '<label for="unread_feed' + num + '" title="' + lang.options_unread_tooltip + '">' + lang.options_unread + '</label>' +
-        '<button id="vbutton' + num + '" onclick="RemoveToken(' + num + ');" title="' + lang.options_delete_tooltip + '">' + 
-        lang.options_delete + '</button>' +
-        '</div>';
-    } 
-}
-
-// Get New VerifyCode
-function GetVerifyCode(num)
-{
-    // clear error
-    $('#error' + num).hide().html("");
-    
-    // send request to background-process
-    opera.extension.postMessage({
-        cmd: "GetVerifyCode"
-    });
-}
-
-function CheckForSave(num)
-{ 
-    // change button action if neccessary
-    if($('#verify' + num).val().length > 0 &&  $('#vbutton'+ num).html() != lang.options_saveverifiy)
-    {
-        $('#vbutton'+ num).html("<strong>" + lang.options_saveverifiy + "</strong>");
-        $('#vbutton'+ num).removeAttr("onclick");
-        $('#vbutton'+ num).attr("onclick","SaveVerifyCode(" + num + ");");   
-    }
-    else if($('#verify' + num).val().length == 0 && $('#vbutton'+ num).html() != lang.options_getverifiy)
-    {
-        opera.postError("REQUEST");
-        $('#vbutton'+ num).html(lang.options_getverifiy);
-        $('#vbutton'+ num).removeAttr("onclick");
-        $('#vbutton'+ num).attr("onclick","GetVerifyCode(" + num + ");");
-    }
-}
-
-// Save VerfiyCode
-function SaveVerifyCode(num)
-{
-    // clear error
-    $('#error' + num).hide().html("");
-    
-    // send request to background-process
-    opera.extension.postMessage({
-        cmd: "SaveVerifyCode", 
-        num: num, 
-        code: $('#verify' + num).val()
-    });
-    
-    // put form into wait-state
-    $('#vbutton' + num).attr("disabled", "disabled");
-    $('#verify' + num).attr("disabled", "disabled");
-    $('#vbutton' + num).html(lang.options_wait)
-}
-
-// Removes a token
-function RemoveToken(num)
-{
-    // delete token
-    widget.preferences['oauth_token' + num] = "";
-    widget.preferences['oauth_secret' + num] = "";
-    widget.preferences['oauth_mail' + num] = "";
-    widget.preferences['unread_feed' + num] = "";
-        
-    // update feed(s)
-    opera.extension.postMessage({
-        cmd:"Refresh"
-    });
-        
-    // reset form to default   
-    $('#mail' + num).html(CreateForm('new', num));   
-}
 
 // Handle messages from background-process
 function HandleMessages(event)
@@ -206,21 +60,7 @@ function HandleMessages(event)
     if(Debug) opera.postError("INFO: Option-Page get command '" + event.data.cmd + "'");
     switch(event.data.cmd)
     {
-        // Verfify-Code was successfully checked
-        case "successCheck" :
-            $('#mail' + event.data.num).html(CreateForm('info', event.data.num));
-            break;
-    
-        // Error while checking Verify-Code
-        case "errorVerify":
-        case "errorCheck":
-            $('#vbutton' + event.data.num).removeAttr("disabled");
-            $('#verify' + event.data.num).removeAttr("disabled");
-            CheckForSave(event.data.num);
-            $('#error' + event.data.num).show().html(lang.options_failverify);
-            
-            $('#verify' + event.data.num).select();
-            break;   
+         
     }
 }
 
