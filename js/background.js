@@ -110,15 +110,9 @@ function Update_callback(source)
     }
     else
     {
-        // Check if we have new mails
-        var unreadCount = 0;
-        var newMail = false;
-        for(var mail in accounts)
-        {
-            unreadCount += Number(accounts[mail].UnreadCount);
-            if(accounts[mail].HasNewMessages) newMail= true;
-
-        }
+        // Check if we have new mails (really new) and get total count of messages
+        var unreadCount = Grake.GetTotalUnreadCount();
+        var newMail = Grake.GetRealNewMessageBool();
         DebugMessage(num + " Accounts with " + unreadCount + " Messages");
     
         // Show total number of unread messages in button
@@ -140,7 +134,7 @@ function SendMessagesToSource(source)
 {
     DebugMessage("Send messages to source");
     
-    // Get Accounts-Count
+    // Set Info Text
     var eventMessage;
     var count = Grake.GetAccountsCount();
     if(count == 0)
@@ -152,10 +146,25 @@ function SendMessagesToSource(source)
     }
     else
     {
+        // Count new messages and Status-Text
+        var messageCount = Grake.GetTotalUnreadCount();
+        var countText="";
+        if(messageCount > 0)
+        {
+            if(messageCount > 1)
+                countText = lang.popup_msg_before + count + lang.popup_msg_after;
+            else
+                countText = lang.popup_onemsg;
+        }
+        else
+            countText = lang.popup_nomsg;
+    
         // Send Accounts to Popup-menu
         eventMessage = {
             cmd: "messages",
             accounts: Grake.GetAccounts(), 
+            accounts_count: count,
+            status: countText,
             timestring: Grake.GetLastUpdateTimestring(),
             showAccountSorted: false
         };
@@ -170,16 +179,7 @@ function HandleMessages(event)
 {
     DebugMessage("Background-Process get command '" + event.data.cmd + "'");
     switch(event.data.cmd)
-    {
-        // Load Google Mail in new tab
-        case 'LoadGmailTab':
-            if( opera.extension.tabs.create )
-                opera.extension.tabs.create({
-                    url:"http://mail.google.com/mail/",
-                    focused:true
-                });
-            break;
-      
+    {      
         // Load Preferences
         case 'Preferences':
             if( opera.extension.tabs.create )
@@ -238,7 +238,7 @@ function HandleMessages(event)
         case 'DebugEnabled':
             SendMsg(event.source, {
                 cmd: 'DebugEnabled', 
-                value: this.Debug
+                value: Debug
             });
             break;
             
@@ -295,5 +295,5 @@ function PlaySoundNotification()
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(Debug) opera.postError("GMNEx," + type + " : " + message);
+    if(Debug) opera.postError("GMNEx,bg," + type + " : " + message);
 }

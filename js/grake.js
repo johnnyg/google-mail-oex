@@ -70,9 +70,27 @@ function Grake()
     this.GetAccountsCount = function()
     {
         var n=0;
-        for(a in Accounts) n++;
+        for(var a in Accounts) if(Accounts[a]) n++;
         return n;
     } 
+    
+    // Returns total number of new messages
+    this.GetTotalUnreadCount = function()
+    {
+        var unreadCount = 0;
+        for(var mail in Accounts)
+            unreadCount += Number(Accounts[mail].UnreadCount);
+        return unreadCount;
+    }
+    
+    // Returns if there new Messages 
+    this.GetRealNewMessageBool = function()
+    {
+        var newMessage = false;
+        for(var mail in Accounts)
+            if(Accounts[mail].HasNewMessages) newMessage = true
+        return newMessage;
+    }
     
     // Returns LastUpdate
     this.GetLastUpdateTimestring = function()

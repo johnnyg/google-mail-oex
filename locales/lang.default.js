@@ -41,6 +41,7 @@ lang.popup_lastupdate = "Last Update : ";
 lang.popup_error_occurred="error occurred";
 lang.popup_from = "From: ";
 lang.popup_to = "To: ";
+lang.popup_choose_account = "Choose your account: ";
 
 // Error-Strings
 lang.error_confails = "<strong>An error occurred.</strong> " +

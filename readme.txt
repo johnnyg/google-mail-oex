@@ -7,10 +7,10 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 v3.0
-Complete rewrite of internal stucture (uses own API named 'Grake')
+Almost complete code-rewrite (uses own API named 'Grake')
 No Auth needed, now uses active GMail-Accounts
 New Debugging-System
-   
+
 v2.3
 Fix wrong message count (thnaks to Victor Grischenko)
 Serveral text fixes

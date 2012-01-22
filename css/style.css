@@ -1,9 +1,9 @@
 /*** Menu-Main ***/
 body {
-  font-family: Arial,Helvetica,SunSans-Regular,Sans-Serif;
-  font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 0px;
+    font-family: Arial,Helvetica,SunSans-Regular,Sans-Serif;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 div::selection, p::selection, img::selection {
@@ -13,106 +13,106 @@ div::selection, p::selection, img::selection {
 
 /*** Menu **/
 .entry {
-  padding: 5px 3px 5px 25px;
-  border-radius: 5px;
-  text-shadow: #DDD 1px 1px 1px;
-  cursor: pointer;
+    padding: 5px 3px 5px 25px;
+    border-radius: 5px;
+    text-shadow: #DDD 1px 1px 1px;
+    cursor: pointer;
 }
 
 .entry:hover {
- background-color: #CC0F15;
- color: white;
- text-shadow: #000 1px 1px 1px;
+    background-color: #CC0F15;
+    color: white;
+    text-shadow: #000 1px 1px 1px;
 }
 
 .double-entry-table {
-  width: 100%; 
-  padding: 0; 
-  margin: 0;
+    width: 100%; 
+    padding: 0; 
+    margin: 0;
 }
 
 .double-entry-table td {
-  width: 50%;
+    width: 50%;
 }
 
 .separator {
-  border-bottom: 1px solid #ADADAD;
-  clear: both;
+    border-bottom: 1px solid #ADADAD;
+    clear: both;
 }
 
 /*** Menu-Icons ***/
 .gmail-icon {
-  background: url('img/mail16.png') no-repeat 5px 5px;
+    background: url('img/mail16.png') no-repeat 5px 5px;
 }
 
 .compose-icon {
-  background: url('img/compose16.png') no-repeat 5px 5px;
+    background: url('img/compose16.png') no-repeat 5px 5px;
 }
 
 .pref-icon {
-  background: url('img/pref16.png') no-repeat 5px 5px;
+    background: url('img/pref16.png') no-repeat 5px 5px;
 }
 
 /*** Status-Box ***/
 #status {
- padding: 5px 3px 5px 5px;
+    padding: 5px 3px 5px 5px;
 }
 
 /*** LastUpdate-Box ***/
 #last_update {
-  font-size: 8px;
-  padding: 0 3px 5px 5px;
-  color: #777;
+    font-size: 8px;
+    padding: 0 3px 5px 5px;
+    color: #777;
 }
 
 /*** Status-Style (Success) ***/
 .status_box {
-  margin-top: 5px;
-  text-shadow: #DDD 1px 1px 1px;
+    margin-top: 5px;
+    text-shadow: #DDD 1px 1px 1px;
 }
 
- /*** Status-Style (Error) ***/
+/*** Status-Style (Error) ***/
 .info_box {
-  border: 1px solid #CC0F15;
-  border-radius: 5px;
-  background-color: #CC0F15;
-  color: white;
-  padding: 5px;
-  margin-top: 10px;
-  text-shadow: #666 1px 1px 1px;
+    border: 1px solid #CC0F15;
+    border-radius: 5px;
+    background-color: #CC0F15;
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    text-shadow: #666 1px 1px 1px;
 }
 
 .error_box a {
-  color: white;
+    color: white;
 }
 
 .error_box a:hover {
-  font-weight: bold;
+    font-weight: bold;
 } 
 
 /*** Message-Style ***/
 
 .message {
-  border: 1px solid #333;
-  border-radius: 5px;
-  background-color: #EEE;
-  color: black;
-  padding: 5px;
-  background: url('img/msg-back.png') repeat-x 0 0;
-  height: 30px;
-  margin-bottom: 5px;
-  overflow: hidden;
-  text-overflow: -o-ellipsis-lastline;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #EEE;
+    color: black;
+    padding: 5px;
+    background: -o-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
+    height: 30px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
 }
 
 .message:hover {
- cursor: pointer;
- background: url('img/msg-back-hover.png') repeat-x 0 0;
- text-shadow: #000 1px 1px 1px;
+    cursor: pointer;
+    background: -o-linear-gradient(top, #f40000 0%,#aa0000 100%);
+    text-shadow: #000 1px 1px 1px;
 }
 
 .message:hover, .message:hover strong {
- color: white;
+    color: white;
 }
 
 /*** Wait-Animation in Popup-Menu ***/
@@ -145,15 +145,37 @@ div::selection, p::selection, img::selection {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: white;
-    opacity: 0.8;    
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);  
 }
 
 #AccountList {
-  margin-top: 10px;
-  margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-shadow: #AAA 1px 1px 1px;
 }
 
-.accountEntry {
-    
+#AccountList .chooseAccount {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#AccountList .accountEntry{
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: black;
+    padding: 5px;
+    background: -o-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
+    height: 15px;
+    margin: 5px;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+}
+
+#AccountList .accountEntry:hover {
+    color: white;
+    cursor: pointer;
+    background: -o-linear-gradient(top, #f40000 0%,#aa0000 100%);
+    text-shadow: #000 1px 1px 1px;
 }

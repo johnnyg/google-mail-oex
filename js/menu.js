@@ -12,6 +12,7 @@ var InfoHeight=130; // Info-Height of Menu
 var SingleMessageHeight = 47; // Height of single Message-Entry
 var Debug = false;
 var Accounts;
+var AccountsCount;
 
 // Init Menu-Handler
 // (this is called when the menu is displayed)
@@ -44,30 +45,55 @@ window.addEventListener("load", function()
 }, false);
 
 // Open Google-Mail-Tab
-function OpenGoogleMailTab()
+function OpenGoogleMailTab(compose)
 {
-    // Check if we have Accounts here
-    if(Accounts && Accounts.length > 0)
+    // Check if we have more Accounts here
+    if(AccountsCount > 1)
     {
         // At first clear AccountList
         $('#AccountList').html("");
+        var choose = $('<p></p>').addClass('chooseAccount').html(lang.popup_choose_account);
+        $('#AccountList').append(choose);
         
         // Fill AccountList
-        for(a in Accounts)
+        for(var mail in Accounts)
         {
-            var entry = $("<div></div>").addClass("accountEntry").html(a.Name);
+            // set link
+            var linkURL = Accounts[mail].AccountLink;
+            if(compose) linkURL += "?#compose";
+            
+            // set entry
+            var entry = $("<div></div>").addClass("accountEntry").html("<strong>" + Accounts[mail].Name + "</strong>");
+            entry.click({
+                link: linkURL
+            }, LoadLink);
             $('#AccountList').append(entry);            
-        }    
+        }
 
         // Show Layer
-        $('#DarkLayer').show();
+        $('#DarkLayer').fadeIn();
+        $('#DarkLayer').click(function(){
+            $('#DarkLayer').fadeOut()
+        });
     }
+    // Or just one
+    else if (AccountsCount == 1)
+    {
+        for(var m in Accounts)
+        {
+             // set link
+            var linkURL2 = Accounts[m].AccountLink;
+            if(compose) linkURL2 += "?#compose";
+            LoadLink(null, linkURL2);
+            return;
+        }
+    }
+    // Otherwise show default Gmail-Tab
     else
     {
-        // Show GMail-Tab (no special account)
-        opera.extension.postMessage({
-            cmd:"LoadGmailTab"
-        });
+        var linkURL = "http://mail.google.com/mail/";
+        if(compose) linkURL  += "?#compose";
+        LoadLink(null, linkURL);
     }
   
     // Close Popup-Menu
@@ -92,11 +118,21 @@ function ShowPreferences()
 }
 
 // Loads links to message to new tab
-function LoadLink(event)
+function LoadLink(event, directlink)
 {
+    // Set link and load
+    var linkURL = "";
+    if(directlink && directlink != "") 
+        linkURL = directlink;
+    else if(event && event.data && event.data.link)
+        linkURL = event.data.link;
+    else
+        return;
+   
+    // URL is loaded by background.js
     opera.extension.postMessage({
         cmd: "LoadLink", 
-        lnk: event.data.link
+        lnk: linkURL
     });
 }
 
@@ -130,6 +166,7 @@ function HandleMessages(event)
             $('#status').addClass('info_box').removeClass('status_box');
             $('#last_update').html("");
             $('#message_box .message').remove();
+            AccountsCount = 0;
             break;
     
         // Show Success-Message
@@ -137,13 +174,14 @@ function HandleMessages(event)
             $('#wait').hide();
             
             // Show Status
-            $('#status').html(event.data.info);
+            $('#status').html(event.data.status);
             $('#status').addClass('status_box').removeClass('info_box');
             $('#last_update').html(event.data.timestring);
             $('#error_details').hide();
-            
+                        
             // Show Messages
             Accounts = event.data.accounts;
+            AccountsCount = event.data.accounts_count;
             ShowMessages(event.data.accounts, event.data.showAccountSorted)
     }
 }
@@ -227,5 +265,5 @@ function CreateMessageBox(message)
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(Debug) opera.postError("GMNEx," + type + " : " + message);
+    if(Debug) opera.postError("GMNEx,mn," + type + " : " + message);
 }
