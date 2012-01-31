@@ -26,14 +26,21 @@ lang.options_update_unit = "s";
 lang.options_unread = "Показывать все непрочитанные";
 lang.options_sound = "Воспроизводить звуковой сигнал при получении нового сообщения.";
 lang.options_mailto = "Открывать ссылки mailto: при помощи GMail.";
+lang.options_debugmode = "Enable Debug-Messages";
 lang.options_close = "Применить и закрыть";
+lang.options_refresh = "Refresh Accounts";
 lang.options_choose_theme = "Choose Theme";
 lang.options_description = "Google Mail Notifier это маленькое, простое и быстрое \
 расширение которое показывает количество непрочитанных сообщений в вашем почтовом \
 ящике Gmail при помощи значка на тулбаре и их заголовки во всплывающем окне.";
+lang.options_description_accounts = "This extension detects automatically your\n\
+    open GMail-Accounts. You must be logged in to your Google-Account to see your inbox. If you want to\n\
+    use more than one account at time, please use the <a id='ma_link'>multiple sign-in-method</a>."
+lang.options_dectected_accounts = "Detected Accounts:";
 lang.options_accounts_header = "Ваши почтовые аккаунты";
 lang.options_appearance_header = "Appearance";
 lang.options_other_header = "Дополнительные настройки";
+lang.options_link_operapage = "Opera Extension Page"
 lang.options_link_projectpage = "Project-Homepage";
 lang.options_link_feedback = "Feedback/Issue-Report";
 
@@ -52,9 +59,11 @@ lang.popup_lastupdate = "Последнее обновление : ";
 lang.popup_error_occurred="произошла ошибка";
 lang.popup_from = "От: ";
 lang.popup_to = "Кому: ";
+lang.popup_choose_account = "Choose your account: ";
 
 // Error-Strings
-lang.error_confails = "<strong>Произошла ошибка. </strong> " +
-  "Пожалуйста проверьте ваше подключение и <a href='javascript:ShowPreferences();'>настройки</a>";
 lang.error_noActiveAccount = "<strong>There is no active Google Mail Account</strong>, " +
 "<br/>please login to your Google-Account and try again.";
+
+// Localized Links
+lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=en&answer=1721977";

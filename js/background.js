@@ -153,7 +153,7 @@ function SendMessagesToSource(source)
         if(messageCount > 0)
         {
             if(messageCount > 1)
-                countText = lang.popup_msg_before + count + lang.popup_msg_after;
+                countText = lang.popup_msg_before + messageCount + lang.popup_msg_after;
             else
                 countText = lang.popup_onemsg;
         }

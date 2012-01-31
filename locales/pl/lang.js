@@ -26,12 +26,18 @@ lang.options_update_unit = "s";
 lang.options_unread = "wszystkie nowe";
 lang.options_sound = "Odtwarzaj dźwięk przy nowych wiadomościach";
 lang.options_mailto = "Otwieraj odnośniki mailowe (mailto) w Gmailu";
+lang.options_debugmode = "Enable Debug-Messages";
 lang.options_close = "Zapisz i zamknij okno";
+lang.options_refresh = "Refresh Accounts";
 lang.options_choose_theme   = "Choose Theme";
 lang.options_description = "Google Mail Notifier jest niewielkim, prostym i szybkim \
 rozszerzeniem, które wyświetla na przycisku ilość nieprzeczytanych wiadomości na koncie \
 (kontach) GMail oraz pokazuje ich tytuły w menu. Rozszerzenie daje również możliwość \
 otwierania linków mailowych (mailto:) bezpośrednio w GMailu.";
+lang.options_description_accounts = "This extension detects automatically your\n\
+    open GMail-Accounts. You must be logged in to your Google-Account to see your inbox. If you want to\n\
+    use more than one account at time, please use the <a id='ma_link'>multiple sign-in-method</a>."
+lang.options_dectected_accounts = "Detected Accounts:";
 lang.options_accounts_header = "Twoje konto (konta) GMail";
 lang.options_appearance_header = "Appearance";
 lang.options_other_header = "Other Options";
@@ -53,9 +59,11 @@ lang.popup_lastupdate = "Ostatnia aktualizacja : ";
 lang.popup_error_occurred="wystąpił błąd";
 lang.popup_from = "Od: ";
 lang.popup_to = "Do: ";
+lang.popup_choose_account = "Choose your account: ";
 
 // Error-Strings
-lang.error_confails = "<strong>Wystąpił błąd. </strong> " +
-  "Sprawdź swoje połączenie oraz <a href='javascript:ShowPreferences();'>ustawienia</a>";
 lang.error_noActiveAccount = "<strong>There is no active Google Mail Account</strong>, " +
 "<br/>please login to your Google-Account and try again.";
+
+// Localized Links
+lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=en&answer=1721977";

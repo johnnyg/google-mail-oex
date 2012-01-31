@@ -26,14 +26,21 @@ lang.options_update_unit = "秒";
 lang.options_unread = "全部未讀";
 lang.options_sound = "當有新的郵件時播放提示音效";
 lang.options_mailto = "使用 Gmail 開啟郵件連結（mailto）";
+lang.options_debugmode = "Enable Debug-Messages";
 lang.options_close = "套用並關閉視窗";
+lang.options_refresh = "Refresh Accounts";
 lang.options_choose_theme = "Choose Theme";
 lang.options_description = "Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過 \
 按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外， 這個延伸套件還可以讓你選擇自動使用 \\n\
 Gmail 來開啟郵件連結（mailto:）。";
+lang.options_description_accounts = "This extension detects automatically your\n\
+    open GMail-Accounts. You must be logged in to your Google-Account to see your inbox. If you want to\n\
+    use more than one account at time, please use the <a id='ma_link'>multiple sign-in-method</a>."
+lang.options_dectected_accounts = "Detected Accounts:";
 lang.options_accounts_header = "你的 Gmail 帳號";
 lang.options_appearance_header = "Appearance";
 lang.options_other_header = "其他選項";
+lang.options_link_operapage = "Opera Extension Page"
 lang.options_link_projectpage = "Project-Homepage";
 lang.options_link_feedback = "Feedback/Issue-Report";
 
@@ -50,12 +57,13 @@ lang.popup_msg_before = "有<strong>";
 lang.popup_msg_after = "封未讀取的郵件</strong>";
 lang.popup_lastupdate = "上次檢查於：";
 lang.popup_error_occurred="發生錯誤";
-lang.popup_errors_occurred="發生多個錯誤";
 lang.popup_from = "寄件者：";
 lang.popup_to = "收件者：";
+lang.popup_choose_account = "Choose your account: ";
 
 // Error-Strings
-lang.error_confails = "<strong>發生了一個錯誤。</strong> " +
-  "請檢查你的連線和<a href='javascript:ShowPreferences();'>設定</a>";
 lang.error_noActiveAccount = "<strong>There is no active Google Mail Account</strong>, " +
 "<br/>please login to your Google-Account and try again.";
+
+// Localized Links
+lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=en&answer=1721977";

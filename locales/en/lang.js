@@ -11,7 +11,7 @@ Google Mail Notifier is a small, simple and fast extension to show the number of
 Features:
 * Automatically detects open GMail-Accounts (no password, username required)
 * Support Multi-Account
-* Supports Google Apps Accounts
+* Supports all Google Accounts
 * Show all unread Messages or just from Inbox
 * Option to open Mail-Links directly with GMail
 * Optional Sound-Notification
