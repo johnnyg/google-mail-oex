@@ -9,6 +9,7 @@
 
 var Accounts;
 var AccountsCount = 0;
+var UniqueAccountString = "";
 
 // Themes-Array (internal name : display name)
 var Themes = {
@@ -106,7 +107,16 @@ function HandleMessages(event)
         case "messages":
             Accounts = event.data.accounts;
             AccountsCount = event.data.accounts_count;
-            ShowAccounts();
+            
+            // Create unique string so we see if there are changes
+            var newUniqueAccountString = "";            
+            for(var mail in Accounts) newUniqueAccountString  += Accounts[mail].UniqueId;      
+            
+            //Refresh Account_list if there are changes
+            if(newUniqueAccountString != UniqueAccountString) 
+                ShowAccounts();
+            UniqueAccountString = newUniqueAccountString;
+
             break;            
     }
 }
