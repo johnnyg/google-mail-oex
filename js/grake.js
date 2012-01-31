@@ -83,10 +83,9 @@ function Grake()
     // Returns if there new Messages 
     this.GetRealNewMessageBool = function()
     {
-        var newMessage = false;
         for(var mail in Accounts)
-            if(Accounts[mail].HasNewMessages) newMessage = true
-        return newMessage;
+            if(Accounts[mail].HasNewMessages) return true
+        return false;
     }
     
     // Returns LastUpdate
