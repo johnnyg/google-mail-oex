@@ -35,9 +35,10 @@
   </license>
   
   <!-- Default Values -->
-  <preference name="update_intervall" value="60" />
+  <preference name="update_intervall" value="30" />
   <preference name="enable_sound" value="true" />
-  <preference name="debug_mode" value="true" />
+  <preference name="mailto_links" value="false" />
+  <preference name="debug_mode" value="false" />  
 
   <!-- Access Policy -->
   <feature name="opera:share-cookies" required="true"/>

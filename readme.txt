@@ -10,9 +10,10 @@ v3.0
 Almost complete code-rewrite (uses own API named 'Grake')
 No Auth needed, now uses active GMail-Accounts
 New Debugging-System
+Some Design-Changes
 
 v2.3
-Fix wrong message count (thnaks to Victor Grischenko)
+Fix wrong message count (thanks to Victor Grischenko)
 Serveral text fixes
 Some fixes for Opera 12.0
 

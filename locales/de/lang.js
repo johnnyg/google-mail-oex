@@ -57,5 +57,5 @@ lang.popup_to           = "An: ";
 // Error-Strings
 lang.error_confails = "<strong>Ein Fehler ist aufgetreten. </strong> " +
 "Bitte überprüfen Sie Ihre Verbindung und die <a href='javascript:ShowPreferences();'>Einstellungen</a>";
-lang.error_noActiveAccount = "<strong>Es ist keine Mailadresse eingerichtet</strong>, " +
-"<br/>bitte prüfen Sie die <a href='javascript:ShowPreferences();'>Einstellungen</a>";
+lang.error_noActiveAccount = "<strong>Es wurde kein aktiver Google-Account gefunden</strong>, " +
+"<br/>bitte <a href='http://mail.google.com'>loggen sie sich in ihren Account ein</a>.";

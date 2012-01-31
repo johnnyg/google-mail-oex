@@ -15,7 +15,6 @@ Features:
 * Show all unread Messages or just from Inbox
 * Option to open Mail-Links directly with GMail
 * Optional Sound-Notification
-* Supports English, German, Russian, Polish, Chinese
  
  */
 

@@ -27,7 +27,7 @@ var ToolbarUIItemProperties =
         display: "block",
         textContent: "x",
         color: "white",
-        backgroundColor: "rgba(211, 0, 4, 1)"
+        backgroundColor: "#dd0000"
     },
     popup:
     {
@@ -41,8 +41,6 @@ var ToolbarUIItemProperties =
 // Create/Add ToolbarIcon on Extension-Start
 window.addEventListener("load", function()
 {
-    // Set Debug-Mode
-    this.Debug = widget.preferences['debug_mode'];
     DebugMessage("Background-Process is initializing, Debug Mode is ready");
 
     // Listen for script messages
@@ -57,7 +55,6 @@ window.addEventListener("load", function()
     
     // Init Grake
     Grake = new Grake();
-    Grake.Debug = this.Debug;
   
     // Update Mails now
     Update();
@@ -116,7 +113,11 @@ function Update_callback(source)
         DebugMessage(num + " Accounts with " + unreadCount + " Messages");
     
         // Show total number of unread messages in button
-        MyButton.badge.textContent = unreadCount;
+        // (if zero hide)
+        if(unreadCount > 0)
+            MyButton.badge.textContent = unreadCount;
+        else
+            MyButton.badge.textContent = "";
     
         // Play sound for new Mail
         if(newMail) PlaySoundNotification();    
@@ -197,24 +198,27 @@ function HandleMessages(event)
                     focused:true
                 });
             break;
-           
-        // Refresh now
-        case 'Refresh':
+            
+        // Refresh now (without callback)
+        case 'Refresh_NoCallback':
             // reset timer
             window.clearTimeout(UpdateTimer);
             
-            // A message is send to source, if the source is the menu
-            if(event.origin.indexOf("popup.html") > -1)
-            {
-                // At first send the current state to the source
-                // (quicker)
-                SendMessagesToSource(event.source);
-                
-                // then update the Accounts
-                Update(event.source);
-            }
-            else
-                Update();
+            // then update the Accounts
+            Update();
+           
+        // Refresh now (with callback)
+        case 'Refresh':
+            // reset timer
+            window.clearTimeout(UpdateTimer);
+
+            // At first send the current state to the source
+            // (quicker)
+            SendMessagesToSource(event.source);
+
+            // then update the Accounts
+            Update(event.source);
+
             break;
       
         // Compose Mail
@@ -231,14 +235,6 @@ function HandleMessages(event)
             SendMsg(event.source, {
                 cmd: 'MailtoEnabled', 
                 value: widget.preferences['mailto_links']
-            });
-            break;
-            
-        // Return Debug-Option
-        case 'DebugEnabled':
-            SendMsg(event.source, {
-                cmd: 'DebugEnabled', 
-                value: Debug
             });
             break;
             
@@ -295,5 +291,6 @@ function PlaySoundNotification()
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(Debug) opera.postError("GMNEx,bg," + type + " : " + message);
+    if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on") 
+        opera.postError("GMNEx,bg," + type + " : " + message);
 }

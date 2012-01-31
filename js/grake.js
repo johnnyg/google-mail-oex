@@ -13,7 +13,7 @@
 
 // ~~~ STRUCTURES ~~~
 function Gmail_Account() {
-    this.Id = "";
+    this.UniqueID = "";
     this.Name = "";
     this.UnreadCount = 0;
     this.HasNewMessages = false;
@@ -37,10 +37,7 @@ function Gmail_Message() {
  */
 function Grake()
 {
-    // Public Properties  
-    this.Debug = false; // DebugMode: If enabled, Messages will send to error-console
-
-// Internal Vars
+    // Internal Vars
     var GmailURL = "https://mail.google.com/mail/";
     var GmailAccountsURL = "https://accounts.google.com/AddSession";
     var RequestTimeout = 10000; // Timeout (in ms) for Ajax-Requests
@@ -115,22 +112,17 @@ function Grake()
             {
                 // Multiple Accounts
                 var accounts = data.match(EmailPattern);
-                DebugMessage("Found active Accounts ");
-                
-                // Check feeds
-                var num = 1;
-                if(accounts != null && accounts.length) 
-                   num = accounts.length
-                GetFeeds(num, callback);
+                DebugMessage("Found active Accounts");
+                GetFeeds(accounts, callback);
             },               
             error: AjaxErrorMessage 
         });   
     }
     
     // Feeds abrufen
-    function GetFeeds(number, callback)
+    function GetFeeds(accounts, callback)
     {
-        DebugMessage("Get " + number + " Message-Feeds now");
+        DebugMessage("Get " + accounts.length + " Message-Feeds now");
         
         // Only make one reuquest at time
         if(RequestProgress) return;
@@ -138,16 +130,25 @@ function Grake()
         
         // Mark all Accounts as outdated, so we can detect dead accounts 
         // and errors
-        for(var mail in Accounts) Accounts[mail].IsOutdated = true;
+        for(var mail in Accounts) 
+            Accounts[mail].IsOutdated = true;
         
         // Resets global var for watching the requests
         AccountsCompleted = 0;
-        
+                
         // Check feeds
-        for (var i=0; i < number; i++)
+        for (var i=0; i < accounts.length; i++)
         {
+            // Get all unread or just inbox
+            var unique = accounts[i].replace(/[^a-zA-Z 0-9]+/g,'')
+            var feed = "/feed/atom/";
+            if(widget.preferences[unique + '_allunread'] && widget.preferences[unique+ '_allunread'] === "on")
+                feed = "/feed/atom/unread";
+            
+            // Get Feed now
+            DebugMessage("Get Feed for " + accounts[i] + " : " + GmailURL + "u/" + i + feed );
             $.ajax({
-                url: GmailURL + "u/" + i + "/feed/atom/", 
+                url: GmailURL + "u/" + i + feed, 
                 timeout: RequestTimeout,
                 success: function(xmlFeed) 
                 {
@@ -177,7 +178,8 @@ function Grake()
                     {
                         // Create new Account-Object
                         Accounts[mail] = new Gmail_Account();
-                        Accounts[mail].Name = mail;
+                        Accounts[mail].Name = "" + mail;
+                        Accounts[mail].UniqueId = Accounts[mail].Name.replace(/[^a-zA-Z 0-9]+/g,'');
                         
                         // If there a more than zero messages for a new account
                         // they must be new
@@ -209,12 +211,12 @@ function Grake()
                                         break;
                                     }
                                     
-                               // This Message is unique, we can break here
-                               if(isUnique)
-                               {
-                                   Accounts[mail].HasNewMessages = true;
-                                   break;
-                               }
+                                // This Message is unique, we can break here
+                                if(isUnique)
+                                {
+                                    Accounts[mail].HasNewMessages = true;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -249,7 +251,7 @@ function Grake()
                     // Note: This function is called every time (error or success),
                     // so there wont be a deadlock
                     AccountsCompleted++;
-                    if(AccountsCompleted == number)
+                    if(AccountsCompleted == accounts.length)
                     {
                         // Delete Outdated Accounts here, because their requests
                         // failed
@@ -287,6 +289,7 @@ function Grake()
     function DebugMessage(message, type)
     {
         if(!type) type = "info";
-        if(Debug) opera.postError("Grake," + type + " : " + message);
+        if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on") 
+            opera.postError("Grake," + type + " : " + message);
     }
 }

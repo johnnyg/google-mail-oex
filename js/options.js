@@ -1,9 +1,18 @@
-var Debug       = 1;    //Debug
-var MaxAccounts = 5;    // Number of max supported accounts
+///
+// Codebit "Opera Google Mail Extension"
+// Option-Page-Handler
+// 
+// @author  Tom Schreiber (tom.schreiber@codebit.de)
+// @version SVN: $Id$
+//
+///
 
+var Accounts;
+var AccountsCount = 0;
+
+// Themes-Array (internal name : display name)
 var Themes = {
-    "standard":"Standard",
-    "spring":"Spring"
+    "standard":"Standard"
 };
 
 // Intialize the option page
@@ -17,14 +26,24 @@ $(document).ready(function()
     $('#update_intervall_unit').html(lang.options_update_unit);
     $('#enable_sound_label').html(lang.options_sound);
     $('#mailto_links_label').html(lang.options_mailto);
+    $('#debug_mode_label').html(lang.options_debugmode);
     $('#theme_label').html(lang.options_choose_theme);
     $('#close').html(lang.options_close);  
+    $('#refresh').html(lang.options_refresh);  
     $('#description').html(lang.options_description);  
+    $('#account_descripton').html("<p>" + lang.options_description_accounts + "</p>"
+            + "<p><strong>" + lang.options_dectected_accounts + "</strong></p>");
     $('#accounts_header').html(lang.options_accounts_header);
     $('#appearance_header').html(lang.options_appearance_header);
-    $('#other_header').html(lang.options_other_header);
+    $('#other_header').html(lang.options_other_header);    
+    $('#link_operapage').html(lang.options_link_operapage);
     $('#link_feedback').html(lang.options_link_feedback);
     $('#link_projectpage').html(lang.options_link_projectpage);
+    
+    // Set localized links
+    $('#ma_link').attr("href", lang.link_multisession_help);
+    $('#ma_link').addClass("strong_link");
+    
     
     // Set Themes
     $.each(Themes, function(key, value)
@@ -44,24 +63,110 @@ $(document).ready(function()
     $('#box_update_intervall').keyup(function() {
         $('#range_update_intervall').val($('#box_update_intervall').val());
     });
+    
+    // Listen for script messages from background-process
+    opera.extension.onmessage = HandleMessages;    
+      
+    // Refresh feed now
+    opera.extension.postMessage({
+        cmd:"Refresh"
+    });
    
-    // set close function (refresh feed & close window)
+    // Set close function (refresh feed & close window)
     $("#close").click(function(){
         opera.extension.postMessage({
-            cmd:"Refresh"
+            cmd:"Refresh_NoCallback"            
         });
         window.close();
     });
+    
+    // Fresh Accounts
+    $('#refresh').click(function() {
+        $('#account_list').html("");
+        $('#wait').show();
+        opera.extension.postMessage({
+            cmd:"Refresh"
+        });
+    })
 });
 
 // Handle messages from background-process
 function HandleMessages(event)
 {
-    if(Debug) opera.postError("INFO: Option-Page get command '" + event.data.cmd + "'");
+    DebugMessage("Option-Page get command '" + event.data.cmd + "'");
     switch(event.data.cmd)
-    {
-         
+    {            
+        // Get Info-Message, thats means there are no active connection :(
+        case "info" :
+            AccountsCount = 0;
+            ShowAccounts();
+            break;
+    
+        // Messages
+        case "messages":
+            Accounts = event.data.accounts;
+            AccountsCount = event.data.accounts_count;
+            ShowAccounts();
+            break;            
     }
+}
+
+// Show Accounts
+function ShowAccounts()
+{
+    // Hide Wait-Animation and clear Account-List
+    $('#wait').hide();
+    $('#account_list').html("");
+    
+    // Show Message, if there are no accounts
+    if(AccountsCount == 0)
+    {
+      var msg = $('<p></p>').html(lang.error_noActiveAccount);
+      $('account_list').append(msg);
+    }
+    // Fill AccountList
+    else
+    {         
+        for(var mail in Accounts)
+        {
+            // Is the option "All Unread" enabled for this account?
+            var checked = "";
+            var uid = Accounts[mail].UniqueId;
+            if(widget.preferences[uid + '_allunread'] && widget.preferences[uid + '_allunread'] === "on")
+                checked = " checked='checked'";
+            else
+               widget.preferences[uid + '_allunread'] = "off";
+            
+            // Create Checkbox
+            var checkbox =  '<input name="' + uid + '_allunread" type="checkbox" title="' + 
+                lang.options_unread_tooltip + '"' + checked + '></input>' + '<label for="' + uid + '_allunread" \n\
+                title="' + lang.options_unread_tooltip + '">' + lang.options_unread + 
+                '</label>';
+            
+            // Set Entry
+            var entry = $("<div></div>").addClass("account_entry")
+             .append($("<div></div>").addClass('text').html("" + Accounts[mail].Name))
+             .append($("<div></div>").addClass('options').html(checkbox));
+            $('#account_list').append(entry); 
+            
+            // Set Function for Check/Uncheck
+            $( '.account_entry :checkbox' ).live( 'change', 
+                function() {
+                    if($(this).is( ':checked' ))
+                         widget.preferences[$(this).attr('name')] = "on";
+                     else
+                         widget.preferences[$(this).attr('name')] = "off";
+                });
+        }
+    }
+}
+
+// Write Debug-Message
+function DebugMessage(message, type)
+{
+    if(!type) type = "info";
+    if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on") 
+        opera.postError("GMNEx,opt," + type + " : " + message);
 }
 
 // general options behavior (from dev.opera.com)

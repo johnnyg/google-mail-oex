@@ -10,7 +10,6 @@
 var StandardHeight=120; // Standard-Height of Menu
 var InfoHeight=130; // Info-Height of Menu
 var SingleMessageHeight = 47; // Height of single Message-Entry
-var Debug = false;
 var Accounts;
 var AccountsCount;
 
@@ -25,12 +24,7 @@ window.addEventListener("load", function()
     opera.extension.postMessage({
         cmd:"Refresh"
     });
-    
-    // Get Debug-Option
-    opera.extension.postMessage({
-        cmd:"DebugEnabled"
-    });
-        
+
     // Set Theme
     if(widget.preferences['theme'] != 'standard')
     {
@@ -153,12 +147,7 @@ function HandleMessages(event)
     // Whats the status
     switch(event.data.cmd)
     {
-        // Debug-Option
-        case "DebugEnabled":
-            Debug = event.data.value;
-            break;
-        
-        // Show Error-Message
+        // Info-Message
         case "info" :
             $('#wait').hide();
             SetHeight(InfoHeight)
@@ -169,7 +158,7 @@ function HandleMessages(event)
             AccountsCount = 0;
             break;
     
-        // Show Success-Message
+        // Messages
         case "messages":
             $('#wait').hide();
             
@@ -182,7 +171,7 @@ function HandleMessages(event)
             // Show Messages
             Accounts = event.data.accounts;
             AccountsCount = event.data.accounts_count;
-            ShowMessages(event.data.accounts, event.data.showAccountSorted)
+            ShowMessages(event.data.accounts, event.data.showAccountSorted);
     }
 }
 
@@ -265,5 +254,6 @@ function CreateMessageBox(message)
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(Debug) opera.postError("GMNEx,mn," + type + " : " + message);
+    if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on")
+        opera.postError("GMNEx,mn," + type + " : " + message);
 }
