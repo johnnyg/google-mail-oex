@@ -8,9 +8,11 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 HISTORY
 v3.0
 Almost complete code-rewrite (uses own API named 'Grake')
-No Auth needed, now uses active GMail-Accounts
+No Authentication in Extension needed, now uses active GMail-Accounts
 New Debugging-System
 Some Design-Changes
+Add Turkish Translation(thanks to Yiğit Ateş)
+Add Hungarian Translation (thanks to Róbert Tóth)
 
 v2.3
 Fix wrong message count (thanks to Victor Grischenko)

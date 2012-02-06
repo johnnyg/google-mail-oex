@@ -44,7 +44,6 @@ function Grake()
     var EmailPattern = /([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4})/ig;
     var Accounts = new Array();
     var AccountsCompleted = 0;
-    var RequestProgress = false;
     var LastUpdate = "";   
     
     // Set global Jquery-AJAX-Error-Function
@@ -109,10 +108,22 @@ function Grake()
             timeout: this.RequestTimeout,
             success: function (data)
             {
-                // Multiple Accounts
+                // Catch Accounts
                 var accounts = data.match(EmailPattern);
-                DebugMessage("Found active Accounts");
-                GetFeeds(accounts, callback);
+                if(accounts)
+                {
+                    DebugMessage("Found active Accounts");
+                    GetFeeds(accounts, callback);
+                }
+                // Delete Account-Object, if we found none Account and callback
+                else
+                {
+                    Accounts = new Array();
+                    // Call now
+                    DebugMessage("No active Account found");
+                    if(callback != null) callback();
+                }
+    
             },               
             error: AjaxErrorMessage 
         });   
@@ -122,10 +133,6 @@ function Grake()
     function GetFeeds(accounts, callback)
     {
         DebugMessage("Get " + accounts.length + " Message-Feeds now");
-        
-        // Only make one reuquest at time
-        if(RequestProgress) return;
-        RequestProgress = true;
         
         // Mark all Accounts as outdated, so we can detect dead accounts 
         // and errors
@@ -256,9 +263,6 @@ function Grake()
                         // failed
                         for(var mail in Accounts)
                             if(Accounts[mail].IsOutdated) Accounts[mail]= null;
-                        
-                        // Mark Request as completed
-                        RequestProgress = false;
                         
                         // Sets LastUpdate-Timestring
                         var now = new Date();
