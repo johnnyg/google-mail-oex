@@ -11,6 +11,7 @@
   <description xml:lang="ru">Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки. Расширение может работать с несколькими аккаунтами и позволяет открывать ссылки mailto: с помощью Gmail.</description>
   <description xml:lang="zh">一個簡單又快速的延伸套件提醒你 Gmail 帳號中有多少尚未讀取的郵件和顯示郵件的標題。你可以設定多個要檢查的帳號還有設定直接用 Gmail 來開啟郵件連結。</description>
   <description xml:lang="pl">Proste i szybkie rozszerzenie informujące o nowych nieprzeczytanych wiadomościach na koncie GMail oraz pokazujące ich tytuły. Możliwe jest sprawdzanie wielu kont i otwieranie odnośników mailowych bezpośrednio w GMailu.</description>
+  <description xml:lang="hu">Egyszerű és gyors kiegészítő, ami értesít, ha új üzeneted érkezik a GMail fiókodba. Több fiókot is képes kezelni, és beállítható az is, hogy az email linkek (mailto:) közvetlenül a GMailben nyíljanak meg.</description>
 
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
