@@ -1,20 +1,20 @@
 /* Google Mail Notifier - Turkish Translation
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * by Yiğit Ateş (yigitates52@gmail.com)
+ * by Yiğit Ateş (celeborn1@myopera.com)
 
 SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
-A simple and fast extensions to inform you about unread messages in your GMail-Account and show the titles of the new messages. You can check multiple accounts and have the option to open mail-links directly with GMail.
+Gmail hesabınızdaki okunmamış iletiler hakkında sizi bilgilendiren ve yeni iletilerin başlıklarını ufak bir pencerede gösteren basit ve hızlı bir eklenti. Birden fazla hesabınızı kontrol edebilir ve e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-Google Mail Notifier is a small, simple and fast extension to show the number of unread mails in your Gmail-Account(s) in front of a button and the titles of the messages in the button-menu. Furthermore this extension gives you the option to open mail-links (mailto:) directly with GMail.
+Google Mail Notifier, Gmail hesabınızdaki okunmamış e-posta sayısını ve ufak bir pencerede e-posta başlıklarını gösteren basit ve hızlı bir eklentidir. Ayrıca, bu eklenti sayesinde e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.
 
-Features:
-* Automatically detects open GMail-Accounts (no password, username required)
-* Support Multi-Account
-* Supports all Google Accounts
-* Show all unread Messages or just from Inbox
-* Option to open Mail-Links directly with GMail
-* Optional Sound-Notification
+Özellikler:
+* Tarayıcıda daha önce girilen Gmail hesaplarını otomatik olarak algılar (kullanıcı adı ve parola gerekmez)
+* Çoklu hesap desteği
+* Tüm Google hesap türlerini destekler
+* Tüm okunmamış iletileri veya yalnızca gelen kutusundaki iletileri gösterebilir
+* E-posta bağlantılarını doğrudan GMail arayüzüyle açabilme
+* Seçime bağlı sesli bildirim
  
  */
 
