@@ -137,7 +137,7 @@ function Grake()
         // Mark all Accounts as outdated, so we can detect dead accounts 
         // and errors
         for(var mail in Accounts) 
-            Accounts[mail].IsOutdated = true;
+            if(Accounts[mail]) Accounts[mail].IsOutdated = true;
         
         // Resets global var for watching the requests
         AccountsCompleted = 0;
