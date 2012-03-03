@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name	Google Mail Notfier - Mailto-Links
 // @description	Open mailto-links with gmail
-// @include	http*
+// @include	http://*
+// // @include	https://*
 // @copyright	codebit
 // @version	1.0.0
 // ==/UserScript==
@@ -20,6 +21,8 @@
         cmd: "MailtoEnabled"
     });
     
+    opera.postError("Skript is running");
+        
     // Get current Accounts
     opera.extension.postMessage({
         cmd:"Refresh_NoCallback"
@@ -92,14 +95,14 @@
             box.style.position = "absolute"; 
             box.style.display = "none";
             box.style.border = "1px solid #DDD";
-            box.style.borderRadius = "5px";
+            box.style.borderRadius = "2px";
             box.style.padding = "5px";
-            box.style.background = "rgba(255,255,255,0.7)";            
+            box.style.background = "rgba(255,255,255,0.8)";            
             box.style.fontFamily = element.currentStyle['fontFamily'];
             box.style.fontSize = "0.8em";
             
             var header = document.createElement('p');
-            header.innerHTML = "Google Mail Account";
+            header.innerHTML = "Send From:";
             header.fontSize = "0.8em";
             header.style.fontWeight = "bold";
             box.appendChild(header);            

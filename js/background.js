@@ -72,7 +72,7 @@ function storageHandler(e)
     {
         // Reset the Update-Timer and set it with the new time
         window.clearTimeout(UpdateTimer);
-        UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
+        UpdateTimer = window.setTimeout(Update, widget.preferences['updateIntervall'] * 1000);
     }
 }
 
@@ -127,7 +127,7 @@ function Update_callback(source)
     if(source) SendMessagesToSource(source)
 
     // Set new timeout
-    UpdateTimer = window.setTimeout(Update, widget.preferences['update_intervall'] * 1000);
+    UpdateTimer = window.setTimeout(Update, widget.preferences['updateIntervall'] * 1000);
 }
 
 // Sends current messages to a event source (the menu)
@@ -234,7 +234,7 @@ function HandleMessages(event)
         case 'MailtoEnabled':
             SendMsg(event.source, {
                 cmd: 'MailtoEnabled', 
-                value: widget.preferences['mailto_links']
+                value: widget.preferences['mailtoLinks']
             });
             break;
             
@@ -274,7 +274,7 @@ function SendMsg(source, message)
 // Play Sound-Notification (if enabled)
 function PlaySoundNotification()
 {
-    if(widget.preferences['enable_sound'] == 'on')
+    if(widget.preferences['enableSound'] == 'on')
     {
         // Init Audio-Object if necessary
         if(!AudioObject) AudioObject = new Audio;
@@ -291,6 +291,6 @@ function PlaySoundNotification()
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on") 
+    if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on") 
         opera.postError("GMNEx,bg," + type + " : " + message);
 }

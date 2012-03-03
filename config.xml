@@ -12,7 +12,8 @@
   <description xml:lang="zh">一個簡單又快速的延伸套件提醒你 Gmail 帳號中有多少尚未讀取的郵件和顯示郵件的標題。你可以設定多個要檢查的帳號還有設定直接用 Gmail 來開啟郵件連結。</description>
   <description xml:lang="pl">Proste i szybkie rozszerzenie informujące o nowych nieprzeczytanych wiadomościach na koncie GMail oraz pokazujące ich tytuły. Możliwe jest sprawdzanie wielu kont i otwieranie odnośników mailowych bezpośrednio w GMailu.</description>
   <description xml:lang="hu">Egyszerű és gyors kiegészítő, ami értesít, ha új üzeneted érkezik a GMail fiókodba. Több fiókot is képes kezelni, és beállítható az is, hogy az email linkek (mailto:) közvetlenül a GMailben nyíljanak meg.</description>
-
+  <description xml:lang="tr">Gmail hesabınızdaki okunmamış iletiler hakkında sizi bilgilendiren ve yeni iletilerin başlıklarını ufak bir pencerede gösteren basit ve hızlı bir eklenti. Birden fazla hesabınızı kontrol edebilir ve e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.</description>
+  
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
     
@@ -28,18 +29,12 @@
   <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="ru">
     Лицензируется в соответствии с Apache License, версия 2.0
   </license>
-  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="zh">
-    Licensed under the Apache License, Version 2.0
-  </license>
-  <license href="http://www.opensource.org/licenses/apache2.0.php" xml:lang="pl">
-    Licensed under the Apache License, Version 2.0
-  </license>
   
   <!-- Default Values -->
-  <preference name="update_intervall" value="30" />
-  <preference name="enable_sound" value="true" />
-  <preference name="mailto_links" value="false" />
-  <preference name="debug_mode" value="false" />  
+  <preference name="updateIntervall" value="30" />
+  <preference name="enableSound" value="on" />
+  <preference name="mailtoLinks" value="off" />
+  <preference name="debugMode" value="off" />  
 
   <!-- Access Policy -->
   <feature name="opera:share-cookies" required="true"/>

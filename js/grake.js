@@ -75,7 +75,7 @@ function Grake()
     {
         var unreadCount = 0;
         for(var mail in Accounts)
-            unreadCount += Number(Accounts[mail].UnreadCount);
+            if(Accounts[mail]) unreadCount += Number(Accounts[mail].UnreadCount);
         return unreadCount;
     }
     
@@ -83,7 +83,7 @@ function Grake()
     this.GetRealNewMessageBool = function()
     {
         for(var mail in Accounts)
-            if(Accounts[mail].HasNewMessages) return true
+            if(Accounts[mail]) if(Accounts[mail].HasNewMessages) return true
         return false;
     }
     
@@ -148,7 +148,7 @@ function Grake()
             // Get all unread or just inbox
             var unique = accounts[i].replace(/[^a-zA-Z 0-9]+/g,'')
             var feed = "/feed/atom/";
-            if(widget.preferences[unique + '_allunread'] && widget.preferences[unique+ '_allunread'] === "on")
+            if(widget.preferences[unique + 'Allunread'] && widget.preferences[unique+ 'Allunread'] === "on")
                 feed = "/feed/atom/unread";
             
             // Get Feed now
@@ -292,7 +292,7 @@ function Grake()
     function DebugMessage(message, type)
     {
         if(!type) type = "info";
-        if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on") 
+        if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on") 
             opera.postError("Grake," + type + " : " + message);
     }
 }

@@ -28,13 +28,13 @@ window.addEventListener("load", function()
     // Set Theme
     if(widget.preferences['theme'] != 'standard')
     {
-        $('head').append('<link rel="stylesheet" href="css/' + widget.preferences['theme'] + '/theme.css" type="text/css" />');
+        $('#menustyle').attr('href', 'css/' + widget.preferences['theme'] + '/theme.css');
     }
 
     // Set Language-Strings
-    $("#open").html(lang.popup_open);
-    $("#compose").html(lang.popup_compose);
-    $("#pref").html(lang.popup_pref);
+    $("#openText").html(lang.popup_open);
+    $("#composeText").html(lang.popup_compose);
+    $("#prefText").html(lang.popup_pref);
         
 }, false);
 
@@ -152,9 +152,9 @@ function HandleMessages(event)
             $('#wait').hide();
             SetHeight(InfoHeight)
             $('#status').html(event.data.msg);
-            $('#status').addClass('info_box').removeClass('status_box');
-            $('#last_update').html("");
-            $('#message_box .message').remove();
+            $('#status').addClass('infoBox').removeClass('statusBox');
+            $('#lastUpdate').html("");
+            $('#messageBox .message').remove();
             AccountsCount = 0;
             break;
     
@@ -164,9 +164,9 @@ function HandleMessages(event)
             
             // Show Status
             $('#status').html(event.data.status);
-            $('#status').addClass('status_box').removeClass('info_box');
-            $('#last_update').html(event.data.timestring);
-            $('#error_details').hide();
+            $('#status').addClass('statusBox').removeClass('infoBox');
+            $('#lastUpdate').html(event.data.timestring);
+            $('#errorDetails').hide();
                         
             // Show Messages
             Accounts = event.data.accounts;
@@ -194,8 +194,8 @@ function ShowMessages(accounts, showAccountSorted)
             newMsgBox.append(CreateMessageBox(msg[i]));
         
         // Show now
-        $('#message_box .message').remove();
-        $('#message_box').append(newMsgBox);
+        $('#messageBox .message').remove();
+        $('#messageBox').append(newMsgBox);
     }
 }
 
@@ -254,6 +254,6 @@ function CreateMessageBox(message)
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on")
+    if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on")
         opera.postError("GMNEx,mn," + type + " : " + message);
 }

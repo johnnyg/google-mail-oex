@@ -11,8 +11,10 @@ Almost complete code-rewrite (uses own API named 'Grake')
 No Authentication in Extension needed, now uses active GMail-Accounts
 New Debugging-System
 Some Design-Changes
+Fixed some little bugs
 Add Turkish Translation(thanks to Yiğit Ateş)
 Add Hungarian Translation (thanks to Róbert Tóth)
+Uncompleted Russian/Chinese-Translation (need Translators)
 
 v2.3
 Fix wrong message count (thanks to Victor Grischenko)

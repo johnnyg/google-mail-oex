@@ -13,14 +13,15 @@ var UniqueAccountString = "";
 
 // Themes-Array (internal name : display name)
 var Themes = {
-    "standard":"Standard"
+    "standard":"Standard",
+    "gmail":"Google Mail"
 };
 
 // Intialize the option page
 $(document).ready(function() 
 {
     // Init
-    $('#range_update_intervall').val(widget.preferences['update_intervall']);
+    $('#range_update_intervall').val(widget.preferences['updateIntervall']);
     
     // Set language-strings
     $('#range_update_intervall_label').html(lang.options_update);
@@ -43,8 +44,7 @@ $(document).ready(function()
     
     // Set localized links
     $('#ma_link').attr("href", lang.link_multisession_help);
-    $('#ma_link').addClass("strong_link");
-    
+    $('#ma_link').addClass("strong_link");    
     
     // Set Themes
     $.each(Themes, function(key, value)
@@ -58,8 +58,6 @@ $(document).ready(function()
     // Show Range-Secounds on change
     $('#range_update_intervall').change(function() {
         $('#box_update_intervall').val($('#range_update_intervall').val());
-        // WORKAROUND: Update Intervall-Value manually (auto-save don't work in 11.50b1040)
-        widget.preferences['update_intervall'] = $('#range_update_intervall').val();
     });
     $('#box_update_intervall').keyup(function() {
         $('#range_update_intervall').val($('#box_update_intervall').val());
@@ -142,10 +140,10 @@ function ShowAccounts()
             // Is the option "All Unread" enabled for this account?
             var checked = "";
             var uid = Accounts[mail].UniqueId;
-            if(widget.preferences[uid + '_allunread'] && widget.preferences[uid + '_allunread'] === "on")
+            if(widget.preferences[uid + 'Allunread'] && widget.preferences[uid + 'Allunread'] === "on")
                 checked = " checked='checked'";
             else
-               widget.preferences[uid + '_allunread'] = "off";
+               widget.preferences[uid + 'Allunread'] = "off";
             
             // Create Checkbox
             var checkbox =  '<input name="' + uid + '_allunread" type="checkbox" title="' + 
@@ -175,7 +173,7 @@ function ShowAccounts()
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(widget.preferences['debug_mode'] && widget.preferences['debug_mode'] === "on") 
+    if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on") 
         opera.postError("GMNEx,opt," + type + " : " + message);
 }
 

@@ -2,7 +2,7 @@
 body {
     font-family: Arial,Helvetica,SunSans-Regular,Sans-Serif;
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 0px;
 }
 
@@ -12,27 +12,36 @@ div::selection, p::selection, img::selection {
 }
 
 /*** Menu **/
+#menu {
+    margin-bottom: 5px;
+    clear: both;
+}
+
 .entry {
-    padding: 5px 3px 5px 25px;
-    border-radius: 5px;
-    text-shadow: #DDD 1px 1px 1px;
     cursor: pointer;
+    border-radius: 2px;
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.1);
+    line-height: 25px;
+    height: 25px;
+    padding: 0 8px;
+    margin-bottom: 5px;
+
 }
 
 .entry:hover {
     background-color: #dd0000;
     color: white;
-    text-shadow: #000 1px 1px 1px;
+    text-shadow: 0px 1px rgba(255, 255, 255, 0.1);
 }
 
-.double-entry-table {
-    width: 100%; 
-    padding: 0; 
-    margin: 0;
+#compose {
+    width: 44%;
+    display: inline-block;
 }
 
-.double-entry-table td {
-    width: 50%;
+#pref {
+    width: 44%;
+    display: inline-block;
 }
 
 .separator {
@@ -41,16 +50,19 @@ div::selection, p::selection, img::selection {
 }
 
 /*** Menu-Icons ***/
-.gmail-icon {
+.openIcon {
     background: url('img/mail16.png') no-repeat 5px 5px;
+    padding-left: 28px;
 }
 
-.compose-icon {
+.composeIcon {
     background: url('img/compose16.png') no-repeat 5px 5px;
+    padding-left: 28px;
 }
 
-.pref-icon {
+.prefIcon {
     background: url('img/pref16.png') no-repeat 5px 5px;
+    padding-left: 28px;
 }
 
 /*** Status-Box ***/
@@ -59,22 +71,22 @@ div::selection, p::selection, img::selection {
 }
 
 /*** LastUpdate-Box ***/
-#last_update {
-    font-size: 8px;
+#lastUpdate {
+    font-size: 9px;
     padding: 0 3px 5px 5px;
     color: #777;
 }
 
 /*** Status-Style (Success) ***/
-.status_box {
+.statusBox {
     margin-top: 5px;
     text-shadow: #DDD 1px 1px 1px;
 }
 
 /*** Status-Style (Error) ***/
-.info_box {
+.infoBox {
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 2px;
     background: -o-linear-gradient(top, #f40000 0%,#aa0000 100%); 
     color: white;
     padding: 5px;
@@ -82,19 +94,18 @@ div::selection, p::selection, img::selection {
     text-shadow: #333 1px 1px 1px;
 }
 
-.info_box a {
+.infoBox a {
     color: white;
 }
 
-.info_box a:hover {
+.infoBox a:hover {
     font-weight: bold;
 } 
 
 /*** Message-Style ***/
-
 .message {
     border: 1px solid #333;
-    border-radius: 5px;
+    border-radius: 2px;
     background-color: #EEE;
     color: black;
     padding: 5px;
@@ -163,7 +174,7 @@ div::selection, p::selection, img::selection {
 
 #AccountList .accountEntry{
     border: 1px solid #333;
-    border-radius: 5px;
+    border-radius: 2px;
     color: black;
     padding: 5px;
     background: -o-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);

@@ -10,9 +10,9 @@ Google Mail Notifier ist eine kleine und schnelle Erweiterung für Opera, welche
 
 Merkmale:
 * Erkennt automatisch die aktiven Google-Konten
-* Unerstützt mehrere Konten
+* Unterstützt mehrere Konten
 * Unterstützt alle Google-Konten
-* Zeigt alle ungelesenen Nachrichten oder nur aus dem Posteingang
+* Zeigt alle ungelesenen Nachrichten oder nur die aus dem Posteingang
 * Option zum direkten Öffnen von Mail-Links mit Googlemail 
 * Optionale Klang-Benachrichtigung
  
@@ -26,8 +26,8 @@ lang.options_sound          = "Spiele Klangbenachrichtigung bei neuen Nachrichte
 lang.options_mailto         = "Öffne EMail-Links ('mailto:') mit Googlemail";
 lang.options_debugmode      = "Enable Debug-Messages";
 lang.options_close          = "Einstellungen übernehmen und Fenster schließen";
-lang.options_refresh        = "Refresh Accounts";
-lang.options_choose_theme   = "Choose Theme";
+lang.options_refresh        = "Konten aktualisieren";
+lang.options_choose_theme   = "Design auswählen";
 lang.options_description    = "Google Mail Notifier ist eine kleine und schnelle \n\
 Erweiterung für Opera, welche die Anzahl der ungelesenen Nachrichten eines oder \n\
 mehrerer Googlemail-Konten anzeigt. Durch einen Klick auf den Button können Sie \n\
