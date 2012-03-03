@@ -9,13 +9,13 @@ DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
 Простое и быстрое расширение которое сообщает вам количество непрочитанных сообщений в ящике Gmail и показывает их заголовки. Расширение может работать с несколькими аккаунтами и позволяет открывать ссылки mailto: с помощью Gmail.
 
 ВОЗМОЖНОСТИ
-* Поддержка до 5 аккаунтов
-* Поддержка всех аккаунтов GMail
-* Показывает все входящие или сообщения только из папки Inbox
-* Позволяет открывать ссылки mailto: с помощью Gmail
-* Воспроизведение звукового сигнала при входящих сообщениях
-* Использование безопасной авторизации OAuth
-* Поддержка английского, немецкого и русского языков
+* Automatically detects open GMail-Accounts (no password, username required)
+* Support Multi-Account
+* Supports all Google Accounts
+* Show all unread Messages or just from Inbox
+* Option to open Mail-Links directly with GMail
+* Optional Sound-Notification
+ 
  
  */
 

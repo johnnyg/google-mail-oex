@@ -9,14 +9,12 @@ DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
 Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。
 
 特色功能
-* 支援 5 帳號
-* 支援所有 Gmail 帳號
-* 顯示所有或只顯示收件匣中的未讀取郵件
-* 提供直接使用 Gmail 開啟郵件連結的選項
-* 提供提示音效選項
-* 使用安全的 OAuth 認證機制
-* 支援英文、德文、俄文、中文
-
+* Automatically detects open GMail-Accounts (no password, username required)
+* Support Multi-Account
+* Supports all Google Accounts
+* Show all unread Messages or just from Inbox
+* Option to open Mail-Links directly with GMail
+* Optional Sound-Notification
 
  */
 

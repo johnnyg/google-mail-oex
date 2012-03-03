@@ -141,7 +141,7 @@ div::selection, p::selection, img::selection {
     color: white;
     padding: 3px;
     opacity: 0.90;
-    border-radius: 5px;
+    border-radius: 2px;
     max-width: 250px;
     font-size: 9px;
 }
