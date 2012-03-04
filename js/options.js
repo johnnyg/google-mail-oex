@@ -108,7 +108,8 @@ function HandleMessages(event)
             
             // Create unique string so we see if there are changes
             var newUniqueAccountString = "";            
-            for(var mail in Accounts) newUniqueAccountString  += Accounts[mail].UniqueId;      
+            for(var mail in Accounts) 
+                if(Accounts[mail]) newUniqueAccountString  += Accounts[mail].UniqueId;      
             
             //Refresh Account_list if there are changes
             if(newUniqueAccountString != UniqueAccountString) 
@@ -129,8 +130,8 @@ function ShowAccounts()
     // Show Message, if there are no accounts
     if(AccountsCount == 0)
     {
-      var msg = $('<p></p>').html(lang.error_noActiveAccount);
-      $('account_list').append(msg);
+      var msg = $("<div class='noAccount'></div>").html(lang.error_noActiveAccount);
+      $('#account_list').append(msg);
     }
     // Fill AccountList
     else

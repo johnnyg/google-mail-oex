@@ -20,9 +20,7 @@
     opera.extension.postMessage({
         cmd: "MailtoEnabled"
     });
-    
-    opera.postError("Skript is running");
-        
+            
     // Get current Accounts
     opera.extension.postMessage({
         cmd:"Refresh_NoCallback"
@@ -71,7 +69,7 @@
                 if(links[i].href && links[i].href.substr(0,7) == "mailto:")
                 {
                     // One Account 
-                    if(AccountsCount == 1)
+                    if(AccountsCount == 1 || AccountsCount == 0)
                     {                         
                         links[i].href = links[i].href.replace("mailto:", "https://mail.google.com/mail/?extsrc=mailto&url=mailto:");
                         links[i].setAttribute("target", "_blank");

@@ -51,6 +51,21 @@ h3 {
     margin-top: 10px;
 }
 
+.noAccount {
+    padding-left: 10px;
+    color: crimson;
+}
+
+.noAccount a {
+    color: crimson;
+    text-decoration: underline;
+}
+
+.noAccount a:hover {
+    color: crimson;
+    font-weight: bold;
+}
+
 .account_entry {
     clear: both;
     margin: 5px 10px;

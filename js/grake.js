@@ -23,6 +23,7 @@ function Gmail_Account() {
 }
 function Gmail_Message() {
     this.Id = "";
+    this.Accountname = "";
     this.Sendername = "";
     this.Sendermail = "";
     this.Subject = "";
@@ -169,6 +170,7 @@ function Grake()
                         // Set new message-object
                         var msg = new Gmail_Message();
                         msg.Id = nodes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                        msg.Accountname = mail;
                         msg.Sendername = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("name")[0].childNodes[0].nodeValue;
                         msg.Sendermail = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("email")[0].childNodes[0].nodeValue;
                         msg.Subject = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;

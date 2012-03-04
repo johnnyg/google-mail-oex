@@ -233,7 +233,7 @@ function CreateMessageBox(message)
     var body = $('<p></p>').text(message.Content);
     
     // Tooltip
-    var tt_to = "";
+    var tt_to = "<u>" + lang.popup_to + " " + message.Accountname + "</u><br/>";
     var tooltip = $("<div></div>")
     .html("<p>" + tt_to + lang.popup_from + " " + message.Sendermail + 
         "<br/><br/></p>").append(body);                    

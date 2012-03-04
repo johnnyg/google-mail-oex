@@ -16,12 +16,13 @@ var StandardHeight=120; // Standard-Height of Menu
 var Grake; // Grake-Interface
 var AudioObject; // Object for playing notification-sound
 var UpdateTimer; // Timer for intervall-update
+var MyButton;
 
 // ToolbarButton-Properties
 var ToolbarUIItemProperties =
 {
     title: "Google Mail Notifier",
-    icon: "img/gmail-icon-18px.png",
+    icon: "img/toolbar-icon-18px.png",
     badge:
     {
         display: "block",
@@ -46,8 +47,12 @@ window.addEventListener("load", function()
     // Listen for script messages
     opera.extension.onmessage = HandleMessages;
     
+    // Sets alternate icon
+    if(widget.preferences['theme'] && widget.preferences['theme'] != 'standard')
+        ToolbarUIItemProperties.icon = "css/" + widget.preferences['theme'] + "/img/toolbar-icon-18px.png";
+ 
     // Create and Add the Button
-    this.MyButton = opera.contexts.toolbar.createItem(this.ToolbarUIItemProperties);
+    MyButton = opera.contexts.toolbar.createItem(this.ToolbarUIItemProperties);
     opera.contexts.toolbar.addItem(this.MyButton);
   
     // listen to storage events
@@ -202,7 +207,16 @@ function HandleMessages(event)
         // Refresh now (without callback)
         case 'Refresh_NoCallback':
             // reset timer
-            window.clearTimeout(UpdateTimer);
+            window.clearTimeout(UpdateTimer);            
+                
+            // Sets alternate icon
+            // (we do this here, because this Message comes from Option-Page)
+            if(widget.preferences['theme'] != 'standard')
+                MyButton.icon = "css/" + widget.preferences['theme'] + "/img/toolbar-icon-18px.png";
+            else
+                MyButton.icon = "img/toolbar-icon-18px.png";
+            
+            opera.postError("GMNEx,bg," + MyButton.icon);
             
             // then update the Accounts
             Update();
