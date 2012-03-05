@@ -205,9 +205,8 @@ function JoinMessages(accounts)
     // Put all messages from every account in one message
     var msg = new Array();    
     for(var mail in accounts)
-    {
-        msg = msg.concat(accounts[mail].UnreadMessages);
-    }
+        if(accounts[mail])
+            msg = msg.concat(accounts[mail].UnreadMessages);
     
     // Sort all messages
     msg.sort(function(a, b){

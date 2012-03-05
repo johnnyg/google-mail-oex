@@ -11,7 +11,7 @@ Almost complete code-rewrite (uses own API named 'Grake')
 No Authentication needed, detects active GMail-Accounts
 New Debugging-System
 Some Design-Changes
-Fixed some little bugs
+Fixed some small bugs
 Add Turkish Translation(thanks to Yiğit Ateş)
 Add Hungarian Translation (thanks to Róbert Tóth)
 Uncompleted Russian/Chinese-Translation (need a Translators)
