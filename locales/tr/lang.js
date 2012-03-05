@@ -3,7 +3,7 @@
  * by Yiğit Ateş (celeborn1@myopera.com)
 
 SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
-Gmail hesabınızdaki okunmamış iletiler hakkında sizi bilgilendiren ve yeni iletilerin başlıklarını ufak bir pencerede gösteren basit ve hızlı bir eklenti. Birden fazla hesabınızı kontrol edebilir ve e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.
+Gmail hesabınızdaki okunmamış iletiler hakkında sizi bilgilendiren ve yeni iletilerin başlıklarını gösteren basit ve hızlı bir eklenti. Çoklu hesap kontrolü yapabilir ve e-posta bağlantılarını Gmail ile açabilirsiniz.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
 Google Mail Notifier, Gmail hesabınızdaki okunmamış e-posta sayısını ve ufak bir pencerede e-posta başlıklarını gösteren basit ve hızlı bir eklentidir. Ayrıca, bu eklenti sayesinde e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.
@@ -41,7 +41,7 @@ lang.options_appearance_header = "Görünüm";
 lang.options_other_header = "Diğer Seçenekler";
 lang.options_link_operapage = "Opera Eklenti Sayfası"
 lang.options_link_projectpage = "Proje Ana Sayfası";
-lang.options_link_feedback = "Geribildirim/Hata Raporlama";
+lang.options_link_feedback = "Geri Bildirim/Hata Raporlama";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "yalnızca gelen kutusundaki okunmamış postalar yerine tüm okunmamış postalarınızın gösterilmesini istiyorsanız bu seçeneği etkinleştirin";
@@ -62,7 +62,7 @@ lang.popup_choose_account = "Hesabınızı seçin: ";
 
 // Error-Strings
 lang.error_noActiveAccount = "<strong>Etkin bir Gmail hesabı yok</strong>, " +
-"<br/>lütfen <a href='http://mail.google.com'>Google hesabınız ile oturum açın</a> ve yeninden deneyin.";
+"<br/>lütfen <a href='http://mail.google.com'>Google hesabınız ile oturum açın</a> ve yeniden deneyin.";
 
 // Localized Links
 lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=tr&hlrm=en&answer=1721977";
