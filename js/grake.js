@@ -264,7 +264,7 @@ function Grake()
                         // Delete Outdated Accounts here, because their requests
                         // failed
                         for(var mail in Accounts)
-                            if(Accounts[mail].IsOutdated) Accounts[mail]= null;
+                            if(Accounts[mail] && Accounts[mail].IsOutdated) Accounts[mail]= null;
                         
                         // Sets LastUpdate-Timestring
                         var now = new Date();

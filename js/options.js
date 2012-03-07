@@ -34,7 +34,7 @@ $(document).ready(function()
     $('#refresh').html(lang.options_refresh);  
     $('#description').html(lang.options_description);  
     $('#account_descripton').html("<p>" + lang.options_description_accounts + "</p>"
-            + "<p><strong>" + lang.options_dectected_accounts + "</strong></p>");
+        + "<p><strong>" + lang.options_dectected_accounts + "</strong></p>");
     $('#accounts_header').html(lang.options_accounts_header);
     $('#appearance_header').html(lang.options_appearance_header);
     $('#other_header').html(lang.options_other_header);    
@@ -130,42 +130,45 @@ function ShowAccounts()
     // Show Message, if there are no accounts
     if(AccountsCount == 0)
     {
-      var msg = $("<div class='noAccount'></div>").html(lang.error_noActiveAccount);
-      $('#account_list').append(msg);
+        var msg = $("<div class='noAccount'></div>").html(lang.error_noActiveAccount);
+        $('#account_list').append(msg);
     }
     // Fill AccountList
     else
     {         
         for(var mail in Accounts)
         {
-            // Is the option "All Unread" enabled for this account?
-            var checked = "";
-            var uid = Accounts[mail].UniqueId;
-            if(widget.preferences[uid + 'Allunread'] && widget.preferences[uid + 'Allunread'] === "on")
-                checked = " checked='checked'";
-            else
-               widget.preferences[uid + 'Allunread'] = "off";
+            if(Accounts[mail])
+            {
+                // Is the option "All Unread" enabled for this account?
+                var checked = "";
+                var uid = Accounts[mail].UniqueId;
+                if(widget.preferences[uid + 'Allunread'] && widget.preferences[uid + 'Allunread'] === "on")
+                    checked = " checked='checked'";
+                else
+                    widget.preferences[uid + 'Allunread'] = "off";
             
-            // Create Checkbox
-            var checkbox =  '<input name="' + uid + '_allunread" type="checkbox" title="' + 
+                // Create Checkbox
+                var checkbox =  '<input name="' + uid + '_allunread" type="checkbox" title="' + 
                 lang.options_unread_tooltip + '"' + checked + '></input>' + '<label for="' + uid + '_allunread" \n\
                 title="' + lang.options_unread_tooltip + '">' + lang.options_unread + 
                 '</label>';
             
-            // Set Entry
-            var entry = $("<div></div>").addClass("account_entry")
-             .append($("<div></div>").addClass('text').html("" + Accounts[mail].Name))
-             .append($("<div></div>").addClass('options').html(checkbox));
-            $('#account_list').append(entry); 
+                // Set Entry
+                var entry = $("<div></div>").addClass("account_entry")
+                .append($("<div></div>").addClass('text').html("" + Accounts[mail].Name))
+                .append($("<div></div>").addClass('options').html(checkbox));
+                $('#account_list').append(entry); 
             
-            // Set Function for Check/Uncheck
-            $( '.account_entry :checkbox' ).live( 'change', 
-                function() {
-                    if($(this).is( ':checked' ))
-                         widget.preferences[$(this).attr('name')] = "on";
-                     else
-                         widget.preferences[$(this).attr('name')] = "off";
-                });
+                // Set Function for Check/Uncheck
+                $( '.account_entry :checkbox' ).live( 'change', 
+                    function() {
+                        if($(this).is( ':checked' ))
+                            widget.preferences[$(this).attr('name')] = "on";
+                        else
+                            widget.preferences[$(this).attr('name')] = "off";
+                    });
+            }
         }
     }
 }

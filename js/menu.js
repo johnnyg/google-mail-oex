@@ -52,16 +52,19 @@ function OpenGoogleMailTab(compose)
         // Fill AccountList
         for(var mail in Accounts)
         {
-            // set link
-            var linkURL = Accounts[mail].AccountLink;
-            if(compose) linkURL += "?#compose";
+            if(Accounts[mail])
+            {
+                // set link
+                var linkURL = Accounts[mail].AccountLink;
+                if(compose) linkURL += "?#compose";
             
-            // set entry
-            var entry = $("<div></div>").addClass("accountEntry").html("<strong>" + Accounts[mail].Name + "</strong>");
-            entry.click({
-                link: linkURL
-            }, LoadLink);
-            $('#AccountList').append(entry);            
+                // set entry
+                var entry = $("<div></div>").addClass("accountEntry").html("<strong>" + Accounts[mail].Name + "</strong>");
+                entry.click({
+                    link: linkURL
+                }, LoadLink);
+                $('#AccountList').append(entry);     
+            }
         }
 
         // Show Layer
@@ -75,7 +78,7 @@ function OpenGoogleMailTab(compose)
     {
         for(var m in Accounts)
         {
-             // set link
+            // set link
             var linkURL2 = Accounts[m].AccountLink;
             if(compose) linkURL2 += "?#compose";
             LoadLink(null, linkURL2);
