@@ -6,6 +6,9 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
+v3.1
+FIXED: Update-Intervall is not saved properly
+
 v3.0
 Almost complete code-rewrite (uses own API named 'Grake')
 No Authentication needed, detects active GMail-Accounts
