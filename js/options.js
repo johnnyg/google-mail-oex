@@ -150,8 +150,8 @@ function ShowAccounts()
                     widget.preferences[uid + 'Allunread'] = "off";
             
                 // Create Checkbox
-                var checkbox =  '<input name="' + uid + '_allunread" type="checkbox" title="' + 
-                lang.options_unread_tooltip + '"' + checked + '></input>' + '<label for="' + uid + '_allunread" \n\
+                var checkbox =  '<input name="' + uid + 'Allunread" type="checkbox" title="' + 
+                lang.options_unread_tooltip + '"' + checked + '></input>' + '<label for="' + uid + 'Allunread" \n\
                 title="' + lang.options_unread_tooltip + '">' + lang.options_unread + 
                 '</label>';
             
