@@ -1,4 +1,4 @@
-~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+﻿~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Google Mail Notifier (an Opera-Extension)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6,8 +6,17 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
-v3.1
+v3.0.3
+FIXED: Extension crashes on empty subject or content
+FIXED: No Standard-Theme is set at first start
+
+v3.0.2
 FIXED: Update-Intervall is not saved properly
+FIXED: Error when connection is lost
+FIXED: "all unread"-Option is not saved properly
+
+v3.0.1
+Using unmodified version of jquery
 
 v3.0
 Almost complete code-rewrite (uses own API named 'Grake')

@@ -173,8 +173,10 @@ function Grake()
                         msg.Accountname = mail;
                         msg.Sendername = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("name")[0].childNodes[0].nodeValue;
                         msg.Sendermail = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("email")[0].childNodes[0].nodeValue;
-                        msg.Subject = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
-                        msg.Content = nodes[i].getElementsByTagName("summary")[0].childNodes[0].nodeValue;
+                        if(nodes[i].getElementsByTagName("title")[0].childNodes[0])
+                            msg.Subject = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                        if (nodes[i].getElementsByTagName("summary")[0].childNodes[0])
+                            msg.Content = nodes[i].getElementsByTagName("summary")[0].childNodes[0].nodeValue;
                         msg.MessageLink = nodes[i].getElementsByTagName("link")[0].getAttribute("href"); 
                         // TODO: Whats the difference beetween issued and modified
                         msg.Modified = new Date(nodes[i].getElementsByTagName("modified")[0].childNodes[0].nodeValue);

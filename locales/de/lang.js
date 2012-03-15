@@ -60,6 +60,10 @@ lang.popup_from         = "Von: ";
 lang.popup_to           = "An: ";
 lang.popup_choose_account = "Wählen Sie Ihr Konto: ";
 
+// Strings for Mails
+lang.mail_empty_subject= "(Kein Betreff)";
+lang.mail_empty_body = "(Kein Inhalt)";
+
 // Error-Strings
 lang.error_noActiveAccount = "<strong>Es wurde kein aktiver Google-Account gefunden</strong>, " +
 "<br/>bitte <a href='http://mail.google.com'>loggen sie sich in ihren Account ein</a>.";

@@ -229,10 +229,14 @@ function CreateMessageBox(message)
         author = $('<strong></strong>').text(message.Sendername + " : ");
                       
     // Message-Title
-    var title = $('<span></span>').text(message.Subject);
+    var subject = message.Subject;
+    if(subject == "") subject = lang.mail_empty_subject;
+    var title = $('<span></span>').text(subject);
 
     // Message-Body
-    var body = $('<p></p>').text(message.Content);
+    var content = message.Content;
+    if(content == "") content = lang.mail_empty_body;
+    var body = $('<p></p>').text(content);
     
     // Tooltip
     var tt_to = "<u>" + lang.popup_to + " " + message.Accountname + "</u><br/>";
