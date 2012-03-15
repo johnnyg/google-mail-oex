@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
   id="http://www.codebit.de/oex/google-mail"
-  version="3.0.2">
+  version="3.0.3">
 
   <!-- Extension Infos -->
   <name>Google Mail Notifier</name>
@@ -35,7 +35,8 @@
   <preference name="enableSound" value="on" />
   <preference name="mailtoLinks" value="off" />
   <preference name="debugMode" value="off" />  
-
+  <preference name="theme" value="standard" />  
+  
   <!-- Access Policy -->
   <feature name="opera:share-cookies" required="true"/>
   <access origin="https://mail.google.com" />

@@ -26,7 +26,7 @@ window.addEventListener("load", function()
     });
 
     // Set Theme
-    if(widget.preferences['theme'] != 'standard')
+    if(widget.preferences['theme'] && widget.preferences['theme'] != 'standard' && widget.preferences['theme'] != '' )
     {
         $('#menustyle').attr('href', 'css/' + widget.preferences['theme'] + '/theme.css');
     }
