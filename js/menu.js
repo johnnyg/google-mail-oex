@@ -50,21 +50,18 @@ function OpenGoogleMailTab(compose)
         $('#AccountList').append(choose);
         
         // Fill AccountList
-        for(var mail in Accounts)
+        for (var i = 0; i < Accounts.length; i++)
         {
-            if(Accounts[mail])
-            {
                 // set link
-                var linkURL = Accounts[mail].AccountLink;
+                var linkURL = Accounts[i].AccountLink;
                 if(compose) linkURL += "?#compose";
             
                 // set entry
-                var entry = $("<div></div>").addClass("accountEntry").html("<strong>" + Accounts[mail].Name + "</strong>");
+                var entry = $("<div></div>").addClass("accountEntry").html("<strong>" + Accounts[i].Name + "</strong>");
                 entry.click({
                     link: linkURL
                 }, LoadLink);
                 $('#AccountList').append(entry);     
-            }
         }
 
         // Show Layer
@@ -76,10 +73,10 @@ function OpenGoogleMailTab(compose)
     // Or just one
     else if (AccountsCount == 1)
     {
-        for(var m in Accounts)
+        for (var j = 0; j < Accounts.length; j++)
         {
             // set link
-            var linkURL2 = Accounts[m].AccountLink;
+            var linkURL2 = Accounts[j].AccountLink;
             if(compose) linkURL2 += "?#compose";
             LoadLink(null, linkURL2);
             return;
@@ -207,9 +204,8 @@ function JoinMessages(accounts)
 {
     // Put all messages from every account in one message
     var msg = new Array();    
-    for(var mail in accounts)
-        if(accounts[mail])
-            msg = msg.concat(accounts[mail].UnreadMessages);
+    for (var i = 0; i < Accounts.length; i++)
+            msg = msg.concat(accounts[i].UnreadMessages);
     
     // Sort all messages
     msg.sort(function(a, b){

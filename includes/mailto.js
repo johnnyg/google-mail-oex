@@ -106,17 +106,14 @@
             box.appendChild(header);            
             
             // Create entrys
-            for(var mail in Accounts)
+            for (var i = 0; i < Accounts.length; i++)
             {
-                if(Accounts[mail])
-                {
                     var entry = document.createElement('a');
                     entry.style.display = "block"
                     entry.style.marginLeft = "8px";
-                    entry.innerHTML = Accounts[mail].Name;
-                    entry.href = element.href.replace("mailto:", Accounts[mail].AccountLink + "/?extsrc=mailto&url=mailto:");
+                    entry.innerHTML = Accounts[i].Name;
+                    entry.href = element.href.replace("mailto:", Accounts[i].AccountLink + "/?extsrc=mailto&url=mailto:");
                     box.appendChild(entry);
-                }
             }              
                         
             // Append box

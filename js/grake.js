@@ -17,7 +17,6 @@ function Gmail_Account() {
     this.Name = "";
     this.UnreadCount = 0;
     this.HasNewMessages = false;
-    this.IsOutdated = false;
     this.AccountLink = "";
     this.UnreadMessages = new Array(); // Message-Array
 }
@@ -44,6 +43,7 @@ function Grake()
     var RequestTimeout = 10000; // Timeout (in ms) for Ajax-Requests
     var EmailPattern = /([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4})/ig;
     var Accounts = new Array();
+    var AccountsNew = new Array();
     var AccountsCompleted = 0;
     var LastUpdate = "";   
     
@@ -66,25 +66,23 @@ function Grake()
     // Number of Accounts (because .length wont work)
     this.GetAccountsCount = function()
     {
-        var n=0;
-        for(var a in Accounts) if(Accounts[a]) n++;
-        return n;
+        return Accounts.length;
     } 
     
     // Returns total number of new messages
     this.GetTotalUnreadCount = function()
     {
         var unreadCount = 0;
-        for(var mail in Accounts)
-            if(Accounts[mail]) unreadCount += Number(Accounts[mail].UnreadCount);
+        for (var i = 0; i < Accounts.length; i++)
+            unreadCount += Number(Accounts[i].UnreadCount);
         return unreadCount;
     }
     
     // Returns if there new Messages 
     this.GetRealNewMessageBool = function()
     {
-        for(var mail in Accounts)
-            if(Accounts[mail]) if(Accounts[mail].HasNewMessages) return true
+        for (var i = 0; i < Accounts.length; i++)
+            if(Accounts[i].HasNewMessages) return true;
         return false;
     }
     
@@ -120,6 +118,7 @@ function Grake()
                 else
                 {
                     Accounts = new Array();
+                    
                     // Call now
                     DebugMessage("No active Account found");
                     if(callback != null) callback();
@@ -135,13 +134,11 @@ function Grake()
     {
         DebugMessage("Get " + accounts.length + " Message-Feeds now");
         
-        // Mark all Accounts as outdated, so we can detect dead accounts 
-        // and errors
-        for(var mail in Accounts) 
-            if(Accounts[mail]) Accounts[mail].IsOutdated = true;
-        
         // Resets global var for watching the requests
         AccountsCompleted = 0;
+        
+        // Clear List
+        AccountsNew = new Array();
                 
         // Check feeds
         for (var i=0; i < accounts.length; i++)
@@ -181,41 +178,52 @@ function Grake()
                         // TODO: Whats the difference beetween issued and modified
                         msg.Modified = new Date(nodes[i].getElementsByTagName("modified")[0].childNodes[0].nodeValue);
                         messages.push(msg);
-                    }                    
+                    }   
                     
-                    // Is this Account a new one?
-                    if(Accounts[mail] == null)
+                    // Create new Account-Object
+                    var currentAccount = new Gmail_Account();;
+                    currentAccount.Name = "" + mail;
+                    currentAccount.UniqueId = currentAccount.Name.replace(/[^a-zA-Z 0-9]+/g,'');
+         
+                    // Search if this Account already exist
+                    var currentIndex = -1;
+                    for (var x = 0; x < Accounts.length; x++)
                     {
-                        // Create new Account-Object
-                        Accounts[mail] = new Gmail_Account();
-                        Accounts[mail].Name = "" + mail;
-                        Accounts[mail].UniqueId = Accounts[mail].Name.replace(/[^a-zA-Z 0-9]+/g,'');
-                        
+                        if(Accounts[x].Name == currentAccount.Name)
+                        {
+                            currentIndex = x;
+                            DebugMessage("Account " + mail + " is found at index " + currentIndex);
+                            break;
+                        }
+                    }
+                    
+                    // Set if we have new messages
+                    if(currentIndex == -1)
+                    {                       
                         // If there a more than zero messages for a new account
                         // they must be new
-                        if(messages.length > 0) Accounts[mail].HasNewMessages = true;
+                        if(messages.length > 0) currentAccount.HasNewMessages = true;
                     }
                     // If we know this Accouns already, we will check for new Messages
                     else
-                    {
+                    {                        
                         // If the number of message is increased, there must be a new message,
                         // if the new number is zero there a no new messages,
                         // in all other situations we have to check every mail
-                        if(messages.length > Accounts[mail].UnreadMessages.length)
-                            Accounts[mail].HasNewMessages = true;
+                        if(messages.length > Accounts[currentIndex].UnreadMessages.length)
+                            currentAccount.HasNewMessages = true;
                         else if (messages.length == 0)
-                            Accounts[mail].HasNewMessages = false;
+                            currentAccount.HasNewMessages = false;
                         else
                         {
                             // Every Message-Id of ne feed is compared to all 
                             // existing Messages-Ids in the Account, if we found a unique ID
                             // we found a new message and will be break here
-                            Accounts[mail].HasNewMessages = false;
-                            for(var i=0; i < messages.length; i++)
+                            for(var j=0; j < messages.length; j++)
                             {
                                 var isUnique = true;
-                                for(var j=0; j < Accounts[mail].UnreadMessages.length; j++)
-                                    if(Accounts[mail].UnreadMessages[j].Id.localeCompare(messages[i].Id) == 0)
+                                for(var ii=0; ii < Accounts[currentIndex].UnreadMessages.length; ii++)
+                                    if(Accounts[currentIndex].UnreadMessages[ii].Id.localeCompare(messages[j].Id) == 0)
                                     {
                                         isUnique = false;
                                         break;
@@ -224,7 +232,7 @@ function Grake()
                                 // This Message is unique, we can break here
                                 if(isUnique)
                                 {
-                                    Accounts[mail].HasNewMessages = true;
+                                    currentAccount.HasNewMessages = true;
                                     break;
                                 }
                             }
@@ -239,20 +247,20 @@ function Grake()
                     });
                     
                     // Set Messages
-                    Accounts[mail].UnreadMessages = messages;
+                    currentAccount.UnreadMessages = messages;
                     
                     // Set Account-Link
-                    Accounts[mail].AccountLink = xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
+                    currentAccount.AccountLink = xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
                                        
                     // Set Unread-Count
                     // Note: the fullcount field can be bigger than the number of
                     // the messages in the feed, because only up to 20 will be here
-                    Accounts[mail].UnreadCount = xmlFeed.documentElement.getElementsByTagName("fullcount")[0].childNodes[0].nodeValue; 
+                    currentAccount.UnreadCount = xmlFeed.documentElement.getElementsByTagName("fullcount")[0].childNodes[0].nodeValue; 
                     
-                    // This Account is now Up-to-Date
-                    Accounts[mail].IsOutdated = false;
+                    // Add Account to List
+                    AccountsNew.push(currentAccount);
                     
-                    DebugMessage("Get  " + Accounts[mail].UnreadCount + " unreads mails for " + mail);
+                    DebugMessage("Get  " + currentAccount.UnreadCount + " unreads mails for " + mail);
                 },
                 error: AjaxErrorMessage,
                 complete: function()
@@ -263,11 +271,6 @@ function Grake()
                     AccountsCompleted++;
                     if(AccountsCompleted == accounts.length)
                     {
-                        // Delete Outdated Accounts here, because their requests
-                        // failed
-                        for(var mail in Accounts)
-                            if(Accounts[mail] && Accounts[mail].IsOutdated) Accounts[mail]= null;
-                        
                         // Sets LastUpdate-Timestring
                         var now = new Date();
                         var h0 = "", m0 = "", s0 = "";
@@ -276,6 +279,9 @@ function Grake()
                         if(now.getSeconds() < 10) s0 = "0"
                         LastUpdate= lang.popup_lastupdate + h0 + now.getHours() + ":" +
                         m0 + now.getMinutes() + ":" + s0 +  now.getSeconds();
+                    
+                        // Replace List
+                        Accounts = AccountsNew;
                         
                         // Call now
                         DebugMessage("Every Request is returned, now calling the Callback-Function");
@@ -285,7 +291,6 @@ function Grake()
             });   
         }
     }
-    
     // AJAX-Error
     function AjaxErrorMessage(jqXHR, textStatus, errorThrown) 
     {  

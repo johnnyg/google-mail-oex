@@ -109,8 +109,8 @@ function HandleMessages(event)
             
             // Create unique string so we see if there are changes
             var newUniqueAccountString = "";            
-            for(var mail in Accounts) 
-                if(Accounts[mail]) newUniqueAccountString  += Accounts[mail].UniqueId;      
+            for (var i = 0; i < Accounts.length; i++)
+                newUniqueAccountString  += Accounts[i].UniqueId;      
             
             //Refresh Account_list if there are changes
             if(newUniqueAccountString != UniqueAccountString) 
@@ -137,13 +137,11 @@ function ShowAccounts()
     // Fill AccountList
     else
     {         
-        for(var mail in Accounts)
+        for (var i = 0; i < Accounts.length; i++)
         {
-            if(Accounts[mail])
-            {
                 // Is the option "All Unread" enabled for this account?
                 var checked = "";
-                var uid = Accounts[mail].UniqueId;
+                var uid = Accounts[i].UniqueId;
                 if(widget.preferences[uid + 'Allunread'] && widget.preferences[uid + 'Allunread'] === "on")
                     checked = " checked='checked'";
                 else
@@ -157,7 +155,7 @@ function ShowAccounts()
             
                 // Set Entry
                 var entry = $("<div></div>").addClass("account_entry")
-                .append($("<div></div>").addClass('text').html("" + Accounts[mail].Name))
+                .append($("<div></div>").addClass('text').html("" + Accounts[i].Name))
                 .append($("<div></div>").addClass('options').html(checkbox));
                 $('#account_list').append(entry); 
             
@@ -169,7 +167,6 @@ function ShowAccounts()
                         else
                             widget.preferences[$(this).attr('name')] = "off";
                     });
-            }
         }
     }
 }

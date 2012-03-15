@@ -96,7 +96,7 @@ div::selection, p::selection, img::selection {
 
 /*** Status-Box ***/
 #status {
-    line-height: 17px;
+    line-height: 15px;
 }
 
 /*** LastUpdate-Box ***/
