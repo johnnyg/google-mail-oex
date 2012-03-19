@@ -21,7 +21,6 @@ Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可�
 // General Strings for Option-Page
 lang.options_update = "更新間隔";
 lang.options_update_unit = "秒";
-lang.options_unread = "全部未讀";
 lang.options_sound = "當有新的郵件時播放提示音效";
 lang.options_mailto = "使用 Gmail 開啟郵件連結（mailto）";
 lang.options_debugmode = "Enable Debug-Messages";
@@ -41,6 +40,9 @@ lang.options_other_header = "其他選項";
 lang.options_link_operapage = "Opera Extension Page"
 lang.options_link_projectpage = "Project-Homepage";
 lang.options_link_feedback = "Feedback/Issue-Report";
+
+// Account-Labels (built-in)
+lang.options_label_unread = "全部未讀";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "啟用這個選項後會顯示所有尚未讀取的郵件而非只有收件匣的未讀郵件";

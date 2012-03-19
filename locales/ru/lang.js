@@ -23,7 +23,6 @@ DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
 // General Strings for Option-Page
 lang.options_update = "Интервал проверки";
 lang.options_update_unit = "s";
-lang.options_unread = "Показывать все непрочитанные";
 lang.options_sound = "Воспроизводить звуковой сигнал при получении нового сообщения.";
 lang.options_mailto = "Открывать ссылки mailto: при помощи GMail.";
 lang.options_debugmode = "Enable Debug-Messages";
@@ -43,6 +42,9 @@ lang.options_other_header = "Дополнительные настройки";
 lang.options_link_operapage = "Opera Extension Page"
 lang.options_link_projectpage = "Project-Homepage";
 lang.options_link_feedback = "Feedback/Issue-Report";
+
+// Account-Labels (built-in)
+lang.options_label_unread = "Показывать все непрочитанные";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "Включите, если хотите видеть количество непрочитанных сообщений не только в папке 'Входящие'";

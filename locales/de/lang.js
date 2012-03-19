@@ -21,7 +21,6 @@ Merkmale:
 // General Strings for Option-Page
 lang.options_update         = "Aktualisierungszeit";
 lang.options_update_unit    = "s";
-lang.options_unread         = "alle ungelesenen";
 lang.options_sound          = "Spiele Klangbenachrichtigung bei neuen Nachrichten";
 lang.options_mailto         = "Öffne EMail-Links ('mailto:') mit Googlemail";
 lang.options_debugmode      = "Enable Debug-Messages";
@@ -42,6 +41,11 @@ lang.options_appearance_header  = "Aussehen";
 lang.options_other_header       = "Weitere Optionen";
 lang.options_link_projectpage   = "Projekt-Homepage";
 lang.options_link_feedback      = "Feedback/Fehlerreport";
+
+// Account-Labels (built-in)
+lang.options_label_inbox = "Posteingang";
+lang.options_label_important = "Wichtig";
+lang.options_label_unread = "Alle Ungelesenen";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "Aktivieren Sie diese Funktion um alle ungelesenen Nachrichten anzuzeigen, nicht nur aus dem Posteingang";

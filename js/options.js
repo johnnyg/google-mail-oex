@@ -140,36 +140,40 @@ function ShowAccounts()
     {         
         for (var i = 0; i < Accounts.length; i++)
         {
-                // Get UniqueID
-                var uid = Accounts[i].UniqueId;
+            // Get UniqueID
+            var uid = Accounts[i].UniqueId;
                 
-                // Get current selected Label
-                var currentLabel = {inbox: "", important: "", unread: ""};                
-                currentLabel.inbox = "selected='selected'";
-                if(widget.preferences[uid + 'Label'])
-                  if(widget.preferences[uid + 'Label'] === 'important')
+            // Get current selected Label
+            var currentLabel = {
+                inbox: "", 
+                important: "", 
+                unread: ""
+            };                
+            currentLabel.inbox = "selected='selected'";
+            if(widget.preferences[uid + 'Label'])
+                if(widget.preferences[uid + 'Label'] === 'important')
                     currentLabel.important = "selected='selected'";
-                  else if  (widget.preferences[uid + 'Label'] === 'unread')
+                else if  (widget.preferences[uid + 'Label'] === 'unread')
                     currentLabel.unread = "selected='selected'";
 
-                // Create Label-Box
-                var labelBox =  '<select id="' + uid + 'SelectLabel" name="' + uid + 'Label" title="' + lang.options_label_tooltip + '">' +
-                '<option value="inbox" ' + currentLabel.inbox + '>' + lang.options_label_inbox + '</option>' + 
-                '<option value="important"' + currentLabel.important + '>' + lang.options_label_important + '</option>' +
-                '<option value="unread"' + currentLabel.unread + '>' + lang.options_label_unread + '</option>' +
-                '</select>';   
+            // Create Label-Box
+            var labelBox =  '<select id="' + uid + 'SelectLabel" name="' + uid + 'Label" title="' + lang.options_label_tooltip + '">' +
+            '<option value="inbox" ' + currentLabel.inbox + '>' + lang.options_label_inbox + '</option>' + 
+            '<option value="important"' + currentLabel.important + '>' + lang.options_label_important + '</option>' +
+            '<option value="unread"' + currentLabel.unread + '>' + lang.options_label_unread + '</option>' +
+            '</select>';   
             
-                // Set Entry
-                var entry = $("<div></div>").addClass("account_entry")
-                .append($("<div></div>").addClass('text').html("" + Accounts[i].Name))
-                .append($("<div></div>").addClass('options').html(labelBox));
-                $('#account_list').append(entry); 
+            // Set Entry
+            var entry = $("<div></div>").addClass("account_entry")
+            .append($("<div></div>").addClass('text').html("" + Accounts[i].Name))
+            .append($("<div></div>").addClass('options').html(labelBox));
+            $('#account_list').append(entry); 
             
-                // Set Function for Check/Uncheck
-                $('#' + uid + 'SelectLabel').live( 'change', 
-                    function() {
-                            widget.preferences[$(this).attr('name')] = $(this).attr('value');
-                    });
+            // Set Function for Check/Uncheck
+            $('#' + uid + 'SelectLabel').live( 'change', 
+                function() {
+                    widget.preferences[$(this).attr('name')] = $(this).attr('value');
+                });
         }
     }
 }

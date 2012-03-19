@@ -21,7 +21,6 @@ Google Mail Notifier, Gmail hesabınızdaki okunmamış e-posta sayısını ve u
 // General Strings for Option-Page
 lang.options_update = "Güncelleme Sıklığı";
 lang.options_update_unit = "s";
-lang.options_unread = "tüm okunmamışlar";
 lang.options_sound = "Yeni iletilerde bilgilendirme sesi çal";
 lang.options_mailto = "E-posta bağlantılarını Gmail arayüzünde aç";
 lang.options_debugmode = "Hata Ayıklama İletilerini Etkinleştir";
@@ -42,6 +41,9 @@ lang.options_other_header = "Diğer Seçenekler";
 lang.options_link_operapage = "Opera Eklenti Sayfası"
 lang.options_link_projectpage = "Proje Ana Sayfası";
 lang.options_link_feedback = "Geri Bildirim/Hata Raporlama";
+
+// Account-Labels (built-in)
+lang.options_label_unread = "tüm okunmamışlar";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "yalnızca gelen kutusundaki okunmamış postalar yerine tüm okunmamış postalarınızın gösterilmesini istiyorsanız bu seçeneği etkinleştirin";

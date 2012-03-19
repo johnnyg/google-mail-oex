@@ -254,11 +254,11 @@ function HandleMessages(event)
         case 'SetPopupSize':
             // Only change size if it is different to avoid flicker
             if(Number(MyButton.popup.height) != Number(event.data.height))
-                {
+            {
                     
-                    DebugMessage("changed " + event.data.height + " -> " + MyButton.popup.height);
-                    MyButton.popup.height = event.data.height;
-                }
+                DebugMessage("changed " + event.data.height + " -> " + MyButton.popup.height);
+                MyButton.popup.height = event.data.height;
+            }
             break;
 
         // Do nothing

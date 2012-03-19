@@ -34,9 +34,9 @@ lang.options_link_projectpage = "Project-Homepage";
 lang.options_link_feedback = "Feedback/Issue-Report";
 
 // Account-Labels (built-in)
-lang.options_label_inbox = "inbox";
-lang.options_label_important = "important";
-lang.options_label_unread = "all unread";
+lang.options_label_inbox = "Inbox";
+lang.options_label_important = "Important";
+lang.options_label_unread = "All unread";
 
 // Tooltips for Option-Page
 lang.options_label_tooltip = "Choose where the extension checks for unread messages";

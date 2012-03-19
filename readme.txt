@@ -7,9 +7,12 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 v3.0.3
+Improved Multi-Account-Handling
+Option to get just important unread Messages (per Account)
 FIXED: Extension crashes on empty subject or content
 FIXED: No Standard-Theme is set at first start
 FIXED: "all unread"-option is executed for wrong Account
+WORKAROUND: Gmail-Feed reports zero messages, while there are more messages
 
 v3.0.2
 FIXED: Update-Intervall is not saved properly
@@ -27,7 +30,7 @@ Some Design-Changes
 Fixed some small bugs
 Add Turkish Translation(thanks to Yiğit Ateş)
 Add Hungarian Translation (thanks to Róbert Tóth)
-Uncompleted Russian/Chinese-Translation (need a Translators)
+Uncompleted Russian/Chinese-Translation (need Translators)
 
 v2.3
 Fix wrong message count (thanks to Victor Grischenko)

@@ -24,7 +24,6 @@ Funkciók:
 // General Strings for Option-Page
 lang.options_update = "Frissítési időköz:";
 lang.options_update_unit = "másodperc";
-lang.options_unread = "Minden olvasatlan";
 lang.options_sound = "Hangjelzés új üzenet érkezésekor";
 lang.options_mailto = "Az email címekre mutató linkek (mailto:) megnyitása GMailben";
 lang.options_debugmode = "Debug-üzenetek engedélyezése";
@@ -45,6 +44,9 @@ lang.options_other_header = "További beállítások";
 lang.options_link_operapage = "Opera Kiegészítő Oldal"
 lang.options_link_projectpage = "Projekt Weboldal";
 lang.options_link_feedback = "Visszajelzés / Hibajelentés";
+
+// Account-Labels (built-in)
+lang.options_label_unread = "Minden olvasatlan";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "Akkor engedélyezd ezt az opciót, ha minden olvasatlan levélről kérsz értesítést, nem csak azokról, amik a bejövő levelek mappában vannak!";

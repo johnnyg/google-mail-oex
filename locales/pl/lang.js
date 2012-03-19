@@ -22,7 +22,6 @@ Funkcje:
 // set default strings
 lang.options_update = "Sprawdzaj co";
 lang.options_update_unit = "s";
-lang.options_unread = "wszystkie nowe";
 lang.options_sound = "Odtwarzaj dźwięk przy nowych wiadomościach";
 lang.options_mailto = "Otwieraj odnośniki mailowe (mailto) w Gmailu";
 lang.options_debugmode = "Włącz informacje debugowania";
@@ -42,6 +41,9 @@ lang.options_appearance_header = "Wygląd";
 lang.options_other_header = "Inne opcje";
 lang.options_link_projectpage = "Strona domowa projektu";
 lang.options_link_feedback = "Opinie/raport błędu";
+
+// Account-Labels (built-in)
+lang.options_label_unread = "wszystkie nowe";
 
 // Tooltips for Option-Page			       
 lang.options_unread_tooltip = "zaznacz to pole aby pokazywać wszystkie nowe wiadomości, nie tylko ze skrzynki odbiorczej";
