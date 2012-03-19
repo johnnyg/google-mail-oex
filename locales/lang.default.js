@@ -6,12 +6,12 @@
 // Init Language-Object
 // Note: This is only done here, the translation-files under locales/ overrides
 // this object (so we have always a fallback for new/untranslated strings)
+
 var lang = new Object();
 
 // General Strings for Option-Page
 lang.options_update = "Update-Time";
 lang.options_update_unit = "s";
-lang.options_unread = "all unread";
 lang.options_sound = "Play notification sound on new messages";
 lang.options_mailto = "Open Mail-Links (mailto) with GMail";
 lang.options_debugmode = "Enable Debug-Messages";
@@ -33,8 +33,13 @@ lang.options_link_operapage = "Opera Extension Page"
 lang.options_link_projectpage = "Project-Homepage";
 lang.options_link_feedback = "Feedback/Issue-Report";
 
+// Account-Labels (built-in)
+lang.options_label_inbox = "inbox";
+lang.options_label_important = "important";
+lang.options_label_unread = "all unread";
+
 // Tooltips for Option-Page
-lang.options_unread_tooltip = "enable this option if you want to show all unread mails, not just from inbox";
+lang.options_label_tooltip = "Choose where the extension checks for unread messages";
 
 // Strings for Popup-Page (click on button)
 lang.popup_open = "Open <strong>GMail</strong> in new tab";

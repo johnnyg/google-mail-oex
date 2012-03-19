@@ -20,7 +20,15 @@ var Themes = {
 // Intialize the option page
 $(document).ready(function() 
 {
-    // Init
+    // Listen for script messages from background-process
+    opera.extension.onmessage = HandleMessages;    
+      
+    // Refresh feed now
+    opera.extension.postMessage({
+        cmd:"Refresh"
+    });
+    
+    // Init Settings
     $('#range_update_intervall').val(widget.preferences['updateIntervall']);
     
     // Set language-strings
@@ -63,14 +71,6 @@ $(document).ready(function()
     $('#box_update_intervall').keyup(function() {
         $('#range_update_intervall').val($('#box_update_intervall').val());
     });
-    
-    // Listen for script messages from background-process
-    opera.extension.onmessage = HandleMessages;    
-      
-    // Refresh feed now
-    opera.extension.postMessage({
-        cmd:"Refresh"
-    });
    
     // Set close function (refresh feed & close window)
     $("#close").click(function(){
@@ -83,6 +83,7 @@ $(document).ready(function()
     // Fresh Accounts
     $('#refresh').click(function() {
         $('#account_list').html("");
+        UniqueAccountString = "";
         $('#wait').show();
         opera.extension.postMessage({
             cmd:"Refresh"
@@ -105,7 +106,7 @@ function HandleMessages(event)
         // Messages
         case "messages":
             Accounts = event.data.accounts;
-            AccountsCount = event.data.accounts_count;
+            AccountsCount = Accounts.length;
             
             // Create unique string so we see if there are changes
             var newUniqueAccountString = "";            
@@ -139,33 +140,35 @@ function ShowAccounts()
     {         
         for (var i = 0; i < Accounts.length; i++)
         {
-                // Is the option "All Unread" enabled for this account?
-                var checked = "";
+                // Get UniqueID
                 var uid = Accounts[i].UniqueId;
-                if(widget.preferences[uid + 'Allunread'] && widget.preferences[uid + 'Allunread'] === "on")
-                    checked = " checked='checked'";
-                else
-                    widget.preferences[uid + 'Allunread'] = "off";
-            
-                // Create Checkbox
-                var checkbox =  '<input name="' + uid + 'Allunread" type="checkbox" title="' + 
-                lang.options_unread_tooltip + '"' + checked + '></input>' + '<label for="' + uid + 'Allunread" \n\
-                title="' + lang.options_unread_tooltip + '">' + lang.options_unread + 
-                '</label>';
+                
+                // Get current selected Label
+                var currentLabel = {inbox: "", important: "", unread: ""};                
+                currentLabel.inbox = "selected='selected'";
+                if(widget.preferences[uid + 'Label'])
+                  if(widget.preferences[uid + 'Label'] === 'important')
+                    currentLabel.important = "selected='selected'";
+                  else if  (widget.preferences[uid + 'Label'] === 'unread')
+                    currentLabel.unread = "selected='selected'";
+
+                // Create Label-Box
+                var labelBox =  '<select id="' + uid + 'SelectLabel" name="' + uid + 'Label" title="' + lang.options_label_tooltip + '">' +
+                '<option value="inbox" ' + currentLabel.inbox + '>' + lang.options_label_inbox + '</option>' + 
+                '<option value="important"' + currentLabel.important + '>' + lang.options_label_important + '</option>' +
+                '<option value="unread"' + currentLabel.unread + '>' + lang.options_label_unread + '</option>' +
+                '</select>';   
             
                 // Set Entry
                 var entry = $("<div></div>").addClass("account_entry")
                 .append($("<div></div>").addClass('text').html("" + Accounts[i].Name))
-                .append($("<div></div>").addClass('options').html(checkbox));
+                .append($("<div></div>").addClass('options').html(labelBox));
                 $('#account_list').append(entry); 
             
                 // Set Function for Check/Uncheck
-                $( '.account_entry :checkbox' ).live( 'change', 
+                $('#' + uid + 'SelectLabel').live( 'change', 
                     function() {
-                        if($(this).is( ':checked' ))
-                            widget.preferences[$(this).attr('name')] = "on";
-                        else
-                            widget.preferences[$(this).attr('name')] = "off";
+                            widget.preferences[$(this).attr('name')] = $(this).attr('value');
                     });
         }
     }
