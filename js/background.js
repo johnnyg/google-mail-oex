@@ -216,8 +216,6 @@ function HandleMessages(event)
             else
                 MyButton.icon = "img/toolbar-icon-18px.png";
             
-            opera.postError("GMNEx,bg," + MyButton.icon);
-            
             // then update the Accounts
             Update();
            
@@ -265,7 +263,7 @@ function HandleMessages(event)
 
         // Do nothing
         default:
-            DebugMessage("Unkown Command from Menu -> " + event.data.cmd, "error");
+            DebugMessage("Unknown Command from Menu -> " + event.data.cmd, "error");
     }
 }
 

@@ -45,7 +45,8 @@ function Grake()
     var Accounts = new Array();
     var AccountsNew = new Array();
     var AccountsCompleted = 0;
-    var LastUpdate = "";   
+    var LastUpdate = ""; 
+    var RequestIsRunning = false;  
     
     // Set global Jquery-AJAX-Error-Function
     $.ajaxSetup({
@@ -101,6 +102,14 @@ function Grake()
     // Update Account-Infos
     this.UpdateAccounts = function(callback)
     {
+        // Check if Reuest is Running
+        if(RequestIsRunning)
+        {
+          DebugMessage("Update-Request is already running, abort now");
+          return;
+        }
+        RequestIsRunning = true;
+    
         // At first check if we have multiple Accounts
         $.ajax({
             url: GmailAccountsURL, 
@@ -109,10 +118,40 @@ function Grake()
             {
                 // Catch Accounts
                 var accounts = data.match(EmailPattern);
-                if(accounts)
+                if(accounts && accounts.length)
                 {
-                    DebugMessage("Found active Accounts");
-                    GetFeeds(accounts, callback);
+                    DebugMessage("Found " + accounts.length + " active Accounts (fetch feed-links now)");
+                
+                    // Resets global var for watching the requests
+                    var detectedAccounts = new Array();
+                    var accountDetectionCompleted = 0;
+                    
+                    // Check feeds
+                    for (var i=0; i < accounts.length; i++)
+                    {
+                    
+                        $.ajax({
+                        url: GmailURL + "u/" + i + "/feed/atom/", 
+                        timeout: RequestTimeout,
+                        success: function(xmlFeed) 
+                        {
+                            // Add object with Account-Name and -Url
+                            var mail = "" + xmlFeed.documentElement.getElementsByTagName("title")[0].childNodes[0].nodeValue.match(EmailPattern);
+                            var link = "" + xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
+                            link = link.replace(/http:/g,'https:')
+                            detectedAccounts.push({name: mail, url: link});
+                        },
+                        error: AjaxErrorMessage,
+                        complete: function()
+                        { 
+                            // Count the complete Accounts and get Feeds 
+                            // if all request get back
+                            accountDetectionCompleted++;
+                            if(accountDetectionCompleted == accounts.length)
+                               GetFeeds(detectedAccounts, callback) 
+                            
+                        }});
+                    }
                 }
                 // Delete Account-Object, if we found none Account and callback
                 else
@@ -120,6 +159,7 @@ function Grake()
                     Accounts = new Array();
                     
                     // Call now
+                    RequestIsRunning = false;
                     DebugMessage("No active Account found");
                     if(callback != null) callback();
                 }
@@ -130,29 +170,29 @@ function Grake()
     }
     
     // Feeds abrufen
-    function GetFeeds(accounts, callback)
+    function GetFeeds(detectedAccounts, callback)
     {
-        DebugMessage("Get " + accounts.length + " Message-Feeds now");
+        DebugMessage("Get " + detectedAccounts.length + " Message-Feeds now");
         
         // Resets global var for watching the requests
-        AccountsCompleted = 0;
+        FeedsCompleted = 0;
         
         // Clear List
         AccountsNew = new Array();
                 
         // Check feeds
-        for (var i=0; i < accounts.length; i++)
+        for (var i=0; i < detectedAccounts.length; i++)
         {
-            // Get all unread or just inbox
-            var unique = accounts[i].replace(/[^a-zA-Z 0-9]+/g,'')
-            var feed = "/feed/atom/";
+            // Prepare feed-url
+            var unique = detectedAccounts[i].name.replace(/[^a-zA-Z 0-9]+/g,'')
+            var feed = detectedAccounts[i].url + "/feed/atom/inbox";
             if(widget.preferences[unique + 'Allunread'] && widget.preferences[unique+ 'Allunread'] === "on")
-                feed = "/feed/atom/unread";
+                feed = detectedAccounts[i].url + "/feed/atom/unread";
             
             // Get Feed now
-            DebugMessage("Get Feed for " + accounts[i] + " : " + GmailURL + "u/" + i + feed );
+            DebugMessage("Get Feed for " + detectedAccounts[i].name + " : " + feed );
             $.ajax({
-                url: GmailURL + "u/" + i + feed, 
+                url: feed, 
                 timeout: RequestTimeout,
                 success: function(xmlFeed) 
                 {
@@ -170,11 +210,21 @@ function Grake()
                         msg.Accountname = mail;
                         msg.Sendername = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("name")[0].childNodes[0].nodeValue;
                         msg.Sendermail = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("email")[0].childNodes[0].nodeValue;
+                        
+                        // Check on empty element at title and summary
                         if(nodes[i].getElementsByTagName("title")[0].childNodes[0])
                             msg.Subject = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
-                        if (nodes[i].getElementsByTagName("summary")[0].childNodes[0])
+                        if (nodes[i].getElementsByTagName("summary")[0] && nodes[i].getElementsByTagName("summary")[0].childNodes[0])
                             msg.Content = nodes[i].getElementsByTagName("summary")[0].childNodes[0].nodeValue;
+                        
+                        // TODO: 3.0.3 - Change Link 
+                        var linkLabel = "inbox";
+                        if(widget.preferences[unique + 'Allunread'] && widget.preferences[unique+ 'Allunread'] === "on")
+                          linkLabel = "unread";                        
                         msg.MessageLink = nodes[i].getElementsByTagName("link")[0].getAttribute("href"); 
+                        msg.MessageLink = msg.MessageLink.replace(/#all/g, "#" + linkLabel);
+                        // DebugMessage("Link " + msg.MessageLink);
+                         
                         // TODO: Whats the difference beetween issued and modified
                         msg.Modified = new Date(nodes[i].getElementsByTagName("modified")[0].childNodes[0].nodeValue);
                         messages.push(msg);
@@ -268,8 +318,8 @@ function Grake()
                     // Count the complete Accounts
                     // Note: This function is called every time (error or success),
                     // so there wont be a deadlock
-                    AccountsCompleted++;
-                    if(AccountsCompleted == accounts.length)
+                    FeedsCompleted++;
+                    if(FeedsCompleted == detectedAccounts.length)
                     {
                         // Sets LastUpdate-Timestring
                         var now = new Date();
@@ -284,6 +334,7 @@ function Grake()
                         Accounts = AccountsNew;
                         
                         // Call now
+                        RequestIsRunning = false;
                         DebugMessage("Every Request is returned, now calling the Callback-Function");
                         if(callback != null) callback();
                     }

@@ -1,4 +1,4 @@
-﻿~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Google Mail Notifier (an Opera-Extension)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -9,6 +9,7 @@ HISTORY
 v3.0.3
 FIXED: Extension crashes on empty subject or content
 FIXED: No Standard-Theme is set at first start
+FIXED: "all unread"-option is executed for wrong Account
 
 v3.0.2
 FIXED: Update-Intervall is not saved properly
