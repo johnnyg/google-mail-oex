@@ -15,6 +15,7 @@
 function Gmail_Account() {
     this.UniqueID = "";
     this.Name = "";
+    this.FeedLabel = "";
     this.UnreadCount = 0;
     this.HasNewMessages = false;
     this.AccountLink = "";
@@ -22,6 +23,7 @@ function Gmail_Account() {
 }
 function Gmail_Message() {
     this.Id = "";
+    this.UrlID = "";
     this.Accountname = "";
     this.Sendername = "";
     this.Sendermail = "";
@@ -129,7 +131,6 @@ function Grake()
                     // Check feeds
                     for (var i=0; i < accounts.length; i++)
                     {
-                    
                         $.ajax({
                             url: GmailURL + "u/" + i + "/feed/atom/", 
                             timeout: RequestTimeout,
@@ -151,7 +152,10 @@ function Grake()
                                 // if all request get back
                                 accountDetectionCompleted++;
                                 if(accountDetectionCompleted == accounts.length)
+                                  if(detectedAccounts.length > 0)
                                     GetFeeds(detectedAccounts, callback);
+                                  else
+                                    RequestIsRunning = false;
                             }
                         });
                     }
@@ -204,7 +208,17 @@ function GetFeeds(detectedAccounts, callback)
             {
                 // Get Mail-Adress of this Account (id)
                 var mail = xmlFeed.documentElement.getElementsByTagName("title")[0].childNodes[0].nodeValue.match(EmailPattern);
-                    
+                
+                // Create new Account-Object
+                var currentAccount = new Gmail_Account();
+                currentAccount.Name = "" + mail;
+                currentAccount.UniqueId = currentAccount.Name.replace(/[^a-zA-Z 0-9]+/g,'').toLowerCase();
+                
+                // Set Feed-Label for this Account
+                currentAccount.FeedLabel = "inbox";
+                if(widget.preferences[currentAccount.UniqueId + 'Label'] && widget.preferences[currentAccount.UniqueId + 'Label'] != "")
+                    currentAccount.FeedLabel  = widget.preferences[currentAccount.UniqueId + 'Label'];
+                            
                 // Get Message-Array from Feed
                 var messages = new Array()
                 var nodes = xmlFeed.documentElement.getElementsByTagName("entry");
@@ -217,28 +231,29 @@ function GetFeeds(detectedAccounts, callback)
                     msg.Sendername = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("name")[0].childNodes[0].nodeValue;
                     msg.Sendermail = nodes[i].getElementsByTagName("author")[0].getElementsByTagName("email")[0].childNodes[0].nodeValue;
                         
+                    // Get ID for URLs
+                    var rxGetID = /message_id=([0-9a-f]+)&/g;
+                    var match = rxGetID.exec(nodes[i].getElementsByTagName("link")[0].getAttribute("href"));    
+                    msg.UrlId = match[1];    
+                        
                     // Check on empty element at title and summary
                     if(nodes[i].getElementsByTagName("title")[0].childNodes[0])
                         msg.Subject = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
                     if (nodes[i].getElementsByTagName("summary")[0] && nodes[i].getElementsByTagName("summary")[0].childNodes[0])
                         msg.Content = nodes[i].getElementsByTagName("summary")[0].childNodes[0].nodeValue;
                         
-                    // TODO: 3.0.3 - Change Link                    
-                    msg.MessageLink = nodes[i].getElementsByTagName("link")[0].getAttribute("href"); 
-                    msg.MessageLink = msg.MessageLink.replace(/#all/g, "#" + feedLabel);
-                    // DebugMessage("Link " + msg.MessageLink);
+                    // Message-Link 
+                    if(currentAccount.FeedLabel == "inbox")     
+                      msg.MessageLink = "https://mail.google.com/mail/?fs=1&source=atom&shva=1#inbox/" + msg.UrlId;
+                    else if (currentAccount.FeedLabel == "important")
+                      msg.MessageLink = "https://mail.google.com/mail/?fs=1&source=atom&shva=1#imp/" + msg.UrlId;
+                    else
+                      msg.MessageLink = "https://mail.google.com/mail/?fs=1&source=atom&shva=1#search/is%3a" + feedLabel + "/" + msg.UrlId;
                          
                     // TODO: Whats the difference beetween issued and modified
                     msg.Modified = new Date(nodes[i].getElementsByTagName("modified")[0].childNodes[0].nodeValue);
                     messages.push(msg);
-                }   
-                    
-                // Create new Account-Object
-                var currentAccount = new Gmail_Account();
-                ;
-                currentAccount.Name = "" + mail;
-                currentAccount.UniqueId = currentAccount.Name.replace(/[^a-zA-Z 0-9]+/g,'').toLowerCase();
-         
+                }
                 // Search if this Account already exist
                 var currentIndex = -1;
                 for (var x = 0; x < Accounts.length; x++)
