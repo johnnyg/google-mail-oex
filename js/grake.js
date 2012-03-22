@@ -42,13 +42,14 @@ function Grake()
     // Internal Vars
     var GmailURL = "https://mail.google.com/mail/";
     var GmailAccountsURL = "https://accounts.google.com/AddSession";
-    var RequestTimeout = 10000; // Timeout (in ms) for Ajax-Requests
+    var RequestTimeout = 5000; // Timeout (in ms) for Ajax-Requests
     var EmailPattern = /([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4})/ig;
     var Accounts = new Array();
     var AccountsNew = new Array();
     var AccountsCompleted = 0;
     var LastUpdate = ""; 
     var RequestIsRunning = false;  
+    var TimeoutProblem = false;
     
     // Set global Jquery-AJAX-Error-Function
     $.ajaxSetup({
@@ -70,7 +71,13 @@ function Grake()
     this.GetAccountsCount = function()
     {
         return Accounts.length;
-    } 
+    }
+    
+    // Returns if there was a timeout-problem
+    this.GetTimeoutProblem  = function()
+    {
+        return TimeoutProblem;
+    }
     
     // Returns total number of new messages
     this.GetTotalUnreadCount = function()
@@ -111,6 +118,7 @@ function Grake()
             return;
         }
         RequestIsRunning = true;
+        TimeoutProblem = false;
     
         // At first check if we have multiple Accounts
         $.ajax({
@@ -145,17 +153,40 @@ function Grake()
                                     url: link
                                 });
                             },
-                            error: AjaxErrorMessage,
+                            error: function(jqXHR, textStatus, errorThrown)
+                            {
+                              // If there is a timeout, try to open gmail
+                              // (because some cookies are missing)
+                              if(textStatus == "timeout")
+                              {
+                                 TimeoutProblem = true;
+                                 var gmUrl = this.url.replace(/feed\/atom\//g,'');
+                                 DebugMessage("Timeout-Problem, check now " + gmUrl  , "error");    
+                                 $.ajax({
+                                    url: gmUrl,
+                                    timeout: RequestTimeout});
+                              }
+                              // other error
+                              else
+                                DebugMessage("Ajax-Error " + textStatus + "/" + errorThrown, "error");    
+                            },
                             complete: function()
                             { 
                                 // Count the complete Accounts and get Feeds 
                                 // if all request get back
-                                accountDetectionCompleted++;
+                                accountDetectionCompleted++;  
                                 if(accountDetectionCompleted == accounts.length)
                                   if(detectedAccounts.length > 0)
                                     GetFeeds(detectedAccounts, callback);
                                   else
+                                  {
+                                    Accounts = new Array();
+                    
+                                    // Call now
                                     RequestIsRunning = false;
+                                    DebugMessage("No active Account found");
+                                    if(callback != null) callback();
+                                  }
                             }
                         });
                     }

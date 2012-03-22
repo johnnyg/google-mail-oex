@@ -6,13 +6,16 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
+v3.0.4
+FIXED: Reports there is no account, if gmail wasn't opened directly yet
+
 v3.0.3
 Improved Multi-Account-Handling
 Option to get just important unread Messages (per Account)
 FIXED: Extension crashes on empty subject or content
 FIXED: No Standard-Theme is set at first start
 FIXED: "all unread"-option is executed for wrong Account
-WORKAROUND: Gmail-Feed reports zero messages, while there are more messages
+FIXED: Red counter dont appear, while there are messages
 
 v3.0.2
 FIXED: Update-Intervall is not saved properly

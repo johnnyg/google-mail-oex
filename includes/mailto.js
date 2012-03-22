@@ -2,9 +2,9 @@
 // @name	Google Mail Notfier - Mailto-Links
 // @description	Open mailto-links with gmail
 // @include	http://*
-// // @include	https://*
+// @include	https://*
 // @copyright	codebit
-// @version	1.0.0
+// @version	1.1.0
 // ==/UserScript==
 
 (function () 

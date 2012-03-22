@@ -109,6 +109,17 @@ function Update_callback(source)
         MyButton.badge.display="block";
         MyButton.badge.textContent = "x";
         DebugMessage("No active accounts are found");
+        
+        // We check twice, because it is possible that
+        // an account is not initialized yet (if a user logged in in other
+        // google-service, but hasn't open mail yet) but Grake tries open
+        // gmail directly in background
+        if(Grake.GetTimeoutProblem())
+        {
+            DebugMessage("Try again, because there was a timeout-problem");
+            window.setTimeout(function() {Update(source);}, 500); 
+            return;
+        }
     }
     else
     {
