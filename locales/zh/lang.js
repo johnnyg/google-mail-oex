@@ -9,37 +9,36 @@ DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
 Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。
 
 特色功能
-* Automatically detects open GMail-Accounts (no password, username required)
-* Support Multi-Account
-* Supports all Google Accounts
-* Show all unread Messages or just from Inbox
-* Option to open Mail-Links directly with GMail
-* Optional Sound-Notification
+* 自動偵測 GMail 帳號（無須密碼或使用者名稱）
+* 支援偵測多組帳號
+* 支援所有 Google 帳號
+* 顯示所有未讀取訊息或收件匣的未讀訊息
+* 提供已 GMail 開啟郵件連結的選項
+* 提供音效提示選項
 
  */
 
 // General Strings for Option-Page
-lang.options_update = "更新間隔";
+lang.options_update = "檢查間隔";
 lang.options_update_unit = "秒";
 lang.options_sound = "當有新的郵件時播放提示音效";
 lang.options_mailto = "使用 Gmail 開啟郵件連結（mailto）";
-lang.options_debugmode = "Enable Debug-Messages";
+lang.options_debugmode = "啟用偵錯訊息";
 lang.options_close = "套用並關閉視窗";
-lang.options_refresh = "Refresh Accounts";
-lang.options_choose_theme = "Choose Theme";
-lang.options_description = "Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過 \
-按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外， 這個延伸套件還可以讓你選擇自動使用 \\n\
-Gmail 來開啟郵件連結（mailto:）。";
-lang.options_description_accounts = "This extension detects automatically your\n\
-    open GMail-Accounts. You must be logged in to your Google-Account to see your inbox. If you want to\n\
-    use more than one account at time, please use the <a id='ma_link'>multiple sign-in-method</a>."
-lang.options_dectected_accounts = "Detected Accounts:";
+lang.options_refresh = "重新整理帳號";
+lang.options_choose_theme = "選擇主題";
+lang.options_description = "Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過\
+按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。";
+lang.options_description_accounts = "這個延伸套件會自動偵測你所開啟的\n\
+    GMail 帳號。你必須要登入 Google 帳號才能檢視你的收件匣。如果你想要\n\
+    同時偵測多個帳號，請使用<a id='ma_link'>多帳戶登入</a>."
+lang.options_dectected_accounts = "已偵測的帳號：";
 lang.options_accounts_header = "你的 Gmail 帳號";
-lang.options_appearance_header = "Appearance";
+lang.options_appearance_header = "外觀";
 lang.options_other_header = "其他選項";
-lang.options_link_operapage = "Opera Extension Page"
-lang.options_link_projectpage = "Project-Homepage";
-lang.options_link_feedback = "Feedback/Issue-Report";
+lang.options_link_operapage = "Opera 延伸套件首頁"
+lang.options_link_projectpage = "專案首頁";
+lang.options_link_feedback = "回饋 / 問題回報";
 
 // Account-Labels (built-in)
 lang.options_label_unread = "全部未讀";
@@ -59,11 +58,11 @@ lang.popup_lastupdate = "上次檢查於：";
 lang.popup_error_occurred="發生錯誤";
 lang.popup_from = "寄件者：";
 lang.popup_to = "收件者：";
-lang.popup_choose_account = "Choose your account: ";
+lang.popup_choose_account = "選擇你的帳號";
 
 // Error-Strings
-lang.error_noActiveAccount = "<strong>There is no active Google Mail Account</strong>, " +
-"<br/>please login to your Google-Account and try again.";
+lang.error_noActiveAccount = "<strong>未偵測到任何 Google Mail 帳號</strong>，" +
+"<br/>請登入你的 Google 帳號並重試。";
 
 // Localized Links
 lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=en&answer=1721977";
