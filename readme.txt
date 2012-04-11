@@ -6,6 +6,10 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
+
+v3.0.5
+FIXED: Deadlock when Mail-Feed-Request is lost
+
 v3.0.4
 FIXED: Reports there is no account, if gmail wasn't opened directly yet
 

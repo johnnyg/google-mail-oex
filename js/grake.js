@@ -50,6 +50,7 @@ function Grake()
     var LastUpdate = ""; 
     var RequestIsRunning = false;  
     var TimeoutProblem = false;
+    var RequestTimer;
     
     // Set global Jquery-AJAX-Error-Function
     $.ajaxSetup({
@@ -119,6 +120,10 @@ function Grake()
         }
         RequestIsRunning = true;
         TimeoutProblem = false;
+        
+        // Set timer for Request to avoid deadlock
+        RequestTimer = window.setTimeout(function(){RequestIsRunning=false;}, 
+            RequestTimeout * 3);
     
         // At first check if we have multiple Accounts
         $.ajax({
@@ -184,6 +189,7 @@ function Grake()
                     
                                     // Call now
                                     RequestIsRunning = false;
+                                    clearTimeout(RequestTimer);
                                     DebugMessage("No active Account found");
                                     if(callback != null) callback();
                                   }
@@ -198,6 +204,7 @@ function Grake()
                     
                 // Call now
                 RequestIsRunning = false;
+                clearTimeout(RequestTimer);
                 DebugMessage("No active Account found");
                 if(callback != null) callback();
             }
@@ -400,6 +407,7 @@ function GetFeeds(detectedAccounts, callback)
                         
                     // Call now
                     RequestIsRunning = false;
+                    clearTimeout(RequestTimer);
                     DebugMessage("Every Request is returned, now calling the Callback-Function");
                     if(callback != null) callback();
                 }
