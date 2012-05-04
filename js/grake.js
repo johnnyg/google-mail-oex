@@ -247,6 +247,9 @@ function GetFeeds(detectedAccounts, callback)
                 // Get Mail-Adress of this Account (id)
                 var mail = xmlFeed.documentElement.getElementsByTagName("title")[0].childNodes[0].nodeValue.match(EmailPattern);
                 
+                // Get Basic-Link
+                var mailLink = xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
+                
                 // Create new Account-Object
                 var currentAccount = new Gmail_Account();
                 currentAccount.Name = "" + mail;
@@ -280,13 +283,13 @@ function GetFeeds(detectedAccounts, callback)
                     if (nodes[i].getElementsByTagName("summary")[0] && nodes[i].getElementsByTagName("summary")[0].childNodes[0])
                         msg.Content = nodes[i].getElementsByTagName("summary")[0].childNodes[0].nodeValue;
                         
-                    // Message-Link 
+                    // Message-Link                     
                     if(currentAccount.FeedLabel == "inbox")     
-                      msg.MessageLink = "https://mail.google.com/mail/?fs=1&source=atom&shva=1#inbox/" + msg.UrlId;
+                      msg.MessageLink = mailLink + "/?fs=1&source=atom&shva=1#inbox/" + msg.UrlId;
                     else if (currentAccount.FeedLabel == "important")
-                      msg.MessageLink = "https://mail.google.com/mail/?fs=1&source=atom&shva=1#imp/" + msg.UrlId;
+                      msg.MessageLink = mailLink + "/?fs=1&source=atom&shva=1#imp/" + msg.UrlId;
                     else
-                      msg.MessageLink = "https://mail.google.com/mail/?fs=1&source=atom&shva=1#search/is%3a" + feedLabel + "/" + msg.UrlId;
+                      msg.MessageLink = mailLink + "/?fs=1&source=atom&shva=1#search/is%3a" + feedLabel + "/" + msg.UrlId;
                          
                     // TODO: Whats the difference beetween issued and modified
                     msg.Modified = new Date(nodes[i].getElementsByTagName("modified")[0].childNodes[0].nodeValue);
@@ -357,7 +360,7 @@ function GetFeeds(detectedAccounts, callback)
                 currentAccount.UnreadMessages = messages;
                     
                 // Set Account-Link
-                currentAccount.AccountLink = xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
+                currentAccount.AccountLink = mailLink;
                                        
                 // Set Unread-Count
                 // Note: the fullcount field can be bigger than the number of
