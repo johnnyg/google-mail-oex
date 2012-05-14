@@ -94,15 +94,6 @@ function OpenGoogleMailTab(compose)
     window.close();
 }
 
-// Compose new mail
-function ComposeMail()
-{
-    // Send command to background-process
-    opera.extension.postMessage({
-        cmd:"ComposeMail"
-    });
-}
-
 // Show Preferences in new Tab
 function ShowPreferences()
 {

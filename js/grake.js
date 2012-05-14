@@ -151,8 +151,9 @@ function Grake()
                             {
                                 // Add object with Account-Name and -Url
                                 var mail = "" + xmlFeed.documentElement.getElementsByTagName("title")[0].childNodes[0].nodeValue.match(EmailPattern);
-                                var link = "" + xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
+                                var link = this.url;
                                 link = link.replace(/http:/g,'https:')
+                                link = link.replace(/\/feed\/atom\//g,'')
                                 detectedAccounts.push({
                                     name: mail, 
                                     url: link
@@ -233,6 +234,10 @@ function GetFeeds(detectedAccounts, callback)
         var feedLabel = "inbox";
         if(widget.preferences[unique + 'Label'] && widget.preferences[unique + 'Label'] != "")
             feedLabel = widget.preferences[unique + 'Label'];
+            
+        // WORKAROUND: Use label '' for 'inbox'  (becuase of counter) -> Issue 75
+        // -> http://code.google.com/p/google-mail-oex/issues/detail?id=75
+        if(feedLabel == "inbox") feedLabel = '';
         
         // Prepare feed-url                  
         var feed = detectedAccounts[i].url + "/feed/atom/" + feedLabel;
@@ -248,7 +253,10 @@ function GetFeeds(detectedAccounts, callback)
                 var mail = xmlFeed.documentElement.getElementsByTagName("title")[0].childNodes[0].nodeValue.match(EmailPattern);
                 
                 // Get Basic-Link
-                var mailLink = xmlFeed.documentElement.getElementsByTagName("link")[0].getAttribute("href");
+                var link = this.url;
+                link = link.replace(/http:/g,'https:')
+                link = link.replace(/\/feed\/atom\//g,'')
+                var mailLink = link;
                 
                 // Create new Account-Object
                 var currentAccount = new Gmail_Account();

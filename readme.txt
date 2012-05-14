@@ -7,6 +7,10 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 
+v3.0.6
+FIXED: Multi-Accounts are not detected properly
+FIXED: Message-counter shows wrongs number (still appears with labels 'important' and 'unread')
+
 v3.0.5
 FIXED: Deadlock when Mail-Feed-Request is lost
 
