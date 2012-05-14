@@ -89,9 +89,6 @@ function OpenGoogleMailTab(compose)
         if(compose) linkURL  += "?#compose";
         LoadLink(null, linkURL);
     }
-  
-    // Close Popup-Menu
-    window.close();
 }
 
 // Show Preferences in new Tab
@@ -118,7 +115,10 @@ function LoadLink(event, directlink)
     opera.extension.postMessage({
         cmd: "LoadLink", 
         lnk: linkURL
-    });
+    });            
+      
+    // Close Popup-Menu
+    window.close();
 }
 
 // Set new height (only background-process can do this)
