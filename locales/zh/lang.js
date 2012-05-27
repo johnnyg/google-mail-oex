@@ -1,6 +1,6 @@
-/* Google Mail Notifier - Russian Translation
+/* Google Mail Notifier - Traditional Chinese Translation
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * by 嚮陽
+* by 嚮陽 (t7yang, http://t7yang.blogspot.com)
 
 SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
 一個簡單又快速的延伸套件提醒你 Gmail 帳號中有多少尚未讀取的郵件和顯示郵件的標題。你可以設定多個要檢查的帳號還有設定直接用 Gmail 來開啟郵件連結。
@@ -16,7 +16,7 @@ Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可�
 * 提供已 GMail 開啟郵件連結的選項
 * 提供音效提示選項
 
- */
+*/
 
 // General Strings for Option-Page
 lang.options_update = "檢查間隔";
@@ -27,11 +27,12 @@ lang.options_debugmode = "啟用偵錯訊息";
 lang.options_close = "套用並關閉視窗";
 lang.options_refresh = "重新整理帳號";
 lang.options_choose_theme = "選擇主題";
-lang.options_description = "Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過\
-按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。";
+lang.options_description = "Google Mail Notifier 是一個小巧、易用又快速\
+的延伸套件，它可以讓你透過按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。\
+除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。";
 lang.options_description_accounts = "這個延伸套件會自動偵測你所開啟的\n\
     GMail 帳號。你必須要登入 Google 帳號才能檢視你的收件匣。如果你想要\n\
-    同時偵測多個帳號，請使用<a id='ma_link'>多帳戶登入</a>."
+    同時偵測多個帳號，請使用<a id='ma_link'>多帳戶登入</a>.";
 lang.options_dectected_accounts = "已偵測的帳號：";
 lang.options_accounts_header = "你的 Gmail 帳號";
 lang.options_appearance_header = "外觀";
@@ -41,10 +42,12 @@ lang.options_link_projectpage = "專案首頁";
 lang.options_link_feedback = "回饋 / 問題回報";
 
 // Account-Labels (built-in)
-lang.options_label_unread = "全部未讀";
+lang.options_label_inbox = "收件匣";
+lang.options_label_important = "重要郵件";
+lang.options_label_unread = "未讀郵件";
 
 // Tooltips for Option-Page
-lang.options_unread_tooltip = "啟用這個選項後會顯示所有尚未讀取的郵件而非只有收件匣的未讀郵件";
+lang.options_label_tooltip = "選擇套件要顯示哪些未讀的郵件";
 
 // Strings for Popup-Page (click on button)
 lang.popup_open = "在新的分頁開啟 <strong>GMail</strong>";
@@ -55,10 +58,13 @@ lang.popup_onemsg = "有<strong>一封未讀取的郵件</strong>";
 lang.popup_msg_before = "有<strong>";
 lang.popup_msg_after = "封未讀取的郵件</strong>";
 lang.popup_lastupdate = "上次檢查於：";
-lang.popup_error_occurred="發生錯誤";
+lang.popup_error_occurred = "發生錯誤";
 lang.popup_from = "寄件者：";
 lang.popup_to = "收件者：";
 lang.popup_choose_account = "選擇你的帳號";
+// Strings for Mails
+lang.mail_empty_subject= "(空的主旨)";
+lang.mail_empty_body = "(空的內容)";
 
 // Error-Strings
 lang.error_noActiveAccount = "<strong>未偵測到任何 Google Mail 帳號</strong>，" +
