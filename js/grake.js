@@ -149,15 +149,24 @@ function Grake()
                             timeout: RequestTimeout,
                             success: function(xmlFeed) 
                             {
-                                // Add object with Account-Name and -Url
+                                // Get Mail of this Account
                                 var mail = "" + xmlFeed.documentElement.getElementsByTagName("title")[0].childNodes[0].nodeValue.match(EmailPattern);
+                                var unique = mail.replace(/[^a-zA-Z 0-9]+/g,''); 
+                                
+                                // Get Link-Adress of this Account
                                 var link = this.url;
                                 link = link.replace(/http:/g,'https:')
                                 link = link.replace(/\/feed\/atom\//g,'')
-                                detectedAccounts.push({
-                                    name: mail, 
-                                    url: link
-                                });
+                                
+                                // Check if this Account should be ignored,
+                                // otherwise add to liot
+                                if(!widget.preferences[unique + 'Label'] || widget.preferences[unique + 'Label'] != "ignore")
+                                {
+                                  detectedAccounts.push({
+                                      name: mail, 
+                                      url: link
+                                  });
+                                }
                             },
                             error: function(jqXHR, textStatus, errorThrown)
                             {

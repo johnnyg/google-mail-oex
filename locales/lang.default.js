@@ -38,6 +38,7 @@ lang.options_link_feedback = "Feedback/Issue-Report";
 lang.options_label_inbox = "Inbox";
 lang.options_label_important = "Important";
 lang.options_label_unread = "All unread";
+lang.options_label_ignore= "Ignore";
 
 // Tooltips for Option-Page
 lang.options_label_tooltip = "Choose where the extension checks for unread messages";
