@@ -208,16 +208,28 @@ function HandleMessages(event)
       
         // Load Message-Link in new Tab
         case 'LoadLink':
+        
+            // Always use https
+            var link = event.data.lnk.replace(/^http:\/\//i, 'https://');
+            
+            // Use HTML-Mode if option is set
+            if(widget.preferences['basicMode'] && widget.preferences['basicMode'] === "on")
+              link = link.replace(/\/u\//i, '/h/');
+              
+            DebugMessage("Open link: " + link);
+        
+            // Open now in new tab
             if( opera.extension.tabs.create )
                 opera.extension.tabs.create({
-                    url:event.data.lnk,
+                    url:link,
                     focused:true
                 });
             break;
             
         // Refresh now (without callback)
         case 'Refresh_NoCallback':
-            // reset timer
+        
+            // Reset timer
             window.clearTimeout(UpdateTimer);            
                 
             // Sets alternate icon

@@ -73,19 +73,16 @@ function OpenGoogleMailTab(compose)
     // Or just one
     else if (AccountsCount == 1)
     {
-        for (var j = 0; j < Accounts.length; j++)
-        {
-            // set link
-            var linkURL2 = Accounts[j].AccountLink;
-            if(compose) linkURL2 += "?#compose";
-            LoadLink(null, linkURL2);
-            return;
-        }
+        // Set link
+        var linkURL2 = Accounts[0].AccountLink;
+        if(compose) linkURL2 += "?#compose";
+        LoadLink(null, linkURL2);
+        return;
     }
     // Otherwise show default Gmail-Tab
     else
     {
-        var linkURL = "http://mail.google.com/mail/";
+        var linkURL = "https://mail.google.com/mail/";
         if(compose) linkURL  += "?#compose";
         LoadLink(null, linkURL);
     }

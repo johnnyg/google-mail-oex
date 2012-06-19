@@ -7,6 +7,10 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 
+vX
+FIXED: Always use https-links for new tabs
+
+
 v3.0.6
 FIXED: Multi-Accounts are not detected properly
 FIXED: Message-counter shows wrongs number (still appears with labels 'important' and 'unread')

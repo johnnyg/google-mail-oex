@@ -23,6 +23,7 @@ lang.options_update         = "Aktualisierungszeit";
 lang.options_update_unit    = "s";
 lang.options_sound          = "Spiele Klangbenachrichtigung bei neuen Nachrichten";
 lang.options_mailto         = "Öffne EMail-Links ('mailto:') mit Googlemail";
+lang.options_htmlmode       = "\"Einfachen HTML\"-Modus in Google-Mail verwenden";
 lang.options_debugmode      = "Enable Debug-Messages";
 lang.options_close          = "Einstellungen übernehmen und Fenster schließen";
 lang.options_refresh        = "Konten aktualisieren";

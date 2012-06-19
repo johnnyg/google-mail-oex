@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
   id="http://www.codebit.de/oex/google-mail"
-  version="3.0.7">
+  version="3.1">
 
   <!-- Extension Infos -->
-  <name>Google Mail Notifier</name>
+  <name>GMail Notifier</name>
   
   <description xml:lang="en">A simple and fast extensions to inform you about new unread messages in your GMail-Account and show the titles of the new messages. You can check multiple accounts and have the option to open mail-links directly with GMail.</description>
   <description xml:lang="de">Diese Erweiterung informiert Sie über neue ungelesene Nachrichten in Ihrem Googlemail-Konto und zeigt die Titel dieser Nachrichten an. Es werden mehrere Konten unterstützt und Mail-Links können direkt mit Googlemail geöffnet werden.</description>
@@ -35,6 +35,7 @@
   <preference name="enableSound" value="on" />
   <preference name="mailtoLinks" value="off" />
   <preference name="debugMode" value="off" />  
+  <preference name="basicMode" value="off" />
   <preference name="theme" value="standard" />  
   
   <!-- Access Policy -->

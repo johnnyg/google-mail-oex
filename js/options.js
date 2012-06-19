@@ -37,6 +37,7 @@ $(document).ready(function()
     $('#enable_sound_label').html(lang.options_sound);
     $('#mailto_links_label').html(lang.options_mailto);
     $('#debug_mode_label').html(lang.options_debugmode);
+    $('#html_mode_label').html(lang.options_htmlmode);
     $('#theme_label').html(lang.options_choose_theme);
     $('#close').html(lang.options_close);  
     $('#refresh').html(lang.options_refresh);  
