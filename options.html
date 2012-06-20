@@ -27,35 +27,37 @@
 
                 <h3 id="appearance_header"></h3>
                 <fieldset>
-                    <p>
+                    <div class='element'>
                         <label id="theme_label" for="theme"></label>
                         <select id="theme" name="theme" type="text"></select>
-                    </p>
+                    </div>
                 </fieldset>
 
                 <h3 id="other_header"></h3>
                 <fieldset>
-                    <p>
+                    <div class='element'>
                         <input id="range_update_intervall" type="range" min="5" max="300" step="1"></input>
                         <label id="range_update_intervall_label" for="range_update_intervall"></label>
-                        <input id="box_update_intervall" name="updateIntervall" type="text"></input> <span id="update_intervall_unit"></span>
-                    </p>
-                    <p>
+                        <input id="box_update_intervall" name="updateIntervall" type="text"></input><span id="update_intervall_unit"></span>
+                    </div>
+                    <div class='element'>
                         <input id="enable_sound" name="enableSound" type="checkbox"></input>
                         <label id="enable_sound_label" for="enableSound"></label>
-                    </p>
-                    <p>
+                        <div id='sound_container'><select id='sounds' name='soundfile'></select>
+                        <img id='playsound' onclick='PreviewSound()' src='img/media-play.png' /></div>                        
+                    </div>
+                    <div class='element'>
                         <input id="mailto_links" name="mailtoLinks" type="checkbox"></input>
                         <label id="mailto_links_label" for="mailtoLinks"><b></b></label>
-                    </p>
-                    <p>
+                    </div>
+                    <div class='element'>
                         <input id="html_mode" name="basicMode" type="checkbox"></input>
                         <label id="html_mode_label" for="basicMode"><b></b></label>
-                    </p>
-                    <p>
+                    </div>
+                    <div class='element'>
                         <input id="debug_mode" name="debugMode" type="checkbox"></input>
                         <label id="debug_mode_label" for="debugMode"><b></b></label>
-                    </p>
+                    </div>
                 </fieldset>
 
                 <div class="button_line">

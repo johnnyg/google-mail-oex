@@ -7,10 +7,14 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 
-vX
+v3.1
+Supporting Mail-Actions: mark as read, archive, mark as spam, delete mail
+New Tooltip-Design
+Option to use Gmail-"Basic-Html"-Mode for all links
+Option to ignore new mails for specific Accounts
+Option to preview notification-sound
 FIXED: Always use https-links for new tabs
-
-
+ 
 v3.0.6
 FIXED: Multi-Accounts are not detected properly
 FIXED: Message-counter shows wrongs number (still appears with labels 'important' and 'unread')

@@ -193,7 +193,7 @@ div::selection, p::selection, img::selection {
 }
 
 .message_options .button .image.mark {
-  background: url("../img/check21.png") 0 0 no-repeat transparent;
+  background: url("../img/check16.png") 4px 2px no-repeat transparent;
 }
 
 .message_options .button .image.archive {

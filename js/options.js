@@ -17,6 +17,11 @@ var Themes = {
     "gmail":"Google Mail"
 };
 
+// Sound-Array (filename : display name)
+var Sounds = {
+    "notification1.ogg": "Standard"
+};
+
 // Intialize the option page
 $(document).ready(function() 
 {
@@ -63,6 +68,16 @@ $(document).ready(function()
             attr("value",key).
             text(value)); 
     });
+    
+    // Set Sound
+    $.each(Sounds, function(key, value)
+    {   
+        $('#sounds').
+        append($("<option></option>").
+            attr("value",key).
+            text(value)); 
+    });
+    ToogleSoundChooser();
     
     // Show Range-Secounds on change
     $('#range_update_intervall').change(function() {
@@ -183,6 +198,25 @@ function ShowAccounts()
     }
 }
 
+// Toogle Soundchooser
+function ToogleSoundChooser()
+{
+  if(widget.preferences['enableSound'] === "on")
+    $('#sound_container').show();
+  else
+    $('#sound_container').hide();
+}
+
+// Preview Sound
+function PreviewSound()
+{  
+  // Init new Audio-Object and play
+  var AudioObject = new Audio;
+  AudioObject.src = '/sound/' + $('#sounds').val();
+  AudioObject.play();        
+  DebugMessage($('#sounds').val() + " is played");
+}
+
 // Write Debug-Message
 function DebugMessage(message, type)
 {
@@ -273,8 +307,11 @@ addEventListener
                     }
                     ).join( glue );
 
-                // set value
+                // set value                 
                 storage.setItem( name, value );
+                
+                // Toogle Elements
+                if(name === "enableSound" ) ToogleSoundChooser();
             }
 
 

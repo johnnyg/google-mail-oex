@@ -37,6 +37,7 @@
   <preference name="debugMode" value="off" />  
   <preference name="basicMode" value="off" />
   <preference name="theme" value="standard" />  
+  <preference name="soundfile" value="notification1.ogg" /> 
   
   <!-- Access Policy -->
   <feature name="opera:share-cookies" required="true"/>

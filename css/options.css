@@ -157,12 +157,30 @@ footer p.small {
     color: blue;
 }
 
+#sound_container{
+ margin-left: 50px;
+ margin-top: 5px;
+}
+
+#sound_container select{
+ width: 200px;
+}
+
+#playsound {
+  float: left;
+  margin-right: 5px;
+}
+
 fieldset {
     border: 1px solid rgba(150,160,200,0.4);
     background: rgba(150,160,200,0.1);
     border-radius: 3px;
     padding: 10px 20px;
     box-shadow: 0 0 4px #DDD;
+}
+
+fieldset .element{
+    margin: 15px 5px;
 }
 
 fieldset label {
