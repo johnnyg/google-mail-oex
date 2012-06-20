@@ -282,7 +282,7 @@ function HandleMessages(event)
             
         // MessageAction (mark as read, achive, delete, ...)
         case 'MessageAction':
-              MessageAction(event.data.uid, event.data.anum, event.data.action);
+              MessageAction(event.data.uid, event.data.anum, event.data.action, event.source);
             break;
             
         // Debug-Message
@@ -314,28 +314,50 @@ function SendMsg(source, message)
 }
 
 // Performs a Message-Action
-function MessageAction(uid, anum, action)
+function MessageAction(uid, anum, action, source)
 { 
   switch(action)
   {
     // Mark as read ("rd")
     case "mark": 
-      Grake.MessageAction({urlid: uid, accountnum: anum, action: "rd"}); 
+      Grake.MessageAction({
+        urlid: uid, accountnum: anum, 
+        action: "rd",
+        callback: function(){Update(source);} }); 
       break;
     
-    // Archive thread ("arch")
+    // Archive thread ("arch" then "rd")
     case "archive":
-      Grake.MessageAction({urlid: uid, accountnum: anum, action: "arch"});
+      Grake.MessageAction({
+        urlid: uid, accountnum: anum, 
+        action: "arch",
+        callback: function(){
+          Grake.MessageAction({
+            urlid: uid, accountnum: anum, 
+            action: "rd",
+            callback: function(){Update(source);}});}}
+      );
       break;
     
-    // Delete thread ("tr")
+    // Delete thread ("tr" then "rd")
     case "delete":
-      Grake.MessageAction({urlid: uid, accountnum: anum, action: "tr"});
+      Grake.MessageAction({
+        urlid: uid, accountnum: anum, 
+        action: "tr",
+        callback: function(){
+          Grake.MessageAction({
+            urlid: uid, accountnum: anum, 
+            action: "rd",
+            callback: function(){Update(source);}});}}
+      );
       break;
     
     // Mark as Spam ("sp")   
     case "spam":
-      Grake.MessageAction({urlid: uid, accountnum: anum, action: "sp"});
+      Grake.MessageAction({
+        urlid: uid, accountnum: anum, 
+        action: "sp",
+        callback: function(){Update(source);} }); 
       break;
     
     // Unknown

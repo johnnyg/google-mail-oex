@@ -182,7 +182,7 @@ div::selection, p::selection, img::selection {
 }
 
 /*** Wait-Animation in Popup-Menu ***/
-#wait {
+#wait, .message_options .wait {
     background: url('img/ajax-loader.gif') no-repeat center center;
     height: 30px;
 }

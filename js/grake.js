@@ -443,7 +443,7 @@ function Grake()
   }
   
      // Send a POST action to Gmail
-   this.MessageAction = function (actionObj, callback)
+   this.MessageAction = function (actionObj)
    {
       // At first check if qe have a valid At-Value
       if (AtValue == null) 
@@ -470,7 +470,8 @@ function Grake()
               DebugMessage("Command '" + actionObj.action + "' for " + actionObj.urlid + " sucessfully send"); 
               
               // Callback
-              if (callback != null) callback();  
+              if (actionObj.callback != null) 
+                actionObj.callback();                
           }
           });
         }

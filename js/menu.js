@@ -169,7 +169,7 @@ function ShowMessages(accounts, showAccountSorted)
     // Show per Account
     if(showAccountSorted)
     {
-    //TODO: Cooming soon...
+        //TODO: Cooming soon...
     }
     else
     {
@@ -302,11 +302,10 @@ function MessageAction(event)
           uid: event.data.uid,
           action: event.data.action,
           anum: event.data.num
-      });   
+      });
       
-      // TODO: Remove element now (hope fur success)
-      
-      // TODO: Refresh          
+      // Show waiting indicator
+      $('#message_options').html("").append($('<div>').addClass('wait'));    
       
       return false;
 }
