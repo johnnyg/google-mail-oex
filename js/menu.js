@@ -175,13 +175,15 @@ function ShowMessages(accounts, showAccountSorted)
     {
         var msg = JoinMessages(accounts);
         SetHeight(StandardHeight + msg.length * SingleMessageHeight);
-        var newMsgBox = $('<div>');
-        for(var i=0; i < msg.length; i++)
-            newMsgBox.append(CreateMessageBox(msg[i]));
-        
-        // Show now
         $('#messageBox .message').remove();
-        $('#messageBox').append(newMsgBox);
+        for(var i=0; i < msg.length; i++)
+        {
+          var box = CreateMessageBox(msg[i]);
+          $('#messageBox').append(box);
+          box.simpletip({content: box.tt_content, fixed: true, 
+            position: 'top', offset: [0, -3], hideEffect: "none",
+            showEffect: "none"});
+        }
     }
 }
 
@@ -227,26 +229,22 @@ function CreateMessageBox(message)
       .attr("name", "num").attr("value", message.AccountNumber);
     
     // Tooltip
-    var tt_to = "<u>" + lang.popup_to + " " + message.Accountname + "</u><br/>";
-    var tooltip = $("<div>")
-    .html("<p>" + tt_to + lang.popup_from + " " + message.Sendermail + 
-        "<br/><br/></p>").append(body);   
+    var tt_content = "<p><u>" + lang.popup_to + " " + 
+      message.Accountname + "</u><br/>" + lang.popup_from + 
+      " " + message.Sendermail + "<br/><br/>" + body.text() + "</p>";   
         
     // Text for Messagebox
     var txt = $('<div>').addClass('text').append(author).append(title);   
        
     // MessageBox
     var msg = $('<div>').addClass('message')
-    .click()
-    .attr("title", tooltip.html())
-    .tooltip({left: -15})
     .append(txt)
     .append(hidden1)
     .append(hidden2)
     .click({
         link: message.MessageLink
-    }, LoadLink);     
-    DebugMessage(msg.html());
+    }, LoadLink);
+    msg.tt_content = tt_content;
 
     // Add Context-Menü
     msg.mousedown(function(e){

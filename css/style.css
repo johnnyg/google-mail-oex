@@ -19,7 +19,7 @@ div::selection, p::selection, img::selection {
 
 .entry {
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 2px;
     text-shadow: 0px 1px rgba(0, 0, 0, 0.1);
     line-height: 25px;
     height: 25px;
@@ -86,7 +86,7 @@ div::selection, p::selection, img::selection {
 /*** Status-Style (Error) ***/
 .infoBox {
     border: 1px solid black;
-    border-radius: 3px;
+    border-radius: 2px;
     background: -o-linear-gradient(top, #f40000 0%,#aa0000 100%); 
     color: white;
     padding: 5px;
@@ -105,7 +105,7 @@ div::selection, p::selection, img::selection {
 /*** Message-Style ***/
 .message {
     border: 1px solid #333;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: #EEE;
     color: black;
     padding: 5px;
@@ -134,7 +134,7 @@ div::selection, p::selection, img::selection {
    position: absolute;
    background-image: -o-linear-gradient(left , rgba(0,0,0, 0.4) 0%, rgba(0,0,0, 0.8) 100%);
    border: 1px solid #333;
-   border-radius: 3px;
+   border-radius: 2px;
    padding: 5px;
    text-align: right;
 }
@@ -188,21 +188,24 @@ div::selection, p::selection, img::selection {
 }
 
 /*** Tooltip-Layout ***/
-#tooltip {
+.tooltip {
     position: absolute;
-    z-index: 3000;
+    top: 0;
+    left: 0;
+    z-index: 3;
     border: 1px solid #111;
     background-color: #2a2b2a;
     color: white;
     padding: 3px;
     opacity: 0.90;
-    border-radius: 3px;
-    max-width: 250px;
-    font-size: 9px;
+    border-radius: 2px;
+    width: 300px;
+    font-size: 10px;
+    display: none;
 }
-#tooltip h3, #tooltip div { margin: 0; }
+.tooltip h3, .tooltip div { margin: 0; }
 
-#tooltip p {
+.tooltip p {
     margin: 0px;
 }
 
@@ -229,7 +232,7 @@ div::selection, p::selection, img::selection {
 
 #AccountList .accountEntry{
     border: 1px solid #333;
-    border-radius: 3px;
+    border-radius: 2px;
     color: black;
     padding: 5px;
     background: -o-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%);
