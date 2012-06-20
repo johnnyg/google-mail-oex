@@ -277,11 +277,18 @@ function HandleMessages(event)
         case 'SetPopupSize':
             // Only change size if it is different to avoid flicker
             if(Number(MyButton.popup.height) != Number(event.data.height))
-            {
-                    
-                DebugMessage("changed " + event.data.height + " -> " + MyButton.popup.height);
                 MyButton.popup.height = event.data.height;
-            }
+            break;
+            
+        // MessageAction (mark as read, achive, delete, ...)
+        case 'MessageAction':
+              MessageAction(event.data.uid, event.data.anum, event.data.action);
+            break;
+            
+        // Debug-Message
+        case 'DebugMessage':
+            if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on") 
+              opera.postError(event.data.msg);
             break;
 
         // Do nothing
@@ -304,6 +311,37 @@ function SendMsg(source, message)
             DebugMessage("Sending message to source fails (" + err.description + ")", "error");
         }
     }    
+}
+
+// Performs a Message-Action
+function MessageAction(uid, anum, action)
+{ 
+  switch(action)
+  {
+    // Mark as read ("rd")
+    case "mark": 
+      Grake.MessageAction({urlid: uid, accountnum: anum, action: "rd"}); 
+      break;
+    
+    // Archive thread ("arch")
+    case "archive":
+      Grake.MessageAction({urlid: uid, accountnum: anum, action: "arch"});
+      break;
+    
+    // Delete thread ("tr")
+    case "delete":
+      Grake.MessageAction({urlid: uid, accountnum: anum, action: "tr"});
+      break;
+    
+    // Mark as Spam ("sp")   
+    case "spam":
+      Grake.MessageAction({urlid: uid, accountnum: anum, action: "sp"});
+      break;
+    
+    // Unknown
+    default:
+      DebugMessage("Unknown MessageAction: " + action, "error"); 
+  }
 }
 
 // Play Sound-Notification (if enabled)

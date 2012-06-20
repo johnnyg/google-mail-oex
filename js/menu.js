@@ -35,7 +35,9 @@ window.addEventListener("load", function()
     $("#openText").html(lang.popup_open);
     $("#composeText").html(lang.popup_compose);
     $("#prefText").html(lang.popup_pref);
-        
+    
+    // Close Popup-Box on "Mouse-Leave"
+    $('body').mouseleave(function() {window.close;});          
 }, false);
 
 // Open Google-Mail-Tab
@@ -46,7 +48,7 @@ function OpenGoogleMailTab(compose)
     {
         // At first clear AccountList
         $('#AccountList').html("");
-        var choose = $('<p></p>').addClass('chooseAccount').html(lang.popup_choose_account);
+        var choose = $('<p>').addClass('chooseAccount').html(lang.popup_choose_account);
         $('#AccountList').append(choose);
         
         // Fill AccountList
@@ -57,7 +59,7 @@ function OpenGoogleMailTab(compose)
                 if(compose) linkURL += "?#compose";
             
                 // set entry
-                var entry = $("<div></div>").addClass("accountEntry").html("<strong>" + Accounts[i].Name + "</strong>");
+                var entry = $("<div>").addClass("accountEntry").html("<strong>" + Accounts[i].Name + "</strong>");
                 entry.click({
                     link: linkURL
                 }, LoadLink);
@@ -129,9 +131,7 @@ function SetHeight(height)
 
 // Handle messages from background-process
 function HandleMessages(event)
-{   
-    DebugMessage("Popup-menu received message: " + event.data.cmd);
-    
+{      
     // Whats the status
     switch(event.data.cmd)
     {
@@ -166,8 +166,6 @@ function HandleMessages(event)
 // Shows the messages
 function ShowMessages(accounts, showAccountSorted)
 {
-    DebugMessage("Show messages now");
-
     // Show per Account
     if(showAccountSorted)
     {
@@ -177,7 +175,7 @@ function ShowMessages(accounts, showAccountSorted)
     {
         var msg = JoinMessages(accounts);
         SetHeight(StandardHeight + msg.length * SingleMessageHeight);
-        var newMsgBox = $('<div></div>');
+        var newMsgBox = $('<div>');
         for(var i=0; i < msg.length; i++)
             newMsgBox.append(CreateMessageBox(msg[i]));
         
@@ -210,40 +208,120 @@ function CreateMessageBox(message)
     // Autorname
     var author = "";
     if(message.Sendername != "")
-        author = $('<strong></strong>').text(message.Sendername + " : ");
+        author = $('<strong>').text(message.Sendername + " : ");
                       
     // Message-Title
     var subject = message.Subject;
     if(subject == "") subject = lang.mail_empty_subject;
-    var title = $('<span></span>').text(subject);
+    var title = $('<span>').text(subject);
 
     // Message-Body
     var content = message.Content;
     if(content == "") content = lang.mail_empty_body;
-    var body = $('<p></p>').text(content);
+    var body = $('<p>').text(content);
+    
+    // Hidden Message UrlID an AccountNumber
+    var hidden1 = $('<input>').attr("type", "hidden")
+      .attr("name", "uid").attr("value", message.UrlId);
+    var hidden2 = $('<input>').attr("type", "hidden")
+      .attr("name", "num").attr("value", message.AccountNumber);
     
     // Tooltip
     var tt_to = "<u>" + lang.popup_to + " " + message.Accountname + "</u><br/>";
-    var tooltip = $("<div></div>")
+    var tooltip = $("<div>")
     .html("<p>" + tt_to + lang.popup_from + " " + message.Sendermail + 
-        "<br/><br/></p>").append(body);                    
-           
+        "<br/><br/></p>").append(body);   
+        
+    // Text for Messagebox
+    var txt = $('<div>').addClass('text').append(author).append(title);   
+       
     // MessageBox
-    var msg = $('<div></div>').addClass('message')
-    .attr("title", tooltip.html()).tooltip({
-        left: -15
-    }).append(author).append(title).click({
+    var msg = $('<div>').addClass('message')
+    .click()
+    .attr("title", tooltip.html())
+    .tooltip({left: -15})
+    .append(txt)
+    .append(hidden1)
+    .append(hidden2)
+    .click({
         link: message.MessageLink
-    }, LoadLink);
+    }, LoadLink);     
+    DebugMessage(msg.html());
+
+    // Add Context-Menü
+    msg.mousedown(function(e){
+      if( e.button == 2 ) { ShowMessageOptions(this) };
+    });
          
-    // return JQuey-Object
+    // return JQuery-Object
     return msg;
+}
+
+// Context-Menu for single message
+function ShowMessageOptions(box)
+{
+  // Only append once
+  if($('#message_options').length > 0) return false;
+
+  // Create a new layer
+  var layer = $("<div>").attr("id", "message_options").addClass('message_options');
+  
+  // Set buttons
+  var id = $(box).find('[name=uid]').val();     
+  var num = $(box).find('[name=num]').val();   
+  layer.append($("<div>").click({action: "mark", uid: id, num: num}, MessageAction)
+    .addClass("button").append("<div class='image mark'></div>"));
+  layer.append($("<div>").click({action: "archive", uid: id, num: num}, MessageAction)
+    .addClass("button").append("<div class='image archive'></div>"));
+  layer.append($("<div>").click({action: "spam", uid: id, num: num}, MessageAction)
+    .addClass("button").append("<div class='image spam'></div>"));
+  layer.append($("<div>").click({action: "delete", uid: id, num: num}, MessageAction)
+    .addClass("button").append("<div class='image delete'></div>"));
+  
+  // Set layer-position
+  layer.css("top", box.offsetTop + "px");
+  layer.css("left", box.offsetLeft + "px");
+  layer.css("height", $(box).css("height"));
+  layer.css("width", $(box).css("width"));
+  
+  // Removes layer on mouse-leave
+  layer.mouseleave(function(){$(this).remove();});
+
+  // Show Layer now
+  $(box).append(layer); 
+  
+  return false; 
+}
+
+// Message-Action: Mark as Read, Archive, Mark as Spam, Delete
+function MessageAction(event)
+{
+      DebugMessage("MessageAction '" + event.data.action + "' for ID:" + event.data.uid);
+
+      // Action is performed by background-process
+      opera.extension.postMessage({
+          cmd: "MessageAction", 
+          uid: event.data.uid,
+          action: event.data.action,
+          anum: event.data.num
+      });   
+      
+      // TODO: Remove element now (hope fur success)
+      
+      // TODO: Refresh          
+      
+      return false;
 }
 
 // Write Debug-Message
 function DebugMessage(message, type)
 {
     if(!type) type = "info";
-    if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on")
-        opera.postError("GMNEx,mn," + type + " : " + message);
+    message = "GMNEx,mn," + type + " : " + message;
+    
+    // Send message to background-process
+    opera.extension.postMessage({
+          cmd: "DebugMessage", 
+          msg: message,
+    });   
 }

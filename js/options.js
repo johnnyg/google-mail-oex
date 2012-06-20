@@ -148,7 +148,8 @@ function ShowAccounts()
             var currentLabel = {
                 inbox: "", 
                 important: "", 
-                unread: ""
+                unread: "",
+                ignore: ""
             };                
             currentLabel.inbox = "selected='selected'";
             if(widget.preferences[uid + 'Label'])
@@ -157,7 +158,7 @@ function ShowAccounts()
                 else if  (widget.preferences[uid + 'Label'] === 'unread')
                     currentLabel.unread = "selected='selected'";
                 else if  (widget.preferences[uid + 'Label'] === 'ignore')
-                    currentLabel.unread = "selected='selected'";
+                    currentLabel.ignore = "selected='selected'";
 
             // Create Label-Box
             var labelBox =  '<select id="' + uid + 'SelectLabel" name="' + uid + 'Label" title="' + lang.options_label_tooltip + '">' +
