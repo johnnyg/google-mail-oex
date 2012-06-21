@@ -326,6 +326,6 @@ function DebugMessage(message, type)
     // Send message to background-process
     opera.extension.postMessage({
           cmd: "DebugMessage", 
-          msg: message,
+          msg: message
     });   
 }
