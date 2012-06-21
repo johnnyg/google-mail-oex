@@ -1,4 +1,4 @@
-/* @preserve
+/** @preserve
 ==UserScript==
  * @name	Google Mail Notfier - Mailto-Links
  * @description	Open mailto-links with gmail
@@ -6,7 +6,7 @@
  * @include	https://*
  * @copyright	codebit
  * @version	1.1.0
-==/UserScript== */
+==/UserScript== **/
 
 (function () 
 {
