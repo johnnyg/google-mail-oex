@@ -247,8 +247,14 @@ function CreateMessageBox(message)
     msg.tt_content = tt_content;
 
     // Add Context-Menü
-    msg.mousedown(function(e){
-      if( e.button == 2 ) { ShowMessageOptions(this) };
+    msg.mousedown(function(event){
+      if(event.button == 2)
+      {
+        if($('#message_options').length == 0) 
+          ShowMessageOptions(this); 
+        else
+          $('#message_options').remove();
+      }
     });
          
     // return JQuery-Object
@@ -283,7 +289,8 @@ function ShowMessageOptions(box)
   layer.css("width", $(box).css("width"));
   
   // Removes layer on mouse-leave
-  layer.mouseleave(function(){$(this).remove();});
+  layer.mouseleave(function(){
+    $(this).remove();});  
 
   // Show Layer now
   $(box).append(layer); 
