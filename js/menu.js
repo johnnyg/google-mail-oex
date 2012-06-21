@@ -37,7 +37,7 @@ window.addEventListener("load", function()
     $("#prefText").html(lang.popup_pref);
     
     // Close Popup-Box on "Mouse-Leave"
-    $('body').mouseleave(function() {window.close;});          
+    $('body').mouseleave(function() {window.close();});          
 }, false);
 
 // Open Google-Mail-Tab
