@@ -199,7 +199,7 @@ div::selection, p::selection, img::selection {
     padding: 3px;
     opacity: 0.90;
     border-radius: 2px;
-    width: 300px;
+    width: 290px;
     font-size: 10px;
     display: none;
 }

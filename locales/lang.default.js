@@ -16,6 +16,7 @@ lang.options_sound = "Play notification sound on new messages";
 lang.options_mailto = "Open Mail-Links (mailto) with GMail";
 lang.options_debugmode = "Enable Debug-Messages";
 lang.options_htmlmode = "Use \"Basic HTML\"-Mode in GMail";
+lang.options_tooltip = "Show Tooltip with Message-Infos (on mouse-over)";
 lang.options_close = "Apply & Close Window";
 lang.options_refresh = "Refresh Accounts";
 lang.options_choose_theme = "Choose Theme";

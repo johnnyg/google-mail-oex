@@ -187,9 +187,19 @@ function ShowMessages(accounts, showAccountSorted)
         {
           var box = CreateMessageBox(msg[i]);
           $('#messageBox').append(box);
-          box.simpletip({content: box.tt_content, fixed: true, 
-            position: 'top', offset: [0, -3], hideEffect: "none",
-            showEffect: "none"});
+          
+          // Add Tooltip
+          if(widget.preferences['showTooltip'] && widget.preferences['showTooltip'] === "on")
+            box.simpletip({content: box.tt_content, fixed: true, 
+              position: 'top', offset: [0, -3],  hideEffect: "none",
+              showEffect: "none"});
+        }
+        
+        //Change size of all tooltips
+        if(widget.preferences['showTooltip'] && widget.preferences['showTooltip'] === "on")
+        {
+          var curWidth = $('#messageBox .message').width() + 4;
+          $('.tooltip').css('width', curWidth);
         }
     }
 }
