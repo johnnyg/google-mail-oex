@@ -10,6 +10,8 @@
 var StandardHeight=120; // Standard-Height of Menu
 var InfoHeight=130; // Info-Height of Menu
 var SingleMessageHeight = 47; // Height of single Message-Entry
+var HideTimeout = 2000;
+var HideTimer;
 var Accounts;
 var AccountsCount;
 
@@ -36,8 +38,13 @@ window.addEventListener("load", function()
     $("#composeText").html(lang.popup_compose);
     $("#prefText").html(lang.popup_pref);
     
-    // Close Popup-Box on "Mouse-Leave"
-    $('body').mouseleave(function() {window.close();});          
+    // Close Popup-Box on "Mouse-Leave" after some time
+    $('body').mouseleave(function() {
+      HideTimer = window.setTimeout(function(){window.close()}, HideTimeout); 
+      });    
+    $('body').mouseenter(function() {
+      clearTimeout(HideTimer); 
+      });          
 }, false);
 
 // Open Google-Mail-Tab
