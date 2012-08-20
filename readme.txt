@@ -51,6 +51,10 @@ Add Turkish Translation(thanks to Yiğit Ateş)
 Add Hungarian Translation (thanks to Róbert Tóth)
 Uncompleted Russian/Chinese-Translation (need Translators)
 
+v2.4 (CURRENT STABLE WITH OAUTH)
+rename to "GMail Notfier with OAuth"
+some design-backports from 3.x  
+
 v2.3
 Fix wrong message count (thanks to Victor Grischenko)
 Serveral text fixes

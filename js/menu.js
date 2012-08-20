@@ -7,7 +7,7 @@
 //
 ///
 
-var StandardHeight=120; // Standard-Height of Menu
+var StandardHeight=135; // Standard-Height of Menu
 var InfoHeight=130; // Info-Height of Menu
 var SingleMessageHeight = 47; // Height of single Message-Entry
 var HideTimeout = 2000;

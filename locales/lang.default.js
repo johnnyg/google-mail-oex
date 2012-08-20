@@ -20,7 +20,7 @@ lang.options_tooltip = "Show Tooltip with Message-Infos (on mouse-over)";
 lang.options_close = "Apply & Close Window";
 lang.options_refresh = "Refresh Accounts";
 lang.options_choose_theme = "Choose Theme";
-lang.options_description = "Google Mail Notifier <img src="de" alt="de, 0B" class="" title="De" height="0" width="0" />is a small, simple and fast \
+lang.options_description = "GMail Notifier is a small, simple and fast \
 extension to show the number of unread mails in your Gmail-Account(s) in front of a \
 button and the titles of the messages in the button-menu. Furthermore this extension \
 gives you the option to open mail-links (mailto:) directly with GMail.";

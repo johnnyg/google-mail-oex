@@ -12,7 +12,7 @@
 // ***** CONSTANT SETTINGS ***/
 
 // Menu-Height
-var StandardHeight=120; // Standard-Height of Menu
+var StandardHeight=135; // Standard-Height of Menu
 var Grake; // Grake-Interface
 var AudioObject; // Object for playing notification-sound
 var UpdateTimer; // Timer for intervall-update
