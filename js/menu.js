@@ -190,16 +190,11 @@ function ShowMessages(accounts, showAccountSorted)
           
           // Add Tooltip
           if(widget.preferences['showTooltip'] && widget.preferences['showTooltip'] === "on")
-            box.simpletip({content: box.tt_content, fixed: true, 
-              position: 'top', offset: [0, -3],  hideEffect: "none",
-              showEffect: "none"});
-        }
-        
-        //Change size of all tooltips
-        if(widget.preferences['showTooltip'] && widget.preferences['showTooltip'] === "on")
-        {
-          var curWidth = $('#messageBox .message').width() + 4;
-          $('.tooltip').css('width', curWidth);
+          {
+              $('#messageBox').append(box.tt_content);
+              box.tooltip({offset: [-3, 0], delay: 0});
+              $('#messageBox').mouseleave(function(){$('.tooltip').hide();});  
+          }
         }
     }
 }
@@ -246,9 +241,9 @@ function CreateMessageBox(message)
       .attr("name", "num").attr("value", message.AccountNumber);
     
     // Tooltip
-    var tt_content = "<p><u>" + lang.popup_to + " " + 
+    var tt_content = "<div class='tooltip'><p><u>" + lang.popup_to + " " + 
       message.Accountname + "</u><br/>" + lang.popup_from + 
-      " " + message.Sendermail + "<br/><br/>" + body.text() + "</p>";   
+      " " + message.Sendermail + "<br/><br/>" + body.text() + "</p></div>";   
         
     // Text for Messagebox
     var txt = $('<div>').addClass('text').append(author).append(title);   
@@ -257,21 +252,18 @@ function CreateMessageBox(message)
     var msg = $('<div>').addClass('message')
     .append(txt)
     .append(hidden1)
-    .append(hidden2)
-    .click({
-        link: message.MessageLink
-    }, LoadLink);
+    .append(hidden2);
     msg.tt_content = tt_content;
 
-    // Add Context-Menü
-    msg.mousedown(function(event){
-      if(event.button == 2)
-      {
+    // Add Message-Menu
+    msg.click(function(event){
         if($('#message_options').length == 0) 
-          ShowMessageOptions(this); 
+          ShowMessageOptions(this, message.MessageLink); 
         else
+        {
           $('#message_options').remove();
-      }
+          $('.tooltip2').remove();
+        }
     });
          
     // return JQuery-Object
@@ -279,7 +271,7 @@ function CreateMessageBox(message)
 }
 
 // Context-Menu for single message
-function ShowMessageOptions(box)
+function ShowMessageOptions(box, link)
 {
   // Only append once
   if($('#message_options').length > 0) return false;
@@ -290,27 +282,34 @@ function ShowMessageOptions(box)
   // Set buttons
   var id = $(box).find('[name=uid]').val();     
   var num = $(box).find('[name=num]').val();   
+  layer.append($("<div>").click({link: link}, LoadLink)
+    .addClass("button").attr("title", lang.tooltip_open).append("<div class='image open'></div>"));
   layer.append($("<div>").click({action: "mark", uid: id, num: num}, MessageAction)
-    .addClass("button").append("<div class='image mark'></div>"));
+    .addClass("button").attr("title", lang.tooltip_mark).append("<div class='image mark'></div>"));
   layer.append($("<div>").click({action: "archive", uid: id, num: num}, MessageAction)
-    .addClass("button").append("<div class='image archive'></div>"));
+    .addClass("button").attr("title", lang.tooltip_archive).append("<div class='image archive'></div>"));
   layer.append($("<div>").click({action: "spam", uid: id, num: num}, MessageAction)
-    .addClass("button").append("<div class='image spam'></div>"));
+    .addClass("button").attr("title", lang.tooltip_spam).append("<div class='image spam'></div>"));
   layer.append($("<div>").click({action: "delete", uid: id, num: num}, MessageAction)
-    .addClass("button").append("<div class='image delete'></div>"));
+    .addClass("button").attr("title", lang.tooltip_delete).append("<div class='image delete'></div>"));
   
   // Set layer-position
   layer.css("top", box.offsetTop + "px");
   layer.css("left", box.offsetLeft + "px");
   layer.css("height", $(box).css("height"));
   layer.css("width", $(box).css("width"));
-  
+
   // Removes layer on mouse-leave
   layer.mouseleave(function(){
-    $(this).remove();});  
+    $(this).remove();
+    $('.tooltip2').remove();
+    });  
 
   // Show Layer now
-  $(box).append(layer); 
+  $(box).append(layer);
+  
+  // Add Tooltips
+  $(".button").tooltip({position: "bottom center", offset: [4, 0], tipClass: "tooltip2", delay:0}); 
   
   return false; 
 }

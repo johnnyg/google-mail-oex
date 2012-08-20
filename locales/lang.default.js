@@ -58,6 +58,13 @@ lang.popup_from = "From: ";
 lang.popup_to = "To: ";
 lang.popup_choose_account = "Choose your account: ";
 
+// Tooltip-Strings
+lang.tooltip_open = "Open message";
+lang.tooltip_mark = "Mark as read";
+lang.tooltip_archive = "Archive";
+lang.tooltip_spam = "Report spam";
+lang.tooltip_delete = "Delete";
+
 // Strings for Mails
 lang.mail_empty_subject= "(Empty Subject)";
 lang.mail_empty_body = "(Empty Body)";

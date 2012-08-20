@@ -165,6 +165,10 @@ div::selection, p::selection, img::selection {
   background: url("img/check16.png") 4px 2px no-repeat transparent;
 }
 
+.message_options .button .image.open {
+  background: url("img/gmail_sprite.png") -63px -63px no-repeat transparent;
+}
+
 .message_options .button .image.archive {
   background: url("img/gmail_sprite.png") -84px -21px no-repeat transparent;
 }
@@ -187,26 +191,34 @@ div::selection, p::selection, img::selection {
     height: 30px;
 }
 
-/*** Tooltip-Layout ***/
-.tooltip {
-    position: absolute;
-    top: 0;
-    left: 0;
+/*** Tooltip-Layout 1 ***/
+.tooltip, .tooltip2 {                
+    display:none;
     z-index: 3;
-    border: 1px solid #111;
-    background-color: #2a2b2a;
+    background-color: rgba(20 ,20 , 20, 0.9);
     color: white;
     padding: 3px;
     opacity: 0.90;
     border-radius: 2px;
-    width: 290px;
+    width: 300px;
     font-size: 10px;
     display: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 }
 .tooltip h3, .tooltip div { margin: 0; }
 
 .tooltip p {
     margin: 0px;
+}
+
+/*** Tooltip-Layout 2 ***/
+.tooltip2 {
+  background-color: #F5F5B5;
+  border: 1px solid #DECA7E;
+  color: #303030;
+  line-height: 12px;
+  text-align: center;
+  width: auto;
 }
 
 /*** Account-List (Overlay) ***/
