@@ -13,6 +13,7 @@ var lang = new Object();
 lang.options_update = "Update-Time";
 lang.options_update_unit = "s";
 lang.options_sound = "Play notification sound on new messages";
+lang.options_enable_messageactions = "Enable Message-Actions (mark as read, delete, ..)";
 lang.options_mailto = "Open Mail-Links (mailto) with GMail";
 lang.options_debugmode = "Enable Debug-Messages";
 lang.options_htmlmode = "Use \"Basic HTML\"-Mode in GMail";

@@ -44,6 +44,7 @@ $(document).ready(function()
     $('#debug_mode_label').html(lang.options_debugmode);
     $('#html_mode_label').html(lang.options_htmlmode);
     $('#gmail_adfree_label').html(lang.options_adfree);
+    $('#enable_messageactions_label').html(lang.options_enable_messageactions);
     $('#enable_tooltips_label').html(lang.options_tooltip);
     $('#theme_label').html(lang.options_choose_theme);
     $('#close').html(lang.options_close);  

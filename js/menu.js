@@ -256,15 +256,18 @@ function CreateMessageBox(message)
     msg.tt_content = tt_content;
 
     // Add Message-Menu
-    msg.click(function(event){
-        if($('#message_options').length == 0) 
-          ShowMessageOptions(this, message.MessageLink); 
-        else
-        {
-          $('#message_options').remove();
-          $('.tooltip2').remove();
-        }
-    });
+    if(widget.preferences['messageActions'] === "on")
+    {
+      msg.mouseenter(function(event){
+          if($('#message_options').length == 0) 
+            ShowMessageOptions(this, message.MessageLink); 
+          else
+          {
+            $('#message_options').remove();
+            $('.tooltip2').remove();
+          }
+      });
+    }
          
     // return JQuery-Object
     return msg;
@@ -278,12 +281,11 @@ function ShowMessageOptions(box, link)
 
   // Create a new layer
   var layer = $("<div>").attr("id", "message_options").addClass('message_options');
+  layer.click({link: link}, LoadLink);
   
   // Set buttons
   var id = $(box).find('[name=uid]').val();     
   var num = $(box).find('[name=num]').val();   
-  layer.append($("<div>").click({link: link}, LoadLink)
-    .addClass("button").attr("title", lang.tooltip_open).append("<div class='image open'></div>"));
   layer.append($("<div>").click({action: "mark", uid: id, num: num}, MessageAction)
     .addClass("button").attr("title", lang.tooltip_mark).append("<div class='image mark'></div>"));
   layer.append($("<div>").click({action: "archive", uid: id, num: num}, MessageAction)
@@ -328,7 +330,20 @@ function MessageAction(event)
       });
       
       // Show waiting indicator
-      $('#message_options').html("").append($('<div>').addClass('wait'));    
+      var waiting =  $('<div>').addClass('message_wait');
+      waiting.append( $('<div>').addClass('wait'));
+      
+      // Copy message-options-position
+      waiting.css("top", $('#message_options').css("top"));
+      waiting.css("left", $('#message_options').css("left"));
+      waiting.css("height", $('#message_options').css("height"));
+      waiting.css("width", $('#message_options').css("width"));
+  
+      // Show progress-animation now
+      $('#message_options').parent().append(waiting);
+      $('#message_options').parent().unbind('mouseenter');
+      $('#message_options').remove();
+      $('.tooltip2').remove();
       
       return false;
 }
