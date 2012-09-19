@@ -34,6 +34,7 @@
   <preference name="updateIntervall" value="30" />
   <preference name="enableSound" value="on" />
   <preference name="mailtoLinks" value="off" />
+  <preference name="gmailAdfree" value="off" />
   <preference name="debugMode" value="off" />  
   <preference name="basicMode" value="off" />
   <preference name="showTooltip" value="on" />

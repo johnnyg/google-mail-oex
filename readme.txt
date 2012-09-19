@@ -13,6 +13,8 @@ Option to use Gmail-"Basic-Html"-Mode for all links
 Option to ignore new mails for specific Accounts
 Option to change notification-sound
 Option to preview notification-sound
+Option to hide gmail-ads
+Less script-overhead for gmail-mailto-links
 FIXED: Always use https-links for new tabs
  
 v3.0.6 (CURRENT STABLE)

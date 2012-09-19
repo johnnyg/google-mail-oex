@@ -255,6 +255,11 @@ function HandleMessages(event)
             Update(event.source);
 
             break;
+        
+        // Only return currrent messages to source (No Refresh)    
+        case 'GetCurrentMessages':
+            SendMessagesToSource(event.source);
+            break; 
       
         // Compose Mail
         case 'ComposeMail':
@@ -263,14 +268,6 @@ function HandleMessages(event)
                     url:"https://mail.google.com/mail/?#compose",
                     focused:true
                 });
-            break;
-
-        // Return Mailto-Option
-        case 'MailtoEnabled':
-            SendMsg(event.source, {
-                cmd: 'MailtoEnabled', 
-                value: widget.preferences['mailtoLinks']
-            });
             break;
             
         // Sets new Popup-Height
