@@ -43,6 +43,21 @@ var ToolbarUIItemProperties =
 window.addEventListener("load", function()
 {
     DebugMessage("Background-Process is initializing, Debug Mode is ready");
+       
+    // WORKAROUND for Audio-Bug, Background-Process needs
+    // to load all sounds, so we can preview it at the option-page
+    AudioObject1 = new Audio;
+    AudioObject1.src = "/sound/notification1.ogg";
+    AudioObject2 = new Audio;
+    AudioObject2.src = "/sound/dont_panic.ogg";    
+    AudioObject3 = new Audio;
+    AudioObject3.src = "/sound/on_the_hunt.ogg";    
+    AudioObject4 = new Audio;
+    AudioObject4.src = "/sound/pixiedust.ogg";    
+    AudioObject5 = new Audio;
+    AudioObject5.src = "/sound/sonar.ogg";    
+    AudioObject6 = new Audio;
+    AudioObject6.src = "/sound/tinkerbell.ogg";
 
     // Listen for script messages
     opera.extension.onmessage = HandleMessages;
@@ -117,7 +132,9 @@ function Update_callback(source)
         if(Grake.GetTimeoutProblem())
         {
             DebugMessage("Try again, because there was a timeout-problem");
-            window.setTimeout(function() {Update(source);}, 500); 
+            window.setTimeout(function() {
+                Update(source);
+            }, 500); 
             return;
         }
     }
@@ -214,7 +231,7 @@ function HandleMessages(event)
             
             // Use HTML-Mode if option is set
             if(widget.preferences['basicMode'] && widget.preferences['basicMode'] === "on")
-              link = link.replace(/\/u\//i, '/h/');
+                link = link.replace(/\/u\//i, '/h/');
               
             DebugMessage("Open link: " + link);
         
@@ -279,13 +296,13 @@ function HandleMessages(event)
             
         // MessageAction (mark as read, achive, delete, ...)
         case 'MessageAction':
-              MessageAction(event.data.uid, event.data.anum, event.data.action, event.source);
+            MessageAction(event.data.uid, event.data.anum, event.data.action, event.source);
             break;
             
         // Debug-Message
         case 'DebugMessage':
             if(widget.preferences['debugMode'] && widget.preferences['debugMode'] === "on") 
-              opera.postError(event.data.msg);
+                opera.postError(event.data.msg);
             break;
 
         // Do nothing
@@ -313,54 +330,76 @@ function SendMsg(source, message)
 // Performs a Message-Action
 function MessageAction(uid, anum, action, source)
 { 
-  switch(action)
-  {
-    // Mark as read ("rd")
-    case "mark": 
-      Grake.MessageAction({
-        urlid: uid, accountnum: anum, 
-        action: "rd",
-        callback: function(){Update(source);} }); 
-      break;
+    switch(action)
+    {
+        // Mark as read ("rd")
+        case "mark":
+            Grake.MessageAction({
+                urlid: uid, 
+                accountnum: anum, 
+                action: "rd",
+                callback: function(){
+                    Update(source);
+                }
+            }); 
+        break;
     
     // Archive thread ("arch" then "rd")
     case "archive":
-      Grake.MessageAction({
-        urlid: uid, accountnum: anum, 
-        action: "arch",
-        callback: function(){
-          Grake.MessageAction({
-            urlid: uid, accountnum: anum, 
-            action: "rd",
-            callback: function(){Update(source);}});}}
-      );
-      break;
+        Grake.MessageAction({
+            urlid: uid, 
+            accountnum: anum, 
+            action: "arch",
+            callback: function(){
+                Grake.MessageAction({
+                    urlid: uid, 
+                    accountnum: anum, 
+                    action: "rd",
+                    callback: function(){
+                        Update(source);
+                    }
+                });
+        }
+        }
+    );
+break;
     
-    // Delete thread ("tr" then "rd")
-    case "delete":
-      Grake.MessageAction({
-        urlid: uid, accountnum: anum, 
+// Delete thread ("tr" then "rd")
+case "delete":
+    Grake.MessageAction({
+        urlid: uid, 
+        accountnum: anum, 
         action: "tr",
         callback: function(){
-          Grake.MessageAction({
-            urlid: uid, accountnum: anum, 
-            action: "rd",
-            callback: function(){Update(source);}});}}
-      );
-      break;
+            Grake.MessageAction({
+                urlid: uid, 
+                accountnum: anum, 
+                action: "rd",
+                callback: function(){
+                    Update(source);
+                }
+            });
+    }
+    }
+);
+break;
     
-    // Mark as Spam ("sp")   
-    case "spam":
-      Grake.MessageAction({
-        urlid: uid, accountnum: anum, 
+// Mark as Spam ("sp")   
+case "spam":
+    Grake.MessageAction({
+        urlid: uid, 
+        accountnum: anum, 
         action: "sp",
-        callback: function(){Update(source);} }); 
-      break;
+        callback: function(){
+            Update(source);
+        }
+    }); 
+break;
     
-    // Unknown
-    default:
-      DebugMessage("Unknown MessageAction: " + action, "error"); 
-  }
+// Unknown
+default:
+    DebugMessage("Unknown MessageAction: " + action, "error"); 
+}
 }
 
 // Play Sound-Notification (if enabled)
@@ -372,10 +411,10 @@ function PlaySoundNotification()
         if(!AudioObject) AudioObject = new Audio;
     
         // Set Source and play
-        AudioObject.src = '/sound/notification1.ogg';
+        AudioObject.src = "/sound/" + widget.preferences['soundfile'];
         AudioObject.play();
         
-        DebugMessage("Notification is played");
+        DebugMessage("Notification '" + widget.preferences['soundfile'] + "' is played");
     }
 }
 

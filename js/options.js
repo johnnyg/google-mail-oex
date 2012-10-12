@@ -10,6 +10,7 @@
 var Accounts;
 var AccountsCount = 0;
 var UniqueAccountString = "";
+var AudioPreview;
 
 // Themes-Array (internal name : display name)
 var Themes = {
@@ -19,7 +20,12 @@ var Themes = {
 
 // Sound-Array (filename : display name)
 var Sounds = {
-    "notification1.ogg": "Standard"
+    "notification1.ogg":"Standard",
+    "dont_panic.ogg":"Don't Panic",
+    "on_the_hunt.ogg":"On the Hunt",
+    "pixiedust.ogg":"Pixiedust",
+    "sonar.ogg":"Sonar",
+    "tinkerbell.ogg":"Tinkerbell"
 };
 
 // Intialize the option page
@@ -149,7 +155,7 @@ function ShowAccounts()
     $('#account_list').html("");
     
     // Show Message, if there are no accounts
-    if(AccountsCount == 0)
+    if(AccountsCount === 0)
     {
         var msg = $("<div class='noAccount'></div>").html(lang.error_noActiveAccount);
         $('#account_list').append(msg);
@@ -214,10 +220,10 @@ function ToogleSoundChooser()
 function PreviewSound()
 {  
   // Init new Audio-Object and play
-  var AudioObject = new Audio;
-  AudioObject.src = '/sound/' + $('#sounds').val();
-  AudioObject.play();        
-  DebugMessage($('#sounds').val() + " is played");
+  var AudioPreview = document.getElementById('sound_preview');
+  AudioPreview.src = '/sound/' + $('#sounds').val();
+  AudioPreview.play();        
+  DebugMessage(AudioPreview.src + " is played");
 }
 
 // Write Debug-Message

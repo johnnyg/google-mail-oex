@@ -3,18 +3,19 @@
  * by Tom Schreiber (tom@codebit.de)
 
 SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
-Diese Erweiterung informiert Sie über ungelesene Nachrichten in Ihrem Googlemail-Konto. Es werden mehrere Konten unterstützt und Mail-Links können direkt mit Googlemail geöffnet werden.
+Diese Erweiterung informiert Sie über ungelesene Nachrichten in Ihrem GMail-Konto mit der Möglichkeit diese direkt zu archivieren, zu löschen, etc. Ihre Konten werden dabei automatisch erkannt wenn Sie eingeloggt sind.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-GMail Notifier ist eine kleine und schnelle Erweiterung für Opera, welche die Anzahl der ungelesenen Nachrichten eines oder mehrerer Googlemail-Konten anzeigt. Durch einen Klick auf den Button können Sie zudem die Titel der Nachrichten und weitere Informationen anzeigen lassen. Außerdem haben Sie die Möglichkeit, dass Mail-Links (mailto:) direkt mit Googlemail geöffnet werden.
+Die Erweiterung "GMail Notifier" ist eine kleine und schnelle Erweiterung für Opera, welche die Anzahl der ungelesenen Nachrichten eines oder mehrerer Googlemail-Konten anzeigt. Durch einen Klick sehen sie alle wichtigen Informationen zu den Nachrichten und haben die Möglichkeit diese direkt zu löschen, zu archivieren oder als gelesen zu markieren. Darüber hinaus bietet die Erweiterung noch eine Vielzahl von weiteren Optionen um ihre tägliche Arbeit mit GMail zu erleichtern.
 
 Merkmale:
 * Erkennt automatisch die aktiven Google-Konten
 * Unterstützt mehrere Konten
-* Unterstützt alle Google-Konten
 * Zeigt alle ungelesenen Nachrichten oder nur die aus dem Posteingang
+* Möglichkeit zum direkten Archivieren, Löschen, etc.
 * Option zum direkten Öffnen von Mail-Links mit Googlemail 
-* Optionale Klang-Benachrichtigung
+* Option zm Ausblenden der Werbung auf der GMail-Webseite
+* Sound-Benachrichtigung, verschiedene Themen und vieles mehr
  
 */
 
@@ -22,9 +23,12 @@ Merkmale:
 lang.options_update         = "Aktualisierungszeit";
 lang.options_update_unit    = "s";
 lang.options_sound          = "Spiele Klangbenachrichtigung bei neuen Nachrichten";
+lang.options_enable_messageactions = "Nachrichten-Aktionen zulassen (Archivieren, Löschen, etc.)";
 lang.options_mailto         = "Öffne EMail-Links ('mailto:') mit Googlemail";
 lang.options_htmlmode       = "\"Einfachen HTML\"-Modus in Google-Mail verwenden";
-lang.options_debugmode      = "Enable Debug-Messages";
+lang.options_adfree         = "Werbung auf der GMail-Seite ausblenden"
+lang.options_tooltip        = "Nachrichtendetails beim Überfahren mit der Maus anzeigen";
+lang.options_debugmode      = "Debug-Modus aktivieren";
 lang.options_close          = "Einstellungen übernehmen und Fenster schließen";
 lang.options_refresh        = "Konten aktualisieren";
 lang.options_choose_theme   = "Design auswählen";
@@ -40,6 +44,7 @@ lang.options_dectected_accounts = "Erkannte Konten:";
 lang.options_accounts_header    = "Google Konten";
 lang.options_appearance_header  = "Aussehen";
 lang.options_other_header       = "Weitere Optionen";
+lang.options_link_operapage     = "Opera Add-ons"
 lang.options_link_projectpage   = "Projekt-Homepage";
 lang.options_link_feedback      = "Feedback/Fehlerreport";
 
@@ -47,9 +52,10 @@ lang.options_link_feedback      = "Feedback/Fehlerreport";
 lang.options_label_inbox = "Posteingang";
 lang.options_label_important = "Wichtig";
 lang.options_label_unread = "Alle Ungelesenen";
+lang.options_label_ignore = "Ignorieren";
 
 // Tooltips for Option-Page
-lang.options_unread_tooltip = "Aktivieren Sie diese Funktion um alle ungelesenen Nachrichten anzuzeigen, nicht nur aus dem Posteingang";
+lang.options_label_tooltip = "Wählen Sie den Ordner aus, der auf ungelesene Nachrichten geprüft werden soll";
 
 // Strings for Popup-Page (click on button)
 lang.popup_open     = "<strong>GoogleMail</strong> im neuen Tab öffnen";
@@ -64,6 +70,13 @@ lang.popup_error_occurred="Fehler ist aufgetreten";
 lang.popup_from         = "Von: ";
 lang.popup_to           = "An: ";
 lang.popup_choose_account = "Wählen Sie Ihr Konto: ";
+
+// Tooltip-Strings
+lang.tooltip_open = "Nachricht öffnen";
+lang.tooltip_mark = "Als gelesen markieren";
+lang.tooltip_archive = "Archivieren";
+lang.tooltip_spam = "Spam melden";
+lang.tooltip_delete = "Löschen";
 
 // Strings for Mails
 lang.mail_empty_subject= "(Kein Betreff)";

@@ -1,20 +1,21 @@
 /* Google Mail Notifier - Spanish Translation
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * by MetalByte (emetalbyte@gmail.com)
+ * by J.Pomeyrol (jpomeyrol@gmail.com)
 
 SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
-Simple y rápida extensión que te informa de nuevos mensajes en tu cuenta de Gmail y muestra los asuntos de los nuevos mensajes. Puedes comprobar múltiples cuentas y tienes la opción de abrir los enlaces de correo electrónico directamente con Gmail.
+Rápida extensión que te informa de nuevos mensajes en tus cuentas de Gmail, con la opción de archivar, marcar como leído, eliminar, etc, de manera directa. Tus cuentas serán detectadas automáticamente cuando estés identificado.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-Google Mail Notifier es una pequeña, simple y rápida extensión que muestra el número de mensajes no leídos en tu cuenta de Gmail. Pulsando el botón se abre un menú donde puedes ver y abrir los asuntos de los mensajes. Además, esta extensión te da la opción de abrir los enlaces de correo electrónico (mailto:) directamente con Gmail.
+Google Mail Notifier es una pequeña, simple y rápida extensión que muestra el número de mensajes no leídos en tus cuentas de Gmail. Pulsando el botón se abre un menú donde puedes ver y abrir los asuntos de los mensajes. Además, esta extensión te da la opción de abrir los enlaces de correo electrónico (mailto:) directamente con Gmail.
 
 Características:
 * Detecta automáticamente las cuentas de Gmail abiertas (sin introducir la contraseña o el nombre de usuario)
 * Soporta múltiples cuentas
-* Soporta todo tipo de cuentas de Google
 * Muestra todos los mensajes no leídos, los importantes o solo la bandeja de entrada
+* Opción de eliminar, marcar como leído
 * Opción para abrir los enlaces de correo electrónico directamente con Gmail
-* Notificación de sonido opcional
+* Opción de ocultar los anuncio en Gmail
+* Notificación de sonido, temas visuales y muchas cosas más
  
 */
 
@@ -22,8 +23,12 @@ Características:
 lang.options_update = "Tiempo de actualización";
 lang.options_update_unit = "s";
 lang.options_sound = "Reproducir sonido de notificación con los mensajes nuevos";
+lang.options_enable_messageactions = "Habilitar acciones de mensaje (marcar como leído, eliminar, ..)";
 lang.options_mailto = "Abrir enlaces de correo electrónico (mailto) con Gmail";
 lang.options_debugmode = "Habilitar mensajes de depuración";
+lang.options_htmlmode = "Usar modo \"HTML básico\"-en Gmail";
+lang.options_adfree = "Ocultar anuncios en Gmail"
+lang.options_tooltip = "Mostrar descripción al pasar el ratón por encima de los mensajes";
 lang.options_close = "Aplicar y cerrar ventana";
 lang.options_refresh = "Actualizar cuentas";
 lang.options_choose_theme = "Elegir tema";
@@ -46,6 +51,7 @@ lang.options_link_feedback = "Comentarios/Informe de problemas";
 lang.options_label_inbox = "Bandeja de entrada";
 lang.options_label_important = "Importantes";
 lang.options_label_unread = "No leídos";
+lang.options_label_ignore= "Ignorar";
 
 // Tooltips for Option-Page
 lang.options_label_tooltip = "Elija dónde comprueba la extensión mensajes no leídos";
@@ -63,6 +69,13 @@ lang.popup_error_occurred="Ha ocurrido un error";
 lang.popup_from = "De: ";
 lang.popup_to = "Para: ";
 lang.popup_choose_account = "Elije tu cuenta: ";
+
+// Tooltip-Strings
+lang.tooltip_open = "Abrir mensaje";
+lang.tooltip_mark = "Marcar como leído";
+lang.tooltip_archive = "Archivar";
+lang.tooltip_spam = "Marcar como spam";
+lang.tooltip_delete = "Eliminar";
 
 // Strings for Mails
 lang.mail_empty_subject= "(Sin asunto)";

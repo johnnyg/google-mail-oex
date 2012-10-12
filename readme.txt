@@ -15,6 +15,7 @@ Option to change notification-sound
 Option to preview notification-sound
 Option to hide gmail-ads
 Less script-overhead for gmail-mailto-links
+Add Spanish Translation(thanks to J.Pomeyrol)
 FIXED: Always use https-links for new tabs
  
 v3.0.6 (CURRENT STABLE)
@@ -55,7 +56,8 @@ Uncompleted Russian/Chinese-Translation (need Translators)
 
 v2.4 (CURRENT STABLE WITH OAUTH)
 rename to "GMail Notfier with OAuth"
-some design-backports from 3.x  
+some design-backports from 3.x 
+bug-fix-backports from 3.x 
 
 v2.3
 Fix wrong message count (thanks to Victor Grischenko)
