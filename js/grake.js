@@ -260,7 +260,7 @@ function Grake()
                   // Get Basic-Link
                   var link = this.url;
                   link = link.replace(/http:/g,'https:')
-                  link = link.replace(/\/feed\/atom\//g,'')
+                  link = link.replace(/\/feed\/atom\/.*/g,'')
                   var mailLink = link;
                   
                   // Set current Account-Number
