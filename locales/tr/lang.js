@@ -22,8 +22,12 @@ Google Mail Notifier, Gmail hesabınızdaki okunmamış e-posta sayısını ve u
 lang.options_update = "Güncelleme Sıklığı";
 lang.options_update_unit = "s";
 lang.options_sound = "Yeni iletilerde bilgilendirme sesi çal";
+lang.options_enable_messageactions = "İleti Eylemlerini Etkinleştir (okundu olarak işaretle, sil, ..)";
 lang.options_mailto = "E-posta bağlantılarını Gmail arayüzünde aç";
 lang.options_debugmode = "Hata Ayıklama İletilerini Etkinleştir";
+lang.options_htmlmode = "Gmail'de \"Temel HTML\" Görümünü Kullan";
+lang.options_adfree = "Gmail Web Sayfasındaki Reklamları Gizle"
+lang.options_tooltip = "İleti Bilgileri ile Araç İpuçları Göster (fare ile üzerine gelindiğinde)";
 lang.options_close = "Uygula & Pencereyi Kapat";
 lang.options_refresh = "Hesapları Tazele";
 lang.options_choose_theme = "Tema Seç";
@@ -43,7 +47,10 @@ lang.options_link_projectpage = "Proje Ana Sayfası";
 lang.options_link_feedback = "Geri Bildirim/Hata Raporlama";
 
 // Account-Labels (built-in)
+lang.options_label_inbox = "Gelen Kutusu";
+lang.options_label_important = "Önemli";
 lang.options_label_unread = "tüm okunmamışlar";
+lang.options_label_ignore= "Yoksay";
 
 // Tooltips for Option-Page
 lang.options_unread_tooltip = "yalnızca gelen kutusundaki okunmamış postalar yerine tüm okunmamış postalarınızın gösterilmesini istiyorsanız bu seçeneği etkinleştirin";
@@ -61,6 +68,13 @@ lang.popup_error_occurred="hata oluştu";
 lang.popup_from = "Kimden: ";
 lang.popup_to = "Kime: ";
 lang.popup_choose_account = "Hesabınızı seçin: ";
+
+// Tooltip-Strings
+lang.tooltip_open = "İletiyi aç";
+lang.tooltip_mark = "Okundu olarak işaretle";
+lang.tooltip_archive = "Arşivle";
+lang.tooltip_spam = "İstenmeyen olarak bildir";
+lang.tooltip_delete = "Sil";
 
 // Error-Strings
 lang.error_noActiveAccount = "<strong>Etkin bir Gmail hesabı yok</strong>, " +

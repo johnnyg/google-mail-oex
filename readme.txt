@@ -15,7 +15,8 @@ Option to change notification-sound
 Option to preview notification-sound
 Option to hide gmail-ads
 Less script-overhead for gmail-mailto-links
-Add Spanish Translation(thanks to J.Pomeyrol)
+Add Spanish Translation (thanks to J.Pomeyrol)
+Improved Tooltips
 FIXED: Always use https-links for new tabs
  
 v3.0.6 (CURRENT STABLE)

@@ -8,10 +8,10 @@
 
 //Check for preferences
 if(!widget || !widget.preferences['mailtoLinks'])
-  opera.postError("GMNEx,is,error : Could'nt get widget-prefernces");
+  opera.postError("GMNEx,is,error : Couldn't get widget-prefernces");
 
 // Check if we should inject this script
-if(widget.preferences['mailtoLinks'] === "on" && document.body)
+if(widget.preferences['mailtoLinks'] === "on")
 {
   var EnableLink = false;
   var Accounts;
