@@ -16,15 +16,19 @@ Funkcje:
 * Opcjonalne powiadamianie dźwiękowe
 * Bezpieczna autoryzacja OAuth
 * W języku angielskim, niemieckim, rosyjskim, chińskim i polskim
- 
+
  */
 
-// set default strings
+// General Strings for Option-Page
 lang.options_update = "Sprawdzaj co";
 lang.options_update_unit = "s";
 lang.options_sound = "Odtwarzaj dźwięk przy nowych wiadomościach";
+lang.options_enable_messageactions = "Włącz działania na wiadomościach (oznacz jako przeczytaną, usuń, ..)";
 lang.options_mailto = "Otwieraj odnośniki mailowe (mailto) w Gmailu";
 lang.options_debugmode = "Włącz informacje debugowania";
+lang.options_htmlmode = "Używaj \"podstawowego widoku HTML\" w GMailu";
+lang.options_adfree = "Ukrywaj reklamy na stronie Gmaila"
+lang.options_tooltip = "Pokazuj dymek z informacją o wiadomościach (po najechaniu myszą)";
 lang.options_close = "Zapisz i zamknij okno";
 lang.options_refresh = "Odśwież konta";
 lang.options_choose_theme   = "Wybierz temat";
@@ -38,15 +42,19 @@ lang.options_description_accounts = "To rozszerzenie automatycznie wykrywa Twoje
 lang.options_dectected_accounts = "Wykryte konta:";
 lang.options_accounts_header = "Twoje konto (konta) GMail";
 lang.options_appearance_header = "Wygląd";
-lang.options_other_header = "Inne opcje";
+lang.options_other_header = "Pozostałe opcje";
+lang.options_link_operapage = "Dodatki Opery"
 lang.options_link_projectpage = "Strona domowa projektu";
 lang.options_link_feedback = "Opinie/raport błędu";
 
 // Account-Labels (built-in)
-lang.options_label_unread = "wszystkie nowe";
+lang.options_label_inbox = "Odebrane";
+lang.options_label_important = "Ważne";
+lang.options_label_unread = "Wszystkie nieprzeczytane";
+lang.options_label_ignore= "Ignorowane";
 
-// Tooltips for Option-Page			       
-lang.options_unread_tooltip = "zaznacz to pole aby pokazywać wszystkie nowe wiadomości, nie tylko ze skrzynki odbiorczej";
+// Tooltips for Option-Page
+lang.options_label_tooltip = "Wybierz gdzie szukać nowych wiadomości";
 
 // Strings for Popup-Page (click on button)
 lang.popup_open = "Otwórz <strong>GMail</strong> w nowej karcie";
@@ -62,9 +70,20 @@ lang.popup_from = "Od: ";
 lang.popup_to = "Do: ";
 lang.popup_choose_account = "Wybierz swoje konto: ";
 
+// Tooltip-Strings
+lang.tooltip_open = "Otwórz wiadomość";
+lang.tooltip_mark = "Oznacz jako przeczytaną";
+lang.tooltip_archive = "Archiwizuj";
+lang.tooltip_spam = "Zgłoś spam";
+lang.tooltip_delete = "Usuń";
+
+// Strings for Mails
+lang.mail_empty_subject= "(Bez tematu)";
+lang.mail_empty_body = "(Bez treści)";
+
 // Error-Strings
 lang.error_noActiveAccount = "<strong>Brak aktywnych kont Google Mail</strong>, " +
-"<br/>zaloguj się na swoje konto Google po czym spróbuj ponownie.";
+"<br/><a href='http://mail.google.com'>zaloguj się</a> na swoje konto Google, po czym spróbuj ponownie.";
 
 // Localized Links
 lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=pl&answer=1721977";
