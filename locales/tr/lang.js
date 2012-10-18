@@ -53,7 +53,7 @@ lang.options_label_unread = "tüm okunmamışlar";
 lang.options_label_ignore= "Yoksay";
 
 // Tooltips for Option-Page
-lang.options_unread_tooltip = "yalnızca gelen kutusundaki okunmamış postalar yerine tüm okunmamış postalarınızın gösterilmesini istiyorsanız bu seçeneği etkinleştirin";
+lang.options_label_tooltip = "Eklentinin okunmamış iletiler için hangi konumu denetleyeceğini seçin";
 
 // Strings for Popup-Page (click on button)
 lang.popup_open = "<strong>GMail</strong>'i yeni sekmede aç";
@@ -75,6 +75,10 @@ lang.tooltip_mark = "Okundu olarak işaretle";
 lang.tooltip_archive = "Arşivle";
 lang.tooltip_spam = "İstenmeyen olarak bildir";
 lang.tooltip_delete = "Sil";
+
+// Strings for Mails
+lang.mail_empty_subject= "(Boş Konu)";
+lang.mail_empty_body = "(Boş Gövde)";
 
 // Error-Strings
 lang.error_noActiveAccount = "<strong>Etkin bir Gmail hesabı yok</strong>, " +
