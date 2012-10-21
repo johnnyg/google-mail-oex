@@ -6,7 +6,7 @@ SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
 Proste i szybkie rozszerzenie informujące o nowych nieprzeczytanych wiadomościach na koncie GMail oraz pokazujące ich tytuły. Możliwa jest obsługa wielu kont i otwieranie odnośników mailowych bezpośrednio w GMailu.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-Google Mail Notifier jest niewielkim, prostym i szybkim rozszerzeniem, które wyświetla na przycisku ilość nieprzeczytanych wiadomości na koncie (kontach) GMail oraz pokazuje ich tytuły w menu. Rozszerzenie daje również możliwość otwierania odnośników mailowych (mailto:) bezpośrednio w GMailu.
+GMail Notifier jest niewielkim, prostym i szybkim rozszerzeniem, które wyświetla na przycisku ilość nieprzeczytanych wiadomości na koncie (kontach) GMail oraz pokazuje ich tytuły w menu. Rozszerzenie daje również możliwość otwierania odnośników mailowych (mailto:) bezpośrednio w GMailu.
 
 Funkcje:
 * Wsparcie do 5. kont

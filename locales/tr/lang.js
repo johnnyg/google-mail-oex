@@ -6,7 +6,7 @@ SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
 Gmail hesabınızdaki okunmamış iletiler hakkında sizi bilgilendiren ve yeni iletilerin başlıklarını gösteren basit ve hızlı bir eklenti. Çoklu hesap kontrolü yapabilir ve e-posta bağlantılarını Gmail ile açabilirsiniz.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-Google Mail Notifier, Gmail hesabınızdaki okunmamış e-posta sayısını ve ufak bir pencerede e-posta başlıklarını gösteren basit ve hızlı bir eklentidir. Ayrıca, bu eklenti sayesinde e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.
+GMail Notifier, Gmail hesabınızdaki okunmamış e-posta sayısını ve ufak bir pencerede e-posta başlıklarını gösteren basit ve hızlı bir eklentidir. Ayrıca, bu eklenti sayesinde e-posta bağlantılarına tıkladığınızda doğrudan Gmail arayüzü ile açılmasını sağlayabilirsiniz.
 
 Özellikler:
 * Tarayıcıda daha önce girilen Gmail hesaplarını otomatik olarak algılar (kullanıcı adı ve parola gerekmez)

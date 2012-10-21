@@ -1,4 +1,4 @@
-~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~
+﻿~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~
 GMail Notifier (an Opera-Extension)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -7,7 +7,7 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 
-v3.1 (UNDER DEVELOPMENT)
+v3.1 (CURRENT STABLE)
 Supporting Mail-Actions: mark as read, archive, mark as spam, delete mail
 Option to use Gmail-"Basic-Html"-Mode for all links
 Option to ignore new mails for specific Accounts
@@ -19,7 +19,7 @@ Add Spanish Translation (thanks to J.Pomeyrol)
 Improved Tooltips
 FIXED: Always use https-links for new tabs
  
-v3.0.6 (CURRENT STABLE)
+v3.0.6
 FIXED: Multi-Accounts are not detected properly
 FIXED: Message-counter shows wrongs number (still appears with labels 'important' and 'unread')
 

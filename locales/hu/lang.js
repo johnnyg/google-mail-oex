@@ -1,27 +1,25 @@
 /* Google Mail Notifier - Hungarian Translation
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * by Róbert Tóth (nekomajin42@gmail.com)
+ * by RÃ³bert TÃ³th (nekomajin42@gmail.com)
 
- SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
- Egyszerû és gyors kiegészítõ, ami értesít, ha új üzeneted érkezik a GMail fiókodba. 
- Több fiókot is képes kezelni, és beállítható az is, hogy az email linkek (mailto:) közvetlenül a GMailben nyíljanak meg.
+SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
+EgyszerÃ» Ã©s gyors kiegÃ©szÃ­tÃµ, ami Ã©rtesÃ­t, ha Ãºj Ã¼zeneted Ã©rkezik a GMail fiÃ³kodba. TÃ¶bb fiÃ³kot is kÃ©pes kezelni, Ã©s beÃ¡llÃ­thatÃ³ az is, hogy az email linkek (mailto:) kÃ¶zvetlenÃ¼l a GMailben nyÃ­ljanak meg.
+
+DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
+A GMail Notifier egy kis mÃ©retÃ», egyszerÃ» Ã©s gyors kiegÃ©szÃ­tÃµ, ami egy eszkÃ¶ztÃ¡ron elhelyezett gomb segÃ­tsÃ©gÃ©vel Ã©rtesÃ­t, ha Ãºj leveled Ã©rkezik a GMail fiÃ³kjaidba. A gombon mutatja az olvasatlan levelek szÃ¡mÃ¡t, a lenyÃ­lÃ³ panelen pedig kilistÃ¡zza a levelek tÃ¡rgyÃ¡t. Ezen tÃºl egy olyan opciÃ³t is tartalmaz, amivel az email linkek (mailto:) kÃ¶zvetlenÃ¼l a GMailben nyÃ­lnak meg.
  
- DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
- A Google Mail Notifier egy kis méretû, egyszerû és gyors kiegészítõ, ami egy eszköztáron elhelyezett gomb segítségével értesít, ha új leveled érkezik a GMail fiókjaidba. 
- A gombon mutatja az olvasatlan levelek számát, a lenyíló panelen pedig kilistázza a levelek tárgyát. 
- Ezen túl egy olyan opciót is tartalmaz, amivel az email linkek (mailto:) közvetlenül a GMailben nyílnak meg.
+FunkciÃ³k:
+* Automatikusan felismeri a GMail fiÃ³kokat, amikbe be vagy jelentkezve. (Nem kell felhasznÃ¡lÃ³nevet Ã©s jelszÃ³t megadni!)
+* TÃ¡mogatja a Google tÃ¶bbfiÃ³kos bejelentkezÃ©sÃ©t.
+* Minden Google fiÃ³kot kezelni tud.
+* BeÃ¡llÃ­thatÃ³, hogy minden olvasatlan levelet jelezzen, vagy csak a "beÃ©rkezÃµ levelek" mappÃ¡ban lÃ©vÃµket.
+* BeÃ¡llÃ­thatÃ³, hogy az email cÃ­mre mutatÃ³ linkek (mailto:) kÃ¶zvetlenÃ¼l a GMailben nyÃ­ljanak meg.
+* BeÃ¡llÃ­thatÃ³, hogy az Ã©rtesÃ­tÃ©skor hangjelzÃ©st is adjon.
+* BeÃ¡llÃ­thatÃ³, hogy a fiÃ³k "alap HTML" mÃ³dban nyÃ­ljon meg.
+* BeÃ¡llÃ­thatÃ³, hogy a fiÃ³kban ne jelenjenek meg a reklÃ¡mok.
+* A lenyÃ­lÃ³ panelen alapvetÃµ mÃ»veleteket is el tud vÃ©gezni a levelekkel (olvasottnak jelÃ¶lÃ©s, tÃ¶rlÃ©s, stb).
  
- Funkciók:
- * Automatikusan felismeri a GMail fiókokat, amikbe be vagy jelentkezve. (Nem kell felhasználónevet és jelszót megadni!)
- * Támogatja a Google többfiókos bejelentkezését.
- * Minden Google fiókot kezelni tud.
- * Beállítható, hogy minden olvasatlan levelet jelezzen, vagy csak a "beérkezõ levelek" mappában lévõket.
- * Beállítható, hogy az email címre mutató linkek (mailto:) közvetlenül a GMailben nyíljanak meg.
- * Beállítható, hogy az értesítéskor hangjelzést is adjon.
- * Beállítható, hogy a fiók "alap HTML" módban nyíljon meg.
- * Beállítható, hogy a fiókban ne jelenjenek meg a reklámok.
- * A lenyíló panelen alapvetõ mûveleteket is el tud végezni a levelekkel (olvasottnak jelölés, törlés, stb).
- */
+*/
 
 // Init Language-Object
 // Note: This is only done here, the translation-files under locales/ overrides
@@ -30,72 +28,72 @@
 var lang = new Object();
 
 // General Strings for Option-Page
-lang.options_update = "Frissítési idõköz";
-lang.options_update_unit = "másodperc";
-lang.options_sound = "Hangjelzés új üzenet érkezésekor";
-lang.options_enable_messageactions = "Levél mûveletek engedélyezése (Megjelölés olvasottként, törlés, stb)";
-lang.options_mailto = "Az email címekre mutató linkek (mailto:) megnyitása GMailben";
-lang.options_debugmode = "Debug-üzenetek engedélyezése";
-lang.options_htmlmode = "\"Alap HTML nézet\" használata";
-lang.options_adfree = "Hirdetések elrejtése a GMail oldalon"
-lang.options_tooltip = "Levél információk mutatása, ha az egeret az üzenet fölé viszem";
-lang.options_close = "Mentés és a beállítások bezárása";
-lang.options_refresh = "Fiókok frissítése";
-lang.options_choose_theme = "Megjelenés kiválasztása:";
-lang.options_description = "A Google Mail Notifier egy kis méretû, egyszerû és gyors kiegészítõ, \
-ami egy eszköztáron elhelyezett gomb segítségével értesít, ha új leveled érkezik a GMail fiókodba. \
-A gombon mutatja az olvasatlan levelek számát, a lenyíló panelen pedig kilistázza a levelek tárgyát, \
-és megjelenít néhány alapvetõ levél mûveletet. \
-Ezen túl olyan opciókat is tartalmaz, mint például az email linkek (mailto:) közvetlen megnyitása a GMailben, \
-a hangjelzés új üzenet érkezésekor vagy a fiók HTML módban történõ betöltése.";
-lang.options_description_accounts = "A kiegészítõ automatikusan felismeri azokat a GMail fiókokat, amibe be vagy jelentkezve. \
-A kiegészítõ mûködéséhez tehát be kell jelentkezned a GMail fiókodba. \
-Ha egyszerre több fiókba is szeretnél bejelentkezni, akkor használd a <a id='ma_link'>több fiókos bejelentkezést</a>!";
-lang.options_dectected_accounts = "Észlelt fiókok:";
-lang.options_accounts_header = "GMail fiókjaid";
-lang.options_appearance_header = "Megjelenés";
-lang.options_other_header = "További beállítások";
-lang.options_link_operapage = "Opera Kiegészítõ Oldal";
+lang.options_update = "FrissÃ­tÃ©si idÃµkÃ¶z";
+lang.options_update_unit = "mÃ¡sodperc";
+lang.options_sound = "HangjelzÃ©s Ãºj Ã¼zenet Ã©rkezÃ©sekor";
+lang.options_enable_messageactions = "LevÃ©l mÃ»veletek engedÃ©lyezÃ©se (MegjelÃ¶lÃ©s olvasottkÃ©nt, tÃ¶rlÃ©s, stb)";
+lang.options_mailto = "Az email cÃ­mekre mutatÃ³ linkek (mailto:) megnyitÃ¡sa GMailben";
+lang.options_debugmode = "Debug-Ã¼zenetek engedÃ©lyezÃ©se";
+lang.options_htmlmode = "\"Alap HTML nÃ©zet\" hasznÃ¡lata";
+lang.options_adfree = "HirdetÃ©sek elrejtÃ©se a GMail oldalon"
+lang.options_tooltip = "LevÃ©l informÃ¡ciÃ³k mutatÃ¡sa, ha az egeret az Ã¼zenet fÃ¶lÃ© viszem";
+lang.options_close = "MentÃ©s Ã©s a beÃ¡llÃ­tÃ¡sok bezÃ¡rÃ¡sa";
+lang.options_refresh = "FiÃ³kok frissÃ­tÃ©se";
+lang.options_choose_theme = "MegjelenÃ©s kivÃ¡lasztÃ¡sa:";
+lang.options_description = "A Google Mail Notifier egy kis mÃ©retÃ», egyszerÃ» Ã©s gyors kiegÃ©szÃ­tÃµ, \
+ami egy eszkÃ¶ztÃ¡ron elhelyezett gomb segÃ­tsÃ©gÃ©vel Ã©rtesÃ­t, ha Ãºj leveled Ã©rkezik a GMail fiÃ³kodba. \
+A gombon mutatja az olvasatlan levelek szÃ¡mÃ¡t, a lenyÃ­lÃ³ panelen pedig kilistÃ¡zza a levelek tÃ¡rgyÃ¡t, \
+Ã©s megjelenÃ­t nÃ©hÃ¡ny alapvetÃµ levÃ©l mÃ»veletet. \
+Ezen tÃºl olyan opciÃ³kat is tartalmaz, mint pÃ©ldÃ¡ul az email linkek (mailto:) kÃ¶zvetlen megnyitÃ¡sa a GMailben, \
+a hangjelzÃ©s Ãºj Ã¼zenet Ã©rkezÃ©sekor vagy a fiÃ³k HTML mÃ³dban tÃ¶rtÃ©nÃµ betÃ¶ltÃ©se.";
+lang.options_description_accounts = "A kiegÃ©szÃ­tÃµ automatikusan felismeri azokat a GMail fiÃ³kokat, amibe be vagy jelentkezve. \
+A kiegÃ©szÃ­tÃµ mÃ»kÃ¶dÃ©sÃ©hez tehÃ¡t be kell jelentkezned a GMail fiÃ³kodba. \
+Ha egyszerre tÃ¶bb fiÃ³kba is szeretnÃ©l bejelentkezni, akkor hasznÃ¡ld a <a id='ma_link'>tÃ¶bb fiÃ³kos bejelentkezÃ©st</a>!";
+lang.options_dectected_accounts = "Ã‰szlelt fiÃ³kok:";
+lang.options_accounts_header = "GMail fiÃ³kjaid";
+lang.options_appearance_header = "MegjelenÃ©s";
+lang.options_other_header = "TovÃ¡bbi beÃ¡llÃ­tÃ¡sok";
+lang.options_link_operapage = "Opera KiegÃ©szÃ­tÃµ Oldal";
 lang.options_link_projectpage = "Projekt Weboldal";
-lang.options_link_feedback = "Visszajelzés / Hibajelentés";
+lang.options_link_feedback = "VisszajelzÃ©s / HibajelentÃ©s";
 
 // Account-Labels (built-in)
-lang.options_label_inbox = "Beérkezõ levelek";
+lang.options_label_inbox = "BeÃ©rkezÃµ levelek";
 lang.options_label_important = "Fontos";
 lang.options_label_unread = "Minden olvasatlan";
-lang.options_label_ignore= "Fiók figyelmen kívül hagyása";
+lang.options_label_ignore= "FiÃ³k figyelmen kÃ­vÃ¼l hagyÃ¡sa";
 
 // Tooltips for Option-Page
-lang.options_label_tooltip = "Állítsd be, hogy milyen üzenetekrõl kérsz értesítést!";
+lang.options_label_tooltip = "ÃllÃ­tsd be, hogy milyen Ã¼zenetekrÃµl kÃ©rsz Ã©rtesÃ­tÃ©st!";
 
 // Strings for Popup-Page (click on button)
-lang.popup_open = "<strong>GMail</strong> megnyitása új fülön";
-lang.popup_compose = "Levél írása";
-lang.popup_pref = "Beállítások";
+lang.popup_open = "<strong>GMail</strong> megnyitÃ¡sa Ãºj fÃ¼lÃ¶n";
+lang.popup_compose = "LevÃ©l Ã­rÃ¡sa";
+lang.popup_pref = "BeÃ¡llÃ­tÃ¡sok";
 lang.popup_nomsg = "<strong>Nincs</strong> olvasatlan leveled.";
 lang.popup_onemsg = "<strong>1</strong> olvasatlan leveled van.";
 lang.popup_msg_before = "<strong>";
 lang.popup_msg_after = "</strong> olvasatlan leveled van.";
-lang.popup_lastupdate = "Utolsó frissítés: ";
-lang.popup_error_occurred = "Hiba történt!";
-lang.popup_from = "Feladó: ";
-lang.popup_to = "Címzett: ";
-lang.popup_choose_account = "Válassz fiókot: ";
+lang.popup_lastupdate = "UtolsÃ³ frissÃ­tÃ©s: ";
+lang.popup_error_occurred = "Hiba tÃ¶rtÃ©nt!";
+lang.popup_from = "FeladÃ³: ";
+lang.popup_to = "CÃ­mzett: ";
+lang.popup_choose_account = "VÃ¡lassz fiÃ³kot: ";
 
 // Tooltip-Strings
-lang.tooltip_open = "Levél megnyitása";
-lang.tooltip_mark = "Megjelölés olvasottként";
-lang.tooltip_archive = "Archiválás";
-lang.tooltip_spam = "Spam bejelentése";
-lang.tooltip_delete = "Törlés";
+lang.tooltip_open = "LevÃ©l megnyitÃ¡sa";
+lang.tooltip_mark = "MegjelÃ¶lÃ©s olvasottkÃ©nt";
+lang.tooltip_archive = "ArchivÃ¡lÃ¡s";
+lang.tooltip_spam = "Spam bejelentÃ©se";
+lang.tooltip_delete = "TÃ¶rlÃ©s";
 
 // Strings for Mails
-lang.mail_empty_subject= "(Nincs megadva tárgy.)";
-lang.mail_empty_body = "(A levél nem tartalmaz szöveget.)";
+lang.mail_empty_subject= "(Nincs megadva tÃ¡rgy.)";
+lang.mail_empty_body = "(A levÃ©l nem tartalmaz szÃ¶veget.)";
 
 // Error-Strings
-lang.error_noActiveAccount = "<strong>Nem észlelek aktív GMail fiókot.</strong>" +
-"<br/><a href='http://mail.google.com'>Jelentkezz be a GMail fiókodba</a>, és próbáld újra!";
+lang.error_noActiveAccount = "<strong>Nem Ã©szlelek aktÃ­v GMail fiÃ³kot.</strong>" +
+"<br/><a href='http://mail.google.com'>Jelentkezz be a GMail fiÃ³kodba</a>, Ã©s prÃ³bÃ¡ld Ãºjra!";
 
 // Localized Links
 lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=hu&answer=1721977";

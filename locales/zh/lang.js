@@ -6,7 +6,7 @@ SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
 一個簡單又快速的延伸套件提醒你 Gmail 帳號中有多少尚未讀取的郵件和顯示郵件的標題。你可以設定多個要檢查的帳號還有設定直接用 Gmail 來開啟郵件連結。
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-Google Mail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。
+GMail Notifier 是一個小巧、易用又快速的延伸套件，它可以讓你透過按鈕和選單的方式來顯示你的 Gmail 帳號中未讀取的郵件和郵件的標題。除此之外，這個延伸套件還可以讓你選擇自動使用 Gmail 來開啟郵件連結（mailto:）。
 
 特色功能
 * 自動偵測 GMail 帳號（無須密碼或使用者名稱）
