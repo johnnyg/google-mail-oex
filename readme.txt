@@ -1,4 +1,4 @@
-﻿~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~
+~~~ Codebit ~~~~~~~~~~~~~~~~~~~~~~~
 GMail Notifier (an Opera-Extension)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6,8 +6,12 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
+v3.1.1 (CURRENT STABLE)
+Updated Russion Translation
+FIXED: With disabled "Message Actions", Message-Links dont work anymore
+FIXED: Error in mailto.js, when there is now HTML-Body
 
-v3.1 (CURRENT STABLE)
+v3.1 
 Supporting Mail-Actions: mark as read, archive, mark as spam, delete mail
 Option to use Gmail-"Basic-Html"-Mode for all links
 Option to ignore new mails for specific Accounts
