@@ -51,22 +51,25 @@ if(widget.preferences['mailtoLinks'] === "on")
   // Manipulate Links
   function ManipulateLinks()
   {
-      var links = document.body.getElementsByTagName("a");
-      for(var i in links)
+      if(document.body)
       {
-          if(links[i].href && links[i].href.substr(0,7) == "mailto:")
-          {
-              // One Account 
-              if(AccountsCount == 1 || AccountsCount == 0)
-              {                         
-                  links[i].href = links[i].href.replace("mailto:", "https://mail.google.com/mail/?extsrc=mailto&url=mailto:");
-                  links[i].setAttribute("target", "_blank");
-              }
-              // Multiple Accounts
-              else
-                  ChooseAccountBox(links[i], "gmn_mailto" + i);
-          }
-      }      
+        var links = document.body.getElementsByTagName("a");
+        for(var i in links)
+        {
+            if(links[i].href && links[i].href.substr(0,7) == "mailto:")
+            {
+                // One Account 
+                if(AccountsCount == 1 || AccountsCount == 0)
+                {                         
+                    links[i].href = links[i].href.replace("mailto:", "https://mail.google.com/mail/?extsrc=mailto&url=mailto:");
+                    links[i].setAttribute("target", "_blank");
+                }
+                // Multiple Accounts
+                else
+                    ChooseAccountBox(links[i], "gmn_mailto" + i);
+            }
+        }      
+      }
   }
   
   // Dialogbox for choosing Account

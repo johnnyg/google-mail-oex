@@ -268,6 +268,10 @@ function CreateMessageBox(message)
           }
       });
     }
+    else
+    {
+      msg.click({link: message.MessageLink}, LoadLink);
+    }
          
     // return JQuery-Object
     return msg;
