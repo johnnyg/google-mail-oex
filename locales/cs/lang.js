@@ -6,7 +6,7 @@ SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
 Rychlé rozšíření informující o nepřečtených e-mailech s náhledem odesílatele a předmětu na všech GMail účtech s možností jejich archivace, smazání, aj. Pokud jste přihlášeni, budou účty automaticky detekovány.
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
-GMail Notifier je malé, jednoduché a rychlé rozšíření ukazující počet nepřečtených e-mailů vedle tlačítka a náhledem e-mailů s odesílatelem a předmětem po jeho stisku. Navíc toto rozšíření přidává možnost otevírat e-mailové odkazy (mailto:) přímo prostřednictvím GMailu.
+GMail Notifier je malé, jednoduché a rychlé rozšíření ukazující počet nepřečtených e-mailů vedle tlačítka. Po jeho stisknutí se zobrazí náhled e-mailů s informací o odesílateli a předmětu. Navíc toto rozšíření přidává možnost otevírat e-mailové odkazy (mailto:) přímo prostřednictvím GMailu.
 
 Features:
 * Automaticka detekce GMail účtů (není vyžadováno heslo ani přihlašovací jméno)
@@ -39,7 +39,7 @@ lang.options_refresh = "Obnovit účty";
 lang.options_choose_theme = "Motiv vzhledu";
 lang.options_description = "GMail Notifier je malé, jednoduché a rychlé \
 rozšíření ukazující počet nepřečtených e-mailů vedle \
-tlačítka a náhledem e-mailů s odesílatelem a předmětem po jeho stisku. Navíc toto rozšíření \
+tlačítka. Po jeho stisknutí se zobrazí náhled e-mailů s informací o odesílateli a předmětu. Navíc toto rozšíření \
 přidává možnost otevírat e-mailové odkazy (mailto:) prostřednictvím GMailu.";
 lang.options_description_accounts = "Toto rozšíření automaticky detekuje vaše\n\
     GMail účty. Pro zobrazení schránek musíte být přihlášeni k vašemu Google účtu. Pokud chcete\n\
