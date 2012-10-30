@@ -7,8 +7,8 @@ Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
 v3.1.1 (CURRENT STABLE)
-Updated Russion Translation
-FIXED: With disabled "Message Actions", Message-Links dont work anymore
+Updated Russian Translation
+FIXED: With disabled "Message Actions", Message-Links don't work anymore
 FIXED: Error in mailto.js, when there is now HTML-Body
 
 v3.1 

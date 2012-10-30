@@ -33,7 +33,7 @@ lang.options_tooltip = "Показывать всплывающее окно с 
 lang.options_close = "Применить и закрыть";
 lang.options_refresh = "Обновить аккаунты";
 lang.options_choose_theme = "Выбрать тему";
-lang.options_description = "Google Mail Notifier это маленькое, простое и быстрое \
+lang.options_description = "GMail Notifier это маленькое, простое и быстрое \
 расширение которое показывает количество непрочитанных сообщений в вашем почтовом \
 ящике Gmail при помощи значка на тулбаре и их заголовки во всплывающем окне.";
 lang.options_description_accounts = "Это расширение автоматически определяет\n\
