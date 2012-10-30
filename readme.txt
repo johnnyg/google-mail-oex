@@ -6,7 +6,11 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
-v3.1.1 (CURRENT STABLE)
+v3.1.2 (CURRENT STABLE)
+Add Czech Translation (thanks to Matej Szendi)
+FIXED: mailto-Script don't work properly on Gmail-Site
+
+v3.1.1 
 Updated Russian Translation
 FIXED: With disabled "Message Actions", Message-Links don't work anymore
 FIXED: Error in mailto.js, when there is now HTML-Body

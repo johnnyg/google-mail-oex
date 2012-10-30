@@ -2,6 +2,8 @@
 // @name	GMail Notfier - Mailto-Links
 // @include	http://*
 // @include	https://*
+// @exclude https://mail.google.com/*
+// @exclude http://mail.google.com/*
 // @copyright	codebit
 // @version	1.2.0
 // ==/UserScript==
@@ -26,7 +28,7 @@ if(widget.preferences['mailtoLinks'] === "on")
   }); 
 
   // Look at mailto-links
-  addEventListener("DOMContentLoaded", ManipulateLinks, false);
+  window.addEventListener('DOMContentLoaded', ManipulateLinks, false);
 
   // Handle messages from background-process
   function HandleMessages(event)
@@ -51,8 +53,8 @@ if(widget.preferences['mailtoLinks'] === "on")
   // Manipulate Links
   function ManipulateLinks()
   {
-      if(document.body)
-      {
+    if(document.body)
+    {
         var links = document.body.getElementsByTagName("a");
         for(var i in links)
         {
@@ -81,7 +83,7 @@ if(widget.preferences['mailtoLinks'] === "on")
           var box = document.createElement('div');
           box.setAttribute('id', id);
           box.style.position = "absolute"; 
-          box.style.display = "none";
+          box.style.display = "none !important";
           box.style.border = "1px solid #DDD";
           box.style.borderRadius = "2px";
           box.style.padding = "5px";

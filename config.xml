@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
   id="http://www.codebit.de/oex/google-mail"
-  version="3.1.1">
+  version="3.1.2">
 
   <!-- Extension Infos -->
   <name>GMail Notifier</name>
@@ -14,6 +14,7 @@
   <description xml:lang="hu">Egyszerû és gyors kiegészítõ, ami értesít, ha új üzeneted érkezik a GMail fiókodba. Több fiókot is képes kezelni, és beállítható az is, hogy az email linkek (mailto:) közvetlenül a GMailben nyíljanak meg.</description>
   <description xml:lang="tr">Gmail hesabınızdaki okunmamış iletiler hakkında sizi bilgilendiren ve yeni iletilerin başlıklarını gösteren basit ve hızlı bir eklenti. Çoklu hesap kontrolü yapabilir ve e-posta bağlantılarını Gmail ile açabilirsiniz.</description>
   <description xml:lang="es">Rápida extensión que te informa de nuevos mensajes en tus cuentas de Gmail, con la opción de archivar, marcar como leído, eliminar, etc, de manera directa. Tus cuentas serán detectadas automáticamente cuando estés identificado.</description>
+  <description xml:lang="cs">Rychlé rozšíření informující o nepřečtených e-mailech s náhledem odesílatele a předmětu na všech GMail účtech s možností jejich archivace, smazání, aj. Pokud jste přihlášeni, budou účty automaticky detekovány.</description>
 
   <author href="http://www.codebit.de/" email="tom.schreiber@codebit.de">
     Codebit</author>
