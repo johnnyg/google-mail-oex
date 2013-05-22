@@ -6,9 +6,12 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
+v3.1.3 (DEVELOPMENT)
+Add Simplified Chinese translation (thanks to Yangfei Pu)
+
 v3.1.2 (CURRENT STABLE)
 Add Czech Translation (thanks to Matej Szendi)
-FIXED: mailto-Script don't work properly on Gmail-Site
+FIXED: mailto don't work properly on Gmail-Site
 
 v3.1.1 
 Updated Russian Translation
