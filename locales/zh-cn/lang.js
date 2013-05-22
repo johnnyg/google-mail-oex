@@ -3,14 +3,14 @@
  * by PUY (yangfei.pu@gmail.com)
 
 SHORT DESCRIPTION FOR ADDONS.OPERA.COM (max 220):
-一款快捷的扩展工具，用于通知你 Gmail 邮箱中有多少未读邮件并可以设定直接对邮件进行存档、删除等。该扩展还可以自动检测已登录的 Gmail 帐号。
+一款快捷的扩展工具，用于通知你 Gmail 邮箱中有多少未读邮件并可以设定直接对邮件进行存档、删除等操作。该扩展还可以自动检测已登录的 Gmail 帐户。
 
 DETAILED DESCRIPTION FOR ADDONS.OPERA.COM:
 GMail Notifier 是一款小巧、简单又快捷的扩展工具，可在界面按钮上显示 Gmail 邮箱中的未读邮件数目，并可在按钮菜单里显示未读邮件标题。此外该扩展还可以设定直接使用 Gmail 来打开 mailto 链接。
 
 特色功能：
-* 自动检测已登录的 Gmail 帐号（无需密码或用户名）
-* 支持多个帐号登录
+* 自动检测已登录的 Gmail 帐户（无需密码或用户名）
+* 支持多个帐户登录
 * 显示所有未读邮件，或仅显示收件箱中的未读邮件
 * 可设定对邮件进行存档、删除或标记为已读等
 * 可设定直接使用 Gmail 来打开 mailto 链接
@@ -34,22 +34,22 @@ lang.options_mailto = "使用 Gmail 打开 mailto 链接";
 lang.options_debugmode = "启用调试信息";
 lang.options_htmlmode = "使用 Gmail \"基本 HTML\" 模式";
 lang.options_adfree = "隐藏 Gmail 页面上的广告"
-lang.options_tooltip = "显示邮件内容的提示信息（当鼠标停留在邮件上）";
+lang.options_tooltip = "显示邮件简要信息（鼠标在邮件上时）";
 lang.options_close = "应用并关闭窗口";
-lang.options_refresh = "刷新帐号";
+lang.options_refresh = "重新整理帐户";
 lang.options_choose_theme = "选择主题";
 lang.options_description = "GMail Notifier 是一款小巧、简单又快捷\
 的扩展工具，可在界面按钮上显示 Gmail 邮箱中的未读邮件数目，\
 并可在按钮菜单里显示未读邮件标题。此外本扩展\
 还可以设定直接使用 Gmail 来打开 mailto 链接。";
 lang.options_description_accounts = "本扩展可自动检测你已\n\
-    登录的 Gmail 帐号。必须登录 Gmail 帐号后才能查看收件箱。如果要\n\
-    同时登录多个帐号，请使用<a id='ma_link'>多帐号登录方式</a>。"
-lang.options_dectected_accounts = "已检测到的帐号：";
-lang.options_accounts_header = "Gmail 帐号";
+    登录的 Gmail 帐户。必须登录 Gmail 帐户后才能查看收件箱。如果要\n\
+    同时登录多个帐户，请使用<a id='ma_link'>多帐户登录方式</a>。"
+lang.options_dectected_accounts = "已检测到的帐户：";
+lang.options_accounts_header = "Gmail 帐户";
 lang.options_appearance_header = "外观";
 lang.options_other_header = "其他选项";
-lang.options_link_operapage = "Opera 扩展网站"
+lang.options_link_operapage = "Opera 插件网站"
 lang.options_link_projectpage = "本项目主页";
 lang.options_link_feedback = "反馈/问题报告";
 
@@ -63,7 +63,7 @@ lang.options_label_ignore= "忽略";
 lang.options_label_tooltip = "选择要显示哪些未读的邮件";
 
 // Strings for Popup-Page (click on button)
-lang.popup_open = "在新选项卡中打开 <strong>Gmail</strong>";
+lang.popup_open = "在新标签页中打开 <strong>Gmail</strong>";
 lang.popup_compose = "写邮件";
 lang.popup_pref = "偏好设置";
 lang.popup_nomsg = "没有 <strong>未读邮件</strong>";
@@ -74,7 +74,7 @@ lang.popup_lastupdate = "上次检查时间：";
 lang.popup_error_occurred="发生错误";
 lang.popup_from = "发件人：";
 lang.popup_to = "收件人：";
-lang.popup_choose_account = "选择帐号：";
+lang.popup_choose_account = "选择帐户：";
 
 // Tooltip-Strings
 lang.tooltip_open = "打开邮件";
@@ -88,8 +88,8 @@ lang.mail_empty_subject= "（标题为空）";
 lang.mail_empty_body = "（内容为空）";
 
 // Error-Strings
-lang.error_noActiveAccount = "<strong>未检测到有已登录的 Gmail 帐号</strong>，" +
-"<br/>请<a href='http://mail.google.com'>登录你的 Google 帐号</a>并重试。";
+lang.error_noActiveAccount = "<strong>未检测到有已登录的 Gmail 帐户</strong>，" +
+"<br/>请<a href='http://mail.google.com'>登录你的 Google 帐户</a>并重试。";
 
 // Localized Links
 lang.link_multisession_help = "http://support.google.com/accounts/bin/answer.py?hl=en&answer=1721977";
