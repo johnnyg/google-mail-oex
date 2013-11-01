@@ -6,10 +6,13 @@ Website: http://codebit.de/oex/google-mail
 Author : Tom Schreiber <tom.schreiber@codebit.de>
 
 HISTORY
-v3.1.3 (DEVELOPMENT)
+v3.1.4 (CURRENT STABLE)
+FIXED: Google Accounts are not detected proberly
+
+v3.1.3 
 Add Simplified Chinese translation (thanks to Yangfei Pu)
 
-v3.1.2 (CURRENT STABLE)
+v3.1.2 
 Add Czech Translation (thanks to Matej Szendi)
 FIXED: mailto don't work properly on Gmail-Site
 

@@ -42,7 +42,7 @@ function Grake()
 {
     // Internal Vars
     var GmailURL = "https://mail.google.com/mail/";
-    var GmailAccountsURL = "https://accounts.google.com/AddSession";
+    var GmailAccountsURL = "https://accounts.google.com/AccountChooser";
     var RequestTimeout = 5000; // Timeout (in ms) for Ajax-Requests
     var EmailPattern = /([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4})/ig;
     var Accounts = new Array();
