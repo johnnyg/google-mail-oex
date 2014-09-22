@@ -134,8 +134,10 @@ function Grake()
             success: function (data)
             {
                 // Catch Accounts
-                var accounts = data.match(EmailPattern);
-                if(accounts && accounts.length)
+                var accounts = $(data).find('#account-list').find('[id^=choose-account]').map(function(i, account) {
+                    return $(account).val();
+                }).get();
+                if (accounts.length)
                 {
                     DebugMessage("Found " + accounts.length + " active Accounts (fetch feed-links now)");
                 
